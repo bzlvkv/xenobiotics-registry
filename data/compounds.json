@@ -12418,7 +12418,7 @@
         "ec50_mg_l": 0.000712,
         "hill_n": 1,
         "source_pmid": "PMID:31860301",
-        "note": "GtoPdb-curated human OX1 (HCRTR1) binding: pKi 8.8 (Ki 1.58 nM), antagonist, ref PMID:31860301. ec50 = 1.58 nM × 450.92 / 1e6.",
+        "note": "Rappas 2020 (PMID:31860301, J Med Chem 63:1528-43), full text Table 1 read from PMC7050010; footnote a: \"Radioligand binding affinity data\" — the authors' own assays, on \"Full-length human WT OX 2 (1-444) and human OX 1 A127T (1-425) receptors\". Radioligand named only in Supporting Information, not retrieved. Table 1 verbatim: \"daridorexant ( 5 ) DORA 3.03 A OX 1 p K i 8.8, OX 2 p K i 8.9\". pKi 8.8 -> Ki 1.58 nM; ec50 = 1.58 nM x 450.92 / 1e6. Citation upgraded from a GtoPdb reading of this same paper to the table itself; the value is unchanged, and the OX2 row comes from the same line.",
         "action": "antagonist"
       },
       {
@@ -25640,10 +25640,10 @@
         "receptor": "beta_2",
         "pathway": "partial-agonist",
         "emax": 1,
-        "ec50_mg_l": 0.003612,
+        "ec50_mg_l": 0.003065,
         "hill_n": 1,
         "source_pmid": "PMID:15655528",
-        "note": "GtoPdb-curated human β2-adrenoceptor binding: pKi 7.96 (Ki 11 nM), partial agonist (ISA), ref PMID:15655528. ec50 = 11 nM × 328.4 / 1e6.",
+        "note": "Baker 2005 (PMID:15655528, Br J Pharmacol 144:317-22), full text Table 1 read from PMC1576008, captioned \"Log K D values of beta-blockers and beta-agonists for binding to the human beta 1-, beta 2- and beta 3-adrenoceptors\". Row verbatim: \"Labetolol -7.63+/-0.05 4 -8.03+/-0.07 10 -6.18+/-0.10 6\" (beta1, beta2, beta3) — the paper MISSPELLS the drug as \"Labetolol\", so grep both spellings. Cloned human beta2 in CHO cells, 3H-CGP 12177 whole-cell binding; a KD, not a Ki. KD = 10^(9-8.03) = 9.33 nM; ec50 = 9.33 nM x 328.4 / 1e6. Replaces 0.003612, read off the GtoPdb page as pKi 7.96.",
         "action": "partial_agonist"
       }
     ],
@@ -26089,7 +26089,7 @@
         "ec50_mg_l": 0.00103,
         "hill_n": 1,
         "source_pmid": "PMID:31860301",
-        "note": "GtoPdb-curated human OX1 (HCRTR1) binding: pKi 8.6 (Ki 2.51 nM), antagonist, ref PMID:31860301. ec50 = 2.51 nM × 410.42 / 1e6.",
+        "note": "Rappas 2020 (PMID:31860301, J Med Chem 63:1528-43), full text Table 1 read from PMC7050010; footnote a: \"Radioligand binding affinity data\" — the authors' own assays, on \"Full-length human WT OX 2 (1-444) and human OX 1 A127T (1-425) receptors\". Radioligand named only in Supporting Information, not retrieved. Table 1 verbatim: \"lemborexant ( 4 ) DORA 2.22 A OX 1 p K i 8.6, OX 2 p K i 9.3\". pKi 8.6 -> Ki 2.51 nM; ec50 = 2.51 nM x 410.42 / 1e6. Citation upgraded from a GtoPdb ligand-page reading to the table itself; the value is unchanged.",
         "action": "antagonist"
       },
       {
@@ -26099,7 +26099,7 @@
         "ec50_mg_l": 0.000206,
         "hill_n": 1,
         "source_pmid": "PMID:31860301",
-        "note": "GtoPdb-curated human OX2 (HCRTR2) binding: pKi 9.3 (Ki 0.5 nM), antagonist, ref PMID:31860301. Lemborexant's OX2 preference (~5× over OX1). ec50 = 0.5 nM × 410.42 / 1e6.",
+        "note": "Rappas 2020 (PMID:31860301, J Med Chem 63:1528-43), full text Table 1 read from PMC7050010; footnote a: \"Radioligand binding affinity data\" — the authors' own assays, on \"Full-length human WT OX 2 (1-444) and human OX 1 A127T (1-425) receptors\". Radioligand named only in Supporting Information, not retrieved. Table 1 verbatim: \"lemborexant ( 4 ) DORA 2.22 A OX 1 p K i 8.6, OX 2 p K i 9.3\". pKi 9.3 -> Ki 0.5 nM; ec50 = 0.5 nM x 410.42 / 1e6. Preserves lemborexant's ~5x OX2 preference. Citation upgraded from a GtoPdb ligand-page reading to the table; the value is unchanged.",
         "action": "antagonist"
       }
     ],
@@ -47802,10 +47802,10 @@
         "receptor": "alpha_2a",
         "pathway": "agonist",
         "emax": 1,
-        "ec50_mg_l": 0.25371,
+        "ec50_mg_l": 0.271855,
         "hill_n": 1,
         "source_pmid": "PMID:36101495",
-        "note": "Per IUPHAR/GtoPdb (human α2A, pKi 6.0 → Ki 1000 nM, binding); primary ref Proudman 2022 (PMID:36101495), \"The signaling and selectivity of α-adrenoceptor agonists for the human α2A, α2B and α2C-adrenoceptors\". Binding pKi is weak (functional potency higher, as for a partial/low-efficacy readout). GtoPdb-curated. ec50 = 1000 nM × 253.71 / 1e6.",
+        "note": "Proudman, Akinaga & Baker 2022 (PMID:36101495, Pharmacol Res Perspect 10:e01003), full text Table 4 read from PMC9471048, captioned \"Log K D values obtained from inhibition of 3 H-rauwolscine binding to the human alpha2A, alpha2B and alpha2C-adrenoceptors in living cells\". Tizanidine row verbatim: \"Tizanidine -5.97 +/- 0.06 5 -5.78 +/- 0.07 5 -5.83 +/- 0.08 5\" (alpha2A, alpha2B, alpha2C). Human alpha2A in CHO cells, whole-cell binding. KD = 10^(9-5.97) = 1071.5 nM; ec50 = 1071.5 nM x 253.71 / 1e6. Replaces 0.25371, read off the GtoPdb page as a rounded pKi 6.0; the paper states -5.97.",
         "action": "agonist"
       }
     ],

@@ -76,8 +76,8 @@ Live: 249 records — **53 fitted, 196 declared estimates**.
 
 ## Compound — `receptor_occupancy[]`
 
-Live: 325 rows on 235 compounds. `hill_n` is exactly 1 on **324 of 325** and `emax` exactly 1 on
-**320** — so every curve in the catalog is a simple hyperbola **by assumption**. Say so in the note.
+Live: 317 rows on 234 compounds. `hill_n` is exactly 1 on **316 of 317** and `emax` exactly 1 on
+**312** — so every curve in the catalog is a simple hyperbola **by assumption**. Say so in the note.
 
 | Field | Type / units | Provenance | Rules | The mistake it invites |
 | --- | --- | --- | --- | --- |
@@ -86,10 +86,10 @@ Live: 325 rows on 235 compounds. `hill_n` is exactly 1 on **324 of 325** and `em
 | `emax`* | [0,1] | — | `receptor.emax-range` **E** | Storing 1 when the record's own note specifies otherwise — `ghb`'s GABA-B `emax` was 1 while its note said "set emax ~= 0.69 (NOT 1)" and had never been applied. A sweep of all 328 rows found no other instance; check yours anyway. |
 | `hill_n`* | > 0 | — | the loader (`receptor.hill-positive` **E** is a backstop) | Storing something other than 1 without a verbatim sigmoidicity factor. `atracurium`'s 4.04 is the only one in the catalog. |
 | `action` | enum incl. `agonist`, `partial_agonist`, `inverse_agonist`, `antagonist`, `inhibitor`, `blocker`, `neutralizer`, `pam`, `nam`, `substrate`, `modulator`, `unknown` | — | — | The model is an agonist Emax/EC50 curve. A pure antagonist, a voltage-dependent blocker, or a genomic nuclear-receptor action does not fit it — skip and write the GAPS row rather than forcing a shape. |
-| `pathway` | ≤80 chars, free text (live: 318) | — | — | — |
+| `pathway` | ≤80 chars, free text (live: 310) | — | — | — |
 | `basis` | `in_vitro_ki` (default when absent) / `in_vivo_plasma_ec50` (live: 2) / `whole_blood_ic50` (live: 16) | — | `pd.occupancy-needs-fu` **W** | Leaving an in-vivo plasma EC50 unlabelled: it is already referenced to total plasma and needs no free-fraction correction, so the label changes the arithmetic. |
 | `source_pmid` / `source_label` | `PMID:\d+`, or a label naming product + set id + effective date | must state the value for your compound as **subject** | `receptor.pmid` **E** (neither present), `receptor.secondary-source` **W** | See `ec50_mg_l`. A PMID copied off an IUPHAR/GtoPdb ligand page is the shape `pnpm verify` can never catch: the id resolves, the paper is on topic and correctly attributed, and nobody in the chain opened it. Live: 33 rows over 23 compounds. `source_label` works as it does on a pk route and exists because for some agents no paper states the affinity at all — ziprasidone's 5-HT2A, 5-HT2C and H1 constants are in GEODON section 12.2 and in no abstract or open full text. A label prints the number with no species, tissue or radioligand around it, so say that in the `note`. |
-| `note` | ≤600 chars (live: 321) | Species, tissue, radioligand, verbatim quote, conversion | `receptor.derived-value` **W**, `receptor.secondary-source` **W** | Claiming "abstract verbatim" for a number the abstract states only qualitatively (`ixekizumab`, `nivolumab`, `pembrolizumab` all did). Both rules read this prose clause by clause, so a note recording the bad value it REPLACED does not fire — say "the previous value was a midpoint" and the rule stays quiet, which is why re-authored rows read the way they do. |
+| `note` | ≤600 chars (live: 313) | Species, tissue, radioligand, verbatim quote, conversion | `receptor.derived-value` **W**, `receptor.secondary-source` **W** | Claiming "abstract verbatim" for a number the abstract states only qualitatively (`ixekizumab`, `nivolumab`, `pembrolizumab` all did). Both rules read this prose clause by clause, so a note recording the bad value it REPLACED does not fire — say "the previous value was a midpoint" and the rule stays quiet, which is why re-authored rows read the way they do. |
 
 ## Compound — free fraction
 
