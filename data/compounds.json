@@ -59725,5 +59725,301 @@
       "PMID:22034637",
       "PMID:25532068"
     ]
+  },
+  {
+    "slug": "roxadustat",
+    "name": "Roxadustat",
+    "aliases": [
+      "FG-4592",
+      "ASP1517",
+      "Evrenzo"
+    ],
+    "category": "pharmacological",
+    "mechanism": "An orally available reversible inhibitor of HIF prolyl-hydroxylase, which stabilises HIF-1alpha and HIF-2alpha and so raises endogenous erythropoietin. PMID:32487538 verbatim (roxadustat the subject): \"In cells, roxadustat increased both HIF-1alpha and HIF-2alpha proteins, leading to an increase in EPO production, even in the presence of EPO-suppressing inflammatory cytokines\", and it \"significantly decreased hepatic expression of hepcidin ... and increased expression of two genes involved in duodenal iron absorption: divalent metal transporter 1 and duodenal cytochrome b.\" Approved for anaemia of chronic kidney disease and prohibited in sport as a blood-doping agent. NO NUMERIC IC50 IS PUBLISHED IN ANY ABSTRACT OR LABEL REACHED — see the GAPS row — so no occupancy row is authored.",
+    "routes": [
+      "PO"
+    ],
+    "doses": {
+      "PO": {
+        "min": 20,
+        "max": 400,
+        "typical": 100,
+        "unit": "mg"
+      }
+    },
+    "half_life_hr": {
+      "PO": 12.8
+    },
+    "pk": {
+      "PO": {
+        "F": 1,
+        "source_pmid": "PMID:27352308",
+        "note": "t1/2 12.8 h is the NORMAL-HEPATIC-FUNCTION arm, single oral 100 mg fasted, n=8 (mean age 54.5 y, 83.6 kg), abstract verbatim: \"Mean terminal half-life (t 1/2) appeared to be longer (17.7 vs. 12.8 h) in subjects with moderate hepatic impairment\". The paper's own Table 2 gives the same arm a MEDIAN of 12.6 h (range 10.2-16.8) and the abstract warns intersubject variability on t1/2 was about twofold; the arithmetic mean is stored and the median recorded here. F IS PINNED TO 1 BECAUSE NO ABSOLUTE F EXISTS: there is no IV formulation and no IV arm in any paper found, so nothing measured belongs in the F slot (WORKFLOW section 3). NO V_L IS STORED: see notes and GAPS."
+      }
+    },
+    "mw_g_mol": 352.3,
+    "fraction_unbound": 0.0081,
+    "fu_note": "Equilibrium dialysis in human plasma, normal-hepatic-function arm, single oral 100 mg, n=8: PMID:27352308 full text Table 2 gives fu 0.81% (SD 0.07), i.e. 0.0081, against 1.1% (0.16) in Child-Pugh B. Method verbatim: \"The unbound fraction of roxadustat was determined by equilibrium dialysis\", on samples \"collected at 3, 12 and 24 h post-dose\" — an ex-vivo measurement at real clinical concentrations, not a rounded label figure. A rounded 99% in ESRD haemodialysis patients (PMID:32603526) is consistent but is a different population; see notes.",
+    "systems": [
+      "immune-hematologic",
+      "renal"
+    ],
+    "notes": "PubChem CID 11256664 (C19H16N2O5, 352.3), re-queried 2026-09-26. NO SALT FORM EXISTS — PubChem returns PUGREST.NotFound for \"roxadustat sodium\" — so every dose is the free acid and no dose_moiety_fraction is needed. NO US LABEL EXISTS: DailyMed SPL v2 returns zero records for both `roxadustat` and `evrenzo`, so unlike daprodustat and vadadustat there is no label route to a volume or a binding figure. APPARENT CLEARANCE, RECORDED BUT NOT STORED: PMID:33486718 (popPK, 8209 samples, 2855 CKD patients) gives \"apparent clearance of 1.1 (0.0223) L/h in NDD subjects, and apparent central and peripheral volumes of distribution of 14.9 (0.0278) L and 9.5 (0.0872) L\". The CL/F is a patient, steady-state, titrated-dose figure and is not mixed with the healthy single-dose t1/2; the volumes are a two-compartment Vc and Vp, and R15 forbids both using a Vc in a one-compartment slot and summing Vc+Vp. HALF-LIVES BY POPULATION, so nobody reconciles them: 12.8 h normal hepatic function single-dose; 17.7 h Child-Pugh B; and \"elimination half-life ranged from 14.7 to 19.4 hours\" across two ESRD-haemodialysis dose cohorts (PMID:32603526) — a range across cohorts, never to be midpointed. A REVIEW USED ONLY AS A SANITY CHECK, NOT CITED FOR A VALUE: PMID:34905154 aggregates \"apparent volume of distribution after oral administration of 22-57 L, apparent clearance of 1.2-2.65 L/h ... the elimination half-life is 9.6-16 h\" — secondary literature and all ranges, but it brackets the primary values above.",
+    "refs": [
+      "PMID:27352308",
+      "PMID:32487538",
+      "PMID:33486718",
+      "PMID:32603526"
+    ]
+  },
+  {
+    "slug": "daprodustat",
+    "name": "Daprodustat",
+    "aliases": [
+      "GSK1278863",
+      "Jesduvroq"
+    ],
+    "category": "pharmacological",
+    "mechanism": "A reversible inhibitor of the HIF prolyl-hydroxylases PH1, PH2 and PH3, stabilising HIF-1alpha and HIF-2alpha and raising erythropoietin transcription. Jesduvroq label section 12.1 verbatim: \"Daprodustat is a reversible inhibitor of HIF-PH1, PH2 and PH3 (IC50 in the low nM range). This activity results in the stabilization and nuclear accumulation of HIF-1alpha and HIF-2alpha transcription factors, leading to increased transcription of the HIF-responsive genes, including erythropoietin.\" The discovery paper calls it \"a pyrimidinetrione-glycinamide low nanomolar inhibitor of PHDs 1-3\" (PMID:28928122). BOTH SOURCES SAY \"LOW NANOMOLAR\" AND NEITHER PRINTS A NUMBER, so no occupancy row is authored.",
+    "routes": [
+      "PO"
+    ],
+    "doses": {
+      "PO": {
+        "min": 1,
+        "max": 8,
+        "typical": 4,
+        "unit": "mg"
+      }
+    },
+    "half_life_hr": {
+      "PO": 1.92
+    },
+    "pk": {
+      "PO": {
+        "V_L": 53.46,
+        "F": 0.661,
+        "source_pmid": "PMID:34713596",
+        "note": "THE ONLY COMPOUND IN THIS BATCH WITH A TRUE IV ARM, and its three published parameters are jointly impossible in one compartment, so R15's teriparatide rule was applied: store the volume the record's own clearance implies, and say so. Verbatim, from the same 6 healthy men, single dose: \"daprodustat plasma clearance (19.3 L/h) and volume of distribution (14.6 L) were low\"; full-text Table 2 gives t1/2 1.92 h (SD 0.43) after a 6 mg oral tablet and 2.07 h after IV, and oral F 0.661 (SD 0.077). But 14.6 L is a steady-state Vss from a multi-exponential profile: with t1/2 1.92 h it implies AUC 752 ng*h/mL at 6 mg against the 202 measured, 3.7x too high. STORED V_L = 19.3 x 1.92 / ln2 = 53.46 L reproduces it as 205, within 2%. F 0.661 is absolute. See notes."
+      }
+    },
+    "mw_g_mol": 393.4,
+    "fraction_unbound": 0.01,
+    "fu_note": "AN INEQUALITY STORED AT ITS UNDER-CORRECTING ENDPOINT, not a measurement. Jesduvroq label section 12.3 (GlaxoSmithKline, set id d82aa06e-5a33-4844-99b7-4701313455a4, DailyMed published 2025-03-17) verbatim: \"In vitro, plasma protein binding of daprodustat is >99%.\" That bounds fu at or below 0.01, and 0.01 is the endpoint that under-corrects, per R3. Human, in vitro, no population. The same figure appears in PMID:34713596's full text but is attributed there to \"GSK data on file\", so that paper must NOT be cited for it; see notes.",
+    "systems": [
+      "immune-hematologic",
+      "renal"
+    ],
+    "notes": "PubChem CID 91617630 (C19H27N3O6, 393.4), re-queried 2026-09-26, and the Jesduvroq label section 11 agrees verbatim: \"The molecular formula of daprodustat is C19H27N3O6, and its molecular mass is 393.43.\" No salt form exists (PUGREST.NotFound for \"daprodustat sodium\"), so doses are the free base. DOSES are the label's, section 2.3 Table 1 for dialysis patients not on an ESA, once daily: 4 mg at Hb below 9 g/dL, 2 mg at Hb 9-10, 1 mg above 10; section 11 lists 1, 2, 4, 6 and 8 mg tablets. THE LABEL'S OWN PK, recorded for cross-check and NOT averaged with the paper's: Vss 14.3 L (against the paper's 14.6), absolute F 65% (against 0.661), \"Mean clearance from plasma was 18.9 L/h\" (against 19.3), and a half-life given only as a RANGE, \"approximately 1 hour to 4 hours\" — the paper's measured 1.92 h sits inside it, which is why the paper is preferred. TWO SOURCES FOR EACH QUANTITY, NEVER MEANED. POPULATION PK, RECORDED NOT STORED: PMID:39259485 (707 CKD patients, titrated, steady state) gives \"Oral clearance and volume of distribution was 24.6 L/h and 26.9 L\" — both APPARENT, from a three-compartment fit that does not say whether 26.9 L is central or steady-state, so R15 bars it from this slot; and it must never be paired with the absolute F 0.661, which would divide by F twice. A DOSE THAT IS NOT THERAPEUTIC: PMID:29545948 uses 100 mg and says so — \"100-mg daprodustat exceeds the planned top therapeutic dose\" — that is a DDI probe dose and is not in the stored range.",
+    "refs": [
+      "PMID:34713596",
+      "PMID:28928122",
+      "PMID:39259485",
+      "PMID:37885335"
+    ]
+  },
+  {
+    "slug": "vadadustat",
+    "name": "Vadadustat",
+    "aliases": [
+      "AKB-6548",
+      "Vafseo"
+    ],
+    "category": "pharmacological",
+    "mechanism": "A reversible inhibitor of HIF prolyl-4-hydroxylases PH1, PH2 and PH3. Vafseo label section 12.1 verbatim: \"Vadadustat is a reversible inhibitor of HIF-prolyl-4-hydroxylases (PH)1, PH2, and PH3 (IC50 in the nM range). This activity results in the stabilization and nuclear accumulation of HIF-1alpha and HIF-2alpha transcription factors, and increased production of erythropoietin (EPO).\" Its preclinical characterisation adds the kinetics of inhibition, verbatim (vadadustat the subject, PMID:35926869): \"PHD enzyme inhibition by vadadustat is competitive with endogenous cofactor 2-oxoglutarate and is insensitive to free iron concentration.\" THAT PAPER SAYS ONLY \"similar low nanomolar inhibitory constant values\" AND PRINTS NO NUMBER, so no occupancy row is authored.",
+    "routes": [
+      "PO"
+    ],
+    "doses": {
+      "PO": {
+        "min": 150,
+        "max": 450,
+        "typical": 300,
+        "unit": "mg"
+      }
+    },
+    "half_life_hr": {
+      "PO": 5.8
+    },
+    "pk": {
+      "PO": {
+        "F": 1,
+        "source_pmid": "PMID:33661566",
+        "note": "t1/2 5.8 h is the NORMAL-HEPATIC-FUNCTION arm of a hepatic-impairment study, single oral 450 mg, n=8 of 16 (mean age 59.2 y, 62.5% female), abstract verbatim: \"Mean elimination half-life was 5.8 and 7.8 hours in the normal and hepatic impairment groups, respectively.\" Those are two parallel groups, NOT a range, and are never averaged. CHOSEN OVER THE LARGER PK PAPER ON PURPOSE: PMID:38924087's \"approximately 4.5 hours\" is hedged, covers \"single or multiple dosing\" so it fits neither, and that paper has an ERRATUM (PMID:39520093) whose content could not be retrieved. See notes. F IS PINNED TO 1: no absolute bioavailability is published and the Vafseo label states none. NO V_L: neither the label section 12.3 nor any fetched abstract gives a volume."
+      }
+    },
+    "mw_g_mol": 306.7,
+    "fraction_unbound": 0.005,
+    "fu_note": "AN INEQUALITY STORED AT ITS UNDER-CORRECTING ENDPOINT. Vafseo label section 12.3 (Akebia Therapeutics, set id ac9da724-5a62-4ab6-a89c-376a25f6195b, DailyMed published 2026-04-15) verbatim: \"Protein binding of vadadustat is >=99.5% in human plasma. Vadadustat does not distribute into red blood cells.\" That bounds fu at or below 0.005, and 0.005 is the endpoint that under-corrects, per R3. Human plasma; the label does not say whether in vitro or ex vivo and gives no population, so neither is claimed here. No measured point value exists in any source reached.",
+    "systems": [
+      "immune-hematologic",
+      "renal"
+    ],
+    "notes": "PubChem CID 23634441 (C14H11ClN2O4, 306.70), re-queried 2026-09-26, matching the Vafseo label section 11 verbatim: \"weight of 306.70. The empirical formula is C14H11ClN2O4.\" No salt form exists (PUGREST.NotFound for \"vadadustat sodium\"), so doses are the free acid. DOSES from the label: section 2.3, \"The recommended starting dose is 300 mg orally once daily\"; section 3 lists 150 mg, 300 mg and 450 mg film-coated tablets. FOUR POPULATIONS, FOUR HALF-LIVES, and mixing them is the trap this record is built to prevent: 4.5 h in healthy men (PMID:38924087, hedged, single-or-multiple); 5.8 h normal hepatic function at 450 mg single dose (PMID:33661566, stored); 7.2 h in CKD stage 3 and 8.5 h in CKD stage 4 after a single 500 mg dose, which are two populations and not a range (PMID:38924087); and from the label, \"The mean half-life of vadadustat in patients on chronic hemodialysis was 13.9 hours\" — nearly 3x the healthy figure and belonging to dialysis patients alone. AN UNREAD CORRECTION: PMID:38924087 has an erratum, PMID:39520093, whose own abstract carries no content, so what was corrected is unknown. That is the reason its 4.5 h is recorded here rather than stored. NO V, F, CL, Cmax OR AUC IS PUBLISHED ANYWHERE REACHED — absent from label section 12.3 and from every abstract fetched, and PMID:38924087 has no PMC copy, so its PK table is unread: full text NOT RETRIEVED, not silent.",
+    "refs": [
+      "PMID:33661566",
+      "PMID:35926869",
+      "PMID:38924087",
+      "PMID:39520093"
+    ]
+  },
+  {
+    "slug": "orforglipron",
+    "name": "Orforglipron",
+    "aliases": [
+      "LY3502970",
+      "OWL833"
+    ],
+    "category": "pharmacological",
+    "mechanism": "A NON-PEPTIDE, orally administered agonist of the glucagon-like peptide-1 receptor, which is why it has genuine oral pharmacokinetics where the peptide GLP-1 agonists have none. PMID:39693407 verbatim (orforglipron the subject): \"Competition binding experiments using either [125I]GLP-1(7-36)NH2 or [3H]orforglipron indicated that orforglipron is a high-affinity [inhibition constant (Ki) = 1 nM], selective ligand of the human GLP-1R.\" It is described there as a competitive ligand with low intrinsic efficacy for effector activation and negligible beta-arrestin recruitment. The Ki is printed to ONE significant figure and no effect-compartment rate constant is published, so it is recorded in prose and no occupancy row is authored.",
+    "routes": [
+      "PO"
+    ],
+    "doses": {
+      "PO": {
+        "min": 3,
+        "max": 45,
+        "typical": 24,
+        "unit": "mg"
+      }
+    },
+    "half_life_hr": {
+      "PO": 29.5
+    },
+    "pk": {
+      "PO": {
+        "V_L": 279.2,
+        "F": 0.791,
+        "source_pmid": "PMID:38402332",
+        "note": "A ROUTE ROW BUILT FROM TWO PAPERS, said plainly. Single-dose parameters are full text, PMID:38402332 Table 2, study A, 3 mg single oral dose fasted, 12 healthy adults; the paper states the design: \"study A (3 mg, single dose) and study B (16 mg, multiple doses)\". Verbatim from that arm: t1/2 29.5 h (geometric mean), AUC0-inf 362 ng*h/mL, Cmax 13.4 ng/mL, CL/F 8.28 L/h, Vz/F 353 L. The absolute F is from PMID:40888509: \"The mean absolute oral bioavailability of orforglipron was 79.1% +/- 16.8%\", against an IV microtracer. DECLARED DERIVATION, because Vz/F and CL/F are APPARENT and must not be paired with an independent F (R15 double-division): V_L = 353 x 0.791 = 279.2 L and CL = 8.28 x 0.791 = 6.549 L/h. That pair reproduces the paper's AUC exactly (362) and its t1/2 as 29.6 h."
+      }
+    },
+    "mw_g_mol": 883,
+    "systems": [
+      "endocrine",
+      "digestive"
+    ],
+    "notes": "PubChem CID 137319706 (C48H48F2N10O5, 883.0), re-queried 2026-09-26. ANALYTE IS THE PARENT, verbatim (PMID:40888509): \"Orforglipron was the most abundant plasma component (93.3%) with minor oxidative metabolites M7 (3.3%) and M23 (1.6%)\", and elimination is faecal: \"The primary route of elimination for [14C]-orforglipron-related radioactivity was via the feces (87% +/- 2.8%) with minimal urinary excretion (0.2% +/- 0.02%).\" WHAT THE STORED VALUES DO AND DO NOT REPRODUCE, checked per R15: they give the paper's AUC exactly and its t1/2 to within 0.1 h, but a one-compartment Cmax at the 3 mg dose comes out near 7 ng/mL against the measured 13.4 ng/mL. That is expected and is disclosed rather than tuned away: Vz is a TERMINAL-phase volume and this drug's profile is not mono-exponential, so the one-compartment approximation is right on exposure and low on peak. The paper also prints Vss/F 303 L; Vz was used because with CL/F it is the pair that reproduces the reported t1/2. RANGES NOT STORED: PMID:37344954 gives \"the mean t1/2 was 24.6 to 35.3 hours after a single dose (0.3-6 mg)\" and 48.1-67.5 h on day 28 — a clean single-dose versus steady-state contrast showing roughly twofold accumulation in apparent t1/2, which is why the single-dose 29.5 h is the value stored. PMID:41325139 reports 51.8-76.1 h at week 12, steady state, unusable for a volume. PRESENTATION MATTERS FOR DOSE: PMID:41994902 gives capsule doses of 1, 3, 6, 12, 24 and 36 mg against tablet doses of 0.8, 2.5, 5.5, 9, 14.5 and 17.2 mg, so tablet and capsule strengths are NOT interchangeable mg-for-mg; the stored range is the capsule/target-dose scale used in the phase 2 and 3 trials.",
+    "refs": [
+      "PMID:38402332",
+      "PMID:40888509",
+      "PMID:39693407",
+      "PMID:37344954",
+      "PMID:41325139"
+    ]
+  },
+  {
+    "slug": "survodutide",
+    "name": "Survodutide",
+    "aliases": [
+      "BI 456906",
+      "BI456906"
+    ],
+    "category": "peptide",
+    "mechanism": "An acylated peptide dual agonist of the glucagon receptor and the GLP-1 receptor, giving GLP-1-mediated appetite and glycaemic effects plus glucagon-receptor-mediated energy expenditure. Its candidate-selection paper (PMID:38560764) determined cAMP potencies in CHO-K1 cells stably expressing human GCGR and GLP-1R, but THAT ABSTRACT PRINTS NO NUMERIC EC50 OR Ki for either human receptor, so none is recorded and no occupancy row is authored. Every number that abstract does print is mouse or rat.",
+    "routes": [
+      "SC"
+    ],
+    "doses": {
+      "SC": {
+        "min": 0.6,
+        "max": 6,
+        "typical": 6,
+        "unit": "mg"
+      }
+    },
+    "half_life_hr": {},
+    "pk_unauthored": {
+      "reason": "uncharacterized",
+      "note": "PK endpoints were measured in humans and no magnitude was ever published. `survodutide AND pharmacokinetics` returns 2 records, and the one PK paper (PMID:38857788) reports only a comparison: \"mean AUC0-inf and Cmax were similar in those with cirrhosis compared with healthy individuals\". A ratio is not a value. That arm IS single-dose, so a Cmax exists and is not printed; no PMC copy, so full text NOT RETRIEVED."
+    },
+    "mw_g_mol": 4232,
+    "systems": [
+      "endocrine",
+      "digestive"
+    ],
+    "notes": "PubChem returns three CIDs for this name — 171378821, 168429725 and 171934786 — all with the SAME formula C192H289N47O61 and mass 4232, re-queried 2026-09-26, so the mass is unambiguous even though the entry is duplicated. At 4.2 kDa it sits in the 3-10 kDa band where this catalog's six authored volumes span 7.7-200 L and the 35 L default falls inside the spread, so the DIRECTION of the volume error is unknown and no class default would help — the record needs a real volume, not a better guess. DOSES, verbatim once-weekly subcutaneous: \"subcutaneous survodutide (0.6, 2.4, 3.6, or 4.8 mg) or placebo once-weekly for 46 weeks\" (PMID:38330987, phase 2 obesity); \"survodutide at a dose of 2.4, 4.8, or 6.0 mg\" (PMID:38847460, phase 2 MASH); and phase 3, \"once-weekly survodutide administered subcutaneously at a dose adjusted up to 3.6 mg or 6.0 mg\" (PMID:42253238). THE EFFICACY TRIALS CARRY NO PK AND ARE NOT CITED FOR ANY: hanging a half-life or volume on PMID:38330987, PMID:38847460 or PMID:42253238 would be the abstract-silent defect R2 documents as the FOURIER/FIELD/CLEAR pattern.",
+    "refs": [
+      "PMID:38857788",
+      "PMID:38560764",
+      "PMID:38330987",
+      "PMID:38847460",
+      "PMID:42253238"
+    ]
+  },
+  {
+    "slug": "mazdutide",
+    "name": "Mazdutide",
+    "aliases": [
+      "IBI362",
+      "LY3305677"
+    ],
+    "category": "peptide",
+    "mechanism": "A once-weekly fatty-acylated synthetic analogue of oxyntomodulin acting as a balanced agonist at the GLP-1 receptor and the glucagon receptor. PMID:35750681 full text verbatim: \"IBI362 (also known as LY3305677) is a once-weekly synthetic peptide analogue of mammalian OXM, with a fatty-acyl moiety to extend the half-life.\" The same paper's statement that it \"potently bound to human and mouse GLP-1 receptors and glucagon receptors in vitro\" carries NO NUMBER and cites other references, so it is a secondary citation for affinity and no occupancy row is authored.",
+    "routes": [
+      "SC"
+    ],
+    "doses": {
+      "SC": {
+        "min": 1.5,
+        "max": 16,
+        "typical": 6,
+        "unit": "mg"
+      }
+    },
+    "half_life_hr": {},
+    "pk_unauthored": {
+      "reason": "uncharacterized",
+      "note": "The published half-lives cannot be reduced to one value. Single (first) dose, full text PMID:35750681: \"half-life (t 1/2) ranging from 147.3 hours to 673.3 hours (6.1 days to 28.1 days)\" — a 4.6-fold range that spans a decision on a weekly interval, so R3 requires a skip, not an endpoint. The only clean number, \"approximately 8 days\" (PMID:40832785), is a hedged WEEK 20 steady-state figure. No Cmax magnitude is published; the numeric tables are supplementary and were not retrieved."
+    },
+    "mw_g_mol": 4476,
+    "systems": [
+      "endocrine",
+      "digestive"
+    ],
+    "notes": "PubChem CID 167312357 (C207H317N45O65, 4476), re-queried 2026-09-26. At 4.5 kDa it sits in the 3-10 kDa band where the direction of the volume error is unknown, so no volume is guessed. TWO TRAPS IN THE SOURCES, both recorded so they are not imported. (1) AN INTERNAL INCONSISTENCY IN PMID:35750681: the sentence \"IBI362 demonstrated slow absorption with peak concentrations (C max ) achieved ranging from 23.3 hours to 144.2 hours\" gives those figures in HOURS and the next clause gives \"the median T max is ~72 hours\" — it is describing time-to-peak, not a concentration, so there is NO Cmax value in that text and none may be read out of it. (2) AN ANALYTE TRAP IN PMID:40832785: the only Cmax and tmax numbers in that paper are ACETAMINOPHEN's, from a gastric-emptying substudy, and none of them may be attributed to mazdutide. DOSES, verbatim once-weekly subcutaneous: \"once-weekly IBI362 (3.0 mg, 4.5 mg or 6.0 mg), placebo or open-label dulaglutide (1.5 mg) subcutaneously for 12 weeks\" (PMID:35750681 — the 1.5 mg is DULAGLUTIDE, a comparator, not a mazdutide dose); escalation to 16 mg over 20 weeks (PMID:40832785); and the approved phase 3 doses, \"4 mg of mazdutide, 6 mg of mazdutide, or placebo for 48 weeks\" (PMID:40421736), which is why typical is 6 mg.",
+    "refs": [
+      "PMID:35750681",
+      "PMID:40832785",
+      "PMID:40421736"
+    ]
+  },
+  {
+    "slug": "bimagrumab",
+    "name": "Bimagrumab",
+    "aliases": [
+      "BYM338"
+    ],
+    "category": "biologic",
+    "mechanism": "A human monoclonal antibody against the activin type II receptors ActRIIA and ActRIIB, occupying the ligand-binding site competitively and so blocking myostatin, activin A and GDF11 signalling through Smad2/3, which relieves the negative regulation of skeletal muscle mass. PMID:29109273 verbatim: \"bimagrumab binds to both ActRIIA and ActRIIB ligand binding domains in a competitive manner at the critical myostatin/activin binding site, hence preventing signal transduction through either ActRII\". PMID:33264516 full text adds: \"Bimagrumab is a human monoclonal antibody that blocks the ActRIIs, preventing the activity of myostatin and other negative skeletal muscle regulators\".",
+    "routes": [
+      "IV",
+      "SC"
+    ],
+    "doses": {
+      "IV": {
+        "min": 210,
+        "max": 1500,
+        "typical": 1200,
+        "unit": "mg"
+      }
+    },
+    "half_life_hr": {},
+    "pk_unauthored": {
+      "reason": "uncharacterized",
+      "note": "THE SOURCE STATES THE PARAMETERS ARE NOT DERIVABLE, which is stronger than absence. PMID:33264516 full text verbatim: \"periods of concentration-associated linear and non-linear clearance suggesting target-mediated drug disposition. Therefore, other PK parameters, such as clearance and half-life, could not be derived using non-compartmental analysis.\" A single scalar half-life is arguably the wrong model object for a TMDD antibody, so none is invented."
+    },
+    "systems": [
+      "musculoskeletal",
+      "endocrine"
+    ],
+    "notes": "NO MOLECULAR WEIGHT IS STORED. PubChem returns PUGREST.NotFound for `bimagrumab`, and none of the three full texts read prints a kDa figure for it, so the familiar ~150 kDa IgG mass is not citable from anything fetched. That absence BLOCKS an occupancy row even though a real affinity exists, because the schema's ec50_mg_l needs the mass for the nM-to-mg/L conversion. AFFINITY, VERBATIM AND CORRECTLY ATTRIBUTED (PMID:29109273 full text, SPR against human ActRIIA-Fc and ActRIIB-Fc): \"The affinity of the bimagrumab Fab for ActRIIA ( K d = 973 pM) is >50-fold lower in comparison with ActRIIB ( K d = 16 pM)\". NOTE THESE ARE FAB AFFINITIES, NOT WHOLE-IgG. The same paragraph prints affinities for the LIGANDS (myostatin, activin A) and for two OTHER antibodies, CSJ089 and CQI876 — none of which belongs on this record. SINGLE-DOSE IV Cmax, verbatim from PMID:33264516 full text, established as single-dose by \"The concentration-time profile following a single i.v. infusion of bimagrumab 3 or 30 mg/kg\": \"In older adults administered bimagrumab 3 and 30 mg/kg, mean C max was 90.7 and 982 microg/mL ... obese participants administered bimagrumab 30 mg/kg had a mean C max of 944 microg/mL\". SUBCUTANEOUS BIOAVAILABILITY IS AN ESTIMATE, not a measurement: PMID:36527600 says \"The absolute subcutaneous bioavailability was estimated at approximately 40%\", so under R17 it is recorded here and not stored in an F slot, and it would belong to the SC route only. That paper also gives three formulations in one study — IV infusion, SC infusion and SC bolus — so any future ka or F is formulation-specific. A COMPARATOR NOT TO IMPORT: the semaglutide 1.0 and 2.4 mg SC weekly arms in the BELIEVE trial (PMID:41772149) are semaglutide's doses, not this compound's.",
+    "refs": [
+      "PMID:33264516",
+      "PMID:29109273",
+      "PMID:36527600",
+      "PMID:33439265",
+      "PMID:41772149"
+    ]
   }
 ]
