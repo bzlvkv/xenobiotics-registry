@@ -272,7 +272,7 @@ export const LINT_RULES: Readonly<Record<string, RuleInfo>> = {
   },
   'receptor.pmid': {
     level: 'error',
-    summary: 'An occupancy row has no source_pmid.',
+    summary: 'An occupancy row cites neither a PMID nor a regulatory label.',
   },
   'receptor.secondary-source': {
     level: 'warning',

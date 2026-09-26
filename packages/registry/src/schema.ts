@@ -153,6 +153,12 @@ const receptorSite = z.strictObject({
     ])
     .optional(),
   source_pmid: pmid,
+  // Non-PubMed primary provenance (regulatory label / monograph), exactly as on
+  // a pk route. For several modern agents the approved label is the ONLY public
+  // document stating a receptor affinity at all: ziprasidone's 5-HT2A, 5-HT2C
+  // and H1 constants are printed verbatim in GEODON section 12.2 and in no
+  // fetchable paper. Length-capped so a label section cannot be pasted in.
+  source_label: z.string().min(1).max(300).optional(),
   // Provenance prose — species / tissue / radioligand / verbatim quote, or an
   // "approximation" caveat. Authored on 321 of 325 rows and once omitted here,
   // which stripped it at load so no surface ever saw the data-quality detail

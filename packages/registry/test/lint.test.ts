@@ -633,6 +633,29 @@ describe('receptor and effect-compartment rules', () => {
     expect(found).toContain('receptor.hill-positive');
   });
 
+  it('receptor.pmid accepts a regulatory label in place of a PMID', () => {
+    // GEODON section 12.2 states ziprasidone's 5-HT2A, 5-HT2C and H1 affinities
+    // verbatim and no fetchable paper does. A label is primary provenance here
+    // exactly as it is on a pk route.
+    const c = compound({
+      slug: 'a',
+      name: 'A',
+      pk: { PO: { F: 1, source_pmid: 'PMID:1' } },
+      effect_compartment: { keo_per_h: 1, source_pmid: 'PMID:1' },
+      receptor_occupancy: [
+        {
+          receptor: '5-HT2A',
+          emax: 1,
+          ec50_mg_l: 0.1,
+          hill_n: 1,
+          source_label: 'GEODON (ziprasidone HCl), DailyMed set id 8326928a, SPL v50, 2026-09-18',
+        },
+      ],
+      fu_note: 'examined',
+    });
+    expect(rules(lint([c], [], catalog))).not.toContain('receptor.pmid');
+  });
+
   it('receptor.unknown-target fires on a key the catalog does not describe', () => {
     // The NEW rule. It was impossible while the linter was handed compounds and
     // pathways only and never saw the target catalog.

@@ -1247,11 +1247,16 @@ export function lintRegistry(registry: Registry): Finding[] {
         }
         const target = targetKeyFor(site.receptor);
         recSeen.set(target, (recSeen.get(target) ?? 0) + 1);
-        if (!site.source_pmid) {
+        // A regulatory label is primary provenance, as it is on a pk route: for
+        // several agents it is the only public document stating an affinity, and
+        // refusing it deletes real pharmacology or pushes the row back onto a
+        // curation-database midpoint. What we still refuse is a row with
+        // NEITHER, because then the number cannot be re-derived from anything.
+        if (!site.source_pmid && !site.source_label) {
           err(
             c.slug,
             'receptor.pmid',
-            `receptor_occupancy[${i}] (${site.receptor}) lacks source_pmid`,
+            `receptor_occupancy[${i}] (${site.receptor}) has no source_pmid and no source_label`,
           );
         }
         // ── The number has to come from a paper someone read ──────────

@@ -333,6 +333,29 @@ export interface ReceptorSite {
   action?: ReceptorAction;
   /** PMID anchoring the binding parameters. */
   source_pmid?: string;
+  /**
+   * Non-PubMed primary provenance: a regulatory label or monograph, named the
+   * way `RoutePk.source_label` requires — product, set id and effective date,
+   * because a label is revised in place and "the FDA label" points at whatever
+   * it says today.
+   *
+   * Here for the same reason it exists on a route, and discovered the same way.
+   * Ziprasidone's 5-HT2A, 5-HT2C and H1 affinities are stated verbatim in GEODON
+   * section 12.2 and in no paper this project can fetch: the two candidate
+   * primaries (Schmidt 2001, Seeger 1995) have abstracts containing no numbers
+   * at all and full text in neither PMC nor Europe PMC. Without this field the
+   * only honest options were a midpoint off a curation database, which is what
+   * those rows held, or deleting real pharmacology. A label is a primary
+   * document; what it is not is a PubMed id, and that is a property of the
+   * citation, not of the evidence.
+   *
+   * `receptor.pmid` accepts either this or `source_pmid`, and refuses a row with
+   * neither. What a label does NOT carry is a species, a tissue or a
+   * radioligand — it prints the number and nothing around it — so a
+   * label-sourced row must say that in its `note` rather than let a reader
+   * assume a cloned-human assay.
+   */
+  source_label?: string;
   /** Provenance prose: species / tissue / radioligand / verbatim quote, or an
    *  "approximation" caveat. This is the data-quality detail behind the value
    *  and was once stripped at load, so no surface could show it. */

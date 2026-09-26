@@ -264,7 +264,7 @@ function occupancy(ctx: Ctx, c: Compound): HTMLElement | null {
       num(r.hill_n),
       r.basis ? el('code', null, r.basis) : dash(),
       r.pathway ? pathwayLink(ctx, r.pathway) : dash(),
-      sourceCell(r.source_pmid),
+      sourceCell(r.source_pmid, r.source_label),
     ]);
     if (r.note) out.push({ full: frag(el('b', null, `${i + 1}. `), inline(r.note)) });
   });
