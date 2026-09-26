@@ -4018,10 +4018,10 @@
         "receptor": "beta_1",
         "pathway": "antagonist",
         "emax": 1,
-        "ec50_mg_l": 0.018853,
+        "ec50_mg_l": 0.0582688,
         "hill_n": 1,
-        "source_pmid": "PMID:15060759",
-        "note": "APPROXIMATION, NOT A MEASUREMENT — recorded here because the value cannot be sourced. The cited abstract contains no atenolol pKi; its only atenolol number is \"(-)-atenolol 1,000\", a POTENCY RATIO. The stored value back-solves to pKi 7.15, a midpoint aggregated across three studies. No verbatim human atenolol beta-1 affinity exists in any abstract found, so it is retained as a declared aggregate rather than replaced by a guess.",
+        "source_pmid": "PMID:15655528",
+        "note": "Baker 2005 (PMID:15655528, Br J Pharmacol 144:317-22), full text Table 1 via PMC1576008: cloned HUMAN receptor in CHO cells, 3H-CGP 12177 whole-cell binding. The value is a KD, not a Ki. Atenolol log KD -6.66 +/- 0.05 (n=7) -> KD 218.8 nM. ec50 = 218.8 nM x 266.34 / 1e6. Replaces 0.018853, which the row itself declared an approximation: a pKi 7.15 aggregated over three studies, cited to PMID:15060759, whose only atenolol figure is the potency ratio \"(-)-atenolol 1,000\". That aggregate was ~12x too strong; the abstract agrees in words, \"micromolar for atenolol\".",
         "action": "antagonist"
       }
     ],
@@ -6182,10 +6182,10 @@
         "receptor": "alpha_2a",
         "pathway": "agonist",
         "emax": 1,
-        "ec50_mg_l": 0.008232,
+        "ec50_mg_l": 0.124617,
         "hill_n": 1,
-        "source_pmid": "PMID:9605427",
-        "note": "Per IUPHAR/GtoPdb (human α2A, binding pKi range 6.4–8.7 across 5 refs → midpoint 7.55, Ki 28.2 nM); representative primary Jasper 1998 (PMID:9605427, recombinant human α2A/B/C agonist binding incl. UK-14304/brimonidine). ec50 = 28.2 nM × 292.13 / 1e6.",
+        "source_pmid": "PMID:36101495",
+        "note": "Proudman, Akinaga & Baker 2022 (PMID:36101495, Pharmacol Res Perspect 10:e01003), full text section 3.5 via PMC9471048, verbatim: \"The affinity of brimonidine was relatively low (log K D -6.37 +/- 0.07, n = 5\". KD 426.6 nM; ec50 = 426.6 nM x 292.13 / 1e6. Human alpha2A in CHO cells, 3H-rauwolscine whole-cell — same lab and assay as this catalog's mirtazapine row. GROUND-STATE affinity: ~15x weaker than the pKi 6.4-8.7 midpoint it replaces because that span is method, not scatter. Jasper 1998 (PMID:9605427) states no brimonidine affinity.",
         "action": "agonist"
       }
     ],
@@ -6527,16 +6527,6 @@
         "source_pmid": "PMID:10502307",
         "note": "Romero 1999 Synapse — abstract verbatim \"antagonist-K(i) values (nM) of buprenorphine at mu, delta, and kappa receptors were 0.088 nM, 1.15 nM, and 0.072 nM\"; [35S]GTPγS functional. MW 467.64",
         "action": "partial_agonist"
-      },
-      {
-        "receptor": "kappa_opioid",
-        "pathway": "antagonist",
-        "emax": 1,
-        "ec50_mg_l": 0.000105,
-        "hill_n": 1,
-        "source_pmid": "PMID:9686407",
-        "note": "GtoPdb-curated human κ-opioid binding: pKi range 9.1–10.2 (PMID:9686407, PMID:9262330); midpoint pKi 9.65 → Ki ≈ 0.22 nM, antagonist. Buprenorphine's κ antagonism. ec50 = 0.22 nM × 467.64 / 1e6.",
-        "action": "antagonist"
       }
     ],
     "notes": "PK: THE 17-HOUR TRANSDERMAL LAG IS THE CLONIDINE DEFECT REPEATING and is deleted. It appears in no buprenorphine transdermal abstract, and the published structural model says the opposite: \"The final transdermal absorption model employed a zero-order input rate ... BUCCAL absorption was a first-order process with a time lag\" — the lag belongs to a different route. The only use of the word for the patch is pharmacodynamic, \"a long lag period for DOSE STABILISATION\". The rest of the patch parameterisation is kept: 168 h is the stated wear interval and the input genuinely is zero-order, declining over the wear and stopping at removal. The stored 30 and 38.1 h half-lives were both unsourced, and the split was real in kind but for the wrong reason — terminal half-life IS route-dependent here because of an oral-mucosal depot and patch-limited input, so one disposition value of 42 h is now shared and the route effects left to the input model. SUBLINGUAL LOSS IS LARGE AND MEASURED: \"Buprenorphine recovered from saliva ... was, on average, 52% to 55% of dose\", causing \"an almost twofold overestimation of bioavailability\". No human volume exists in any abstract. A reference with NO ABSTRACT AT ALL is removed. THE EFFECT-COMPARTMENT VALUE IS KEPT BUT FLAGGED INCOMPLETE: its own paper states hysteresis is \"a combination of biophase distribution kinetics AND receptor association/dissociation kinetics\", with a partial-agonist ceiling, so a lone equilibration rate under-predicts both duration and ceiling.",
@@ -6909,10 +6899,10 @@
         "receptor": "adenosine_A1",
         "pathway": "wakefulness",
         "emax": 1,
-        "ec50_mg_l": 2.46,
+        "ec50_mg_l": 3.67019,
         "hill_n": 1,
         "source_pmid": "PMID:8469419",
-        "note": "Deckert et al 1993 (Neurosci Lett 150:191-194) — caffeine is a primary test subject. Adenosine A1 receptors in HUMAN hippocampus, displacement of [3H]DPCPX; caffeine Ki 8.5-18.9 microM across hippocampal layers (geometric mean ~12.7 microM). ec50 = 12675 nM x 194.19 / 1e6 = 2.46 mg/L (full-text/abstract range value; prior 2.3 mg/L sits within this range). Replaces Fredholm 1999 Pharmacol Rev review (PMID:10049999, no primary Ki / no abstract).",
+        "note": "Deckert 1993 (PMID:8469419, Neurosci Lett 150:191-4), abstract verbatim: \"Ki's in the individual layers were in a range between 8.5 +/- 6.5 microM and 18.9 +/- 16.0 microM for caffeine\". Human hippocampus, [3H]DPCPX displacement, caffeine a subject. STORED AT THE UNDER-CORRECTING ENDPOINT, 18.9 microM: the paper states a per-layer range and no overall value, and the weaker endpoint errs toward less occupancy. ec50 = 18900 nM x 194.19 / 1e6. Replaces 2.46 mg/L, the geometric mean of that range, which no sentence states.",
         "action": "antagonist"
       },
       {
@@ -10534,30 +10524,10 @@
         "receptor": "dopamine_d2",
         "pathway": "antagonist",
         "emax": 1,
-        "ec50_mg_l": 0.145995,
+        "ec50_mg_l": 0.0245122,
         "hill_n": 1,
-        "source_pmid": "PMID:1354163",
-        "note": "Per IUPHAR/GtoPdb (human D2, pKi range 5.8–6.9 across 5 refs [Freedman 1994, MacKenzie 1994, Shahid 2009, Sokoloff 1992, Tang 1994] → midpoint 6.35, Ki 447 nM); representative primary Sokoloff 1992 (PMID:1354163, human D2/D3 pharmacology, antipsychotic panel). Clozapine is a weak/low-affinity D2 antagonist (its hallmark). ec50 = 447 nM × 326.83 / 1e6.",
-        "action": "antagonist"
-      },
-      {
-        "receptor": "5-HT2A",
-        "pathway": "antagonist",
-        "emax": 1,
-        "ec50_mg_l": 0.001638,
-        "hill_n": 1,
-        "source_pmid": "PMID:8935801",
-        "note": "Per IUPHAR/GtoPdb (human 5-HT2A, pKi range 7.6–9.0 across 5 refs → midpoint 8.3, Ki 5.0 nM); representative primary Schotte 1996 (PMID:8935801, risperidone vs reference antipsychotics receptor binding incl. clozapine). ec50 = 5.0 nM × 326.83 / 1e6.",
-        "action": "antagonist"
-      },
-      {
-        "receptor": "H1",
-        "pathway": "antagonist",
-        "emax": 1,
-        "ec50_mg_l": 0.000206,
-        "hill_n": 1,
-        "source_pmid": "PMID:8935801",
-        "note": "GtoPdb-curated human H1 binding: pKi range 8.8–9.6 (PMID:8935801, PMID:12629531, PMID:12065734); midpoint pKi 9.2 → Ki ≈ 0.63 nM. Clozapine's potent antihistamine action. ec50 = 0.63 nM × 326.83 / 1e6.",
+        "source_pmid": "PMID:24219174",
+        "note": "Seeman 2014 (PMID:24219174, ACS Chem Neurosci 5:24-9), full text via PMC3894721, verbatim: \"clozapine has a Ki of 75 nM at the D2 receptor when the loosely bound ligand [3H]raclopride (Kd = 1.9 nM) is used\". Clozapine is the subject and this is its central claim. Human-cloned D2Long. ec50 = 75 nM x 326.83 / 1e6. DISCLOSED: a review of the author's own data, Table 1 \"adapted from\" two further reviews; the bench report was not retrieved. Kept because the sentence is reachable, unlike the 447 nM midpoint it replaces. Ki is radioligand-dependent: 385 nM with [3H]nemonapride.",
         "action": "antagonist"
       },
       {
@@ -11231,28 +11201,6 @@
       "note": "Approximation; no published kₑₒ. endogenous GR/MR agonist: PD onset via nuclear-receptor transcriptional change (hours to days), so a slow effect-compartment ~0.1/h (t½kₑₒ ≈ 7 h). Matches the existing dexamethasone/prednisolone keo convention.",
       "approximated": true
     },
-    "receptor_occupancy": [
-      {
-        "receptor": "glucocorticoid",
-        "pathway": "agonist",
-        "emax": 1,
-        "ec50_mg_l": 0.008119,
-        "hill_n": 1,
-        "source_pmid": "PMID:8282004",
-        "note": "GtoPdb-curated human GR (NR3C1) binding: pIC50 range 7.3–8.0 (PMID:8282004, PMID:10611474, PMID:10747884); midpoint 7.65 → IC50 ≈ 22 nM. Cortisol is the endogenous GR agonist. ec50 = 22 nM × 362.46 / 1e6.",
-        "action": "agonist"
-      },
-      {
-        "receptor": "mineralocorticoid",
-        "pathway": "agonist",
-        "emax": 1,
-        "ec50_mg_l": 0.0000484,
-        "hill_n": 1,
-        "source_pmid": "PMID:8282004",
-        "note": "GtoPdb-curated human MR (NR3C2) binding: pIC50 range 9.8–9.95 (PMID:8282004, PMID:10611474); midpoint 9.875 → IC50 ≈ 0.13 nM. Cortisol's high MR affinity is why 11β-HSD2 in distal tubule must inactivate it to spare MR for aldosterone. ec50 = 0.13 nM × 362.46 / 1e6.",
-        "action": "agonist"
-      }
-    ],
     "notes": "PK: Derendorf 1991 (PMID:2050835), 20 mg IV/PO crossover in dexamethasone-suppressed subjects, verbatim \"half-life of 1.7 hr. The volume of distribution was 34 L. Oral bioavailability averaged 96%\", Tmax 1 h; ka not stated. Johnson 2018 (PMID:29795974) corroborates F \"1.00 (0.89-1.14)\". Half-life is dose-conditional through CBG saturation — 1.2 h at 5 mg rising to 1.7 h at 40 mg (Toothaker 1982, PMID:7143223); the 20 mg value is stored. IM route removed 2026-09-06: no human abstract states an IM absorption parameter. hydrocortisone is the same molecule and was merged into this record.",
     "retired_slugs": [
       "hydrocortisone"
@@ -12477,10 +12425,10 @@
         "receptor": "orexin_2",
         "pathway": "antagonist",
         "emax": 1,
-        "ec50_mg_l": 0.000451,
+        "ec50_mg_l": 0.000567675,
         "hill_n": 1,
         "source_pmid": "PMID:31860301",
-        "note": "GtoPdb-curated human OX2 (HCRTR2) antagonist potency: pKB range 8.9–9.1 (PMID:31860301, PMID:28663311); midpoint pKB 9.0 → ~1 nM. pKB (Schild) used as Kᵢ surrogate for an antagonist. ec50 = 1.0 nM × 450.92 / 1e6.",
+        "note": "Rappas 2020 (PMID:31860301, J Med Chem 63:1528-43), full text Table 1 via PMC7050010, verbatim: \"daridorexant (5) | DORA | 3.03 A | OX1 pKi 8.8, OX2 pKi 8.9\". The authors' own binding assays, human OX2 on HEK293T membranes; the OX2 radioligand is named only in Supporting Information, not retrieved. pKi 8.9 -> Ki 1.2589 nM; ec50 = 1.2589 nM x 450.92 / 1e6. Replaces a pKB 8.9-9.1 midpoint and its \"pKB as Ki surrogate\" caveat: this is a binding pKi. Same table carries the stored OX1 value.",
         "action": "antagonist"
       }
     ],
@@ -21836,26 +21784,6 @@
         "hill_n": 1,
         "source_pmid": "PMID:1361536",
         "note": "Tsuchihashi 1992 verbatim: \"the Kd and Bmax values were 7.42 +/- 1.03 nM and 1.58 +/- 0.20 pmol (mg protein)-1\". Rat striatum, [3H]haloperidol direct binding (Kd, not Ki). ec50 = 7.42 nM × 375.86 / 1e6.",
-        "action": "antagonist"
-      },
-      {
-        "receptor": "dopamine_d3",
-        "pathway": "antagonist",
-        "emax": 1,
-        "ec50_mg_l": 0.00335,
-        "hill_n": 1,
-        "source_pmid": "PMID:8301582",
-        "note": "GtoPdb-curated human D3 binding: pKi range 7.5–8.6 (PMID:8301582, PMID:1354163, PMID:7862709, PMID:18308814); midpoint pKi 8.05 → Ki ≈ 8.9 nM. ec50 = 8.9 nM × 375.86 / 1e6.",
-        "action": "antagonist"
-      },
-      {
-        "receptor": "5-HT2A",
-        "pathway": "antagonist",
-        "emax": 1,
-        "ec50_mg_l": 0.037586,
-        "hill_n": 1,
-        "source_pmid": "PMID:8935801",
-        "note": "GtoPdb-curated human 5-HT2A binding: pKi range 6.7–7.3 (PMID:8935801, PMID:9732398, PMID:12629531, PMID:15102927, PMID:18308814); midpoint pKi 7.0 → Ki ≈ 100 nM. Haloperidol's modest 5-HT2A antagonism. ec50 = 100 nM × 375.86 / 1e6.",
         "action": "antagonist"
       }
     ],
@@ -31327,10 +31255,10 @@
         "receptor": "alpha_2a",
         "pathway": "antagonist",
         "emax": 1,
-        "ec50_mg_l": 0.029773,
+        "ec50_mg_l": 0.0419253,
         "hill_n": 1,
         "source_pmid": "PMID:35224877",
-        "note": "Per IUPHAR/GtoPdb (human α2A, pKi range 6.8–7.1 → geometric-mean 6.95, Ki 112 nM); primary Proudman 2022 (PMID:35224877), human α2A affinity of antidepressants (mirtazapine named). Mirtazapine's mechanism is α2 (auto/heteroreceptor) ANTAGONISM. ec50 = 112 nM × 265.36 / 1e6.",
+        "note": "Proudman, Akinaga & Baker 2022 (PMID:35224877, Pharmacol Res Perspect 10:e00936), full text Table 3 via PMC8882856: mirtazapine log KD -6.80 +/- 0.05 (n=5); the discussion states it verbatim, \"Mirtazepine (alpha2A-affinity 158 nM)\" — the paper spells it \"mirtazepine\". Human alpha2A in CHO cells, 3H-rauwolscine whole-cell binding. ec50 = 158 nM x 265.35 / 1e6. Replaces a midpoint. The same discussion reports 79-126 nM at human alpha2A from independent earlier work.",
         "action": "antagonist"
       },
       {
@@ -32892,16 +32820,6 @@
         "ec50_mg_l": 0.036,
         "source_pmid": "PMID:14632053",
         "note": "Beigi & Wainer 2003 Anal Chem — abstract verbatim \"calculated dissociation constants (Kd) were 110 nM for naloxone\"; immobilized hMOR from CHO. MW 327.37",
-        "action": "antagonist"
-      },
-      {
-        "receptor": "kappa_opioid",
-        "pathway": "antagonist",
-        "emax": 1,
-        "ec50_mg_l": 0.0026,
-        "hill_n": 1,
-        "source_pmid": "PMID:9686407",
-        "note": "GtoPdb-curated human κ-opioid binding: pKi range 7.6–8.6 (PMID:9686407, PMID:7869844, PMID:7624359, PMID:9262330); midpoint pKi 8.1 → Ki ≈ 7.9 nM, antagonist. Naloxone's non-selective antagonism. ec50 = 7.9 nM × 327.37 / 1e6.",
         "action": "antagonist"
       },
       {
@@ -34538,10 +34456,10 @@
         "receptor": "5-HT2C",
         "pathway": "antagonist",
         "emax": 1,
-        "ec50_mg_l": 0.001757,
+        "ec50_mg_l": 0.00468645,
         "hill_n": 1,
-        "source_pmid": "PMID:12629531",
-        "note": "GtoPdb-curated human 5-HT2C binding: pKi range 8.1–8.4 (PMID:12629531, PMID:10991983, PMID:18308814), antagonist/inverse agonist; midpoint pKi 8.25 → Ki ≈ 5.6 nM. Implicated in olanzapine's metabolic effects. ec50 = 5.6 nM × 312.43 / 1e6.",
+        "source_pmid": "PMID:10227113",
+        "note": "Bymaster 1999 (PMID:10227113, Schizophr Res 37:107-22), abstract verbatim: \"in this cell line potently inhibited 5-HT-stimulated [35S]GTP gamma S binding with a Ki value of 15 nM\". Olanzapine is the sole title subject. TWO CAVEATS: this is a FUNCTIONAL antagonist Ki, not radioligand displacement; and the source says only \"cell lines transfected with 5-HT2c receptors\", never human, so no species is claimed. ec50 = 15 nM x 312.43 / 1e6. Replaces a midpoint cited to Kroeze 2003 (PMID:12629531), an H1 paper reporting only correlations.",
         "action": "antagonist"
       }
     ],
@@ -38883,13 +38801,23 @@
     },
     "receptor_occupancy": [
       {
+        "receptor": "beta_1",
+        "pathway": "antagonist",
+        "emax": 1,
+        "ec50_mg_l": 0.00179419,
+        "hill_n": 1,
+        "source_pmid": "PMID:15655528",
+        "note": "Baker 2005 (PMID:15655528, Br J Pharmacol 144:317-22), full text Table 1 via PMC1576008: cloned HUMAN receptor in CHO cells, 3H-CGP 12177 whole-cell binding. The value is a KD, not a Ki. Propranolol log KD -8.16 +/- 0.08 (n=5) -> KD 6.918 nM. ec50 = 6.918 nM x 259.34 / 1e6. Closes a standing gap: GtoPdb carries no beta-1 entry for propranolol at all, which is why this row did not exist. Note the direction — in this single-laboratory panel propranolol is 8.3x more potent at beta-2 than beta-1, the paper's headline finding.",
+        "action": "antagonist"
+      },
+      {
         "receptor": "beta_2",
         "pathway": "antagonist",
         "emax": 1,
-        "ec50_mg_l": 0.000116,
+        "ec50_mg_l": 0.00021571,
         "hill_n": 1,
         "source_pmid": "PMID:15655528",
-        "note": "Per IUPHAR/GtoPdb (human β2, pKi range 9.2–9.5 across 4 refs → midpoint 9.35, Ki 0.45 nM); representative primary Baker 2005 (PMID:15655528, β-antagonist selectivity at human β1/β2/β3). NOTE: GtoPdb has no β1 row for propranolol (β1 omitted, logged). ec50 = 0.45 nM × 259.34 / 1e6.",
+        "note": "Baker 2005 (PMID:15655528, Br J Pharmacol 144:317-22), full text Table 1 via PMC1576008: cloned HUMAN receptor in CHO cells, 3H-CGP 12177 whole-cell binding. The value is a KD, not a Ki. Propranolol log KD -9.08 +/- 0.06 (n=8) -> KD 0.8318 nM. ec50 = 0.8318 nM x 259.34 / 1e6. Replaces a GtoPdb midpoint attributed to this same paper, which states one number.",
         "action": "antagonist"
       }
     ],
@@ -39509,20 +39437,10 @@
         "receptor": "5-HT2A",
         "pathway": "antagonist",
         "emax": 1,
-        "ec50_mg_l": 0.076524,
+        "ec50_mg_l": 0.0110605,
         "hill_n": 1,
-        "source_pmid": "PMID:12176106",
-        "note": "Per IUPHAR/GtoPdb (human 5-HT2A, pKi range 6.4–7.0 → midpoint 6.7, Ki 200 nM); representative primary Kongsamut 2002 (PMID:12176106, antipsychotic D2/5-HT2A binding + hERG, quetiapine tested). ec50 = 200 nM × 383.51 / 1e6.",
-        "action": "antagonist"
-      },
-      {
-        "receptor": "H1",
-        "pathway": "antagonist",
-        "emax": 1,
-        "ec50_mg_l": 0.001713,
-        "hill_n": 1,
-        "source_pmid": "PMID:8935801",
-        "note": "GtoPdb-curated human H1 binding: pKi range 8.0–8.7 (PMID:8935801, PMID:12629531); midpoint pKi 8.35 → Ki ≈ 4.5 nM. Drives quetiapine's sedation. ec50 = 4.5 nM × 383.51 / 1e6.",
+        "source_pmid": "PMID:26436896",
+        "note": "Cross 2016 (PMID:26436896, Br J Pharmacol 173:155-66), full text Table 2 via PMC4813385; quetiapine row, h5-HT2A binding pKi 7.54 +/- 0.30. Quetiapine is the title subject. Cloned human 5-HT2A in CHO cells, [3H]-MDL100907 displacement, Ki via Cheng-Prusoff. Ki = 28.84 nM; ec50 = 28.84 nM x 383.51 / 1e6. Replaces a midpoint of a GtoPdb pKi 6.4-7.0 range cited to Kongsamut 2002 (PMID:12176106), a hERG paper stating no absolute Ki for any drug. Same table as this record's D2 row.",
         "action": "antagonist"
       }
     ],
@@ -41482,10 +41400,10 @@
         "receptor": "H1",
         "pathway": "antagonist",
         "emax": 1,
-        "ec50_mg_l": 0.00821,
+        "ec50_mg_l": 0.000862008,
         "hill_n": 1,
-        "source_pmid": "PMID:8935801",
-        "note": "GtoPdb-curated human H1 binding: pKi range 7.6–7.8 (PMID:8935801, PMID:12629531); midpoint pKi 7.7 → Ki ≈ 20 nM. ec50 = 20 nM × 410.49 / 1e6.",
+        "source_pmid": "PMID:1372084",
+        "note": "Leysen 1992 (PMID:1372084, Mol Pharmacol 41:494-508), abstract verbatim: \"(Ki values, in nM, for ocaperidone and risperidone, respectively) ... histamine H1 (1.6 and 2.1)\" — risperidone is the second figure, Ki 2.1 nM, and a title subject. SPECIES: RAT BRAIN, per the title; the abstract reserves cloned human receptors for D2 alone, so this is not a human value. ec50 = 2.1 nM x 410.48 / 1e6. Replaces a midpoint attributed to Schotte 1996 (PMID:8935801), whose abstract carries no binding numerals at all.",
         "action": "antagonist"
       },
       {
@@ -44646,20 +44564,20 @@
         "receptor": "beta_1",
         "pathway": "antagonist",
         "emax": 1,
-        "ec50_mg_l": 0.305588,
+        "ec50_mg_l": 0.462534,
         "hill_n": 1,
         "source_pmid": "PMID:15655528",
-        "note": "Per IUPHAR/GtoPdb (human β1, pKi range 5.8–6.1 → midpoint 5.95, Ki 1122 nM; single-source within-paper range); primary Baker 2005 (PMID:15655528). Weak β-affinity (sotalol is hydrophilic, high doses). ec50 = 1122 nM × 272.36 / 1e6.",
+        "note": "Baker 2005 (PMID:15655528, Br J Pharmacol 144:317-22), full text Table 1 via PMC1576008: cloned HUMAN receptor in CHO cells, 3H-CGP 12177 whole-cell binding. The value is a KD, not a Ki. Sotalol log KD -5.77 +/- 0.11 (n=7) -> KD 1698 nM. ec50 = 1698 nM x 272.36 / 1e6. Replaces a midpoint of a \"pKi 5.8-6.1 range\" said to be within this paper. Baker states a single value; the range was GtoPdb's aggregation.",
         "action": "antagonist"
       },
       {
         "receptor": "beta_2",
         "pathway": "antagonist",
         "emax": 1,
-        "ec50_mg_l": 0.054344,
+        "ec50_mg_l": 0.0384719,
         "hill_n": 1,
         "source_pmid": "PMID:15655528",
-        "note": "Per IUPHAR/GtoPdb (human β2, pKi range 6.5–6.9 → midpoint 6.7, Ki 200 nM); primary Baker 2005 (PMID:15655528). ec50 = 200 nM × 272.36 / 1e6.",
+        "note": "Baker 2005 (PMID:15655528, Br J Pharmacol 144:317-22), full text Table 1 via PMC1576008: cloned HUMAN receptor in CHO cells, 3H-CGP 12177 whole-cell binding. The value is a KD, not a Ki. Sotalol log KD -6.85 +/- 0.09 (n=10) -> KD 141.3 nM. ec50 = 141.3 nM x 272.36 / 1e6. Replaces a pKi 6.5-6.9 midpoint.",
         "action": "antagonist"
       }
     ],
@@ -52180,41 +52098,41 @@
         "receptor": "5-HT2A",
         "pathway": "antagonist",
         "emax": 1,
-        "ec50_mg_l": 0.00028493,
+        "ec50_mg_l": 0.000165176,
         "hill_n": 1,
-        "source_pmid": "PMID:12176106",
-        "note": "Per IUPHAR/GtoPdb (human 5-HT2A, pKi 8.8–9.5 range → geometric-mean Ki 0.69 nM); primary Kongsamut 2002. ec50 = 0.69 nM × 412.94 / 1e6.",
-        "action": "antagonist"
+        "note": "5-HT2A Ki = 0.4 nM; ec50 = 0.4 nM x 412.94 / 1e6. Label verbatim: \"Ziprasidone binds with relatively high affinity to the dopamine D 2 and D 3 , serotonin 5HT 2A , 5HT 2C , 5HT 1A , 5HT 1D , and alpha 1 -adrenergic receptors (K i s of 4.8, 7.2, 0.4, 1.3, 3.4, 2, and 10 nM, respectively)\" — the orders correspond. No species or radioligand is claimed: a label prints none. No paper supplies it — PMID:11513838 and PMID:7562537 have ziprasidone as subject but no numbers in their abstracts and no retrievable full text. Replaces a GtoPdb midpoint.",
+        "action": "antagonist",
+        "source_label": "GEODON (ziprasidone HCl) US prescribing information, DailyMed SPL set id 8326928a-2cb6-4f7f-9712-03a425a14c37, version 50, effective 2026-09-18, section 12.2"
       },
       {
         "receptor": "5-HT1A",
         "pathway": "partial-agonist",
         "emax": 1,
-        "ec50_mg_l": 0.001644,
+        "ec50_mg_l": 0.001403996,
         "hill_n": 1,
-        "source_pmid": "PMID:9760039",
-        "note": "GtoPdb-curated human 5-HT1A binding: pKi range 7.9–8.9 (PMID:9760039, PMID:8935801), partial agonist; midpoint pKi 8.4 → Ki ≈ 4.0 nM. ec50 = 4.0 nM × 412.94 / 1e6.",
+        "source_pmid": "PMID:10516958",
+        "note": "Sprouse 1999 (PMID:10516958, Neuropsychopharmacology 21:622-31), abstract verbatim: \"Ziprasidone is a novel antipsychotic agent which binds with high affinity to 5-HT1A receptors (Ki = 3.4 nM)\". Ziprasidone is the title subject. ec50 = 3.4 nM x 412.94 / 1e6. DISCLOSED: the sentence is the abstract's opening framing, so the constant is likely restated from in-house work rather than measured here, and no species is given. Kept because it is single-valued and subject-attributed, and the GEODON label prints the same 3.4 nM.",
         "action": "partial_agonist"
       },
       {
         "receptor": "5-HT2C",
         "pathway": "antagonist",
         "emax": 1,
-        "ec50_mg_l": 0.001449,
+        "ec50_mg_l": 0.000536822,
         "hill_n": 1,
-        "source_pmid": "PMID:12629531",
-        "note": "GtoPdb-curated human 5-HT2C binding: pKi range 7.9–9.01 (PMID:12629531, PMID:10991983, PMID:18308814), antagonist/inverse agonist; midpoint pKi 8.46 → Ki ≈ 3.5 nM. ec50 = 3.5 nM × 412.94 / 1e6.",
-        "action": "antagonist"
+        "note": "5-HT2C Ki = 1.3 nM; ec50 = 1.3 nM x 412.94 / 1e6. Label verbatim: \"Ziprasidone binds with relatively high affinity to the dopamine D 2 and D 3 , serotonin 5HT 2A , 5HT 2C , 5HT 1A , 5HT 1D , and alpha 1 -adrenergic receptors (K i s of 4.8, 7.2, 0.4, 1.3, 3.4, 2, and 10 nM, respectively)\" — the orders correspond. No species or radioligand is claimed: a label prints none. No paper supplies it — PMID:11513838 and PMID:7562537 have ziprasidone as subject but no numbers in their abstracts and no retrievable full text. Replaces a GtoPdb midpoint.",
+        "action": "antagonist",
+        "source_label": "GEODON (ziprasidone HCl) US prescribing information, DailyMed SPL set id 8326928a-2cb6-4f7f-9712-03a425a14c37, version 50, effective 2026-09-18, section 12.2"
       },
       {
         "receptor": "H1",
         "pathway": "antagonist",
         "emax": 1,
-        "ec50_mg_l": 0.010373,
+        "ec50_mg_l": 0.019408,
         "hill_n": 1,
-        "source_pmid": "PMID:8935801",
-        "note": "GtoPdb-curated human H1 binding: pKi range 7.4–7.8 (PMID:8935801, PMID:12629531); midpoint pKi 7.6 → Ki ≈ 25 nM. ec50 = 25 nM × 412.94 / 1e6.",
-        "action": "antagonist"
+        "note": "H1 Ki = 47 nM; ec50 = 47 nM x 412.94 / 1e6. Label verbatim: \"and with moderate affinity to the histamine H 1 receptor (K i =47 nM).\" No species or radioligand is claimed: a label prints none. No paper supplies it — PMID:11513838 and PMID:7562537 have ziprasidone as subject but no numbers in their abstracts and no retrievable full text. Replaces a GtoPdb midpoint.",
+        "action": "antagonist",
+        "source_label": "GEODON (ziprasidone HCl) US prescribing information, DailyMed SPL set id 8326928a-2cb6-4f7f-9712-03a425a14c37, version 50, effective 2026-09-18, section 12.2"
       }
     ],
     "notes": "PK: the oral row was real-PMID zero-content — PMID:10771448 states none of its four values. Re-cited to a review (PMID:11978164) for the two figures that exist: \"half-life is approximately 6-7 hours\" (the upper endpoint is stored) and \"Oral bioavailability of ziprasidone taken with food is approximately 60%\", which must be read as a FED value — fasting exposure is roughly half. The intramuscular row is re-sourced to PMID:15901743, 24 plus 12 healthy volunteers with a real intravenous arm, verbatim \"The mean IM elimination t(1/2) was short and approximately 2.5 hours\" and \"bioavailability for the 5-mg IM ziprasidone dose was approximately 100%\" — the stored 3 h was not stated and is not even the midpoint of the 2-5 h range its old citation gives. V 105 L on both rows and both absorption rates dropped as unsourced.",
@@ -52756,10 +52674,10 @@
         "receptor": "dopamine_d3",
         "pathway": "agonist",
         "emax": 1,
-        "ec50_mg_l": 0.000596,
+        "ec50_mg_l": 0.00190197,
         "hill_n": 1,
-        "source_pmid": "PMID:7756621",
-        "note": "APPROXIMATION, NOT A MEASUREMENT. NEITHER CITED PAPER CONTAINS AN AFFINITY FOR THIS DRUG: one gives only \"pramipexole ... 15 ... times more potent ... at the D3 than at the D2 receptor\" — a SELECTIVITY RATIO sitting beside the drug name, a live collision hazard — and the other only \"a 5-fold selectivity\". The stored value back-solves to pKi 8.55, the midpoint of a curated 8.4-8.7 range, and neither endpoint appears in either abstract. No replacement is proposed. This record already applied exactly this reasoning to its D2 row, declining to author it because the range was too wide.",
+        "source_pmid": "PMID:16088951",
+        "note": "Seeman 2005 (PMID:16088951, Synapse 58:122-8), abstract verbatim: \"The K(i) values for the human cloned D2(High) and D3(High) receptors, respectively, were 19 and 9 nM for pramipexole\" — pramipexole is the lead title compound. Competition against [3H]domperidone. ec50 = 9 nM x 211.33 / 1e6. THE STATE IS PART OF THE VALUE: D3(High), the agonist high-affinity state, which for an agonist is the state the curve wants. Replaces a midpoint cited to Sautel 1995 (PMID:7756621), which gives only fold-selectivity.",
         "action": "agonist"
       }
     ],
@@ -57881,10 +57799,10 @@
         "receptor": "5-HT2B",
         "pathway": "antagonist",
         "emax": 1,
-        "ec50_mg_l": 0.002815,
+        "ec50_mg_l": 0.00132915,
         "hill_n": 1,
         "source_pmid": "PMID:9459568",
-        "note": "GtoPdb-curated human 5-HT2B antagonist pKi 7.8–8.4 (midpoint 8.1 → Ki 7.94 nM); PMID:9459568 characterises [³H]rauwolscine as the radioligand for the cloned human 5-HT2B receptor (rauwolscine = named subject). ec50 = 7.94 nM × 354.4 / 1e6.",
+        "note": "Wainscott 1998 (PMID:9459568, Naunyn Schmiedebergs Arch Pharmacol 357:17-24), abstract verbatim: \"In saturation studies at 37 degrees C, [3H]rauwolscine labeled a single population of binding sites, Kd = 3.75+/-0.23 nM\". Rauwolscine is the title subject and this is its own KD by direct saturation — no competitor, no Cheng-Prusoff. Cloned HUMAN 5-HT2B in AV12 cells, with efaroxan blocking an endogenous alpha2 site. ec50 = 3.75 nM x 354.44 / 1e6. Replaces a pKi 7.8-8.4 range drawn from this same paper, which states single constants.",
         "action": "antagonist"
       }
     ]

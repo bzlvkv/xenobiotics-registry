@@ -931,17 +931,18 @@ Authored (GtoPdb single human pKi + verified primary PMID): oxybutynin (M3, Del 
 > the 2026-06-28 audit then spent its length removing. The paragraph is left in place because this
 > is a record of what was done, not a rulebook.
 >
-> **The rows are still live, and `pnpm validate` now lists them.** Two warnings, added 2026-09-26,
-> read the occupancy notes and name every row this policy produced:
-> `receptor.derived-value` (28 rows over 19 compounds) for a constant that is the midpoint or mean
-> of a range, and `receptor.secondary-source` (33 rows over 23 compounds) for one taken off the
-> GtoPdb ligand page under a primary PMID nobody fetched. Run `pnpm report` to see both grouped.
+> **The midpoint rows are gone; the secondary-citation rows are not.** Two warnings, added
+> 2026-09-26, read the occupancy notes and name every row this policy produced.
+> `receptor.derived-value` covered the 28 midpoint rows and **now reports 0** — they were
+> re-sourced or removed the same day, and the section at the end of this file records every one.
+> `receptor.secondary-source` still reports **33 rows over 23 compounds**: a constant taken off the
+> GtoPdb ligand page under a primary PMID nobody fetched. Run `pnpm report` to see them grouped.
 > Both are prose rules and only know what a note admits, so expect them to miss a row that words
 > the practice differently — but they no longer let the class grow silently, which is what the
 > earlier ad-hoc grep could not prevent.
-> They are an open defect class, not a backlog of missing data: each needs a single-valued human
-> affinity from a paper that states it, or a GAPS row and the row's removal. `pnpm verify` still
-> passes every one of them, because the identifiers resolve and the shape is legal.
+> Those 33 are an open defect class, not a backlog of missing data: each needs a single-valued
+> affinity from a paper someone fetched, or a GAPS row and the row's removal. `pnpm verify` passes
+> every one of them, because the identifiers resolve and the shape is legal.
 
 Authored (geometric-mean of GtoPdb range; representative primary PMID verified on-topic): tolterodine (M3, Sinha 2010), tiotropium (M3, Prat 2009), ipratropium (M3, Dowling 2006), brimonidine (α2A, Jasper 1998), quetiapine (D2 review-sourced Arnt 1998 + 5-HT2A Kongsamut 2002), clozapine (D2 Sokoloff 1992 + 5-HT2A Schotte 1996), propranolol (β2, Baker 2005), sotalol (β1+β2, Baker 2005). New key `beta_2`.
 
@@ -5791,3 +5792,41 @@ rediscovered as a bug.
 | --- | --- | --- | --- |
 | **`riboflavin-5-phosphate`** / **`ribose-5-phosphate`** | `retired_slugs` / `aliases` | `r5p` is a retired slug of riboflavin-5-phosphate and also an alias of ribose-5-phosphate, so a slug lookup forwards to the first while a name search matches the second. The abbreviation is genuinely used for both in the literature, so neither claim is wrong and picking one by fiat would mislead half of its readers. New rule `compound.retired-alias-clash` reports it as a warning. | An authoring decision about which record owns the abbreviation, or dropping it from both so that only the unambiguous names resolve. |
 | *(catalog-wide)* | nutrient vitamer grouping | Four lint rules went with the food catalog the redesign removed: `nutrient-group.member-exists`, `.member-nutrition`, `.min-members` and `.shared-dv`. They read a grouping table that no longer exists, and no grouping is stored in `compounds.json` today, so nothing is left unguarded. | If shared-Daily-Value families (B12, folate, D, K vitamers) are ever authored as registry data, those four checks must come back with them: a renamed member silently ungroups, and members whose unit or RDI drifted cannot be summed. `git show feb7677 -- scripts/lint-rules.ts` has the originals. |
+
+## GtoPdb midpoint unwind — occupancy re-sourced, 9 rows removed (2026-09-26)
+
+The Wave-20 policy above licensed storing the geometric mean of a multi-paper
+GtoPdb pKi range under a "representative" primary PMID. New lint rule
+`receptor.derived-value` named all 28 surviving rows; this pass closed every
+one. **14 re-sourced to a single verbatim constant, 3 to the product label, 1
+stored at a disclosed range endpoint, 9 removed for want of any source.** Three
+parallel literature passes ran the whole list against NCBI, PMC and Europe PMC.
+
+The 9 removals. Each was a number no paper states, and none has a replacement
+that clears HYGIENE R2, so the row is gone rather than left asserting a
+midpoint. A removed occupancy row asserts nothing, which is why removal is the
+honest state here and never is for PK.
+
+| Compound | Target | PMIDs chased, and why each failed | What would unlock it |
+| --- | --- | --- | --- |
+| **clozapine** | 5-HT2A | 8935801 (Schotte 1996) abstract is wholly qualitative, no PMC, not OA. 24219174 (Seeman 2014) Table 1 gives 4 nM but the column is incidental to a D2 paper and its footnote chains through three reviews; Table 2's own ratio (20) does not reproduce 75/4. 26436896 (Cross 2016) has clozapine as a comparator. 8854201 is a review, and J-STAGE is blocked. | Schotte 1996 Table 1 (Springer, not OA), or Seeman's refs 19/20/26 in full text. |
+| **clozapine** | H1 | 21912901 (Humbert-Claude 2012) is the right paper — clozapine the subject, all four human histamine receptors — but its abstract states no Ki and it is not OA. 12629531 (Kroeze 2003) certainly tabulates it; **its PDF is free at nature.com, which this container's proxy refuses with CONNECT 403**. 8935801 qualitative. 16983399 gives only the inequality "Ki<10 nM". H3/H2 papers (8915103, 7541279, 39661142) are the wrong subtype. | Re-run the Kroeze 2003 fetch from a session where nature.com is reachable. The PDF is free; this is a network gap, not an evidence gap. |
+| **haloperidol** | D3 | 8301582 (Freedman 1994) names haloperidol once, in a list, with no Ki — the current citation is abstract-silent. `esearch haloperidol[ti] AND (D3[tiab] OR D(3)[tiab]) AND (Ki[tiab] OR affinity[tiab])` returns **COUNT 0**. A 564-hit Europe PMC sweep surfaced only docking, PET and behaviour. | Structurally unresolvable under the subject rule: haloperidol is the field's universal *reference* ligand at D2/D3 and is measured constantly, never as a paper's subject. Needs either a haloperidol-subject binding paper or a decision to accept a receptor-characterisation paper's own table. |
+| **haloperidol** | 5-HT2A | Same shape. A 70-record sweep, 29 titles pulled: every one behavioural, clinical, catalepsy, microdialysis or a trial. The only verbatim value anywhere is Seeman 2014 Table 1 (74 nM) where haloperidol is an explicit comparator. Note 74 nM is close to the 100 nM midpoint removed — the midpoint was not *wrong*, it was unsourceable. | As above. |
+| **quetiapine** | H1 | Cross 2016 (26436896) was checked table by table and **does not measure H1** — that lead is exhausted. 18059438 (Jensen 2008) screened quetiapine across a GPCR panel but the only H1 number in the abstract is the **metabolite's** (3.4 nM), which must not be stored as the parent; **free PDF at nature.com, proxy CONNECT 403**. 7871032 (Saller 1993) never mentions histamine. 12176106 is a hERG paper with no absolute Ki. | Jensen 2008's binding table, free at nature.com, from a session that can reach it. |
+| **cortisol** | glucocorticoid (NR3C1) | 8282004 (Rupprecht 1993), the cited source, states **no cortisol number**; its only affinity is progesterone's at MR. Cortisol is a legitimate subject among its 11 steroids — the numbers are simply not in the abstract, and Elsevier 1993 is not in PMC. 1655735 paraphrases ("high affinity for cortisol"). 3037703 has no numbers. 40 further candidates screened: wrong organism, wrong target, or no constant. | Rupprecht 1993's binding table (Eur J Pharmacol 247:145-154). One table closes both cortisol rows and probably other steroid rows. |
+| **cortisol** | mineralocorticoid (NR3C2) | As above; extends the dead end already recorded for hydrocortisone. | As above. Second choice: any paper measuring cortisol against a **cortisol-class** radioligand — GR papers use a dexamethasone ligand, which makes cortisol the displacer rather than the characterised ligand. |
+| **buprenorphine** | kappa | 9686407 (Toll 1998), the cited source, **has no abstract in PubMed at all** and no PMC copy, so nothing can be quoted from it. 9262330 is cloned human kappa but gives buprenorphine only a rank-order mention. 11303059 (Huang 2001) is the best candidate — buprenorphine the subject, cloned receptors — but paraphrases ("in the nanomolar or subnanomolar range"); ASPET full text unreachable. 10502307 states Ki 0.072 nM verbatim but is **guinea pig caudate** and a functional antagonist-Ki. | Huang 2001 Table 1 (ASPET), or Toll 1998's SRI standard-assay table — a government monograph, so a free PDF plausibly exists outside PubMed. Toll would close buprenorphine kappa, naloxone kappa and retroactively verify naloxone delta. |
+| **naloxone** | kappa | Same 9686407 problem. 10502307 gives Ki 11.4 nM verbatim but is guinea pig **and** naloxone is a comparator there. 7869844 and 7624359, both cited in the old note, state no Ki; PMC41460 is a scanned deposit with no `<body>` — full text not retrieved. 16433932 is OA but mouse, and tests neither drug. | Toll 1998, as above. Even with it in hand, check whether naloxone is a characterised ligand there or a reference antagonist before storing. |
+
+### Findings this pass produced but did not fix
+
+| Finding | Detail |
+| --- | --- |
+| **PMID:8935801 (Schotte 1996) cannot support any occupancy value in this registry** | Cited on five rows of the flagged set. Its abstract contains zero binding numerals, it has no PMC record, and Europe PMC confirms it is not open access. Two of those rows were re-sourced and two removed here; grep the catalog for the id before trusting any other. |
+| **ziprasidone D2 rests on a paper nobody can read** | The row cites Schmidt 2001 (PMID:11513838) for 4.8 nM. That abstract contains no numbers at all and its full text is in neither PMC nor Europe PMC. The number is right — the GEODON label states 4.8 nM verbatim — but the citation points at text no one in the chain has seen. Not touched here: this batch's concern was the midpoint rows. Fix by moving it to the same `source_label` the other three ziprasidone rows now use. |
+| **buprenorphine mu is a guinea-pig number presented as human** | The stored mu row cites PMID:10502307 for Ki 0.088 nM with no species on the record. That paper is guinea pig caudate, and the value is a functional antagonist-Ki from [35S]-GTPgammaS, not a binding Ki. Needs a species note at minimum. |
+| **`efetch db=pmc` returning front matter is not the end of the road** | Two full-text wins here (Cross 2016, Seeman 2014) returned no `<body>` from `efetch` and HTTP 500 from Europe PMC's `fullTextXML`, yet `https://pmc.ncbi.nlm.nih.gov/articles/PMCxxxxxxx/` served complete HTML including the tables. Rows previously skipped as "full text not retrieved" may reopen on that route alone. |
+| **Three skips here are network gaps, not evidence gaps** | nature.com, sciencedirect.com, jstage.jst.go.jp, unpaywall, openalex, crossref, semanticscholar, core.ac.uk, bindingdb and pdsp.unc.edu all return CONNECT 403 through this container's proxy, while `authoring/NETWORK.md` lists several as expected. A row that says "PDF is free but the host is blocked" should be retried, not re-searched. |
+| **Rappas 2020 Table 1 also carries suvorexant and lemborexant** | The same free ACS table that closed daridorexant OX2 prints suvorexant (OX1 9.4 / OX2 9.1), lemborexant (8.6 / 9.3) and filorexant (9.2 / 9.7). The orexin cells recorded above as paywalled are openable from it. |
+| **A caffeine A1 candidate was found and not taken** | PMID:21056087 states "K(i) ... 61.4±11.2μM" for caffeine verbatim, caffeine a title subject. Its abstract does not say whether that figure is the human brain homogenate or the transfected CHO preparation, and it is ~5x weaker than the A2A row's scale. Full text is Elsevier, not retrieved. Resolve the preparation question before adopting it. |

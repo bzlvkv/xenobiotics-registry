@@ -155,12 +155,13 @@ wants outcome 2 and has not done the arithmetic yet.
 
 **The one place this rule was suspended, and the debt it left.** A 2026-05-26 wave adopted a written
 policy of storing the geometric mean of a multi-paper GtoPdb pKi range under a "representative"
-primary PMID. That policy is superseded and must not be applied, but **28 occupancy rows across 19
-compounds still carry values authored under it** — each is a number no paper states, cited to a
-paper that does not state it. `receptor.derived-value` lists them by name; the superseding note in
-[`../data/GAPS.md`](../data/GAPS.md) records how they got there. Treat the class as open: a row is
-closed by a single-valued human affinity from a paper that states it, or by removing the row and
-writing the GAPS entry.
+primary PMID. That policy is superseded and must not be applied. The 28 occupancy rows it produced
+were unwound on 2026-09-26 — 14 re-sourced to a single verbatim constant, 3 to the product label, 1
+stored at a disclosed range endpoint, and **9 removed outright** because no source states them —
+so `receptor.derived-value` reports 0 today. Keep it that way: a row is closed by a single-valued
+affinity from a paper someone fetched, or by removing the row and writing the GAPS entry. The trail
+for all nine removals, and the full-text routes that would reopen them, is at the end of
+[`../data/GAPS.md`](../data/GAPS.md).
 
 **Caught by.** `receptor.derived-value` (**warning**) on the occupancy rows, where the practice was
 systematic and the notes say so in their own words — but it is a prose rule, so see R16, and it
