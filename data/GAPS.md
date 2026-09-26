@@ -5913,3 +5913,37 @@ the article is unavailable. Try it before writing "full text not retrieved".
 | **fluphenazine keeps an effect_compartment with no occupancy** | Its three rows were removed; the kₑₒ has nothing left to drive. Not wrong, but orphaned. |
 | **PMID:9667968 was cited for a value it does not contain** | It sat on the progesterone row as corroboration and states no progesterone figure at all. Independent of whether that row returns. |
 | **morphine's mu row is unaffected** | It cites PMID:1851921, not Torralva 2020, whose MOR column is **rat** (CHO-rMOR). If that row is ever re-sourced there, the species changes. |
+
+## Requested-candidate screen — 17 already present, 2 rejected on literature volume (2026-09-26)
+
+A list of 26 candidate compounds was screened against the catalog and against PubMed.
+**Seventeen were already here** under their own slug or an alias and needed nothing: `kpv`,
+`humanin`, `pinealon`, `cartalax`, `ovagen`, `thymosin-alpha-1`, `vilon`, `cibinetide`
+(requested as Ara-290), `dsip`, `9-me-bc`, `agmatine`, `17a-estradiol`, `epicatechin`,
+`foxo4-dri`, `5-amino-1mq`, `ss-31` (requested as elamipretide) and `ergothioneine`. That is
+HYGIENE Part 1 gate 1 doing its job: a request list is not a gap list.
+
+`pyridoxamine` is genuinely absent and is NOT a collision with the two B6 records already
+here — `pyridoxine` (169.18) and `p5p` (247.14) are the alcohol and phosphate vitamers, and
+pyridoxamine is the third, distinct amine vitamer.
+
+### Rejected on gate 5 — no indexed literature at all
+
+| Compound | Field | Why skipped | Re-author target |
+| --- | --- | --- | --- |
+| **`ptc-2105`** | the whole record | Requested as an "Eos senotherapeutic peptide" with company-stage mouse rejuvenation claims. `esearch term=PTC-2105` returns **count 0**, and `PTC-2105 OR PTC-2107 OR Eos senotherapeutic` also returns **count 0** (2026-09-26). No indexed literature means no verifiable structure, no mechanism that is not a vendor claim, and no mass that could be stored without lending it a precision nothing supports — the `adamax` precedent. This is the `piribedil` decision in HYGIENE gate 5, applied to a compound with even less. | A first indexed primary paper naming the sequence or the structure. Until then, leave closed: a record here would be a vendor press release wearing a schema. |
+| **`ptc-2107`** | the whole record | Same screen, same result: **count 0** on its own term and count 0 in the combined search. | As above. |
+
+### Authored as a mixture, with its composition deliberately unfilled
+
+| Compound | Field | Why skipped | Re-author target |
+| --- | --- | --- | --- |
+| **`gly-low`** | `composition[]` | Added as a `mixture` record because the combination is real, indexed and named: PMID:41086114 (Cell Rep 2025) states it verbatim — "A combination of nicotinamide, alpha-lipoic acid, thiamine, pyridoxamine, and piperine (Gly-Low)". Four constituents already have records and the fifth is `pyridoxamine`. But `composition[].mg_per_g_extract` is a **required positive number**, and no fetched abstract gives a per-ingredient amount or ratio — the mouse work quantifies nothing beyond "Gly-Low (in chow)" / "Gly-Low-enriched chow" (PMID:41247756). Filling five ratios to satisfy the schema would be five invented numbers. | The patent or the supplement's label, which would state the per-ingredient amounts. Also the Cell Rep methods section, which is likely to give the chow concentration. Neither was retrieved this session. |
+| **`gly-low`** | `doses`, all PK | Every published exposure is dietary, in mice, unquantified per ingredient. No human exposure exists. | A human trial, which does not yet exist. |
+
+**A citation deliberately not made, recorded so it is not "found" later:** PMID:41045492 (Aging
+2025, growth-hormone excess drives liver aging via glycation stress) comes back in every Gly-Low
+search and is from the same programme, but **its abstract does not mention Gly-Low**, so it is not
+on the record. And the aortic study exists twice — bioRxiv PMID:39829921 and published
+PMID:41247756 — whose abstracts word the same result differently ("old (24 month) mice" vs
+"C57BL/6J (24 month) mice"). The published one is cited and quoted.

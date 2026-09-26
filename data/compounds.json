@@ -59384,5 +59384,36 @@
       "PMID:42542926",
       "PMID:34324435"
     ]
+  },
+  {
+    "slug": "gly-low",
+    "name": "Gly-Low",
+    "aliases": [
+      "GLYLO",
+      "Glylo",
+      "glycation-lowering compound"
+    ],
+    "category": "other",
+    "mechanism": "A five-component dietary combination aimed at methylglyoxal (MGO) and the advanced glycation end-product it forms, MG-H1. Its composition is stated verbatim by the Cell Reports paper that reports its lifespan effect: \"A combination of nicotinamide, alpha-lipoic acid, thiamine, pyridoxamine, and piperine (Gly-Low) lowers the deleterious effects of glycation by reducing MGO and the MGO-derived AGE, MG-H1, in mice\" (PMID:41086114). The proposed mechanism for the food-intake and weight effects is not glycation-lowering directly but appetite signalling: \"Gly-Low inhibits appetite stimulation through ghrelin and AMP-activated protein kinase (AMPK) signaling pathways in the hypothalamus, leading to reduced hunger responses.\" ALL PUBLISHED IN-VIVO WORK IS MOUSE. THIS IS A MIXTURE, NOT ONE MOLECULE, so it stores no molecular weight and no curve; the constituents carry their own records.",
+    "routes": [
+      "PO"
+    ],
+    "doses": {},
+    "half_life_hr": {},
+    "pk_unauthored": {
+      "reason": "mixture",
+      "note": "A five-ingredient combination, so a single curve cannot represent it. Every published exposure is dietary in mice and none is quantified per ingredient: the intervention is described only as \"Gly-Low (in chow)\" and \"Gly-Low-enriched chow\" (PMID:41247756). No human dose, no human exposure, and no pharmacokinetic parameter for the combination in any species. The constituents niacinamide, ala-r, thiamine and piperine each have their own record; pyridoxamine is the fifth."
+    },
+    "systems": [
+      "endocrine",
+      "cardiovascular",
+      "nervous",
+      "digestive"
+    ],
+    "notes": "IDENTITY. Research name Gly-Low; the commercial name is GLYLO, disclosed in the Cell Reports conflict-of-interest statement — \"L.A.W., N.B., and P.K. are patent holders of GLYLO, a supplement licensed to Juvify Bio by the Buck Institute. P.K. is the founder of Juvify Bio.\" That is recorded because the efficacy literature and the commercial interest share authors, which a reader should know. COMPOSITION IS NAMED BUT NOT PROPORTIONED. All five constituents are stated verbatim (PMID:41086114) and four of them are already in this catalog, but no fetched abstract gives a mg-per-gram or a per-ingredient dose, and composition[].mg_per_g_extract is a required positive number — so composition[] is deliberately NOT authored rather than filled with invented ratios. See the GAPS row. WHAT THE MOUSE DATA ACTUALLY SHOW, verbatim: survival — \"increases survival in leptin receptor-deficient (Leprdb) and wild-type C57B6/J mice\"; late-life dosing — \"As a late-life intervention, Gly-Low slows hypothalamic aging signatures, improves glucose homeostasis and motor coordination, and increases lifespan\" (both PMID:41086114). Vascular, from the published version of the aortic study (PMID:41247756): MGO \"increased PWV in young mice by 21% (P<0.05 vs. control), which was prevented with Gly-Low (P=0.93 vs. control)\". A CITATION DELIBERATELY NOT MADE: PMID:41045492 (Aging 2025, growth-hormone excess and liver glycation) surfaces in the same searches and is from the same programme, but its abstract does not mention Gly-Low at all, so it is not cited here. A PREPRINT IS NOT THE CITATION: the aortic study also exists as bioRxiv PMID:39829921, whose abstract words the same result as \"old (24 month) mice\" where the published paper says \"C57BL/6J (24 month) mice\" — the published version is the one cited and the one quoted.",
+    "refs": [
+      "PMID:41086114",
+      "PMID:41247756"
+    ]
   }
 ]
