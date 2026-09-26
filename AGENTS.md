@@ -65,4 +65,7 @@ files contain only what is required to run: no explanatory comments.
 
 ## Git
 
-Commit and merge to `main`, always. Do not leave work on a side branch.
+Work on `main` and push `main`. **Never push a branch**, and never open a pull
+request. If a session starts you on a side branch — some harnesses do — merge it
+into `main`, push `main`, and stay there. A branch that still exists on the
+remote is unfinished work, not a deliverable.
