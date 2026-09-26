@@ -4304,7 +4304,7 @@
     "effect_compartment": {
       "keo_per_h": 11,
       "source_pmid": "PMID:10217331",
-      "note": "IV, parasympatholytic HRV endpoint; abstract verbatim \"ke0 11.0 ± 5.28\" (units render as \"l/h\" but consistent with t½kₑₒ ~4 min in atropine HR literature)"
+      "note": "IV, parasympatholytic HRV endpoint; abstract verbatim \"equilibration rate constant (k(e0)) estimates were … 11.0 (+/-5.28) l/h for atropine\" (units render as \"l/h\" but consistent with t½kₑₒ ~4 min in atropine HR literature)"
     },
     "receptor_occupancy": [
       {
@@ -17823,7 +17823,7 @@
     "effect_compartment": {
       "keo_per_h": 7.38,
       "source_pmid": "PMID:15701707",
-      "note": "RAT tail-flick antinociception, effect-compartment/receptor-binding model. Verbatim: \"The k(eo) was 0.024 min(-1) [95% CI: 0.018-0.030 min(-1)] and 0.123 min(-1) (95% CI: 0.095-0.151 min(-1)) for buprenorphine and fentanyl, respectively.\" keo = 0.123 × 60 = 7.38/h — fentanyl's value, not buprenorphine's, from a sentence reporting both. No human fentanyl keo was adopted; buprenorphine's own record cites a separate healthy-volunteer study.",
+      "note": "RAT tail-flick antinociception, effect-compartment/receptor-binding model. Verbatim: \"The k(eo) was 0.024 min(-1) [95% confidence interval (CI): 0.018-0.030 min(-1)] and 0.123 min(-1) (95% CI: 0.095-0.151 min(-1)) for buprenorphine and fentanyl, respectively.\" keo = 0.123 × 60 = 7.38/h — fentanyl's value, not buprenorphine's, from a sentence reporting both. No human fentanyl keo was adopted; buprenorphine's own record cites a separate healthy-volunteer study.",
       "source_species": "rat"
     },
     "receptor_occupancy": [
@@ -19035,7 +19035,7 @@
         "slug": "clozapine",
         "name": "Clozapine",
         "level": "caution",
-        "note": "CYP1A2 inhibition (strong). Diaz 2008 (PMID:18484549) verbatim: \"fluvoxamine (E=+263%) and paroxetine (E=+30%) inhibit it [clozapine metabolism]\". Mixed-model analysis of 255 patients, 415 SS troughs, controlling for smoking + valproate. Css ratio 1+2.63 = 3.63×; Ki ≈ 0.16/2.63 = 0.061 µM. Naturalistic data — less precise than a controlled crossover but reflects real-world clozapine + SSRI co-prescription practice.",
+        "note": "CYP1A2 inhibition (strong). Diaz 2008 (PMID:18484549) verbatim: \"fluvoxamine (E=+263%) and paroxetine (E=+30%) inhibit it\" — the \"it\" is clozapine metabolism, named in the preceding clause. Mixed-model analysis of 255 patients, 415 SS troughs, controlling for smoking + valproate. Css ratio 1+2.63 = 3.63×; Ki ≈ 0.16/2.63 = 0.061 µM. Naturalistic data — less precise than a controlled crossover but reflects real-world clozapine + SSRI co-prescription practice.",
         "kinetics": {
           "ki_uM": 0.0608365,
           "ki_basis": "calibrated_from_auc",
@@ -19048,7 +19048,7 @@
         "slug": "tacrine",
         "name": "Tacrine",
         "level": "major",
-        "note": "CYP1A2 inhibition (strong). Becquemont 1997 (PMID:9209244) verbatim: tacrine AUC \"27 (95% CI, 19 to 38) ng.hr/ml versus 224 (95% CI, 166 to 302) ng.hr/ml\". 13 healthy volunteers, double-blind randomized crossover, fluvoxamine 100 mg/d × 6d + single 40 mg PO tacrine. AUC ratio 224/27 = 8.30×; apparent oral CL 1683 → 200 L/hr (88% reduction). Ki ≈ 0.16/7.30 = 0.022 µM. Tacrine withdrawn 2013 — retained as textbook CYP1A2 reference data.",
+        "note": "CYP1A2 inhibition (strong). Becquemont 1997 (PMID:9209244) verbatim: tacrine AUC \"27 (95% confidence interval [CI], 19 to 38) ng.hr/ml versus 224 (95% CI, 166 to 302) ng. hr/ml\". 13 healthy volunteers, double-blind randomized crossover, fluvoxamine 100 mg/d × 6d + single 40 mg PO tacrine. AUC ratio 224/27 = 8.30×; apparent oral CL 1683 → 200 L/hr (88% reduction). Ki ≈ 0.16/7.30 = 0.022 µM. Tacrine withdrawn 2013 — retained as textbook CYP1A2 reference data.",
         "kinetics": {
           "ki_uM": 0.0219289,
           "ki_basis": "calibrated_from_auc",
@@ -29827,7 +29827,7 @@
     "effect_compartment": {
       "keo_per_h": 2.6,
       "source_pmid": "PMID:15089813",
-      "note": "Miosis endpoint, oral methadone, placebo arm; abstract verbatim \"k(e0) … 2.6 ± 2.6 h⁻¹\""
+      "note": "Miosis endpoint, oral methadone, placebo arm; abstract verbatim \"rate constant for transfer of methadone between plasma and effect compartment (k(e0)) (2.6 +/- 2.6 vs 2.5 +/- 1.4 h(-1)\" — first figure is the placebo arm, matching the miosis pair in the same abstract"
     },
     "receptor_occupancy": [
       {
@@ -39439,7 +39439,7 @@
         "slug": "propafenone",
         "name": "Propafenone",
         "level": "caution",
-        "note": "CYP2D6 (5-hydroxylation). Funck-Brentano 1989 (PMID:2719900) verbatim: \"quinidine increased mean steady-state plasma propafenone concentrations more than two fold, from 408 ± 351 to 1096 ± 644 ng ml-1 (P less than 0.001)\". 7 EMs + 2 PMs on propafenone for VT; PMs unchanged. AUC 2.69×; Ki ≈ 0.888 µM. ECG/arrhythmia unchanged because 5-OH-propafenone is also active — interaction matters more for adverse effects than efficacy.",
+        "note": "CYP2D6 (5-hydroxylation). Funck-Brentano 1989 (PMID:2719900) verbatim: \"quinidine increased mean steady-state plasma propafenone concentrations more than two fold, from 408 ± 351 (mean ± s.d.) to 1096 ± 644 ng ml-1 (P less than 0.001)\". 7 EMs + 2 PMs on propafenone for VT; PMs unchanged. AUC 2.69×; Ki ≈ 0.888 µM. ECG/arrhythmia unchanged because 5-OH-propafenone is also active — interaction matters more for adverse effects than efficacy.",
         "kinetics": {
           "ki_uM": 0.897666,
           "ki_basis": "calibrated_from_auc",
@@ -44697,7 +44697,7 @@
         "slug": "simvastatin",
         "name": "Simvastatin",
         "level": "warn",
-        "note": "CYP3A4 induction. Sugimoto 2001 (PMID:11753267) verbatim: simvastatin acid \"area under the plasma concentration-time curve between time zero and 24 hours after administration (ratio, 0.48 of placebo) was significantly decreased (P <.05) by St John\\u2019s Wort\". n=8 simvastatin arm, double-blind crossover, SJW 300 mg tid × 14d. Active-metabolite AUC ratio 0.48 → induction_factor 1/0.48 = 2.08. Statin efficacy loss.",
+        "note": "CYP3A4 induction. Sugimoto 2001 (PMID:11753267) verbatim: simvastatin acid \"area under the plasma concentration-time curve between time zero and 24 hours after administration (ratio, 0.48 of placebo) was significantly decreased (P <.05) by St John’s Wort\". n=8 simvastatin arm, double-blind crossover, SJW 300 mg tid × 14d. Active-metabolite AUC ratio 0.48 → induction_factor 1/0.48 = 2.08. Statin efficacy loss.",
         "kinetics": {
           "induction_factor": 2.08
         },
