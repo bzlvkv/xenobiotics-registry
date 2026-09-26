@@ -10220,33 +10220,13 @@
     },
     "receptor_occupancy": [
       {
-        "receptor": "SERT",
-        "pathway": "serotonin_reuptake_inhibition",
-        "emax": 1,
-        "ec50_mg_l": 0.0000628,
-        "hill_n": 1,
-        "source_pmid": "PMID:9537821",
-        "note": "Per IUPHAR/GtoPdb (human SERT, pKi 9.7 → Ki 0.20 nM); primary Tatsumi 1997 (PMID:9537821), \"Pharmacological profile of antidepressants and related compounds at human monoamine transporters\" — the gold-standard human transporter panel. ec50 = 0.20 nM × 314.85 / 1e6.",
-        "action": "inhibitor"
-      },
-      {
-        "receptor": "net",
-        "pathway": "norepinephrine_reuptake_inhibition",
-        "emax": 1,
-        "ec50_mg_l": 0.012534,
-        "hill_n": 1,
-        "source_pmid": "PMID:9537821",
-        "note": "Per IUPHAR/GtoPdb (human NET, pKd 7.4 → Kd 39.8 nM); primary Tatsumi 1997 (PMID:9537821). Clomipramine is SERT-preferring (NET weaker). ec50 = 39.8 nM × 314.85 / 1e6.",
-        "action": "inhibitor"
-      },
-      {
         "receptor": "alpha_1",
         "pathway": "antagonist",
         "emax": 1,
-        "ec50_mg_l": 0.002501,
+        "ec50_mg_l": 0.00238972,
         "hill_n": 1,
         "source_pmid": "PMID:32608144",
-        "note": "GtoPdb-curated human α1A-adrenoceptor binding: pKi 8.1 (Ki 7.9 nM), antagonist, ref PMID:32608144. Keyed alpha_1 (non-subtype-selective). ec50 = 7.9 nM × 314.85 / 1e6.",
+        "note": "Proudman, Pupo & Baker 2020 (PMID:32608144, Pharmacol Res Perspect 8:e00602), full text Table 3 read from PMC7327383, captioned \"Log K D values and selectivity ratios of antidepressants binding to the human alpha1A, alpha1B and alpha1D-adrenoceptors\". Row verbatim: \"Clomipramine | -8.12 +/- 0.10 | 9 | -6.34 +/- 0.07 | 9 | -6.15 +/- 0.09 | 5\" (alpha1A, alpha1B, alpha1D). One of the 101 drugs the study profiles. Cloned human alpha1A in CHO cells, [3H]prazosin whole-cell binding; a KD, not a Ki. KD = 7.59 nM; ec50 = 7.59 nM x 314.85 / 1e6. Replaces 7.9 nM, GtoPdb's pKi 8.1 back-converted.",
         "action": "antagonist"
       }
     ],
@@ -13881,18 +13861,6 @@
       "note": "Approximation; no published kₑₒ. Sedating first-gen antihistamine; CNS H1 onset fairly fast (~1–2 h oral).",
       "approximated": true
     },
-    "receptor_occupancy": [
-      {
-        "receptor": "H1",
-        "pathway": "antagonist",
-        "emax": 1,
-        "ec50_mg_l": 0.003218,
-        "hill_n": 1,
-        "source_pmid": "PMID:12065734",
-        "note": "Per IUPHAR/GtoPdb (human H1, pKi 7.9 → Ki 12.6 nM); primary ref Booth 2002 (PMID:12065734), \"A novel phenylaminotetralin radioligand reveals a subpopulation of histamine H1 receptors\" — cloned human H1 in CHO. GtoPdb-curated (table); ec50 = 12.6 nM × 255.36 / 1e6.",
-        "action": "antagonist"
-      }
-    ],
     "fraction_unbound": 0.183,
     "fu_note": "Healthy human volunteers, stated as unbound: \"the percentages of unbound diphenhydramine (26.40% +/- 6.46% versus 18.30% +/- 4.31 ...) were significantly higher in Chinese subjects compared to Caucasians\" (PMID:2369804). The Caucasian value is stored; the ethnic difference is 1.4-fold and is AAG-driven. THIS CONFLICTS BY AN ORDER OF MAGNITUDE with the 98-99% bound figure that circulates in tertiary references, which could not be sourced to any abstract. A direct measurement in a clinical pharmacology journal is preferred over the tertiary number, but the disagreement is recorded."
   },
@@ -18005,18 +17973,6 @@
       "approximated": true,
       "note": "Approximation; no published kₑₒ. Wheal suppression outlasts a 3.75 h plasma half-life, so some delay is right in direction, but no value is measured. Note this drug is terfenadine active metabolite and its receptor source is a terfenadine-analogue paper."
     },
-    "receptor_occupancy": [
-      {
-        "receptor": "H1",
-        "pathway": "antagonist",
-        "emax": 1,
-        "ec50_mg_l": 0.013545,
-        "hill_n": 1,
-        "source_pmid": "PMID:19660947",
-        "note": "Per IUPHAR/GtoPdb (human H1, Ki 27 nM); primary ref Aslanian 2009 (PMID:19660947), \"Structural determinants for histamine H1 affinity ... in a series of terfenadine analogs\". GtoPdb-curated (table; fexofenadine = terfenadine metabolite in the series). ec50 = 27 nM × 501.66 / 1e6.",
-        "action": "antagonist"
-      }
-    ],
     "notes": "PK: F 0.33 IS AN INEQUALITY BOUND — \"at least 33%\" — and an absolute bioavailability for this drug does not exist: \"not known because of a lack of studies of intravenous administration of this agent\". F is therefore pinned to 1 and the volume stored as apparent, derived within the cited paper own placebo arm from its exposure and half-life. V 80 L was a template shared with five unrelated compounds. The half-life of 3.75 h is verbatim but is SAMPLING-WINDOW-LIMITED: the literature spans 3 to 17 h, and the drug shows flip-flop from slow absorption of a zwitterion. A SCALAR BIOAVAILABILITY IS NOT DEFENSIBLE ANYWAY — grapefruit juice alone moves exposure 2.8-fold. Both this record only reference and its receptor source are a TERFENADINE analogue paper: fexofenadine is terfenadine active metabolite, so the provenance is anchored to the parent drug rather than to this molecule. ka 1 dropped, the registry modal default appearing on 43 records."
   },
   {
@@ -18527,19 +18483,7 @@
       "keo_per_h": 0.1,
       "note": "Approximation; no published kₑₒ. MR-preferring agonist: PD onset via nuclear-receptor transcriptional change (hours to days), so a slow effect-compartment ~0.1/h (t½kₑₒ ≈ 7 h). Matches the existing dexamethasone/prednisolone keo convention.",
       "approximated": true
-    },
-    "receptor_occupancy": [
-      {
-        "receptor": "mineralocorticoid",
-        "pathway": "agonist",
-        "emax": 1,
-        "ec50_mg_l": 0.0000457,
-        "hill_n": 1,
-        "source_pmid": "PMID:8282004",
-        "note": "GtoPdb-curated human MR (NR3C2) binding: pIC50 9.92 (IC50 0.12 nM), agonist (PMID:8282004). Fludrocortisone's defining MR-preferring activity (used for Addison's + orthostatic hypotension). ec50 = 0.12 nM × 380.45 / 1e6.",
-        "action": "agonist"
-      }
-    ]
+    }
   },
   {
     "slug": "flumazenil",
@@ -20137,18 +20081,6 @@
       "source_pmid": "PMID:9543135",
       "note": "Human PK-PD keo, Ke0 = 1.13 ± 0.94 /h (sigmoid-Emax link model on the GH-release endpoint), verbatim in the abstract of the paediatric phase-I i.v. study Pihoker 1998 (PMID:9543135) — the same study that anchors the SC t½ 0.55 h."
     },
-    "receptor_occupancy": [
-      {
-        "receptor": "ghsr",
-        "pathway": "agonist",
-        "emax": 1,
-        "ec50_mg_l": 0.00041,
-        "hill_n": 1,
-        "source_pmid": "PMID:9092793",
-        "note": "GtoPdb-curated rat GHS-R (ghrelin receptor) full-agonist pKi 9.3 → Ki 0.501 nM (GtoPdb ligand 1092 / interaction 2832; primary McKee 1997, PMID:9092793). The value is a competition-binding table entry — McKee’s abstract quotes only the [35S]MK-0677 radioligand KD (0.7 nM). Rat affinity; no human GHRP-2 Ki is published. ec50 = 0.501 nM × 818.0 g/mol / 1e6 = 0.00041 mg/L.",
-        "action": "agonist"
-      }
-    ],
     "notes": "ROUTE CAVEAT: the 0.55 h half-life is verbatim — Pihoker 1998 (PMID:9543135), \"t(1/2beta) = 0.55 +/- 0.14 h\" — but that study dosed intravenously in ten prepubertal children, not subcutaneously in adults, and its own closing line concedes that extravascular data do not yet exist. The same paper also gives an apparent volume of 0.32 +/- 0.14 L/kg, not stored here because the route does not match."
   },
   {
@@ -30975,8 +30907,8 @@
         "emax": 1,
         "ec50_mg_l": 0.000171,
         "hill_n": 1,
-        "source_pmid": "PMID:8282004",
-        "note": "GtoPdb-curated human GR (NR3C1) binding: pKd 9.4 (Kd 0.40 nM), antagonist (PMID:8282004, PMID:3560943). Mifepristone's anti-GR action is the basis for its hypercortisolism (Cushing's) indication. ec50 = 0.40 nM × 429.6 / 1e6.",
+        "source_pmid": "PMID:3560943",
+        "note": "DECLARED DERIVATION, not a stated value. Heikinheimo 1987 (PMID:3560943) states two things verbatim about human placental GR: \"RU 486 had an approx. 4-fold higher relative binding affinity to the glucocorticoid receptor than dexamethasone\" and \"The affinity of dexamethasone to the human glucocorticoid receptor was 1.6 X 10(-9) M\". 1.6 nM / 4 = 0.40 nM; ec50 = 0.40 nM x 429.6 / 1e6. CAVEATS: \"approx\" is the paper's word, inverting a binding ratio into a KD assumes one assay, and this is placental cytosol, not a cloned receptor. PMID:8282004 is dropped: it states nothing for mifepristone.",
         "action": "antagonist"
       },
       {
@@ -31959,20 +31891,20 @@
         "receptor": "kappa_opioid",
         "pathway": "partial-agonist",
         "emax": 1,
-        "ec50_mg_l": 0.014301,
+        "ec50_mg_l": 0.00770418,
         "hill_n": 1,
-        "source_pmid": "PMID:9686407",
-        "note": "GtoPdb-curated human κ-opioid binding: pKi 7.3 (Ki 50 nM), partial agonist, ref PMID:9686407. Morphine's weak κ activity. ec50 = 50 nM × 285.34 / 1e6.",
+        "source_pmid": "PMID:32513839",
+        "note": "Torralva 2020 (PMID:32513839, J Pharmacol Exp Ther 374:376-91), full text Table 1 read from PMC7430447; morphine row verbatim: \"Morphine 0.58 +/- 0.8 (19) 27 +/- 3 (15) 178 +/- 14 (12)\" under columns CHO-rMOR, CHO-hKOR, CHO-hDOR. Morphine is a title subject. Cloned HUMAN kappa receptor in CHO cells, [3H]U69,593 equilibrium competition; Ki 27 +/- 3 nM (n=15). ec50 = 27 nM x 285.34 / 1e6. Replaces 50 nM read off the GtoPdb page under Toll 1998 (PMID:9686407), a record PubMed carries with NO ABSTRACT, so nothing could ever be quoted from it.",
         "action": "partial_agonist"
       },
       {
         "receptor": "delta_opioid",
         "pathway": "agonist",
         "emax": 1,
-        "ec50_mg_l": 0.035921,
+        "ec50_mg_l": 0.05079052,
         "hill_n": 1,
-        "source_pmid": "PMID:9686407",
-        "note": "GtoPdb-curated human δ-opioid binding: pKi 6.9 (Ki 126 nM), full agonist, ref PMID:9686407. Morphine's weak δ activity. ec50 = 126 nM × 285.34 / 1e6.",
+        "source_pmid": "PMID:32513839",
+        "note": "Torralva 2020 (PMID:32513839, J Pharmacol Exp Ther 374:376-91), full text Table 1 read from PMC7430447; same morphine row verbatim: \"Morphine 0.58 +/- 0.8 (19) 27 +/- 3 (15) 178 +/- 14 (12)\" under CHO-rMOR, CHO-hKOR, CHO-hDOR. Morphine is a title subject. Cloned HUMAN delta receptor in CHO cells, [3H]DPDPE competition; Ki 178 +/- 14 nM (n=12). ec50 = 178 nM x 285.34 / 1e6. Replaces 126 nM read off the GtoPdb page under Toll 1998 (PMID:9686407), which PubMed carries with no abstract at all.",
         "action": "agonist"
       }
     ],
@@ -32788,16 +32720,6 @@
         "ec50_mg_l": 0.036,
         "source_pmid": "PMID:14632053",
         "note": "Beigi & Wainer 2003 Anal Chem — abstract verbatim \"calculated dissociation constants (Kd) were 110 nM for naloxone\"; immobilized hMOR from CHO. MW 327.37",
-        "action": "antagonist"
-      },
-      {
-        "receptor": "delta_opioid",
-        "pathway": "antagonist",
-        "emax": 1,
-        "ec50_mg_l": 0.020657,
-        "hill_n": 1,
-        "source_pmid": "PMID:9686407",
-        "note": "GtoPdb-curated human δ-opioid binding: pKi 7.2 (Ki 63 nM), antagonist, ref PMID:9686407. ec50 = 63 nM × 327.37 / 1e6.",
         "action": "antagonist"
       }
     ],
@@ -38392,18 +38314,6 @@
       "note": "Approximation; no published kₑₒ. endogenous PR agonist: PD onset via nuclear-receptor transcriptional change (hours to days), so a slow effect-compartment ~0.1/h (t½kₑₒ ≈ 7 h). Matches the existing dexamethasone/prednisolone keo convention.",
       "approximated": true
     },
-    "receptor_occupancy": [
-      {
-        "receptor": "progesterone_receptor",
-        "pathway": "agonist",
-        "emax": 1,
-        "ec50_mg_l": 0.00109,
-        "hill_n": 1,
-        "source_pmid": "PMID:9464360",
-        "note": "GtoPdb-curated human PR (PGR) binding: pKi 8.46 (Ki 3.5 nM), full agonist (PMID:9464360); pEC50 8.82 (PMID:9667968) functionally consistent. Endogenous PR agonist. ec50 = 3.5 nM × 314.46 / 1e6.",
-        "action": "agonist"
-      }
-    ],
     "notes": "PK: THE STORED ABSORPTION RATE WAS THE SOLVER DEFAULT WEARING A CITATION. A ka of 1.0/h is exactly what resolvePk substitutes when the field is ABSENT, and no source on this record states one. Removing it is NUMERICALLY A NO-OP — the resolver supplies the identical number — so no curve moves; what changes is that the record stops asserting an absorption rate it never measured. This is the same shape already found on a volume of 35 L, which is likewise the default at the seventy-kilogram reference. THE WIDER DEBT IS LEFT ALONE ON PURPOSE: twelve values account for 152 of the 276 authored absorption rates, but the other eleven are NOT the default, so deleting those would move their curves rather than leave them, which is the error this audit spent a batch documenting.",
     "fu_note": "EXAMINED AND DELIBERATELY NOT AUTHORED. Every free-fraction figure found for this steroid is RAT. The catalogue permits animal PK where it is labelled, but an unlabelled animal free fraction silently rescales every occupancy curve on the record, and progesterone binding is dominated by corticosteroid-binding globulin and albumin whose concentrations differ substantially between species."
   },
@@ -42758,19 +42668,7 @@
       "keo_per_h": 1,
       "note": "Approximation; no published kₑₒ. Antimuscarinic (antiemetic/antispasmodic); oral Tmax ~1 h (transdermal much slower).",
       "approximated": true
-    },
-    "receptor_occupancy": [
-      {
-        "receptor": "muscarinic",
-        "pathway": "parasympatholysis",
-        "emax": 1,
-        "ec50_mg_l": 0.000121,
-        "hill_n": 1,
-        "source_pmid": "PMID:1346637",
-        "note": "Per IUPHAR/GtoPdb (human M3, pKi 9.4 → Ki 0.40 nM); primary ref Bolden 1992 (PMID:1346637), \"Antagonism by antimuscarinic and neuroleptic compounds at the five cloned human muscarinic cholinergic receptors expressed in CHO cells\" ([3H]QNB) — the ideal cloned-human-M3 source. GtoPdb-curated. ec50 = 0.40 nM × 303.35 / 1e6.",
-        "action": "antagonist"
-      }
-    ]
+    }
   },
   {
     "slug": "sea-buckthorn-oil",
@@ -48601,28 +48499,6 @@
       "note": "Approximation; no published kₑₒ. SARI antidepressant / hypnotic; oral.",
       "approximated": true
     },
-    "receptor_occupancy": [
-      {
-        "receptor": "5-HT2A",
-        "pathway": "antagonist",
-        "emax": 1,
-        "ec50_mg_l": 0.014804,
-        "hill_n": 1,
-        "source_pmid": "PMID:15322733",
-        "note": "Per IUPHAR/GtoPdb (human 5-HT2A, pKi 7.4 → Ki 39.8 nM); primary Knight 2004 (PMID:15322733), 5-HT2A/2B/2C binding characterization (trazodone tabulated antagonist). Trazodone is a 5-HT2A antagonist (SARI). ec50 = 39.8 nM × 371.86 / 1e6.",
-        "action": "antagonist"
-      },
-      {
-        "receptor": "5-HT2C",
-        "pathway": "antagonist",
-        "emax": 1,
-        "ec50_mg_l": 0.093411,
-        "hill_n": 1,
-        "source_pmid": "PMID:15322733",
-        "note": "GtoPdb-curated human 5-HT2C binding: pKi 6.6 (Ki 251 nM), antagonist, ref PMID:15322733. ec50 = 251 nM × 371.86 / 1e6.",
-        "action": "antagonist"
-      }
-    ],
     "fraction_unbound": 0.11,
     "fu_note": "A LABEL RANGE STORED AT ITS UNDER-CORRECTING ENDPOINT, and label-grade as well as range-only: \"Trazodone is 89 to 95% protein bound in vitro at concentrations attained with therapeutic doses in humans\", giving fu 0.11 to 0.05. No PubMed abstract states a percentage. PARENT ONLY — the active metabolite mCPP has its own receptor profile and does not inherit this figure."
   },
@@ -48711,18 +48587,6 @@
       "note": "Approximation; no published kₑₒ. synthetic GR agonist: PD onset via nuclear-receptor transcriptional change (hours to days), so a slow effect-compartment ~0.1/h (t½kₑₒ ≈ 7 h). Matches the existing dexamethasone/prednisolone keo convention.",
       "approximated": true
     },
-    "receptor_occupancy": [
-      {
-        "receptor": "glucocorticoid",
-        "pathway": "agonist",
-        "emax": 1,
-        "ec50_mg_l": 0.007889,
-        "hill_n": 1,
-        "source_pmid": "PMID:10747884",
-        "note": "GtoPdb-curated human GR (NR3C1) binding: pIC50 7.7 (IC50 20 nM), full agonist (PMID:10747884). ec50 = 20 nM × 394.43 / 1e6.",
-        "action": "agonist"
-      }
-    ],
     "fraction_unbound": 0.32,
     "fu_note": "MY PRIOR THAT THIS MIGHT JOIN CORTISOL AND PREDNISOLONE IN THE SATURABLE-CBG SKIP CLASS WAS WRONG, AND THE SOURCE PRE-EMPTS IT: \"Mean plasma protein binding of triamcinolone acetonide was CONSTANT, PREDICTABLE, and a relatively low 68% over a 24-FOLD RANGE of plasma concentrations\" (PMID:10883419) — the authors ran exactly the experiment that disqualified the other two. Six healthy males, [14C] mass balance, acetonide. A PRE-EXISTING MISMATCH LOGGED SEPARATELY: this record mass is the free alcohol while all four of its marketed routes are the acetonide."
   },
@@ -51134,7 +50998,7 @@
         "ec50_mg_l": 0.004477,
         "hill_n": 1,
         "source_pmid": "PMID:21486038",
-        "note": "GtoPdb-curated human 5-HT1A binding: pKi 7.82 (Ki 15 nM), partial agonist, ref PMID:21486038. Part of vortioxetine's multimodal 5-HT profile. ec50 = 15 nM × 298.45 / 1e6.",
+        "note": "Bang-Andersen 2011 (PMID:21486038, J Med Chem 54:3206-21), abstract verbatim: \"Compound 5m (Lu AA21004) was the lead compound, displaying high affinity for recombinant human 5-HT(1A) (K(i) = 15 nM), 5-HT(1B) (K(i) = 33 nM), 5-HT(3A) (K(i) = 3.7 nM), 5-HT(7) (K(i) = 19 nM)\". Vortioxetine's discovery paper, where it is the title compound; the INN postdates it, so the paper calls it Lu AA21004 and the title's IUPAC name fixes the identity. Recombinant human; radioligand not stated. ec50 = 15 nM x 298.45 / 1e6; value unchanged, citation is now the sentence.",
         "action": "partial_agonist"
       },
       {
@@ -51144,7 +51008,7 @@
         "ec50_mg_l": 0.009849,
         "hill_n": 1,
         "source_pmid": "PMID:21486038",
-        "note": "GtoPdb-curated human 5-HT1B binding: pKi 7.48 (Ki 33 nM), partial agonist, ref PMID:21486038. ec50 = 33 nM × 298.45 / 1e6.",
+        "note": "Bang-Andersen 2011 (PMID:21486038, J Med Chem 54:3206-21), abstract verbatim: \"displaying high affinity for recombinant human 5-HT(1A) (K(i) = 15 nM), 5-HT(1B) (K(i) = 33 nM)\". Vortioxetine's discovery paper, where it is the title compound as Lu AA21004. Recombinant human; radioligand not stated in the abstract. The same abstract calls it a PARTIAL AGONIST here (\"partial agonist properties at 5-HT(1B) receptors\"), which matters if the row is read as antagonist occupancy. ec50 = 33 nM x 298.45 / 1e6; the value is unchanged, the citation is now the sentence.",
         "action": "partial_agonist"
       },
       {
@@ -52956,10 +52820,10 @@
         "receptor": "5-HT1B",
         "pathway": "partial-agonist",
         "emax": 1,
-        "ec50_mg_l": 0.005747,
+        "ec50_mg_l": 0.00137646,
         "hill_n": 1,
-        "source_pmid": "PMID:10193663",
-        "note": "GtoPdb-curated human 5-HT1B binding: pKi 7.7 (Ki 20 nM), partial agonist, ref PMID:10193663. ec50 = 20 nM × 287.36 / 1e6.",
+        "source_pmid": "PMID:9154322",
+        "note": "Martin 1997 (PMID:9154322, Br J Pharmacol 121:157-64), abstract verbatim: \"311C90 displayed high affinity at human recombinant 5-HT1D ... and 5-HT1B ... receptors in transfected CHO-K1 cell membranes (pIC50 values = 9.16 +/- 0.12 and 8.32 +/- 0.09, respectively)\". Zolmitriptan (311C90) is the title subject; the 5-HT1D and 5-HT1F rows already cite it. An IC50, not a Ki, and no Cheng-Prusoff correction is possible: the radioligand is not in reachable text. pIC50 8.32 -> 4.79 nM; ec50 = 4.79 nM x 287.36 / 1e6. Replaces 20 nM, cited to an ELETRIPTAN study naming zolmitriptan only as a comparator.",
         "action": "partial_agonist"
       },
       {

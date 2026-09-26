@@ -5830,3 +5830,86 @@ honest state here and never is for PK.
 | **Three skips here are network gaps, not evidence gaps** | nature.com, sciencedirect.com, jstage.jst.go.jp, unpaywall, openalex, crossref, semanticscholar, core.ac.uk, bindingdb and pdsp.unc.edu all return CONNECT 403 through this container's proxy, while `authoring/NETWORK.md` lists several as expected. A row that says "PDF is free but the host is blocked" should be retried, not re-searched. |
 | **Rappas 2020 Table 1 also carries suvorexant and lemborexant** | The same free ACS table that closed daridorexant OX2 prints suvorexant (OX1 9.4 / OX2 9.1), lemborexant (8.6 / 9.3) and filorexant (9.2 / 9.7). The orexin cells recorded above as paywalled are openable from it. |
 | **A caffeine A1 candidate was found and not taken** | PMID:21056087 states "K(i) ... 61.4±11.2μM" for caffeine verbatim, caffeine a title subject. Its abstract does not say whether that figure is the human brain homogenate or the transfected CHO preparation, and it is ~5x weaker than the A2A row's scale. Full text is Elsevier, not retrieved. Resolve the preparation question before adopting it. |
+
+## Secondary-citation unwind — occupancy re-sourced, 15 rows removed (2026-09-26)
+
+The companion pass to the midpoint unwind above. New lint rule
+`receptor.secondary-source` named 33 rows whose affinity came off an
+IUPHAR/GtoPdb ligand page while the `source_pmid` named whatever paper that
+database attributes it to — a citation nobody in the chain had opened. Closed
+every one: **18 re-sourced to text someone read, 15 removed.** The rule now
+reports 0, as does `receptor.derived-value`.
+
+**A cheap way to find more of this shape.** Four of the removed values (39.8,
+251, 7.9, 20 nM) are exact back-conversions of one-decimal pKi/pKd figures
+(7.4, 6.6, 8.1, 7.7), and two more (asenapine 0.16 nM, cariprazine 0.09 nM)
+round the same way. A stored nanomolar constant that reproduces a one-decimal
+p-value exactly is a GtoPdb fingerprint, and grepping for it is cheaper than
+opening a paper.
+
+### The 15 removals
+
+| Compound | Target | PMIDs chased, and why each failed | What would unlock it |
+| --- | --- | --- | --- |
+| **fluphenazine** | D2 | 17826096 (Sasse 2007), the cited source, is a D3 SAR paper that **never mentions fluphenazine**. 11132243 (Richelson 2000) does not study it either — strike it from the PDF queue. 8524985 puts it in a band ("Kis less than 20 nM") at rat D4. PMC10724577 prints 1.44 nM but as a "Min Activity" scrape from a bioactivity database in a liver-cancer repurposing paper that measured nothing. | A primary radioligand study with fluphenazine as a test compound, or the PDSP source record behind the GtoPdb figure. |
+| **fluphenazine** | 5-HT2A | 12629531 (Kroeze 2003) tabulates it, but its abstract reports only correlation coefficients. | Kroeze 2003 Table 1. **Network gap**: the PDF is free at nature.com, which this proxy refuses. |
+| **fluphenazine** | H1 | As above. A PDSP median (pKi 7.7) corroborates the removed 20 nM, so the value is probably right — it just has no reachable primary. | As above. |
+| **clomipramine** | SERT | 9537821 (Tatsumi 1997) is the right paper and clomipramine is a genuine panel member, but the abstract names only mazindol, sertraline and nomifensine. PMC2665081 studies clomipramine at hSERT, but its Table 1 is a **bitmap** — no numeric cell exists in the HTML — and its value is an uptake-inhibition Ki, not a binding Ki. | Tatsumi 1997's hSERT column (Eur J Pharmacol 340:249-258). Elsevier, **network gap**. |
+| **clomipramine** | NET | Same paper, same wall. The removed 39.8 nM is pKd 7.4 back-converted. | Tatsumi 1997's hNET column. |
+| **diphenhydramine** | H1 | 12065734 (Booth 2002), the cited source, **never names diphenhydramine**; its subject is the radioligand H2-PAT. Three open-access antihistamine kinetics papers were checked and none carries a value. | **A true evidence gap**, not a network one: Booth would only ever hold it as a reference antagonist. Needs a primary human-H1 competition study with diphenhydramine as a test compound. |
+| **fexofenadine** | H1 | 19660947 (Aslanian 2009) contains **no numbers at all** and never names fexofenadine; its subjects are terfenadine analogues. PMC6536503 gives pKd values per enantiomer, kinetically derived and probe-dependent — three reasons it cannot fill a racemate's equilibrium row. | Also **a true evidence gap**. Needs a study with racemic fexofenadine as a test compound. |
+| **scopolamine** | muscarinic (M3) | 1346637 (Bolden 1992) is exactly the right kind of source — cloned human m1-m5, [3H]QNB, scopolamine a genuine panel member — but its abstract names only QNB's own Kd. 73 further hits screened; the rest are reviews or use scopolamine as the reference antagonist. | Bolden 1992's m1-m5 table (JPET 260:576-580). ASPET, **network gap**. One PDF closes it. |
+| **trazodone** | 5-HT2A | 15322733 (Knight 2004) **never names trazodone**. Cusack 1994 and Owens 1997 were already recorded as table-only and did not reopen. `trazodone AND "5-HT2C" AND Ki` returns 0 hits. | Knight 2004's table, Springer, **network gap** — but note it measures against AGONIST radioligands at the agonist-preferring conformation, so a trazodone value from it is not interchangeable with an antagonist-radioligand Ki. Cusack 1994 is the better target. |
+| **trazodone** | 5-HT2C | As above; the removed 251 nM is pKi 6.6 back-converted. | As above. |
+| **fludrocortisone** | MR | 8282004 (Rupprecht 1993) states no fludrocortisone number. All four retrieval routes were tested and named: no PMC copy, Europe PMC `isOpenAccess N`, doi.org and linkinghub.elsevier.com both refused. 7 further candidates, all rat or narrative. | Rupprecht 1993's binding table. **Definitively unreachable from this container**; this also blocks the two cortisol rows removed above. |
+| **triamcinolone** | GR | 10747884 (Lind 2000) is a mutagenesis paper whose abstract carries no constant for any compound. | Lind 2000 Table I/II, free at jbc.org, **network gap**. Check first which compound the column holds: MW 394.43 is the free alcohol, while GR panels of that era usually run triamcinolone **acetonide** (434.5). |
+| **progesterone** | PR | 9464360 (Zhi 1998) states "progesterone (Ki = 3.5 nM)" verbatim — but progesterone is the reference standard in a paper about nonsteroidal chromenoquinolines, so the comparator rule rejects it. 9667968, cited as corroboration, states **no progesterone value at all**. | A policy decision, not a document. See below. |
+| **ghrp-2** | GHS-R | 9092793 (McKee 1997) gives only the radioligand's own KD (MK-0677, 0.7 nM). | McKee 1997's competition table. **Network gap, and a one-fetch close**: Europe PMC lists a FREE PDF at academic.oup.com, which this proxy refuses. The receptor is rat even so. |
+| **naloxone** | delta | 9686407 (Toll 1998) **has no abstract in PubMed at all**. 12576191 gives ratios only and is mouse; 8603422 says "approximately 29 nM" with naloxone a comparator in SCLC membranes; 8114680 (Raynor 1994) has an abstract with zero numerals. | Toll 1998 via archives.nida.nih.gov — a free government PDF, **refused by this proxy**. It would close this row plus the two removed above. Second choice, Raynor 1994 Table 1. |
+
+### A policy question this pass could not settle
+
+Three cells now fail for the same structural reason, and no amount of further
+searching will fix them: **haloperidol** at D3 and 5-HT2A, **progesterone** at
+PR, and **naloxone** at delta. Each is a universal reference ligand in its
+field. Its affinity is measured constantly, stated verbatim, and well
+characterised — but always in a paper about some other compound, because
+nobody publishes a paper whose subject is the reference standard. The
+comparator rule in HYGIENE R2 exists because a comparator's value is often
+wrong for the named compound; in these three cases it is almost certainly
+right. Either the rule gains a narrow exception for a reference ligand
+characterised in a full panel under one method, or these cells stay open
+permanently. Re-running a literature pass on them is wasted effort.
+
+### Network gaps, all confirmed by attempt this session
+
+`nature.com`, `sciencedirect.com`, `linkinghub.elsevier.com`, `doi.org`,
+`link.springer.com`, `jpet.aspetjournals.org`, `academic.oup.com`, `jbc.org`,
+`archives.nida.nih.gov`, `files.eric.ed.gov`, `jstage.jst.go.jp`, and the
+metadata APIs `unpaywall`, `openalex`, `crossref`, `semanticscholar`,
+`core.ac.uk`, `bindingdb`, `pdsp.unc.edu` — all return CONNECT 403 through
+this container's proxy, while `authoring/NETWORK.md` lists several as expected.
+**Eight of the fifteen removals are gated only by that**, and each names a
+document that is free where it sits. A session with those hosts open should
+retry them before searching again.
+
+### Retrieval route that keeps working
+
+`efetch db=pmc` returning front matter with "The publisher of this article does
+not allow downloading of the full text in XML form" and no `<body>` is NOT the
+end of the road: `https://pmc.ncbi.nlm.nih.gov/articles/PMCnnnnnnn/` serves the
+complete article including tables. That route closed five rows today (Cross
+2016, Seeman 2014, Proudman 2020, Baker 2005, Torralva 2020) after both
+`efetch` and Europe PMC's `fullTextXML` had failed on them. It rate-limits
+hard — a reCAPTCHA page of about 21 KB means back off for a minute, not that
+the article is unavailable. Try it before writing "full text not retrieved".
+
+### Carried forward, not fixed here
+
+| Finding | Detail |
+| --- | --- |
+| **labetalol has no beta-1 row** | Baker 2005 Table 1 gives it verbatim (log KD -7.63, KD 23.4 nM) beside the beta-2 value this pass authored. A beta-blocker carrying only a beta-2 row reads oddly. One line from a table already read. |
+| **Baker 2005 misspells labetalol as "Labetolol"** | A grep of that full text for the correct spelling returns nothing and nearly filed the row as absent. |
+| **fluphenazine keeps an effect_compartment with no occupancy** | Its three rows were removed; the kₑₒ has nothing left to drive. Not wrong, but orphaned. |
+| **PMID:9667968 was cited for a value it does not contain** | It sat on the progesterone row as corroboration and states no progesterone figure at all. Independent of whether that row returns. |
+| **morphine's mu row is unaffected** | It cites PMID:1851921, not Torralva 2020, whose MOR column is **rat** (CHO-rMOR). If that row is ever re-sourced there, the species changes. |

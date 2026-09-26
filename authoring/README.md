@@ -19,7 +19,7 @@ add volume that nobody can check. Before you add anything, read
 
 Counts measured from the live data on 2026-09-26: 626 compounds carry authored PK, 618 carry an
 explicit `pk_unauthored` reason, **0 carry neither**. 788 route entries, all 788 cited.
-4,041 citation instances resolving to 2,601 unique PMIDs.
+4,026 citation instances resolving to 2,605 unique PMIDs.
 
 ## The five commands
 
