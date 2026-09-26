@@ -3439,10 +3439,10 @@
         "receptor": "H1",
         "pathway": "antagonist",
         "emax": 1,
-        "ec50_mg_l": 0.0000453,
+        "ec50_mg_l": 0.00028579,
         "hill_n": 1,
-        "source_pmid": "PMID:8935801",
-        "note": "GtoPdb-curated human H1 binding: pKi 9.8 (Ki 0.16 nM), antagonist, ref PMID:8935801. Asenapine is among the most antihistaminic antipsychotics. ec50 = 0.16 nM × 285.79 / 1e6.",
+        "source_pmid": "PMID:18308814",
+        "note": "Shahid 2009 (PMID:18308814, J Psychopharmacol), abstract verbatim: \"asenapine showed high affinity and a different rank order of binding affinities (pKi) for serotonin receptors ... and histamine receptors (H1 [9.0] and H2 [8.2])\". Asenapine is the title subject; the abstract states \"Compounds were tested under comparable assay conditions using cloned human receptors\". pKi 9.0 -> Ki 1.0 nM; ec50 = 1.0 nM x 285.79 / 1e6. Replaces 0.16 nM, a GtoPdb pKi 9.8 tracing to a PDSP median with no primary behind it: a 6x move onto a real citation.",
         "action": "antagonist"
       }
     ],
@@ -6129,8 +6129,8 @@
         "emax": 1,
         "ec50_mg_l": 0.00013,
         "hill_n": 1,
-        "source_pmid": "PMID:24947465",
-        "note": "GtoPdb-curated human D2 binding: pKi 9.52 (Ki 0.30 nM), partial agonist, ref PMID:24947465. Brexpiprazole's defining target. ec50 = 0.30 nM × 433.57 / 1e6.",
+        "source_pmid": "PMID:33196868",
+        "note": "Ishigooka 2021 (PMID:33196868, Eur J Clin Pharmacol 77:709-18), OA full text introduction via PMC8032567, verbatim: \"acts as a partial agonist at serotonin 5-HT1A (Ki = 0.12 nM) and dopamine D2 (Ki = 0.30 nM) receptors\". Brexpiprazole is the subject. ec50 = 0.30 nM x 433.57 / 1e6; the value is unchanged. DISCLOSED: the sentence restates Maeda 2014 (PMID:24947465), whose abstract gives only \"Ki < 1 nM\" and whose Table 1 sits behind ASPET, refused by this proxy. Maeda establishes the receptor as cloned human D2L. A reachable sentence replaces a GtoPdb reading; the measurement is still Maeda's.",
         "action": "partial_agonist"
       }
     ],
@@ -7878,20 +7878,20 @@
         "receptor": "dopamine_d2",
         "pathway": "partial agonist",
         "emax": 1,
-        "ec50_mg_l": 0.002436,
+        "ec50_mg_l": 0.0002957,
         "hill_n": 1,
-        "source_pmid": "PMID:22537450",
-        "note": "Per IUPHAR/GtoPdb (human D2L, Ki 5.7 nM, partial agonist); primary ref Agai-Csongor 2012 (PMID:22537450), \"Discovery of cariprazine (RGH-188): a novel antipsychotic acting on dopamine D3/D2 receptors\". D2/D3 partial agonist (D3-preferring; D3 Ki ~0.09 nM per GtoPdb). GtoPdb-curated. ec50 = 5.7 nM × 427.41 / 1e6.",
+        "source_pmid": "PMID:20093397",
+        "note": "Kiss 2010 (PMID:20093397, J Pharmacol Exp Ther 333:328-40), abstract verbatim: \"demonstrated approximately 10-fold higher affinity for human D(3) versus human D(2L) and human D(2S) receptors (pKi 10.07, 9.16, and 9.31, respectively)\". Cariprazine is the title subject. D2L is the splice stored; D2S is pKi 9.31 and the two are NOT averaged. pKi 9.16 -> Ki 0.6918 nM; ec50 = 0.6918 nM x 427.41 / 1e6. Replaces 5.7 nM, read off GtoPdb and cited to the med-chem letter Agai-Csongor 2012 (PMID:22537450), whose abstract holds no binding numeral; 5.7 nM matches neither splice.",
         "action": "partial_agonist"
       },
       {
         "receptor": "dopamine_d3",
         "pathway": "partial-agonist",
         "emax": 1,
-        "ec50_mg_l": 0.0000385,
+        "ec50_mg_l": 0.000036378,
         "hill_n": 1,
         "source_pmid": "PMID:20093397",
-        "note": "GtoPdb-curated human D3 binding: pKi 10.05 (Ki 0.09 nM), partial agonist, ref PMID:20093397. Cariprazine's D3-preferring signature (~60× over its D2 Ki 5.7 nM). ec50 = 0.09 nM × 427.41 / 1e6.",
+        "note": "Kiss 2010 (PMID:20093397, J Pharmacol Exp Ther 333:328-40), abstract verbatim: \"demonstrated approximately 10-fold higher affinity for human D(3) versus human D(2L) and human D(2S) receptors (pKi 10.07, 9.16, and 9.31, respectively)\". Cariprazine is the title subject; human D3, cloned (the abstract names CHO cells for the cAMP work). pKi 10.07 -> Ki 0.08511 nM; ec50 = 0.08511 nM x 427.41 / 1e6. The cited paper does state this; what changes is that the row carries the paper's 10.07, not GtoPdb's rounded 10.05. Both D2 and D3 now come from one sentence.",
         "action": "partial_agonist"
       }
     ],
@@ -18839,38 +18839,6 @@
       "approximated": true,
       "note": "Approximation; NO PUBLISHED kₑₒ EXISTS FOR ANY ANTIPSYCHOTIC IN THIS BATCH — fourteen PET and PK/PD papers were chased and none reports one. The definitive modern D2-occupancy analysis for this class uses \"an Emax model relating D2RO with plasma levels\", a DIRECT model with no effect compartment at all. Retained only because receptor_occupancy rows need a value. Sign is admissible: oral Tmax precedes central occupancy."
     },
-    "receptor_occupancy": [
-      {
-        "receptor": "dopamine_d2",
-        "pathway": "antagonist",
-        "emax": 1,
-        "ec50_mg_l": 0.00063,
-        "hill_n": 1,
-        "source_pmid": "PMID:17826096",
-        "note": "Per IUPHAR/GtoPdb (human D2, pKi 8.8 → Ki 1.44 nM); primary Sasse 2007. ec50 = 1.44 nM × 437.52 / 1e6.",
-        "action": "antagonist"
-      },
-      {
-        "receptor": "5-HT2A",
-        "pathway": "antagonist",
-        "emax": 1,
-        "ec50_mg_l": 0.014,
-        "hill_n": 1,
-        "source_pmid": "PMID:12629531",
-        "note": "Per IUPHAR/GtoPdb (human 5-HT2A, pKi 7.5 → Ki 32 nM); primary Kroeze 2003. ec50 = 32 nM × 437.52 / 1e6.",
-        "action": "antagonist"
-      },
-      {
-        "receptor": "H1",
-        "pathway": "antagonist",
-        "emax": 1,
-        "ec50_mg_l": 0.00875,
-        "hill_n": 1,
-        "source_pmid": "PMID:12629531",
-        "note": "GtoPdb-curated human H1 binding: pKi 7.7 (Ki 20 nM), antagonist, ref PMID:12629531. ec50 = 20 nM × 437.52 / 1e6.",
-        "action": "antagonist"
-      }
-    ],
     "notes": "PK: TWO VALUES VERIFY AND THE VOLUME IS REFUTED TWO WAYS. F 0.027 is verbatim and is correctly the IMMEDIATE-RELEASE figure (\"2.7% for the immediate release formulation and 3.4% for the slow release\"), not the slow-release value and not a midpoint; the oral half-life of 16.4 h is verbatim and correctly the mean rather than the adjacent standard deviation of 13.3. V 1500 L is in no abstract and fails arithmetic twice over: the volume reproducing its own paper \"Cmax 2.3 ng/mL at tmax 2.8 h\" is about 125 L, so the model runs TWELVE TIMES LOW, and at steady state it puts the average concentration at or below the bottom of the therapeutic window this record other citation defines. IT IS RETAINED ONLY BECAUSE THE RESOLVER DEFAULT WOULD BE FORTY-FOLD WORSE, and no replacement is invented — a volume computed from this record own numbers is precisely the defect being hunted. ka 1.25 is a BACK-DERIVATION, reproducing that same 2.8 h peak exactly. THE DEPOT ROUTE IS REMOVED: its half-life was the oral value copied across, against a citation stating the opposite — \"a long half-life measurable in MONTHS rather than weeks\" — and its release duration appears nowhere."
   },
   {
@@ -27984,20 +27952,20 @@
         "receptor": "5-HT2A",
         "pathway": "antagonist",
         "emax": 1,
-        "ec50_mg_l": 0.001,
+        "ec50_mg_l": 0.00100014,
         "hill_n": 1,
-        "source_pmid": "PMID:20404009",
-        "note": "Per IUPHAR/GtoPdb (Ki 2.03 nM, species rat per GtoPdb); primary ref Ishibashi 2010 (PMID:20404009). Potent 5-HT2A antagonist. GtoPdb-curated. ec50 = 2.03 nM × 492.68 / 1e6.",
+        "source_pmid": "PMID:26316760",
+        "note": "Franklin 2015 (PMID:26316760, Neuropsychiatr Dis Treat 11:2143-52), open-access full text Table 1 \"Binding profile of lurasidone\" via PMC4547662, verbatim: \"5-HT2A Serotonin Antagonist 2.03+/-0.46\", footnote \"Values are means +/- standard error of the mean of three or more separate experiments\". ec50 = 2.03 nM x 492.68 / 1e6. DISCLOSED: a review reproducing Ishibashi 2010 Table 1, whose own abstract is wholly qualitative and whose full text is behind ASPET. SPECIES UNVERIFIED: the review states none, so GtoPdb's rat flag on this row can be neither confirmed nor refuted here.",
         "action": "antagonist"
       },
       {
         "receptor": "5-HT7",
         "pathway": "antagonist",
         "emax": 1,
-        "ec50_mg_l": 0.000244,
+        "ec50_mg_l": 0.000243877,
         "hill_n": 1,
-        "source_pmid": "PMID:20404009",
-        "note": "GtoPdb-curated human 5-HT7 binding: pKi 9.31 (Ki 0.495 nM), antagonist, ref PMID:20404009. Lurasidone's potent 5-HT7 — a putative cognitive/antidepressant contributor. ec50 = 0.495 nM × 492.68 / 1e6.",
+        "source_pmid": "PMID:26316760",
+        "note": "Franklin 2015 (PMID:26316760, Neuropsychiatr Dis Treat 11:2143-52), open-access full text Table 1 \"Binding profile of lurasidone\" via PMC4547662, verbatim: \"5-HT7 Serotonin Antagonist 0.495+/-0.090\". ec50 = 0.495 nM x 492.68 / 1e6; the value is unchanged. DISCLOSED: a review reproducing Ishibashi 2010 Table 1, unreachable behind ASPET, and it states no species. Corroborated independently by PMC4786592, which prints the same 2.03 nM and 0.495 nM for lurasidone.",
         "action": "antagonist"
       }
     ],
