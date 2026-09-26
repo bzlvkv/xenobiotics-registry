@@ -60021,5 +60021,198 @@
       "PMID:33439265",
       "PMID:41772149"
     ]
+  },
+  {
+    "slug": "somapacitan",
+    "name": "Somapacitan",
+    "aliases": [
+      "somapacitan-beco",
+      "Sogroya",
+      "NN8640"
+    ],
+    "category": "peptide",
+    "mechanism": "A 191-amino-acid human growth hormone analogue carrying a single substitution to which an albumin-binding fatty-acid side chain is attached; reversible non-covalent binding to circulating albumin is what stretches the dosing interval to weekly. Sogroya label verbatim: \"The reversible binding to endogenous albumin delays elimination of somapacitan and thereby prolongs the in vivo half-life and duration of action.\" Downstream it signals through the growth hormone receptor to drive hepatic IGF-1. NO RECEPTOR AFFINITY IS AUTHORED: PMID:32053994 is the right paper and somapacitan is its subject, but its binding result is qualitative — \"Receptor binding isotherms were characterized by a high and a low affinity interaction site with or without HSA\" — with no Kd, which is the ixekizumab defect shape R2 names.",
+    "routes": [
+      "SC"
+    ],
+    "doses": {
+      "SC": {
+        "min": 1.5,
+        "max": 8,
+        "typical": 1.5,
+        "unit": "mg"
+      }
+    },
+    "half_life_hr": {
+      "SC": 48
+    },
+    "pk": {
+      "SC": {
+        "V_L": 14.6,
+        "F": 1,
+        "source_label": "FDA label: SOGROYA (somapacitan-beco) injection, Novo Nordisk, set id eadd03b4-adc3-4b88-8a24-9d205c5b85aa, DailyMed published 2026-03-16, section 12.3 Pharmacokinetics",
+        "note": "BOTH VALUES ARE THE ADULT GHD FIGURES AND BOTH CARRY A CAVEAT. The half-life is stored at the UNDER-CORRECTING ENDPOINT of a stated range: the label says \"The plasma elimination half-life of somapacitan-beco is approximately 2 to 3 days in adult patients with GHD\", and 48 h is the shorter end (R3 outcome 1). Paediatric figures differ about twofold and are not mixed in (about 34 h in paediatric GHD). The volume is declared APPARENT by the label itself, \"the estimated volume of distribution (V/F) of somapacitan-beco in adult GHD patients is approximately 14.6 L\", so F is pinned to 1 rather than paired with any bioavailability (R15). The label's four pediatric V/F values, 1.7 to 3.23 L, are separate populations and are not averaged."
+      }
+    },
+    "mw_g_mol": 23305.1,
+    "fraction_unbound": 0.01,
+    "fu_note": "AN INEQUALITY AT ITS UNDER-CORRECTING ENDPOINT, and arguably the wrong primitive for this molecule. Sogroya label section 12.3 verbatim: \"Somapacitan-beco is extensively bound (>99%) to plasma proteins.\" That bounds fu at or below 0.01. But the albumin binding here IS the drug's mechanism — it is the engineered, reversible, saturable interaction that produces the weekly interval — so a single scalar unbound fraction describes it less well than it would an ordinary small molecule, and that is recorded rather than hidden.",
+    "systems": [
+      "endocrine",
+      "musculoskeletal"
+    ],
+    "notes": "THE MASS COMES FROM THE LABEL BECAUSE PUBCHEM IS WRONG FOR THIS DRUG. A PubChem name lookup for `somapacitan` returns CID 129894493, C54H95N13O20S2, 1310.5 (re-queried 2026-09-26) — a 191-residue protein conjugate cannot weigh 1310 Da, and that entry is the albumin-binding side-chain/linker fragment, not the molecule. Storing it would be a silent ~18-fold molar error, the lithium defect shape in R10. The label states the real mass verbatim: \"The molecular formula (including the albumin-binding moiety) is C 1038 H 1609 N 273 O 319 S 9 and the molecular weight is 23305.10 g/mol, of which the albumin-binding moiety is 1191.39 g/mol.\" No salt form; the label adds only that \"Hydrochloric acid and sodium hydroxide may be added to adjust the pH.\" DOSES, label verbatim: \"Initiate SOGROYA with a dosage of 1.5 mg once weekly for treatment naive patients and patients switching from daily growth hormone\", titrated \"every 2 to 4 weeks by approximately 0.5 mg to 1.5 mg\", and \"The maximum recommended dosage for adult GHD is 8 mg once weekly.\" Paediatric dosing is weight-based (0.16 mg/kg/week for GHD, 0.24 for SGA, NS and ISS) and is not represented in a fixed-mg row. WHY NO VOLUME WAS DERIVED FROM A Cmax, since single-dose Cmax figures do exist: PMID:28656605 reports \"maximum concentration ranged from 21.8 ng/mL (0.02 mg/kg dose) to 458.4 ng/mL (0.16 mg/kg dose)\" in children, genuinely single-dose, and the R9 accumulation trap does NOT apply here — the label says steady state arrives in 1 to 2 weeks and PMID:29671202 reports \"little or no accumulation of somapacitan\". The blocker is R15 instead: an eightfold dose gives a twentyfold Cmax, and the label confirms \"a non-linear dose-exposure relationship with a greater than dose proportional increase in exposure\", so dose/Cmax is not a volume anyone measured. ANALYTE CAUTION for any future exposure number from PMID:34601071: that study's PK is total somapacitan-related radioactivity, and it states \"The total exposure of intact somapacitan accounted for 59% of the total exposure of all somapacitan-related material\".",
+    "refs": [
+      "PMID:28656605",
+      "PMID:29671202",
+      "PMID:32053994",
+      "PMID:34601071"
+    ]
+  },
+  {
+    "slug": "macimorelin",
+    "name": "Macimorelin",
+    "aliases": [
+      "macimorelin acetate",
+      "Macrilen",
+      "JMV 1843",
+      "EP1572"
+    ],
+    "category": "pharmacological",
+    "mechanism": "An orally active peptidomimetic agonist at the growth hormone secretagogue receptor, used diagnostically rather than therapeutically: a single oral dose provokes a growth-hormone peak and a subnormal peak diagnoses adult growth hormone deficiency. Macrilen label section 12.1 verbatim: \"Macimorelin stimulates GH release by activating growth hormone secretagogue receptors present in the pituitary and hypothalamus\", and section 12.2: \"Maximum GH levels are observed between 30 to 90 minutes after administration of MACRILEN.\" NOTE THE PD AND PK ARE DIFFERENT ANALYTES ON DIFFERENT CLOCKS — growth hormone peaks at 30-90 min while macimorelin itself peaks at 0.5-1.5 h. NO RECEPTOR AFFINITY IS AUTHORED: the discovery paper has macimorelin as its subject and measured binding to human pituitary GHS receptors and hGHS-R1a, but prints no constant, calling it only \"high potency\" (PMID:12646029); its full text was NOT RETRIEVED, being outside the PMC open-access subset.",
+    "routes": [
+      "PO"
+    ],
+    "doses": {
+      "PO": {
+        "min": 35,
+        "max": 35,
+        "typical": 35,
+        "unit": "mg"
+      }
+    },
+    "half_life_hr": {
+      "PO": 4.1
+    },
+    "pk": {
+      "PO": {
+        "F": 1,
+        "source_label": "FDA label: MACRILEN (macimorelin acetate) granule for solution, Novo Nordisk, set id 6034c9b8-5a36-4961-a5dd-11ebf7bdab78, DailyMed published 2025-12-29, section 12.3 Clinical Pharmacology",
+        "note": "Half-life verbatim from the label, at the therapeutic dose: \"Macimorelin was eliminated with a mean terminal half-life (T 1/2 ) of 4.1 hours following administration of a single oral dose of 0.5 mg macimorelin/kg body weight in healthy subjects.\" A second source gives 3.51 h jointly for TWO dose cohorts and 8.29 h at a fourfold supratherapeutic dose (PMID:32325373), so neither is a per-dose therapeutic value; the label figure is preferred. F IS PINNED TO 1: no absolute bioavailability is published and no IV arm exists for the named compound. NO VOLUME is stated in the label or either PK paper, and none was derived, because the same paper reports exposure is LESS than dose-proportional over 0.5-1.0 mg/kg."
+      }
+    },
+    "mw_g_mol": 474.6,
+    "dose_moiety_fraction": 0.8824,
+    "dose_moiety_note": "The product is the ACETATE and every dose is expressed as the free base, so the fraction is needed for molar work. It comes from the label's own stated pair rather than from a mass ratio, Macrilen section 11 verbatim: \"Each aluminum pouch of MACRILEN contains 60 mg of macimorelin, equivalent to 68 mg of macimorelin acetate.\" Arithmetic: 60 / 68 = 0.8824. PubChem's mass ratio 474.6/534.6 = 0.888 is close but is NOT what the label says, so the label's pair is used (R4, R10). Stored mw is the free base; see notes.",
+    "systems": [
+      "endocrine"
+    ],
+    "notes": "PubChem free base CID 9804938 (C26H30N6O3, 474.6) and acetate CID 71526737 (C28H34N6O5, 534.6), both re-queried 2026-09-26; the label's own section 11 mass for the acetate agrees exactly. THE STORED DOSE IS A DECLARED CONVERSION, not a figure the label prints: the label says \"The recommended dose is a single oral dose of 0.5 mg/kg of macimorelin\", and 0.5 mg/kg at this catalog's 70 kg reference is 35 mg, which is what is stored so that a fixed-mg consumer sees the right exposure. A GROWTH-HORMONE TRAP THAT MUST NOT BECOME A MACIMORELIN Cmax: PMID:32325373 reports \"Mean GH Cmax was similar with the macimorelin 0.5- and 1.0-mg/kg doses (31.9 and 37.8 ng/mL, respectively)\" — those ng/mL are GROWTH HORMONE, the pharmacodynamic readout, and the units make them look plausible as the drug's own concentration. Macimorelin's real parent-drug Cmax values are 3.46, 8.13 and 12.87 ng/mL at 0.25, 0.5 and 1.0 mg/kg, and they are in CHILDREN with suspected GHD, not healthy adults (PMID:34438400). PROTEIN BINDING IS NOT STATED anywhere — not in the label, not in either PK paper — so no fraction_unbound is stored. FOOD EFFECT, label verbatim, kept out of the F slot where it does not belong: \"A liquid meal decreased the macimorelin C max and AUC by 55% and 49%, respectively.\" METABOLISM: \"An in vitro human liver microsomes study showed that CYP3A4 is the major enzyme to metabolize macimorelin.\" A HUMAN IV DOSE EXISTS UNDER A DIFFERENT NAME and is not treated as this record's: PMID:12240910 gives \"acute i.v. EP1572 administration (1.0 microg/kg)\" in 2 men, never using the word macimorelin, so it is development-code identity in n=2 and yields no PK.",
+    "refs": [
+      "PMID:32325373",
+      "PMID:34438400",
+      "PMID:12646029",
+      "PMID:12240910"
+    ]
+  },
+  {
+    "slug": "acadesine",
+    "name": "Acadesine",
+    "aliases": [
+      "AICAR",
+      "AICA riboside",
+      "AICA-riboside",
+      "GP-1-110",
+      "NSC-105823"
+    ],
+    "category": "nucleoside",
+    "mechanism": "A cell-permeable adenosine analogue phosphorylated intracellularly to ZMP, which allosterically mimics AMP at AMP-activated protein kinase — so it activates AMPK without perturbing the cell's own adenine nucleotide pool. PMID:7744080 verbatim: \"ZMP mimics both activating effects of AMP on AMPK, i.e. direct allosteric activation and promotion of phosphorylation by AMPK kinase. Unlike existing methods for activating AMPK in intact cells (e.g. fructose, heat shock), AICAR does not perturb the cellular contents of ATP, ADP or AMP.\" That assay is rat hepatocytes and adipocytes. NO AFFINITY CONSTANT IS AUTHORED AND NONE WOULD BE THE RIGHT PRIMITIVE: the target engagement is intracellular and allosteric, so a Hill occupancy row against a plasma curve would misrepresent it. Prohibited in sport as an AMPK-activating metabolic modulator.",
+    "routes": [
+      "IV",
+      "PO"
+    ],
+    "doses": {
+      "IV": {
+        "min": 700,
+        "max": 14700,
+        "typical": 1750,
+        "unit": "mg"
+      }
+    },
+    "half_life_hr": {
+      "IV": 1.4,
+      "PO": 1.4
+    },
+    "pk": {
+      "IV": {
+        "V_L": 353.5,
+        "F": 1,
+        "source_pmid": "PMID:2037706",
+        "note": "A DECLARED DERIVATION, because the paper's own three parameters cannot all hold in one compartment. Verbatim, healthy men, IV, single dose: \"the terminal elimination phase had a harmonic mean t1/2 beta of 1.4 hours\" and \"Total plasma clearance (CL), mean residence time (MRTIV), and volume of distribution at steady-state (VSS) were 2.5 L/hr/kg, 0.7 hr, and 1.6 L/kg, respectively.\" At the 70 kg reference that is CL 175 L/h and Vss 112 L. But 112 L with t1/2 1.4 h implies 55 L/h, threefold below the measured 175, because t1/2-beta is the terminal slope of a BIPHASIC profile. STORED V_L = 175 x 1.4 / ln2 = 353.5 L, the volume this record's own clearance implies (R15), reproducing 175 L/h exactly. The 1.4 h is a HARMONIC mean, the correct central tendency."
+      },
+      "PO": {
+        "F": 0.05,
+        "V_L": 353.5,
+        "source_pmid": "PMID:2037706",
+        "note": "F IS AN INEQUALITY STORED AT ITS ONLY ENDPOINT, and the formulation matters. Verbatim: \"The drug was poorly bioavailable (less than 5%) when administered orally in solution.\" 0.05 is the upper bound the source gives, so it is what is stored, and both F and any future ka are specific to that oral SOLUTION (R10). The volume and half-life are carried over from the IV arm of the same study, which is where they were measured."
+      }
+    },
+    "mw_g_mol": 258.23,
+    "fraction_unbound": 0.99,
+    "fu_note": "Human plasma, and unusually for this catalog the drug is essentially unbound. PMID:2037706 states it flatly — \"The drug was not protein bound\" — and PMID:8227467 gives the figure: \"plasma protein binding was negligible (approximately 1%)\", i.e. fu 0.99, which is what is stored rather than a bare 1.0. Also settling R15's matrix question in this drug's favour: PMID:8227467 reports \"the acadesine blood/plasma ratio was unity\", so a plasma-referenced volume is correct despite red-cell uptake.",
+    "systems": [
+      "cardiovascular",
+      "immune-hematologic",
+      "endocrine"
+    ],
+    "notes": "REGISTERED UNDER `acadesine`, NOT `AICAR`, AND THE REASON IS A 31% MASS ERROR. PubChem `acadesine` returns CID 17513 (C9H14N4O5, 258.23) — the riboside, which is the administered drug and the molecule the AMPK literature calls AICAR. PubChem `AICAR` returns CID 65110 (C9H15N4O8P, 338.21), which the phosphate in the formula gives away: that is ZMP, the intracellular MONOPHOSPHATE metabolite. Both re-queried 2026-09-26. An unqualified `AICAR` lookup therefore yields a mass 31% too high for a phosphorylated species the patient is never given, so the alias points here rather than the reverse. No salt form; free nucleoside in both PK studies. DOSES are a declared conversion from mg/kg at the 70 kg reference: 10-100 mg/kg in the healthy-volunteer study (PMID:2037706) gives 700-7000 mg, the 25 mg/kg of both PK studies gives the stored typical 1750 mg, and the CLL trial's ceiling, \"210 mg/kg was the maximum tolerated dose (MTD) and optimal biological dose (OBD)\" (PMID:23228986), gives 14700 mg. THE HALF-LIFE THAT MUST NEVER BE STORED IS ONE WEEK. PMID:8227467 reports \"the terminal phase had an apparent t1/2 of about 1 week\" — but that is TOTAL 14C, dominated by the metabolite, and the same abstract says \"Intact acadesine was only measurable for 2 hours after infusion\" and \"Uric acid ... was the major metabolite of acadesine in plasma and accounted for all of the total, plasma 14C at 6 hours\". Storing 168 h against the parent's 1.4 h would be a 120-fold analyte error, worse than the carisoprodol case R10 cites. That abstract is also TRUNCATED at 250 words, so anything not quoted from it is not retrieved rather than absent. HUMAN USE IS NOT LIMITED TO CARDIAC SURGERY: healthy-volunteer IV and oral PK (PMID:2037706, PMID:8227467), healthy-volunteer AMPK physiology in 29 men (PMID:17513706, which states no dose), CABG phase 3, and relapsed CLL (PMID:23228986). A MECHANISM CLAIM NOT TO ADOPT: a 2008 development profile opens \"Acadesine is an adenosine receptor agonist\", which conflicts with the primary AMPK literature; no adenosine-receptor affinity is authored off it. Dose-independence is certified by the source: \"there were no significant differences (P greater than .05) in the mean estimates of t1/2 beta, CL, CLR, MRTIV and VSS associated with dose.\"",
+    "refs": [
+      "PMID:2037706",
+      "PMID:8227467",
+      "PMID:2813961",
+      "PMID:7744080",
+      "PMID:23228986",
+      "PMID:17513706"
+    ]
+  },
+  {
+    "slug": "mitoq",
+    "name": "MitoQ",
+    "aliases": [
+      "mitoquinone",
+      "mitoquinone mesylate",
+      "mitoquinol",
+      "MitoQ10"
+    ],
+    "category": "other",
+    "mechanism": "A ubiquinone head group tethered by a ten-carbon chain to a lipophilic triphenylphosphonium cation; the mitochondrial membrane potential drives the cation to accumulate in the inner mitochondrial membrane, where the respiratory chain reduces it to the antioxidant quinol that scavenges mitochondrial lipid peroxyl radicals. PMID:20492507 verbatim: \"The mitochondria-targeted anti-oxidant mitoquinone combines a potent anti-oxidant with a lipophilic cation that causes it to accumulate several-hundred fold within mitochondria in vivo.\" The same caution this catalog records on `skq1` applies to that accumulation figure: such numbers are typically the authors' calculation from an assumed membrane potential rather than a measurement. THERE IS NO RECEPTOR, so no occupancy row could exist even in principle.",
+    "routes": [
+      "PO"
+    ],
+    "doses": {
+      "PO": {
+        "min": 20,
+        "max": 160,
+        "typical": 20,
+        "unit": "mg"
+      }
+    },
+    "half_life_hr": {},
+    "pk_unauthored": {
+      "reason": "uncharacterized",
+      "note": "Human trials exist and plasma MitoQ has been MEASURED, yet no human pharmacokinetic parameter is published: no Cmax, half-life, volume, bioavailability, clearance or protein binding. Seven searches found none — `MitoQ AND Cmax` and `MitoQ AND (healthy volunteers OR first-in-human) AND dose` both return 0 hits, and the `mitoquinone AND pharmacokinetics` hits are rat or Caco-2. There is no indexed first-in-human PK study. All human data are outcome-only."
+    },
+    "mw_g_mol": 583.7,
+    "systems": [
+      "cardiovascular",
+      "nervous"
+    ],
+    "notes": "THE STORED MASS IS THE CATION, AND THE NAME ITSELF IS THE TRAP. PubChem `mitoquinone` returns CID 11388332, C37H44O4P+ at 583.7 — note the explicit `+`, a permanently charged triphenylphosphonium species, so there is no neutral free base and \"free cation\" is the correct term. PubChem `MitoQ` and `mitoquinone mesylate` BOTH return the salt, CID 11388331, C38H47O7PS at 678.8. All re-queried 2026-09-26. The counter-ion follows from the difference between the two fetched formulae, C38H47O7PS minus C37H44O4P = CH3O3S, one methanesulfonate, a 1:1 monovalent salt matching the single cationic charge. The cation is the active species and is what is stored; 583.7 / 678.8 = 0.860 is the cation fraction by mass. NO dose_moiety_fraction IS SET, DELIBERATELY: not one source states whether the 20, 40, 80 or 160 mg human doses are salt or cation, and MitoQ is a supplement with no FDA label to settle it, so applying 0.860 silently would invent the very fact that is missing (R10). THE CLOSEST THING TO HUMAN PK, AND WHY IT IS NOT A VALUE: PMID:29661838 measured plasma MitoQ in 20 older adults and reports only \"plasma MitoQ was higher after the treatment versus placebo period (P<0.05)\" — a direction and a p-value. Its full text was read (PMC5945293, body element confirmed) and the number exists ONLY inside Figure 1, in no sentence and no table, so reading it out would be the figure-legend defect R2 names. The authors themselves describe that sample as a 24-26 h trough that \"likely represent the lowest values achieved\", at 6-week steady state, so it would not license a volume even if printed. Its two citations for \"the known pharmacokinetic profile\" are both reviews, and the one fetched (PMID:20649545) prints no number — the SSRI-to-paroxetine-review pattern. DOSES, verbatim: \"6 weeks of oral supplementation with MitoQ (20 mg/d)\" with an acute \"supratherapeutic MitoQ [160 mg]\" arm (PMID:29661838), and \"mitoquinone (40 or 80 mg) or placebo once daily for 28 days\" in 30 chronic hepatitis C patients (PMID:20492507). The Parkinson's PROTECT trial (PMID:20568096) was negative — \"no difference between MitoQ and placebo on any measure of PD progression\" — and does not state its doses numerically.",
+    "refs": [
+      "PMID:29661838",
+      "PMID:20492507",
+      "PMID:20568096",
+      "PMID:20649545"
+    ]
   }
 ]
