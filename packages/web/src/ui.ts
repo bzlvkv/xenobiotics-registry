@@ -226,11 +226,55 @@ export interface Col {
   align?: 'r';
   /** Secondary: dropped at phone width so the columns that matter stay visible. */
   hide?: boolean;
+  /** Sort key. Set it and the header becomes the button that sorts by this
+   *  column; the caller owns the comparator, so the table stays data-agnostic. */
+  sort?: string;
+  /** Header tooltip — what the column's abbreviation means. */
+  title?: string;
+}
+
+/** Who is sorting, which way, and what to call when a header is clicked. */
+export interface Sorting {
+  key: string;
+  dir: 1 | -1;
+  on: (key: string) => void;
 }
 
 function cellClass(col: Col | undefined): string | null {
   const cls = `${col?.align === 'r' ? 'r' : ''} ${col?.hide ? 'opt' : ''}`.trim();
   return cls || null;
+}
+
+/**
+ * One header cell. A sortable column renders a button rather than bare text:
+ * the sort is reachable by keyboard and announced, and the arrow says which way
+ * the rows are running without a legend.
+ */
+function headCell(col: Col, sorting?: Sorting): HTMLElement {
+  const active = Boolean(sorting && col.sort && sorting.key === col.sort);
+  const th = el('th', {
+    class: cellClass(col),
+    title: col.title,
+    'aria-sort': active ? (sorting?.dir === 1 ? 'ascending' : 'descending') : null,
+  });
+  if (!sorting || !col.sort) {
+    th.appendChild(document.createTextNode(col.label));
+    return th;
+  }
+  const key = col.sort;
+  th.appendChild(
+    el(
+      'button',
+      { class: `sort${active ? ' on' : ''}`, type: 'button', onclick: () => sorting.on(key) },
+      col.label,
+      el(
+        'span',
+        { class: 'arrow', 'aria-hidden': 'true' },
+        active ? (sorting.dir === 1 ? '\u2191' : '\u2193') : '\u2195',
+      ),
+    ),
+  );
+  return th;
 }
 /** A row is either cells, or one full-width row (used for long notes). */
 export type Row = Child[] | { full: Child };
@@ -239,7 +283,7 @@ export function table(cols: Col[], rows: Row[]): HTMLElement {
   const head = el(
     'tr',
     null,
-    cols.map((c) => el('th', { class: cellClass(c) }, c.label)),
+    cols.map((c) => headCell(c)),
   );
   const body = el('tbody');
   for (const row of rows) {
@@ -381,20 +425,21 @@ export function chunkedTable<T>(
   cols: Col[],
   items: readonly T[],
   row: (item: T) => Node,
+  opts: { cls?: string; sorting?: Sorting } = {},
 ): HTMLElement {
   const host = chunked(items, row);
   const tbody = host.firstChild as Node;
   const sentinel = host.lastChild as Node;
   const t = el(
     'table',
-    null,
+    { class: opts.cls },
     el(
       'thead',
       null,
       el(
         'tr',
         null,
-        cols.map((c) => el('th', { class: cellClass(c) }, c.label)),
+        cols.map((c) => headCell(c, opts.sorting)),
       ),
     ),
   );

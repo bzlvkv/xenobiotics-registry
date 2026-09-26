@@ -228,6 +228,23 @@ section.card > h2 .n {
   background: var(--line);
   border-top: 1px solid var(--line);
 }
+/* In a card the strip is a summary of what is below it, not a headline. The
+ * line work is per tile rather than a background showing through the grid gaps,
+ * because at phone width the last row is a partial one and a background leaves
+ * a block of naked colour where the missing tiles would be. */
+.card .controls + .stats {
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+}
+.card .controls + .stats .stat {
+  outline: 1px solid var(--line);
+}
+.card .controls + .stats .stat {
+  padding: 0.4rem 0.6rem;
+}
+.card .controls + .stats .stat b {
+  font-size: 1rem;
+}
 .stat {
   background: var(--panel);
   padding: 0.6rem 0.8rem;
@@ -302,6 +319,154 @@ td .slug {
   font-family: var(--mono);
   font-size: 0.75rem;
   color: var(--ink-3);
+}
+/* A dense row cannot afford a second line for the slug, and does not need one. */
+td .slug.inline {
+  display: inline;
+  margin-left: 0.2rem;
+}
+td .more {
+  color: var(--ink-3);
+  margin-left: 0.15rem;
+}
+
+/*
+ * The dense catalog table: three times the rows per screen, and the columns a
+ * reviewer scans read as bands rather than as a grid to be traversed. Zebra
+ * striping does the work the row padding used to do.
+ */
+table.dense td {
+  padding: 0.22rem 0.55rem;
+  vertical-align: baseline;
+}
+table.dense th {
+  padding: 0.3rem 0.55rem;
+}
+table.dense tbody tr:nth-child(even) td {
+  background: color-mix(in srgb, var(--panel-2) 85%, var(--panel));
+}
+table.dense tbody tr:hover td {
+  background: var(--accent-bg);
+}
+table.dense .chip {
+  margin: 0 0.18rem 0 0;
+  padding: 0 0.32rem;
+  line-height: 1.45;
+}
+table.dense .chips {
+  gap: 0;
+}
+/* A chip that carries a number reads as label-then-value, not as prose. */
+table.dense .chip b {
+  font-weight: 600;
+  color: var(--ink);
+  margin-left: 0.28rem;
+}
+/* Two system chips have to sit side by side in a 12% column. */
+table.dense td:nth-child(3) .chip {
+  font-size: 0.7rem;
+}
+table.dense .chip.route {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+}
+/*
+ * Fixed widths, because an auto layout spends the page on whichever column
+ * happens to hold the longest word — category, in practice — and leaves the
+ * chips wrapping onto a second line next to it. The proportions are set to the
+ * widest common content per column, so a row is one line for all but the
+ * few records carrying three systems or four routes.
+ */
+table.dense {
+  table-layout: fixed;
+}
+table.dense th:nth-child(1),
+table.dense td:nth-child(1) {
+  width: 21%;
+}
+table.dense th:nth-child(2),
+table.dense td:nth-child(2) {
+  width: 13%;
+}
+table.dense th:nth-child(3),
+table.dense td:nth-child(3) {
+  width: 11.5%;
+}
+table.dense th:nth-child(4),
+table.dense td:nth-child(4) {
+  width: 16%;
+}
+table.dense th:nth-child(5),
+table.dense td:nth-child(5) {
+  width: 6.5%;
+}
+table.dense th:nth-child(6),
+table.dense td:nth-child(6) {
+  width: 11%;
+}
+table.dense th:nth-child(7),
+table.dense td:nth-child(7) {
+  width: 14%;
+}
+table.dense th:nth-child(8),
+table.dense td:nth-child(8) {
+  width: 6%;
+}
+/* The name stays on one line; the slug beside it is what gives way, to an
+ * ellipsis and a tooltip, rather than doubling the row's height. */
+table.dense td:nth-child(1) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* The category names run to "pharmacological"; one step down in size is what
+ * fits it beside the chips rather than under them. */
+table.dense td:nth-child(2) {
+  font-size: 0.82rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* "1,200 h" is one value, not two lines. */
+table.dense td:nth-child(5) {
+  white-space: nowrap;
+}
+/* A right-aligned column's header button has to right-align too. */
+table.dense th.r button.sort {
+  width: 100%;
+  justify-content: flex-end;
+}
+
+/* ---- sortable headers ---- */
+th button.sort {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+th button.sort:hover {
+  color: var(--ink);
+}
+th button.sort.on {
+  color: var(--accent);
+}
+th button.sort .arrow {
+  opacity: 0.35;
+  font-size: 0.9em;
+}
+th button.sort.on .arrow {
+  opacity: 1;
+}
+th button.sort:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 table.kv td:first-child {
   color: var(--ink-3);
@@ -467,6 +632,18 @@ ul.tight li {
   th.opt,
   td.opt {
     display: none;
+  }
+  /* With most columns gone the authored proportions are the wrong ones: let the
+   * three that remain size to their contents. */
+  table.dense {
+    table-layout: auto;
+  }
+  table.dense th,
+  table.dense td {
+    width: auto;
+  }
+  table.dense td:nth-child(1) {
+    white-space: normal;
   }
   /* A long reason chip ("research-only") wraps rather than pushing its column off screen. */
   .chip {
