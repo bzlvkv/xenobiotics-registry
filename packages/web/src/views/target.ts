@@ -61,13 +61,7 @@ export function targetView(ctx: Ctx, keyIn: string): Node {
       ? el(
           'p',
           { class: 'pad note' },
-          frag(
-            'Occupancy rows write ',
-            el('code', null, keyIn),
-            '; it resolves to the catalog entry ',
-            el('code', null, canon),
-            '.',
-          ),
+          frag(el('code', null, keyIn), ' → ', el('code', null, canon)),
         )
       : null,
     t
@@ -101,13 +95,7 @@ export function targetView(ctx: Ctx, keyIn: string): Node {
     card(
       'Compounds with authored occupancy here',
       `${bound.length} compound${bound.length === 1 ? '' : 's'}`,
-      rows.length
-        ? table(cols, rows)
-        : el(
-            'p',
-            { class: 'pad muted' },
-            'No compound in the registry has an authored occupancy row at this target.',
-          ),
+      rows.length ? table(cols, rows) : el('p', { class: 'pad muted' }, 'None.'),
     ),
   );
 }

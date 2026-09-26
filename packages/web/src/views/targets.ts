@@ -105,10 +105,8 @@ export function targetsView(ctx: Ctx, loc: Loc): Node {
     el(
       'p',
       { class: 'lede' },
-      `${ctx.coverage.targets.gpcrs} GPCRs and ${ctx.coverage.targets.nonGpcr} non-GPCR targets ` +
-        `— enzymes, transporters, channels, nuclear receptors — from the ${ctx.receptors.meta.source}. ` +
-        'The catalog is nomenclature; the numbers live on the compounds that bind them. What the two lists ' +
-        'cover, and which release they came from, is recorded at the foot of this page.',
+      `${ctx.coverage.targets.gpcrs} GPCRs · ${ctx.coverage.targets.nonGpcr} non-GPCR targets · ` +
+        `${ctx.receptors.meta.source} ${ctx.receptors.meta.version}`,
     ),
     card(
       'Catalog',
@@ -154,14 +152,6 @@ export function targetsView(ctx: Ctx, loc: Loc): Node {
       ? card(
           'Occupancy keys with no catalogued target',
           unknown.length,
-          el(
-            'p',
-            { class: 'pad sub' },
-            'These keys appear in receptor_occupancy rows and resolve to no catalog entry. Shorthand keys ' +
-              'normally resolve to their gene-keyed entry, so what is left names a subtype-nonselective ' +
-              'class rather than one target. Pinning such a row to a single subtype would assert a ' +
-              'selectivity nobody measured, so they are deliberately unmapped.',
-          ),
           el(
             'div',
             { class: 'pad chips' },

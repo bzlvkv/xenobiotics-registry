@@ -25,7 +25,6 @@ import {
   pmidLinks,
   prose,
   refList,
-  statement,
   table,
   type Child,
   type Row,
@@ -212,36 +211,16 @@ function implied(c: Compound): HTMLElement | null {
     if (x.caveats.length)
       rows.push({ full: frag(el('b', null, `${r}: `), x.caveats.join('; ') + '.') });
   }
-  return card(
-    'What the stored values imply',
-    null,
-    el(
-      'p',
-      { class: 'pad sub' },
-      'One-compartment arithmetic at the typical dose. An input marked default is not stored on this record, ' +
-        'yet every consumer assumes it. Hold Cmax, AUC and CL against the cited paper: values that are each ' +
-        'correctly cited can still be jointly impossible.',
-    ),
-    table(cols, rows),
-  );
+  return card('Implied at the typical dose', null, table(cols, rows));
 }
 
 function unauthored(c: Compound): HTMLElement | null {
   const u = c.pk_unauthored;
   if (!u) return null;
   return card(
-    'PK deliberately not authored',
-    null,
-    statement(
-      chip(u.reason, 'est'),
-      u.note ? inline(u.note) : el('span', { class: 'muted' }, 'No note.'),
-    ),
-    el(
-      'p',
-      { class: 'pad sub' },
-      'A stated reason, not a missing value: deleting an unsupported number would leave this record asserting ' +
-        'a consumer default invisibly, so the absence is declared instead.',
-    ),
+    'PK not authored',
+    chip(u.reason, 'est'),
+    u.note ? el('div', { class: 'pad note' }, inline(u.note)) : null,
   );
 }
 
@@ -254,18 +233,7 @@ function effectCompartment(c: Compound): HTMLElement | null {
     ec.approximated ? chip('estimated, not fitted', 'warn') : chip('fitted to data', 'accent'),
     kv([
       ['keo /h', num(ec.keo_per_h)],
-      [
-        't½ equilibration',
-        halfEq === undefined
-          ? dash()
-          : el('span', null, `${fmt(Math.round(halfEq * 600) / 10)} min (derived from keo)`),
-      ],
-      [
-        'basis',
-        ec.approximated
-          ? 'Reasoned from time-to-peak-effect or an analogue — not a published keo.'
-          : 'Fitted keo from the cited study.',
-      ],
+      ['t½ equilibration, min', halfEq === undefined ? dash() : fmt(Math.round(halfEq * 600) / 10)],
       ['species', ec.source_species ? chip(ec.source_species, 'est') : dash()],
       ['source', sourceCell(ec.source_pmid)],
     ]),
@@ -462,12 +430,7 @@ export function compoundView(ctx: Ctx, slug: string): Node {
       ? el(
           'p',
           { class: 'pad note' },
-          frag(
-            el('code', null, slug),
-            ' is a retired slug. This record absorbed it — the live slug is ',
-            el('code', null, c.slug),
-            '.',
-          ),
+          frag(el('code', null, slug), ' (retired) → ', el('code', null, c.slug)),
         )
       : null,
     findings.length
@@ -496,8 +459,6 @@ export function compoundView(ctx: Ctx, slug: string): Node {
           ),
         )
       : null,
-    findings.length === 0
-      ? el('p', { class: 'sub' }, 'The linter reports nothing against this record.')
-      : null,
+    findings.length === 0 ? el('p', { class: 'sub' }, 'None.') : null,
   );
 }

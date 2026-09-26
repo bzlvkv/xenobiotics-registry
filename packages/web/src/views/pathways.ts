@@ -88,12 +88,6 @@ export function pathwaysView(ctx: Ctx, loc: Loc): Node {
   apply();
   return frag(
     el('h1', null, 'Pathways'),
-    el(
-      'p',
-      { class: 'lede' },
-      'Mechanisms as step chains, each step cited, each modulator pointing at a compound in the catalog. ' +
-        'A Recon3D subsystem, where one is mapped, ties the chain to the human metabolic reconstruction.',
-    ),
     card(
       'Catalog',
       null,

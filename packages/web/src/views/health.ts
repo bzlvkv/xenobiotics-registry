@@ -44,9 +44,7 @@ export function healthView(ctx: Ctx, loc: Loc): Node {
         ? el(
             'p',
             { class: 'pad' },
-            ctx.findings.length === 0
-              ? 'The linter reports nothing against this registry. Every rule passes.'
-              : 'No finding matches that filter.',
+            ctx.findings.length === 0 ? 'No findings.' : 'No finding matches that filter.',
           )
         : frag(
             ...groups.map(([rule, list]) => {
@@ -57,14 +55,6 @@ export function healthView(ctx: Ctx, loc: Loc): Node {
                   chip(worst, worst === 'error' ? 'error' : 'warn'),
                   LINT_RULES[rule]?.standing ? frag(' ', chip('standing caveat', 'est')) : null,
                   ` ${list.length} finding${list.length === 1 ? '' : 's'}`,
-                ),
-                el(
-                  'p',
-                  { class: 'pad sub' },
-                  LINT_RULES[rule]?.summary ?? 'No description recorded for this rule.',
-                  LINT_RULES[rule]?.standing
-                    ? " Already audited: the absence is the audit's result, so do not close it by adding a number."
-                    : null,
                 ),
                 findingsTable(ctx, list),
               );
@@ -81,12 +71,6 @@ export function healthView(ctx: Ctx, loc: Loc): Node {
   apply();
   return frag(
     el('h1', null, 'Registry health'),
-    el(
-      'p',
-      { class: 'lede' },
-      'What the linter says about the data as it stands. This is the view to open after a batch of authoring: ' +
-        'an error means the batch is not publishable, a warning means a value needs a human eye.',
-    ),
     el(
       'div',
       { class: 'stats' },

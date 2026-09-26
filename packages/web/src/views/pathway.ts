@@ -96,11 +96,6 @@ function diagram(p: Pathway): HTMLElement | null {
   return card(
     'Diagram',
     `${nodes.length} nodes, ${edges.length} edges`,
-    el(
-      'p',
-      { class: 'pad sub' },
-      'Rendered as the node and edge lists it is stored as; every edge keeps its citation.',
-    ),
     table(
       [{ label: 'node' }, { label: 'label' }, { label: 'kind' }],
       nodes.map((n) => [el('code', null, n.id), n.label, n.kind ? chip(n.kind) : dash()]),
@@ -190,11 +185,7 @@ export function pathwayView(ctx: Ctx, slug: string): Node {
             { class: 'pad chips' },
             touching.map((c) => chipLink(`#/compounds/${c.slug}`, c.name)),
           )
-        : el(
-            'p',
-            { class: 'pad muted' },
-            'No compound names this pathway in a receptor-occupancy row or a modulator entry.',
-          ),
+        : el('p', { class: 'pad muted' }, 'None.'),
     ),
     diagram(p),
     card('References', `${(p.refs ?? []).length}`, el('div', { class: 'pad' }, refList(p.refs))),

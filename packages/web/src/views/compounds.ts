@@ -170,15 +170,5 @@ export function compoundsView(ctx: Ctx, loc: Loc): Node {
   );
 
   apply();
-  return frag(
-    el('h1', null, 'Compounds'),
-    el(
-      'p',
-      { class: 'lede' },
-      'Every record, filterable by what it actually stores. ',
-      el('code', null, 'unvisited'),
-      ' would mean a record with neither PK nor a stated reason for its absence; that count is meant to be zero.',
-    ),
-    card('Catalog', null, controls, list, count),
-  );
+  return frag(el('h1', null, 'Compounds'), card('Catalog', null, controls, list, count));
 }
