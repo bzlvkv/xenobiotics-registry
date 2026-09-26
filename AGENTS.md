@@ -42,7 +42,8 @@ pnpm validate --since /tmp/before.json  # only what your edit changed
 pnpm verify     # every cited PMID against NCBI. Network, about 25 s.
 pnpm report     # what is authored and what is open, derived from the data
 pnpm test       # registry package tests, including the no-field-loss check
-pnpm dev        # the browsing client, to spot-check a record by eye
+./live.sh       # validate, then serve the browsing client for a spot-check
+pnpm dev        # the client alone, without the install check or the gate
 pnpm check      # format + lint + typecheck + test + validate
 ```
 

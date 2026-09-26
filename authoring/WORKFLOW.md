@@ -236,8 +236,11 @@ pnpm validate --since /tmp/before.json   # only what your edit changed. Seconds.
 pnpm validate                            # the whole picture. 0 errors is the bar.
 pnpm test                                # the package suites, including no-field-loss.
 pnpm verify                              # every cited PMID against NCBI. Network, about 25 s.
-pnpm dev                                 # spot-check. Open every record you touched.
+./live.sh                                # spot-check. Open every record you touched.
 ```
+
+`./live.sh` installs if needed, runs the gate, and then serves the client, so you cannot browse a
+catalog that does not parse. `pnpm dev` skips both checks.
 
 `pnpm check` runs format, lint, typecheck, test and validate in one command; run it before you call
 a batch done, then `pnpm verify`. **That pair is the finish condition** — nothing else counts as

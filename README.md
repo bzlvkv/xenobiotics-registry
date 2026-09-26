@@ -25,7 +25,8 @@ directly and reviewed as git diffs.
 
 ```
 pnpm install
-pnpm dev               # browse the registry at http://localhost:5173
+./live.sh              # validate the data, then browse it at http://localhost:5173
+pnpm dev               # the client alone, no install check and no validation
 pnpm validate          # schema + lint rules, offline, well under a second. 0 errors is the bar.
 pnpm verify            # every cited PMID against NCBI ESummary. Needs network, under a minute.
 pnpm report            # what is authored and what is open, derived from the data
