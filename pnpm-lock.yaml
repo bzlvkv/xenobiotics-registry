@@ -36,27 +36,8 @@ importers:
         specifier: ^2.1.2
         version: 2.1.9(@types/node@22.20.4)
 
-  packages/core:
-    dependencies:
-      zod:
-        specifier: ^3.23.8
-        version: 3.25.76
-    devDependencies:
-      typescript:
-        specifier: ^5.6.2
-        version: 5.9.3
-      ulid:
-        specifier: ^2.3.0
-        version: 2.4.0
-      vitest:
-        specifier: ^2.1.2
-        version: 2.1.9(@types/node@22.20.4)
-
   packages/registry:
     dependencies:
-      '@xeno/core':
-        specifier: workspace:*
-        version: link:../core
       zod:
         specifier: ^3.23.8
         version: 3.25.76
@@ -68,21 +49,18 @@ importers:
         specifier: ^2.1.2
         version: 2.1.9(@types/node@22.20.4)
 
-  packages/solver:
+  packages/web:
     dependencies:
-      '@xeno/core':
+      '@xeno/registry':
         specifier: workspace:*
-        version: link:../core
+        version: link:../registry
     devDependencies:
       typescript:
         specifier: ^5.6.2
         version: 5.9.3
-      ulid:
-        specifier: ^2.3.0
-        version: 2.4.0
-      vitest:
-        specifier: ^2.1.2
-        version: 2.1.9(@types/node@22.20.4)
+      vite:
+        specifier: ^5.4.8
+        version: 5.4.21(@types/node@22.20.4)
 
 packages:
 
@@ -1121,10 +1099,6 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  ulid@2.4.0:
-    resolution: {integrity: sha512-fIRiVTJNcSRmXKPZtGzFQv9WRrZ3M9eoptl/teFJvjOzmpU+/K/JH6HZ8deBfb5vMEpicJcLn7JmvdknlMq7Zg==}
-    hasBin: true
-
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
@@ -2096,8 +2070,6 @@ snapshots:
       - supports-color
 
   typescript@5.9.3: {}
-
-  ulid@2.4.0: {}
 
   undici-types@6.21.0: {}
 

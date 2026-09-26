@@ -1,25 +1,14 @@
-# Registry data. These are authored/generated datasets, not source: compounds.json
-# alone is 2.5 MB, and reformatting it would produce an unreviewable diff over
-# data whose shape is already enforced by the Zod loaders and data-lint.
-packages/registry/data/*.json
-packages/registry/data/compounds/
-
-# The provenance docs are hand-wrapped at ~80 columns with deliberate emphasis
-# and wide tables. Prettier reflows both, which makes a diff against the copies
-# in the app repos unreadable for no gain.
-packages/registry/data/*.md
-
-# Authoring artifacts — dated apply-scripts and their captured JSON payloads are
-# a historical record. Reformatting them rewrites provenance for no benefit.
-scripts/authoring/
-
-# Work products written BY the scripts: receptor-action and MBI perpetrator
-# review sheets, slug/label maps, and the Reactome pathway-import artifacts.
-# Generated output, reviewed as data rather than maintained as source.
-scripts/out/
-
-# Generated / vendored.
-**/build/
-**/dist/
-**/node_modules/
 pnpm-lock.yaml
+node_modules/
+dist/
+# The three datasets are machine-written (2-space JSON, trailing newline) and
+# 3.8 MB in total. Prettier reformatting them would produce diffs nobody can
+# review and would fight the writers in scripts/.
+data/*.json
+
+# GAPS.md and the authoring docs are hand-wrapped at ~100 columns with wide
+# tables and verbatim quotes whose line breaks are part of the record. Prettier
+# reflows both: it rewrites 3,032 of GAPS.md's 5,764 lines, which is the same
+# unreviewable diff the datasets are excluded for. Rows are appended by hand.
+data/GAPS.md
+authoring/

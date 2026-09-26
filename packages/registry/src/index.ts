@@ -1,31 +1,90 @@
 /**
- * @xeno/registry — read-only compound dataset.
+ * @xeno/registry — the compounds, pathways and targets, the schema that admits
+ * them, the queries over them, and the rules that decide whether they are good
+ * enough to publish.
  *
- * v0.1: ships JSON files baked into the bundle. Authoring + community PRs
- * (planned for v0.4) will swap this out for a fetched + cached snapshot,
- * but the loader API stays the same.
- *
- * The registry is intentionally small surface: load once, query in memory.
- * No reactivity. UI consumers wrap it in Svelte stores at the app layer.
+ * BROWSER-SAFE BY CONSTRUCTION. Nothing reachable from this file imports
+ * `node:fs` or anything else Node-only, so the thin web client imports the same
+ * module a gate does and gets the same answers. Reading the JSON off disk lives
+ * behind `@xeno/registry/read`, which is deliberately NOT re-exported here.
  */
 
-export * from './loader';
-export * from './query';
-export * from './interactions';
-export * from './recon3d';
-export * from './pubmed';
-export { resettableMemo } from './memo';
+// The shapes.
+export type {
+  Compound,
+  Composition,
+  CompoundCategory,
+  DoseRange,
+  DoseUnit,
+  EffectCompartment,
+  InteractionKinetics,
+  InteractionRef,
+  NonGpcrTarget,
+  Nutrition,
+  Pathway,
+  PathwayCategory,
+  PathwayDiagram,
+  PathwayDiagramChip,
+  PathwayDiagramEdge,
+  PathwayDiagramFeedback,
+  PathwayDiagramNode,
+  PathwayDomain,
+  PathwayModulator,
+  PathwayNodeDetails,
+  PathwayNodeKind,
+  PathwayStep,
+  ReceptorAction,
+  ReceptorCatalog,
+  ReceptorCatalogEntry,
+  ReceptorSite,
+  Registry,
+  Route,
+  RoutePk,
+  Slug,
+  SourceSpecies,
+  SystemId,
+  TargetClass,
+} from './types';
+export { SYSTEM_IDS, SYSTEM_META } from './types';
+
+// The structural gate.
+export { compoundSchema, pathwaySchema, receptorCatalogSchema } from './schema';
+export { loadCompounds, loadPathways, loadReceptors, loadRegistry } from './load';
+
+// The reads.
 export {
-  bundledCompounds,
-  ensureBundledCompounds,
-  loadCompoundProvenance,
-  loadCompoundProvenanceIndex,
-  bundledReceptors,
-  ensureBundledReceptors,
-  loadBundledPathways,
-  bundledFoods,
-  ensureBundledFoods,
-  setRegistryBundleOverride,
-  type RegistryBundleOverride,
-} from './bundled';
-export { REGISTRY_SCHEMA_VERSION } from './schema-version';
+  allCitations,
+  allTargets,
+  citationsIn,
+  compoundIndex,
+  compoundsForPathway,
+  compoundsForTarget,
+  coverage,
+  findCompound,
+  interactionsOf,
+  pubmedUrl,
+  searchCompounds,
+  searchPathways,
+  searchTargets,
+} from './query';
+export type { Citation, CoverageReport, ReceptorTarget } from './query';
+
+// What a route's stored numbers imply, with every input labelled stored or default.
+export { impliedExposure, PK_DEFAULTS } from './exposure';
+export type { ExposureInput, ImpliedExposure, InputSource, NoExposure } from './exposure';
+
+// The semantic gate.
+export {
+  OCCUPANCY_TARGET_KEYS,
+  RECEPTOR_ALIASES,
+  canonicalReceptor,
+  lintRegistry,
+  targetKeyFor,
+} from './lint';
+export type { Finding } from './lint';
+export { LINT_RULES, STANDING_CAVEAT_RULES } from './rules';
+export type { RuleInfo } from './rules';
+
+// PubMed verdicts, without the fetching.
+export { describePubmed, esummaryUrl, ESUMMARY_BATCH, ESUMMARY_URL, resolved } from './pubmed';
+export type { EsummaryRecord, EsummaryResponse, PubmedDetail } from './pubmed';

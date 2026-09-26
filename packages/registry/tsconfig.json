@@ -1,13 +1,10 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "rootDir": ".",
     "baseUrl": ".",
-    "paths": {
-      "@xeno/core": ["../core/src/index.ts"],
-      "@xeno/core/*": ["../core/src/*"]
-    },
-    "resolveJsonModule": true,
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals", "node"],
+    "resolveJsonModule": true
   },
-  "include": ["src/**/*.ts", "data/**/*.json"]
+  "include": ["src/**/*.ts", "test/**/*.ts"]
 }

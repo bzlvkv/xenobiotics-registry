@@ -2,7 +2,5 @@ packages:
   - 'packages/*'
 
 # pnpm 10 refuses to run dependency build scripts unless they are named here.
-# Declared in the file rather than approved interactively so a fresh clone
-# installs deterministically.
 onlyBuiltDependencies:
   - esbuild

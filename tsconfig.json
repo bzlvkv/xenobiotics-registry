@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@xeno/registry": ["packages/registry/src/index.ts"],
+      "@xeno/registry/*": ["packages/registry/src/*"]
+    },
+    "types": ["node"],
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+  "include": ["scripts/**/*.ts"]
+}

@@ -1,31 +1,12 @@
-# dependencies
 node_modules/
 .pnpm-store/
-
-# build outputs
 dist/
 build/
-
-# logs
 *.log
 pnpm-debug.log*
-
-# env
 .env
 .env.local
-.env.*.local
-
-# editor
+coverage/
 .vscode/*
 .idea/
 .DS_Store
-
-# tests
-coverage/
-
-# Generated compound chunks (core + provenance split from compounds.json;
-# see scripts/build-compound-chunks.mjs)
-packages/registry/data/compounds/
-
-# registry:bundle writes the content-addressed bundle to
-# packages/registry/dist/, which the `dist/` rule above already covers.
