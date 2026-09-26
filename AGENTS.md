@@ -31,7 +31,9 @@ its absence put a wrong number in front of a reader.
    guess, and do not silently delete a value.
 4. Run `pnpm validate` after every edit. Before you call the work finished, run
    `pnpm check` and then `pnpm verify`: that pair is the finish condition. Zero
-   errors is the bar. Say what you could not verify.
+   errors is the bar. Say what you could not verify. If you touched a note that
+   quotes its source, run `pnpm verify:quotes` too — it checks the quote against
+   the abstract, which is the half `pnpm verify` cannot see.
 
 ## Commands
 
@@ -40,6 +42,7 @@ pnpm validate   # schema + lint rules, offline, ~1 s. Must show 0 errors.
 pnpm validate --save /tmp/before.json   # baseline, before a batch
 pnpm validate --since /tmp/before.json  # only what your edit changed
 pnpm verify     # every cited PMID against NCBI. Network, about 25 s.
+pnpm verify:quotes # every verbatim quote against the abstract it cites. Network, ~6 s.
 pnpm report     # what is authored and what is open, derived from the data
 pnpm test       # registry package tests, including the no-field-loss check
 ./live.sh       # validate, then serve the browsing client for a spot-check

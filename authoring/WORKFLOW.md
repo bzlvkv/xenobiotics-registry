@@ -236,6 +236,7 @@ pnpm validate --since /tmp/before.json   # only what your edit changed. Seconds.
 pnpm validate                            # the whole picture. 0 errors is the bar.
 pnpm test                                # the package suites, including no-field-loss.
 pnpm verify                              # every cited PMID against NCBI. Network, about 25 s.
+pnpm verify:quotes                       # every verbatim quote against its abstract. Network, ~6 s.
 ./live.sh                                # spot-check. Open every record you touched.
 ```
 
@@ -253,6 +254,12 @@ finished, and there is no rung you may skip because the edit looked small.
   audited states you must not close by inventing a number.
 - `pnpm verify` catches a dead id. It **cannot** catch a live id on the wrong paper, which is the
   larger defect class. Do not let a green verify stand in for having read the abstract.
+- `pnpm verify:quotes` closes the one slice of that class a machine can decide: it fetches each
+  cited abstract and checks that the sentence your note quotes is actually in it. A MISSING means
+  the quote was paraphrased, came from the full text (say so, and it is then exempt), or is from a
+  different paper. It does **not** check that the number in the quote is the number you stored,
+  and a note that quotes nothing is never checked — so a green run is not a read abstract either.
+  **19 quotes are missing today** and are not yours; check that your batch did not add a 20th.
 - In `pnpm dev`, check what the record *does*. Each compound page with PK carries a **What the
   stored values imply** card: the one-compartment Cmax, Tmax, AUC and clearance at the typical dose,
   with defaults badged and derived values marked. Compare them with the paper, and treat a

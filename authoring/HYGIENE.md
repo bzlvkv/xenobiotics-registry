@@ -114,8 +114,11 @@ in the **enzalutamide** discovery paper; `zolmitriptan`'s from a binding study o
 `piperine`'s PK from a study whose analyte is **curcumin**. The whole SSRI transporter block
 (`fluoxetine`, `fluvoxamine`, `sertraline`) traced to a **paroxetine review's Table 1**.
 
-**Caught by.** Only a human — or an agent — reading the abstract. There cannot be a general offline
-rule for this: the defect is a mismatch between a paper's text and a stored number, and the text is
+**Caught by.** `pnpm verify:quotes`, where the note quotes the sentence it took the value from:
+that quote is a falsifiable claim about a named document, and the gate fetches the document and
+decides it. 19 of 228 quotes fail today. It cannot judge a note that quotes nothing, which is
+where the rest of this class lives. Otherwise: only a human — or an agent — reading the abstract.
+There cannot be a general offline rule for this: the defect is a mismatch between a paper's text and a stored number, and the text is
 not in the repo. One subclass IS mechanical, because it confesses: `receptor.secondary-source`
 (**warning**) reports the 33 occupancy rows whose own note credits the IUPHAR/GtoPdb ligand page for
 the affinity while the `source_pmid` names the paper that database attributes it to. That is the

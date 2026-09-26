@@ -88,3 +88,17 @@ export type { RuleInfo } from './rules';
 // PubMed verdicts, without the fetching.
 export { describePubmed, esummaryUrl, ESUMMARY_BATCH, ESUMMARY_URL, resolved } from './pubmed';
 export type { EsummaryRecord, EsummaryResponse, PubmedDetail } from './pubmed';
+
+// The one provenance claim a machine can check: a note's quote against its abstract.
+export {
+  citesFullText,
+  efetchUrl,
+  EFETCH_BATCH,
+  EFETCH_URL,
+  normalizeForMatch,
+  quoteFound,
+  quotesIn,
+  splitAbstracts,
+  verbatimClaims,
+} from './quotes';
+export type { QuoteClaim, QuoteVerdict } from './quotes';

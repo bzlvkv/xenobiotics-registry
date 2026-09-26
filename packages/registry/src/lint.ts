@@ -316,16 +316,36 @@ function occupancyNoteAsserts(
   claim: RegExp,
   opts: { require?: RegExp; reject?: RegExp } = {},
 ): boolean {
-  return note
-    .split(/(?<=[.;])\s+/)
-    .some(
-      (clause) =>
-        claim.test(clause) &&
-        assertsOfThisRecord(clause) &&
-        !CORRECTED_AWAY_FROM.test(clause) &&
-        (!opts.require || opts.require.test(clause)) &&
-        (!opts.reject || !opts.reject.test(clause)),
-    );
+  return splitClauses(note).some(
+    (clause) =>
+      claim.test(clause) &&
+      describesStoredValue(clause) &&
+      (!opts.require || opts.require.test(clause)) &&
+      (!opts.reject || !opts.reject.test(clause)),
+  );
+}
+
+/**
+ * Split a note the way every prose rule in this file reads one: into clauses at
+ * sentence and semicolon boundaries. Exported because `quotes.ts` must split
+ * identically — a quote attributed to a superseded value sits in its own clause,
+ * and a different split would attribute it to the stored one.
+ */
+export function splitClauses(note: string): string[] {
+  return note.split(/(?<=[.;])\s+/);
+}
+
+/**
+ * True when a clause is talking about the value this record STORES, rather than
+ * one it replaced, rejected or negated.
+ *
+ * The union of the two guards every prose rule here needs, in one place and
+ * under one name, so a reader of `quotes.ts` gets the same answer as a reader of
+ * this file. Both halves are load-bearing and both were written after a rule
+ * flagged a record for documenting its own fix.
+ */
+export function describesStoredValue(clause: string): boolean {
+  return assertsOfThisRecord(clause) && !CORRECTED_AWAY_FROM.test(clause);
 }
 
 /**

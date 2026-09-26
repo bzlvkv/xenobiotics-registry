@@ -1,0 +1,152 @@
+/**
+ * The quote gate, tested on the shapes that actually occur.
+ *
+ * Every string in this file is copied from a real record or a real PubMed
+ * abstract. A synthetic pair proves the matcher can match; only the real pairs
+ * prove it survives the two renderings of the same sentence, which is the entire
+ * problem this module solves.
+ */
+
+import { describe, expect, it } from 'vitest';
+import {
+  citesFullText,
+  normalizeForMatch,
+  quoteFound,
+  quotesIn,
+  splitAbstracts,
+  verbatimClaims,
+} from '../src/index';
+import { readRegistry } from '../src/read';
+
+describe('quotesIn', () => {
+  it('takes the quote from a note that claims to be quoting its abstract', () => {
+    expect(
+      quotesIn('Tsuchihashi 1992 verbatim: "the Kd and Bmax values were 7.42 +/- 1.03 nM".'),
+    ).toEqual(['the Kd and Bmax values were 7.42 +/- 1.03 nM']);
+  });
+
+  it('claims nothing when the note claims nothing', () => {
+    expect(
+      quotesIn('Human beta-1, HEK293 cells expressing a single subtype, "high affinity".'),
+    ).toEqual([]);
+  });
+
+  it('ignores a quote attributed to the value this record REPLACED', () => {
+    // alfentanil's kₑₒ note, which is why this rule exists: the second quote is
+    // true, comes from a different paper, and is correctly absent from this one.
+    const note =
+      'Adult human, direct head-to-head with remifentanil. Verbatim: "a T(12)k(e0) for ' +
+      'remifentanil of 0.75 min [corrected] and 0.96 min for alfentanil". keo = ln2 / ' +
+      '(0.96/60) = 43.32/h. Replaces 69.3/h, computed from a 5-subject COMPARATOR arm ' +
+      'reporting "0.6 +/- 0.4 minutes" — a 67% relative SD.';
+    expect(quotesIn(note)).toEqual([
+      'a T(12)k(e0) for remifentanil of 0.75 min [corrected] and 0.96 min for alfentanil',
+    ]);
+  });
+
+  it('skips a term too short to be a sentence', () => {
+    expect(quotesIn('Abstract states "human M3" only.')).toEqual([]);
+  });
+
+  it('recognises a full-text provenance, which the abstract cannot be expected to carry', () => {
+    expect(citesFullText('Cox 2010 full-text binding table: human OX1R Ki = 0.55 nM.')).toBe(true);
+    expect(citesFullText('Abstract verbatim: "Ki = 0.55 nM".')).toBe(false);
+  });
+});
+
+describe('normalizeForMatch folds the two renderings of one sentence', () => {
+  const same = (a: string, b: string): boolean => normalizeForMatch(a) === normalizeForMatch(b);
+
+  it('folds the tolerance sign, the micro sign and superscript units', () => {
+    expect(same('35.9 ± 4.2 µM', '35.9 +/-4.2 microM')).toBe(true);
+    expect(same('k(eo) was 0.058 ± 0.026 min⁻¹', 'k(eo) was 0.058 +/- 0.026 min(-1)')).toBe(true);
+  });
+
+  it('rejoins a token PubMed hard-wrapped mid-word', () => {
+    expect(
+      quoteFound('5-HT1A receptors K i=4.2 nM', 'human 5-HT1A receptors K\n(i)=4.2 nM using'),
+    ).toBe(true);
+  });
+
+  it('reads the Greek mu as a unit before m/g/l and as the letter otherwise', () => {
+    expect(same('4.9 μM', '4.9 microM')).toBe(true);
+    expect(normalizeForMatch('μ-opioid')).toBe('mu-opioid');
+  });
+
+  it('spells out the other Greek letters, which PubMed prints as words', () => {
+    expect(same('α1-adrenoceptor affinities', 'alpha1-adrenoceptor affinities')).toBe(true);
+  });
+
+  it('folds the approximation sign and the curly apostrophe', () => {
+    expect(same('IC50 of ~45nM', 'IC50 of ∼45nM')).toBe(true);
+    expect(same('St John’s wort', "St John's wort")).toBe(true);
+  });
+});
+
+describe('quoteFound', () => {
+  const abstract =
+    'Ki values in the individual layers were in a range between 8.5 +/- 6.5 microM and\n' +
+    '18.9 +/- 16.0 microM for caffeine.';
+
+  it('finds a quote spanning the abstract line wrap', () => {
+    expect(quoteFound('between 8.5 +/- 6.5 microM and 18.9 +/- 16.0 microM', abstract)).toBe(true);
+  });
+
+  it('honours an elision, in order', () => {
+    expect(quoteFound('Ki values … for caffeine', abstract)).toBe(true);
+    expect(quoteFound('for caffeine … Ki values', abstract)).toBe(false);
+  });
+
+  it('refuses a sentence the abstract does not contain', () => {
+    expect(quoteFound('caffeine Ki was 12.7 microM', abstract)).toBe(false);
+  });
+});
+
+describe('splitAbstracts', () => {
+  it('keys each record on the PMID line that ENDS it', () => {
+    const text = [
+      '1. J One. 1990.',
+      '',
+      'First body.',
+      '',
+      'PMID: 111 [Indexed for MEDLINE]',
+      '',
+      '2. J Two. 1991.',
+      '',
+      'Second body.',
+      '',
+      'PMID: 222',
+    ].join('\n');
+    const out = splitAbstracts(text);
+    expect([...out.keys()]).toEqual(['111', '222']);
+    expect(out.get('111')).toContain('First body.');
+    expect(out.get('222')).toContain('Second body.');
+    expect(out.get('222')).not.toContain('First body.');
+  });
+});
+
+describe('verbatimClaims over the real registry', () => {
+  const claims = verbatimClaims(readRegistry());
+
+  it('finds claims, and every one names a bare PMID and a non-empty quote', () => {
+    expect(claims.length).toBeGreaterThan(100);
+    for (const c of claims) {
+      expect(c.pmid, `${c.entity} ${c.origin}`).toMatch(/^\d+$/);
+      expect(c.quote.length, `${c.entity} ${c.origin}`).toBeGreaterThan(11);
+      expect(c.entity.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('reaches notes on nested records, not only the top level', () => {
+    const origins = claims.map((c) => c.origin);
+    expect(origins.some((o) => o.startsWith('receptor_occupancy['))).toBe(true);
+    expect(origins.some((o) => o.startsWith('interactions['))).toBe(true);
+    expect(origins.some((o) => o === 'effect_compartment.note')).toBe(true);
+  });
+
+  it('excludes a note that sources its value to full text', () => {
+    // suvorexant's orexin rows quote a binding table and say so; the abstract is
+    // silent on the number by the paper's own construction.
+    expect(claims.filter((c) => c.entity === 'suvorexant')).toEqual([]);
+  });
+});

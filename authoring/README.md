@@ -21,20 +21,22 @@ Counts measured from the live data on 2026-09-26: 626 compounds carry authored P
 explicit `pk_unauthored` reason, **0 carry neither**. 788 route entries, all 788 cited.
 4,052 citation instances resolving to 2,596 unique PMIDs.
 
-## The four commands
+## The five commands
 
 ```
-pnpm validate    # schema + loaders + lint rules. Seconds. Must be clean before you commit.
-pnpm verify      # every cited PMID against NCBI ESummary. Minutes, network.
-pnpm report      # the coverage report: what is authored, what is open, which keys are unknown.
-pnpm dev         # the browser client — spot-check the records you touched.
+pnpm validate      # schema + loaders + lint rules. Seconds. Must be clean before you commit.
+pnpm verify        # every cited PMID against NCBI ESummary. Minutes, network.
+pnpm verify:quotes # every verbatim quote against the abstract it names. Seconds, network.
+pnpm report        # the coverage report: what is authored, what is open, which keys are unknown.
+pnpm dev           # the browser client — spot-check the records you touched.
 ```
 
 ## The rules, in the smallest complete form
 
 1. **Never invent a citation.** Every `source_pmid` must resolve (`pnpm verify`) **and** the
    abstract must state the value verbatim for the named compound. Fetch the abstract; do not
-   recall it. Four PMIDs in one 2026-09-08 batch draft were inferred from context and all four
+   recall it. Where a note carries the sentence it quoted, `pnpm verify:quotes` now checks that
+   sentence against that abstract — the only part of rule 2 a machine can decide. Four PMIDs in one 2026-09-08 batch draft were inferred from context and all four
    were wrong papers — live ids, wrong papers, which `pnpm verify` passes by construction.
 2. **A resolving PMID is not a warrant.** A real, on-topic, correctly-attributed paper whose
    abstract states none of the values hung on it is the largest defect class this dataset has

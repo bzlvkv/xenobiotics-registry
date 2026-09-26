@@ -11,6 +11,7 @@
     "preview": "pnpm --filter @xeno/web preview",
     "validate": "tsx scripts/validate.ts",
     "verify": "tsx scripts/verify-citations.ts",
+    "verify:quotes": "tsx scripts/verify-quotes.ts",
     "report": "tsx scripts/report.ts",
     "receptors:fetch": "tsx scripts/fetch-receptors.ts",
     "test": "pnpm -r test",
