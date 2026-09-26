@@ -99,59 +99,85 @@ export function targetsView(ctx: Ctx, loc: Loc): Node {
   const unknown = ctx.coverage.targets.occupancyKeysUnknown;
   const families = tally(ctx.targets.map((t) => t.family).filter((f): f is string => Boolean(f)));
 
+  /*
+   * `?only=unknown` scopes the page to the uncatalogued occupancy keys. The home
+   * page counts those keys and needs somewhere to send a reader that shows
+   * exactly them; they are not targets, so no `kind` filter could do it, and
+   * without this the link landed on all 428 catalogued targets with the two keys
+   * a scroll away at the bottom.
+   */
+  const onlyUnknown = loc.query.get('only') === 'unknown' && unknown.length > 0;
+
   apply();
   return frag(
     el('h1', null, 'Targets'),
     el(
       'p',
       { class: 'lede' },
-      `${ctx.coverage.targets.gpcrs} GPCRs · ${ctx.coverage.targets.nonGpcr} non-GPCR targets · ` +
-        `${ctx.receptors.meta.source} ${ctx.receptors.meta.version}`,
+      onlyUnknown
+        ? `${unknown.length} occupancy key${unknown.length === 1 ? '' : 's'} that no catalogued ` +
+            `target describes, of ${ctx.coverage.targets.occupancyKeysUsed} in use`
+        : `${ctx.coverage.targets.gpcrs} GPCRs · ${ctx.coverage.targets.nonGpcr} non-GPCR targets · ` +
+            `${ctx.receptors.meta.source} ${ctx.receptors.meta.version}`,
     ),
-    card(
-      'Catalog',
-      `${ctx.coverage.targets.occupancyKeysUsed} keys carry authored occupancy`,
-      el(
-        'div',
-        { class: 'controls' },
-        search(state.q, 'Search name, gene or key…', (v) => {
-          state.q = v;
-          push();
-        }),
-        select(
-          'kind',
-          state.kind,
-          [
-            ['', 'every target'],
-            ['gpcr', 'GPCRs'],
-            ['non-gpcr', 'non-GPCR targets'],
-            ['bound', 'with authored occupancy'],
-          ],
-          (v) => {
-            state.kind = v;
-            push();
-          },
+    onlyUnknown ? link('#/targets', 'Show the whole catalog', 'back') : null,
+    onlyUnknown
+      ? null
+      : card(
+          'Catalog',
+          `${ctx.coverage.targets.occupancyKeysUsed} keys carry authored occupancy`,
+          el(
+            'div',
+            { class: 'controls' },
+            search(state.q, 'Search name, gene or key…', (v) => {
+              state.q = v;
+              push();
+            }),
+            select(
+              'kind',
+              state.kind,
+              [
+                ['', 'every target'],
+                ['gpcr', 'GPCRs'],
+                ['non-gpcr', 'non-GPCR targets'],
+                ['bound', 'with authored occupancy'],
+              ],
+              (v) => {
+                state.kind = v;
+                push();
+              },
+            ),
+            select(
+              'family',
+              state.fam,
+              [
+                ['', `all families (${families.length})`],
+                ...families.map(([k, n]) => [k, `${k} (${n})`] as [string, string]),
+              ],
+              (v) => {
+                state.fam = v;
+                push();
+              },
+            ),
+          ),
+          list,
+          count,
         ),
-        select(
-          'family',
-          state.fam,
-          [
-            ['', `all families (${families.length})`],
-            ...families.map(([k, n]) => [k, `${k} (${n})`] as [string, string]),
-          ],
-          (v) => {
-            state.fam = v;
-            push();
-          },
-        ),
-      ),
-      list,
-      count,
-    ),
     unknown.length
       ? card(
           'Occupancy keys with no catalogued target',
           unknown.length,
+          /* The home page counts these two keys and links straight here, so the
+           * card says what they are rather than assuming the reader arrived by
+           * scrolling the whole catalog. They are not targets — that is the
+           * finding — so no `kind` filter could have shown them. */
+          el(
+            'p',
+            { class: 'pad muted' },
+            'A compound hangs occupancy on each of these, and ',
+            el('code', null, 'receptors.json'),
+            ' catalogues neither, so each renders with no gene, family or GtoPdb anchor.',
+          ),
           el(
             'div',
             { class: 'pad chips' },

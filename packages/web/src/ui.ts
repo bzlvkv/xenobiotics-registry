@@ -341,6 +341,30 @@ export function stat(label: string, value: Child, cls = ''): HTMLElement {
   return el('div', { class: `stat ${cls}`.trim() }, el('b', null, value), el('span', null, label));
 }
 
+/**
+ * A stat that is also its own query. Every number on the home page is a count of
+ * some subset of the data, and the subset is the thing a reader wants next — so
+ * the tile links to the list already narrowed to it rather than to an unfiltered
+ * page the reader has to re-narrow by hand.
+ *
+ * Same markup as `stat` apart from the tag, so the grid does not care which it
+ * gets. `title` is the sentence that says what the destination will show, which
+ * matters because a bare count does not say what filter produced it.
+ */
+export function statLink(
+  href: string,
+  label: string,
+  value: Child,
+  opts: { cls?: string; title?: string } = {},
+): HTMLElement {
+  return el(
+    'a',
+    { href, class: `stat ${opts.cls ?? ''}`.trim(), title: opts.title },
+    el('b', null, value),
+    el('span', null, label),
+  );
+}
+
 /** Sorted [key, count] pairs for a select's options. */
 export function tally(values: readonly string[]): [string, number][] {
   const m = new Map<string, number>();

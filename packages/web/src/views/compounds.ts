@@ -26,16 +26,32 @@ import {
   type Col,
 } from '../ui';
 
+/**
+ * The facets exist so every count on the home page has somewhere to land. Each
+ * one is a subset a coverage number reports, and a reader who clicks that number
+ * arrives here with the subset already applied rather than an unfiltered list.
+ */
 const FACETS: [string, string][] = [
   ['', 'anything authored'],
   ['pk', 'has authored PK'],
   ['gap', 'explained PK gap'],
+  ['hl', 'has a half-life'],
   ['occ', 'has receptor occupancy'],
   ['int', 'has interactions'],
   ['ec', 'has effect compartment'],
+  ['keo-fit', 'keo fitted from a curve'],
+  ['keo-est', 'keo is a declared estimate'],
   ['nut', 'has nutrition'],
   ['lint', 'has lint findings'],
+  ['uncited', 'PK route block with no source'],
+  ['untagged', 'no body system'],
+  ['unvisited', 'neither PK nor a reason'],
 ];
+
+/** A route block is uncited when it carries neither a PMID nor a label. */
+function hasUncitedRoute(c: Compound): boolean {
+  return Object.values(c.pk ?? {}).some((p) => !p?.source_pmid && !p?.source_label);
+}
 
 const COLS: Col[] = [
   { label: 'compound', sort: 'name' },
@@ -184,25 +200,39 @@ function matches(
   cat: string,
   sys: string,
   facet: string,
+  reason: string,
   linted: Set<string>,
 ): boolean {
   if (cat && c.category !== cat) return false;
   if (sys && !(c.systems ?? []).includes(sys as SystemId)) return false;
+  if (reason && c.pk_unauthored?.reason !== reason) return false;
   switch (facet) {
     case 'pk':
       return routeCount(c) > 0;
     case 'gap':
       return Boolean(c.pk_unauthored);
+    case 'hl':
+      return halfLives(c).length > 0;
     case 'occ':
       return (c.receptor_occupancy ?? []).length > 0;
     case 'int':
       return (c.interactions ?? []).length > 0;
     case 'ec':
       return Boolean(c.effect_compartment);
+    case 'keo-fit':
+      return Boolean(c.effect_compartment && !c.effect_compartment.approximated);
+    case 'keo-est':
+      return Boolean(c.effect_compartment?.approximated);
     case 'nut':
       return Boolean(c.nutrition);
     case 'lint':
       return linted.has(c.slug);
+    case 'uncited':
+      return hasUncitedRoute(c);
+    case 'untagged':
+      return (c.systems ?? []).length === 0;
+    case 'unvisited':
+      return routeCount(c) === 0 && !c.pk_unauthored;
     default:
       return true;
   }
@@ -216,6 +246,7 @@ export function compoundsView(ctx: Ctx, loc: Loc): Node {
     cat: loc.query.get('cat') ?? '',
     sys: loc.query.get('sys') ?? '',
     facet: loc.query.get('facet') ?? '',
+    reason: loc.query.get('reason') ?? '',
     sort: loc.query.get('sort') ?? 'name',
     dir: loc.query.get('dir') === 'd' ? 'd' : 'a',
   };
@@ -235,7 +266,7 @@ export function compoundsView(ctx: Ctx, loc: Loc): Node {
 
   const apply = (): void => {
     const filtered = ctx.compounds.filter((c) =>
-      matches(c, state.cat, state.sys, state.facet, linted),
+      matches(c, state.cat, state.sys, state.facet, state.reason, linted),
     );
     const found = state.q.trim() ? searchCompounds(filtered, state.q, 5000) : filtered;
     /*
@@ -358,6 +389,22 @@ export function compoundsView(ctx: Ctx, loc: Loc): Node {
       state.facet = v;
       push();
     }),
+    /* The reason select exists so a deep link from the home page's
+     * by-reason table is adjustable once you arrive, rather than a dead end. */
+    select(
+      'PK gap reason',
+      state.reason,
+      [
+        ['', 'any reason'],
+        ...tally(ctx.compounds.map((c) => c.pk_unauthored?.reason ?? '').filter(Boolean)).map(
+          ([k, c]) => [k, `${k} (${c})`] as [string, string],
+        ),
+      ],
+      (v) => {
+        state.reason = v;
+        push();
+      },
+    ),
   );
 
   const cov = ctx.coverage.compounds;

@@ -26,11 +26,37 @@ const COLS: Col[] = [
   { label: 'Recon3D subsystem', hide: true },
 ];
 
+/**
+ * The facets the home page's coverage rows link to. A pathway with no Recon3D
+ * subsystem and one whose steps carry no PMID are both counts on that page, so
+ * each needs a destination that shows exactly those records.
+ */
+const FACETS: [string, string][] = [
+  ['', 'every pathway'],
+  ['no-recon', 'no Recon3D subsystem'],
+  ['uncited-steps', 'a step with no source'],
+  ['uncited-mods', 'a modulator with no source'],
+];
+
+function matchesFacet(p: Pathway, facet: string): boolean {
+  switch (facet) {
+    case 'no-recon':
+      return !p.recon3d_subsystem;
+    case 'uncited-steps':
+      return (p.steps ?? []).some((s) => !s.source_pmid);
+    case 'uncited-mods':
+      return (p.modulators ?? []).some((m) => !m.source_pmid);
+    default:
+      return true;
+  }
+}
+
 export function pathwaysView(ctx: Ctx, loc: Loc): Node {
   const state = {
     q: loc.query.get('q') ?? '',
     cat: loc.query.get('cat') ?? '',
     sub: loc.query.get('sub') ?? '',
+    facet: loc.query.get('facet') ?? '',
   };
   const list = el('div');
   const count = el('div', { class: 'count' });
@@ -39,7 +65,8 @@ export function pathwaysView(ctx: Ctx, loc: Loc): Node {
     const filtered = ctx.pathways.filter(
       (p: Pathway) =>
         (!state.cat || p.category === state.cat) &&
-        (!state.sub || p.recon3d_subsystem === state.sub),
+        (!state.sub || p.recon3d_subsystem === state.sub) &&
+        matchesFacet(p, state.facet),
     );
     const rows = state.q.trim() ? searchPathways(filtered, state.q, 500) : filtered;
     count.replaceChildren(
@@ -124,6 +151,10 @@ export function pathwaysView(ctx: Ctx, loc: Loc): Node {
             push();
           },
         ),
+        select('provenance', state.facet, FACETS, (v) => {
+          state.facet = v;
+          push();
+        }),
       ),
       list,
       count,
