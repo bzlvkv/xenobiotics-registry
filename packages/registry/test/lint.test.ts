@@ -587,6 +587,18 @@ describe('receptor and effect-compartment rules', () => {
     ).not.toContain('receptor.derived-value');
   });
 
+  it("receptor.derived-value does NOT fire when the mean is inside the SOURCE's own quote", () => {
+    // sildenafil's PDE5 note. The averaging is the paper's, over its own
+    // replicates, and 3.5 nM is the single verbatim value the rules ask for.
+    // The elision puts a full stop inside the quotation, so the guard has to
+    // strip quotes before splitting the note into clauses.
+    expect(
+      occ(
+        'Ballard 1998 verbatim: "sildenafil ... inhibiting PDE5 from HCC with a geometric mean IC50 of 3.5 nM". Human corpus cavernosum PDE5.',
+      ),
+    ).not.toContain('receptor.derived-value');
+  });
+
   it('receptor.secondary-source fires when the database supplied the constant', () => {
     expect(
       occ('GtoPdb-curated human H1 binding: pKi 9.8 (Ki 0.16 nM), antagonist, ref PMID:8935801.'),

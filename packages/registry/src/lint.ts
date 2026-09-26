@@ -316,7 +316,12 @@ function occupancyNoteAsserts(
   claim: RegExp,
   opts: { require?: RegExp; reject?: RegExp } = {},
 ): boolean {
-  return splitClauses(note).some(
+  // Quotations come out BEFORE the split, not after. An author's elision puts a
+  // full stop inside the quote — sildenafil's reads "sildenafil ... inhibiting
+  // PDE5 from HCC with a geometric mean IC50 of 3.5 nM" — so splitting first
+  // cuts the quotation in half and leaves its second fragment looking like
+  // unquoted prose, which is precisely the fragment holding the arithmetic word.
+  return splitClauses(note.replace(QUOTED_SPAN, ' ')).some(
     (clause) =>
       claim.test(clause) &&
       describesStoredValue(clause) &&
@@ -324,6 +329,21 @@ function occupancyNoteAsserts(
       (!opts.reject || !opts.reject.test(clause)),
   );
 }
+
+/**
+ * A quoted span inside a note: the SOURCE's words, not the author's.
+ *
+ * The distinction decides whether an arithmetic word is a confession or a
+ * quotation. sildenafil's PDE5 note quotes its abstract verbatim — "inhibiting
+ * PDE5 from HCC with a geometric mean IC50 of 3.5 nM" — where the averaging is
+ * the paper's own, over its own replicates, and 3.5 nM is exactly the single
+ * verbatim value the rules ask for. Reading that as a cross-paper mean flagged
+ * the one row in the whole set that was already correct, which is HYGIENE R16
+ * happening in real time. Matching only outside the quotation marks fixes it
+ * without weakening the rule, because an author confessing a midpoint writes it
+ * in their own prose.
+ */
+const QUOTED_SPAN = /"[^"]*"|\u201c[^\u201d]*\u201d/g;
 
 /**
  * Split a note the way every prose rule in this file reads one: into clauses at
