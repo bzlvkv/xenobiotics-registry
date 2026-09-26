@@ -73,6 +73,7 @@ pnpm dev         # the browser client — spot-check the records you touched.
 | [WORKFLOW.md](./WORKFLOW.md) | When you are about to do a batch. Target selection, the exact E-utilities calls, how to edit the JSON, the validation ladder, the sub-agent verification prompt. |
 | [FIELDS.md](./FIELDS.md) | While writing JSON. Every field, its units, the provenance it requires, the lint rules that touch it, and the mistake it invites. |
 | [`../data/GAPS.md`](../data/GAPS.md) | Before searching PubMed for anything. If the cell is already there, the search is already done. |
+| [NETWORK.md](./NETWORK.md) | When a fetch fails or a session is being set up. The hosts an authoring session needs, by tier, and the free keys ([`../.env.example`](../.env.example)) that raise their rate limits. |
 
 Everything else you might look for is gone on purpose. There are no dated apply-scripts: the
 JSON files are the source of truth, you edit them directly, and the git diff is the review. There
