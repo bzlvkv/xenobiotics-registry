@@ -1,0 +1,40 @@
+{
+  "name": "xenobiotics-registry",
+  "private": true,
+  "version": "1.0.0",
+  "description": "The cited compound / receptor / pathway registry — data, schema, gates and authoring history",
+  "type": "module",
+  "packageManager": "pnpm@10.33.2",
+  "scripts": {
+    "typecheck": "pnpm -r typecheck && tsc --noEmit -p tsconfig.scripts.json",
+    "test": "pnpm -r test",
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write .",
+    "registry:lint": "tsx scripts/data-lint.ts",
+    "registry:verify": "tsx scripts/verify-registry.ts",
+    "registry:check": "pnpm registry:lint && pnpm registry:verify",
+    "registry:bundle": "tsx scripts/build-bundle.ts",
+    "registry:push": "tsx scripts/push-bundle.ts",
+    "registry:receptors": "tsx scripts/build-receptor-catalog.ts",
+    "registry:chunks": "node scripts/build-compound-chunks.mjs",
+    "registry:seed": "tsx scripts/seed-registry.ts",
+    "registry:curator": "tsx scripts/grant-curator.ts",
+    "registry:triage": "node scripts/audit-triage.mjs",
+    "gates": "pnpm lint && pnpm typecheck && pnpm test && pnpm registry:lint"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.4",
+    "@types/node": "^22.7.0",
+    "eslint": "^9.12.0",
+    "globals": "14.0.0",
+    "prettier": "^3.3.3",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.60.1",
+    "vitest": "^2.1.2"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  }
+}
