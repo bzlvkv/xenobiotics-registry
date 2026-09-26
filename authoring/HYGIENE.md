@@ -114,8 +114,13 @@ in the **enzalutamide** discovery paper; `zolmitriptan`'s from a binding study o
 `piperine`'s PK from a study whose analyte is **curcumin**. The whole SSRI transporter block
 (`fluoxetine`, `fluvoxamine`, `sertraline`) traced to a **paroxetine review's Table 1**.
 
-**Caught by.** Only a human — or an agent — reading the abstract. There is no lint rule for this
-and there cannot be one offline.
+**Caught by.** Only a human — or an agent — reading the abstract. There cannot be a general offline
+rule for this: the defect is a mismatch between a paper's text and a stored number, and the text is
+not in the repo. One subclass IS mechanical, because it confesses: `receptor.secondary-source`
+(**warning**) reports the 33 occupancy rows whose own note credits the IUPHAR/GtoPdb ligand page for
+the affinity while the `source_pmid` names the paper that database attributes it to. That is the
+shape `pnpm verify` is documented as unable to see — the id resolves, the paper is on topic, and
+nobody in the chain opened it.
 
 ## R3. No range midpoint, no paraphrase, no cross-paper average.
 
@@ -147,16 +152,17 @@ wants outcome 2 and has not done the arithmetic yet.
 
 **The one place this rule was suspended, and the debt it left.** A 2026-05-26 wave adopted a written
 policy of storing the geometric mean of a multi-paper GtoPdb pKi range under a "representative"
-primary PMID. That policy is superseded and must not be applied, but **at least 23 occupancy rows
-across 15 compounds still carry values authored under it** (live, counted by prose match, so the
-true number is higher) — each is a number no paper states, cited to a paper that does not state it. The superseding note in
-[`../data/GAPS.md`](../data/GAPS.md) has the command that lists them. Treat the class as open: a row
-is closed by a single-valued human affinity from a paper that states it, or by removing the row and
-writing the GAPS entry. No gate can find these, because the identifiers resolve and the shape is
-legal.
+primary PMID. That policy is superseded and must not be applied, but **28 occupancy rows across 19
+compounds still carry values authored under it** — each is a number no paper states, cited to a
+paper that does not state it. `receptor.derived-value` lists them by name; the superseding note in
+[`../data/GAPS.md`](../data/GAPS.md) records how they got there. Treat the class as open: a row is
+closed by a single-valued human affinity from a paper that states it, or by removing the row and
+writing the GAPS entry.
 
-**Caught by.** Reading. `pk.defaulted-volume` becomes visible *after* you remove such a value,
-which is the point of removing it.
+**Caught by.** `receptor.derived-value` (**warning**) on the occupancy rows, where the practice was
+systematic and the notes say so in their own words — but it is a prose rule, so see R16, and it
+only knows what a note admits. Everywhere else: reading. `pk.defaulted-volume` becomes visible
+*after* you remove such a value, which is the point of removing it.
 
 ## R4. A declared derivation is allowed. A guess is not. The difference is written on the record.
 

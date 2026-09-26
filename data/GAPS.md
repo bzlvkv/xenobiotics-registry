@@ -931,14 +931,17 @@ Authored (GtoPdb single human pKi + verified primary PMID): oxybutynin (M3, Del 
 > the 2026-06-28 audit then spent its length removing. The paragraph is left in place because this
 > is a record of what was done, not a rulebook.
 >
-> **The rows are still live.** At least 23 occupancy rows across 15 compounds carry a note naming a
-> range or a geometric mean (measured 2026-09-26). List them from the repo root with
-> `node -e 'const RE=/geometric mean|pKi range|multi-paper|range midpoint|GtoPdb range/i; for (const c of require("./data/compounds.json")) for (const r of c.receptor_occupancy ?? []) if (RE.test(r.note ?? "")) console.log(c.slug, r.receptor)'`.
-> The regex is a prose match, so read what it returns and expect it to miss rows whose note words
-> the same practice differently.
+> **The rows are still live, and `pnpm validate` now lists them.** Two warnings, added 2026-09-26,
+> read the occupancy notes and name every row this policy produced:
+> `receptor.derived-value` (28 rows over 19 compounds) for a constant that is the midpoint or mean
+> of a range, and `receptor.secondary-source` (33 rows over 23 compounds) for one taken off the
+> GtoPdb ligand page under a primary PMID nobody fetched. Run `pnpm report` to see both grouped.
+> Both are prose rules and only know what a note admits, so expect them to miss a row that words
+> the practice differently — but they no longer let the class grow silently, which is what the
+> earlier ad-hoc grep could not prevent.
 > They are an open defect class, not a backlog of missing data: each needs a single-valued human
-> affinity from a paper that states it, or a GAPS row and the row's removal. Neither `pnpm validate`
-> nor `pnpm verify` can see the problem, because the identifiers resolve and the shape is legal.
+> affinity from a paper that states it, or a GAPS row and the row's removal. `pnpm verify` still
+> passes every one of them, because the identifiers resolve and the shape is legal.
 
 Authored (geometric-mean of GtoPdb range; representative primary PMID verified on-topic): tolterodine (M3, Sinha 2010), tiotropium (M3, Prat 2009), ipratropium (M3, Dowling 2006), brimonidine (α2A, Jasper 1998), quetiapine (D2 review-sourced Arnt 1998 + 5-HT2A Kongsamut 2002), clozapine (D2 Sokoloff 1992 + 5-HT2A Schotte 1996), propranolol (β2, Baker 2005), sotalol (β1+β2, Baker 2005). New key `beta_2`.
 

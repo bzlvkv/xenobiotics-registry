@@ -540,6 +540,83 @@ describe('receptor and effect-compartment rules', () => {
     expect(rules(lint([c], [], catalog))).toContain('receptor.duplicate');
   });
 
+  // ── provenance of the affinity itself ───────────────────────────────────
+  // Both rules read the note's prose, so each gets its false-positive guard
+  // tested beside it: every shape below is taken from a real row, and the two
+  // "does NOT fire" cases are rows that were already re-authored correctly.
+
+  const occ = (note: string) => {
+    const c = compound({
+      slug: 'a',
+      name: 'A',
+      pk: { PO: { F: 1, source_pmid: 'PMID:1' } },
+      effect_compartment: { keo_per_h: 1, source_pmid: 'PMID:1' },
+      receptor_occupancy: [{ ...site, note }],
+      fu_note: 'examined',
+    });
+    return rules(lint([c], [], catalog));
+  };
+
+  it('receptor.derived-value fires on a midpoint of a published range', () => {
+    expect(
+      occ(
+        'Per IUPHAR/GtoPdb (human D2, pKi range 5.8–6.9 across 5 refs → midpoint 6.35, Ki 447 nM).',
+      ),
+    ).toContain('receptor.derived-value');
+  });
+
+  it('receptor.derived-value fires on a cross-paper geometric mean', () => {
+    expect(
+      occ('Per IUPHAR/GtoPdb (human 5-HT2A, pKi 8.8–9.5 range → geometric-mean Ki 0.69 nM).'),
+    ).toContain('receptor.derived-value');
+  });
+
+  it('receptor.derived-value does NOT fire on a note describing the midpoint it replaced', () => {
+    expect(
+      occ(
+        'Verbatim: "pKi values ... beta1-AR (8.4)". The previous value was 4.5 nM, the MIDPOINT of a stated "approximately 4-5 nM".',
+      ),
+    ).not.toContain('receptor.derived-value');
+  });
+
+  it("receptor.derived-value does NOT fire on an average that is the PAPER's own", () => {
+    expect(
+      occ(
+        'Abstract verbatim "quinidine suppressed INa with an average IC50 of 1.4 +/- 0.3 microM".',
+      ),
+    ).not.toContain('receptor.derived-value');
+  });
+
+  it('receptor.secondary-source fires when the database supplied the constant', () => {
+    expect(
+      occ('GtoPdb-curated human H1 binding: pKi 9.8 (Ki 0.16 nM), antagonist, ref PMID:8935801.'),
+    ).toContain('receptor.secondary-source');
+  });
+
+  it('receptor.secondary-source does NOT fire when the database is cited for the mode of action', () => {
+    expect(
+      occ(
+        'In-model primary target 5-HT2A (full agonist per GtoPdb); subject-primary Wacker 2017, Kd 0.33 nM at human 5-HT2A.',
+      ),
+    ).not.toContain('receptor.secondary-source');
+  });
+
+  it('receptor.secondary-source does NOT fire when the database is named only as corroboration', () => {
+    expect(
+      occ(
+        "Cox 2010 full-text binding table: human OX1R Ki = 0.55 nM. Corroborated by GtoPdb's OX1 pKi range 8.7-9.3.",
+      ),
+    ).not.toContain('receptor.secondary-source');
+  });
+
+  it('a derived GtoPdb midpoint reports the specific rule only, not both', () => {
+    const fired = occ(
+      'Per IUPHAR/GtoPdb (human 5-HT2A, pKi range 6.4–7.0 → midpoint 6.7, Ki 200 nM).',
+    );
+    expect(fired).toContain('receptor.derived-value');
+    expect(fired).not.toContain('receptor.secondary-source');
+  });
+
   it('receptor.pmid / emax-range / ec50-positive / hill-positive all fire', () => {
     const c = compound({
       slug: 'a',

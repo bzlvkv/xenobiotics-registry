@@ -239,6 +239,11 @@ export const LINT_RULES: Readonly<Record<string, RuleInfo>> = {
     level: 'error',
     summary: 'A non-canonical occupancy key, whose rows never combine with the canonical ones.',
   },
+  'receptor.derived-value': {
+    level: 'warning',
+    summary:
+      'An occupancy constant is the midpoint or mean of a range of published values, so no paper states it.',
+  },
   'receptor.duplicate': {
     level: 'warning',
     summary: 'One record has two occupancy rows that resolve to the same target.',
@@ -268,6 +273,11 @@ export const LINT_RULES: Readonly<Record<string, RuleInfo>> = {
   'receptor.pmid': {
     level: 'error',
     summary: 'An occupancy row has no source_pmid.',
+  },
+  'receptor.secondary-source': {
+    level: 'warning',
+    summary:
+      'An occupancy constant comes from the IUPHAR/GtoPdb ligand page while the citation names a paper nobody fetched.',
   },
   'receptor.unknown-target': {
     level: 'warning',

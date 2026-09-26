@@ -233,6 +233,102 @@ function assertsOfThisRecord(sentence: string): boolean {
 }
 
 /**
+ * Clauses describing a value this record USED TO store. `SUPERSEDED` catches the
+ * "replaces / prior / rejected" phrasings; these are the ones it misses, and they
+ * matter more here than anywhere else in this file, because a re-authored
+ * occupancy note's whole job is to name the bad number it drove out. carvedilol's
+ * β1 note says "The previous value was 4.5 nM, the MIDPOINT of a stated
+ * 'approximately 4-5 nM'"; metoclopramide's 5-HT3 note says "The previous value
+ * was a MIDPOINT of a pKi span taken across two papers"; methylphenidate's DAT
+ * note says "Citation corrected from the IUPHAR/GtoPdb cross-paper geometric-mean
+ * ... to this genuine human subject-primary". All three are FIXES. Reading them
+ * as confessions would flag the three rows that did the work.
+ */
+const CORRECTED_AWAY_FROM = /\b(?:previous\w*|corrected from|used to|formerly|earlier value)\b/i;
+
+/**
+ * An occupancy note admitting the stored constant was COMPUTED ACROSS a span of
+ * published values rather than read off one of them: "pKi range 5.8–6.9 across 5
+ * refs → midpoint 6.35", "pKi 8.8–9.5 range → geometric-mean Ki 0.69 nM".
+ *
+ * HYGIENE R3 forbids exactly this ("no range midpoint, no cross-paper average"),
+ * and these rows break R2 as well: the `source_pmid` is one "representative
+ * primary" out of the span, whose abstract cannot state a number computed from
+ * four other papers. `pnpm verify` passes every one of them, because the PMID is
+ * real — this is the defect class that gate is documented as unable to see.
+ *
+ * NOT a blanket ban on arithmetic. A declared derivation is legal and common
+ * here: every one of these notes ends with "ec50 = <Ki> nM × <MW> / 1e6", which
+ * is a unit conversion of ONE number and is not what this matches. What it
+ * matches is the step BEFORE that, where the Ki itself was manufactured.
+ *
+ * `average` is deliberately absent from this pattern. quinidine's Nav1.5 note
+ * quotes its abstract verbatim — "suppressed INa with an average IC50 of ... 1.4
+ * +/- 0.3 microM" — where the averaging is the PAPER's, over its own cells, and
+ * the number is exactly the verbatim value the rules ask for.
+ */
+const OCCUPANCY_DERIVED_FROM_RANGE =
+  /\b(?:mid-?point|geometric[-\s]mean|arithmetic mean|mean of the (?:range|values)|cross-paper (?:mean|average))\b/i;
+
+/**
+ * A note clause crediting a CURATION DATABASE — IUPHAR/GtoPdb — for the number
+ * itself: "GtoPdb-curated human H1 binding: pKi 9.8 ... ref PMID:8935801", "Per
+ * IUPHAR/GtoPdb (human SERT, pKi 9.7 → Ki 0.20 nM); primary Tatsumi 1997".
+ *
+ * The value came from the database's ligand page; the `source_pmid` is whatever
+ * paper the database attributes it to, and the note itself says so. Nobody in the
+ * authoring chain opened that paper. This is the secondary-citation shape the
+ * 2026-06-28 audit found 84 times — a real, correctly-attributed, on-topic PMID
+ * hung on a number its abstract does not state — and it is the reason
+ * authoring/README.md rule 2 says a resolving PMID is not a warrant.
+ *
+ * Two guards, both from false positives on real rows:
+ *   - AFFINITY_TOKEN must be in the SAME clause. GtoPdb is also cited for
+ *     qualitative facts, and crediting it for a MODE OF ACTION is fine: lsd's
+ *     5-HT2A note opens "In-model primary target 5-HT2A (full agonist per
+ *     GtoPdb)" and then sources its Kd to the crystal-structure paper where LSD
+ *     is the subject. That row is exemplary and must not fire.
+ *   - OCCUPANCY_CORROBORATION excludes the opposite arrangement, where a
+ *     fetched primary supplies the number and the database is named only as a
+ *     cross-check: suvorexant's orexin rows read "Corroborated by GtoPdb's OX1
+ *     pKi range 8.7-9.3". That is a re-authored row citing its own evidence.
+ */
+const OCCUPANCY_CURATED_SOURCE =
+  /\bGtoPdb[-\s]curated\b|\bper\s+(?:IUPHAR\/)?(?:GtoPdb|IUPHAR)\b|\bGtoPdb\s+(?:lists|gives|reports|curates)\b/i;
+
+/** An affinity or potency constant named in prose. */
+const AFFINITY_TOKEN = /\b(?:p?K[idB]\b|pIC50|IC50|pEC50|EC50)/i;
+
+/** The database is being cited AGAINST the value, as agreement, not as its source. */
+const OCCUPANCY_CORROBORATION =
+  /\b(?:corroborat\w+|consistent with|matches|cross-?check\w*|attributes?|agrees?)\b/i;
+
+/**
+ * True when some clause of an occupancy note makes `claim` ABOUT THIS ROW's own
+ * stored value — not about the value it replaced, and not as a negation.
+ *
+ * Clause-scoped for the reason given on `assertsOfThisRecord`: this catalog's
+ * prose is a record of decisions, and a whole-note regex reports the records that
+ * documented their fix most carefully.
+ */
+function occupancyNoteAsserts(
+  note: string,
+  claim: RegExp,
+  opts: { require?: RegExp; reject?: RegExp } = {},
+): boolean {
+  return note
+    .split(/(?<=[.;])\s+/)
+    .some(
+      (clause) =>
+        claim.test(clause) &&
+        assertsOfThisRecord(clause) &&
+        !CORRECTED_AWAY_FROM.test(clause) &&
+        (!opts.require || opts.require.test(clause)) &&
+        (!opts.reject || !opts.reject.test(clause)),
+    );
+}
+
+/**
  * True when `effect_compartment.note` credits a non-human species as the value's
  * own source.
  *
@@ -1136,6 +1232,30 @@ export function lintRegistry(registry: Registry): Finding[] {
             c.slug,
             'receptor.pmid',
             `receptor_occupancy[${i}] (${site.receptor}) lacks source_pmid`,
+          );
+        }
+        // ── The number has to come from a paper someone read ──────────
+        // Two shapes of unsourced affinity, both of which pass `receptor.pmid`
+        // above and `pnpm verify` afterwards, because in both the PMID is real.
+        // They are ordered, not independent: a midpoint of a GtoPdb range is
+        // both, and the derived message is the more specific of the two.
+        const occNote = site.note ?? '';
+        if (occupancyNoteAsserts(occNote, OCCUPANCY_DERIVED_FROM_RANGE)) {
+          warn(
+            c.slug,
+            'receptor.derived-value',
+            `receptor_occupancy[${i}] (${site.receptor}) note says the stored constant is a midpoint or mean of a RANGE of published values — no paper states it, and the cited abstract cannot (HYGIENE R3). Re-source to one fetched measurement, or write the derivation's inputs and arithmetic onto the record`,
+          );
+        } else if (
+          occupancyNoteAsserts(occNote, OCCUPANCY_CURATED_SOURCE, {
+            require: AFFINITY_TOKEN,
+            reject: OCCUPANCY_CORROBORATION,
+          })
+        ) {
+          warn(
+            c.slug,
+            'receptor.secondary-source',
+            `receptor_occupancy[${i}] (${site.receptor}) takes its constant from IUPHAR/GtoPdb while source_pmid cites the paper that database attributes it to — a citation nobody in the chain fetched (README rule 2). Read that paper and store what it states, or say on the record that the database is the source`,
           );
         }
         if (site.emax <= 0 || site.emax > 1) {
