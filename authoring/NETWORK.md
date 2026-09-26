@@ -9,8 +9,7 @@ try. Check reachability before a batch, and stop if Tier 1 is closed:
 curl -s -m 20 "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=6138080&retmode=json" | head -c 200
 ```
 
-The keys that raise the rate limits on these hosts are listed in [`../.env.example`](../.env.example).
-None is required; none changes the rules.
+Rate-limit keys, where a host offers one, go in a local `.env` (gitignored).
 
 The plain list, one host per line for pasting into an allowlist, is at the end of this file.
 

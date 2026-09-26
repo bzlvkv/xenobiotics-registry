@@ -53,3 +53,13 @@ The only library is `packages/registry` (types, zod schema, loader, queries,
 lint rules). `packages/web` is a read-only browsing client. `scripts/` holds the
 gates. There is no database, no app and no build pipeline for the data: the
 JSON files are the source of truth and changes are reviewed as git diffs.
+
+## Tone
+
+Answer in as few lines as the question needs. No preamble, no recap of what
+was read, no restating the rules back. Lists over prose. Config and example
+files contain only what is required to run: no explanatory comments.
+
+## Git
+
+Commit and merge to `main`, always. Do not leave work on a side branch.
