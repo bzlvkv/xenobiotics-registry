@@ -59413,7 +59413,317 @@
     "notes": "IDENTITY. Research name Gly-Low; the commercial name is GLYLO, disclosed in the Cell Reports conflict-of-interest statement — \"L.A.W., N.B., and P.K. are patent holders of GLYLO, a supplement licensed to Juvify Bio by the Buck Institute. P.K. is the founder of Juvify Bio.\" That is recorded because the efficacy literature and the commercial interest share authors, which a reader should know. COMPOSITION IS NAMED BUT NOT PROPORTIONED. All five constituents are stated verbatim (PMID:41086114) and four of them are already in this catalog, but no fetched abstract gives a mg-per-gram or a per-ingredient dose, and composition[].mg_per_g_extract is a required positive number — so composition[] is deliberately NOT authored rather than filled with invented ratios. See the GAPS row. WHAT THE MOUSE DATA ACTUALLY SHOW, verbatim: survival — \"increases survival in leptin receptor-deficient (Leprdb) and wild-type C57B6/J mice\"; late-life dosing — \"As a late-life intervention, Gly-Low slows hypothalamic aging signatures, improves glucose homeostasis and motor coordination, and increases lifespan\" (both PMID:41086114). Vascular, from the published version of the aortic study (PMID:41247756): MGO \"increased PWV in young mice by 21% (P<0.05 vs. control), which was prevented with Gly-Low (P=0.93 vs. control)\". A CITATION DELIBERATELY NOT MADE: PMID:41045492 (Aging 2025, growth-hormone excess and liver glycation) surfaces in the same searches and is from the same programme, but its abstract does not mention Gly-Low at all, so it is not cited here. A PREPRINT IS NOT THE CITATION: the aortic study also exists as bioRxiv PMID:39829921, whose abstract words the same result as \"old (24 month) mice\" where the published paper says \"C57BL/6J (24 month) mice\" — the published version is the one cited and the one quoted.",
     "refs": [
       "PMID:41086114",
-      "PMID:41247756"
+      "PMID:41247756",
+      "PMID:39829921"
+    ]
+  },
+  {
+    "slug": "s14g-humanin",
+    "name": "S14G-Humanin",
+    "aliases": [
+      "HNG",
+      "humanin G",
+      "[Gly14]-humanin",
+      "Gly14-humanin",
+      "S14G humanin"
+    ],
+    "category": "peptide",
+    "mechanism": "The Ser14->Gly analogue of the mitochondrial-derived peptide humanin, introduced as the more potent form: PMID:11739234 verbatim describes \"the effects of [Gly(14)]-humanin, a more potent humanin analogue\" against the parent, which the same abstract calls \"a very recently discovered 24 amino acid linear polypeptide\". Reported cytoprotective actions are anti-apoptotic and anti-oxidative rather than receptor-occupancy: STAT3 and ERK1/2 activation in rat renal ischaemia-reperfusion (PMID:42672739) and NF-kB suppression in mouse acute lung injury (PMID:38054825). In human myotubes it blunts glucocorticoid signalling — PMID:41732124 verbatim, \"HNG co-treatment with DEXA preserved myotube area (p < 0.001), blunted DEXA-induced STAT3 activation (p = 0.027), but had no effect on fusion index or E3 ligase mRNA levels.\" NO HUMAN ADMINISTRATION EXISTS.",
+    "routes": [
+      "SC"
+    ],
+    "doses": {},
+    "half_life_hr": {},
+    "pk_unauthored": {
+      "reason": "research-only",
+      "note": "Rat, mouse and human-cell data only; no human administration and no pharmacokinetic parameter in any species. The published in-vivo routes are not the route stored here, and two of them this schema cannot express: IV in rats (PMID:42672739), intraperitoneal in mice (PMID:38054825) and intracerebroventricular in mice (PMID:11739234). SC is recorded to match the parent `humanin` record and the grey-market route, not because any study used it."
+    },
+    "systems": [
+      "renal",
+      "respiratory",
+      "musculoskeletal",
+      "nervous"
+    ],
+    "notes": "NO MOLECULAR WEIGHT IS STORED, ON PURPOSE. PubChem has no entry for this analogue: `S14G-humanin`, `S14G humanin`, `HNG`, `humanin G` and `Gly14-humanin` each return PUGREST.NotFound (queried 2026-09-26). The parent humanin is CID 16131438 (C119H204N34O32S2, 2687.2) and THAT MASS BELONGS TO THE PARENT, NOT THIS RECORD — storing it here would be a wrong-molecule mass of the kind HYGIENE R10 rejects. A Ser->Gly substitution is -CH2O, so ~2657.2 is arithmetically implied, but that is a derivation from a formula no abstract states for this peptide, so it is left unstored rather than authored under R4. IDENTITY IS SOURCED: PMID:42672739 ties three of the aliases together in one phrase, \"the effects of S14G-humanin (humanin G, HNG)\". DISTINCT FROM `humanin`, which is already in this catalog — the potency claim in PMID:11739234 is the warrant for a separate record rather than an alias. A PAPER THAT LOOKS LIKE HUMAN EXPOSURE AND IS NOT: PMID:41975304 measures endogenous \"Humanin (HN)\" in older women as an exercise biomarker; that is the parent peptide as an analyte, not administration of this analogue, and must not be read as human exposure data. DOSES AS PUBLISHED, none of them human and none stored: \"HNG (2 mg/kg, i.v.) was administered 10 min before reperfusion\" in rats (PMID:42672739); \"followed by an intraperitoneal injection of 3 and 6 mg/kg HNG\" in mice (PMID:38054825); \"[Gly(14)]-Humanin (1000 pmol 5 microl(-1) i.c.v.)\" in mice (PMID:11739234). The myotube work used a concentration, not a dose — \"exposed to 10 microM DEXA +/-10 microM HNG\" (PMID:41732124).",
+    "refs": [
+      "PMID:42672739",
+      "PMID:41732124",
+      "PMID:11739234",
+      "PMID:38054825"
+    ]
+  },
+  {
+    "slug": "cortagen",
+    "name": "Cortagen",
+    "aliases": [
+      "Ala-Glu-Asp-Pro",
+      "AEDP",
+      "AEDP peptide"
+    ],
+    "category": "peptide",
+    "mechanism": "Synthetic tetrapeptide Ala-Glu-Asp-Pro from the Khavinson short-peptide programme, derived from the bovine cortex preparation Cortexin: PMID:15159690 verbatim, \"The synthetic tetrapeptide Cortagen (Ala-Glu-Asp-Pro) was obtained by directed synthesis based on amino acid analysis of natural brain cortex peptide preparation Cortexin.\" The published mechanism is transcriptional and epigenetic rather than receptor-mediated — a mouse-heart microarray found \"234 clones (1,53% of the total number of clones) with significant changes of expression that matched 110 known genes\" (PMID:15159690), and in aged human lymphocytes \"each of the studied peptide bioregulators (Ala-Glu-Asp-Gly; Lys-Glu-Asp-Ala; Ala-Glu-Asp-Pro and Lys-Glu) has a selective effect on definite regions of chromosomes\" (PMID:37042594). NO RECEPTOR AND NO MOLECULAR TARGET IS NAMED IN ANY INDEXED ABSTRACT.",
+    "routes": [
+      "IM"
+    ],
+    "doses": {},
+    "half_life_hr": {},
+    "pk_unauthored": {
+      "reason": "research-only",
+      "note": "No pharmacokinetic parameter in any species and no human dose. The only dose stated anywhere is rat: \"Intramuscular injection of 10 microg/kg cortagen to rats during 10 days after transsection and suturing of the sciatic nerve\" (PMID:11276314), which is why IM is the route recorded. Human use is asserted in one background sentence but never documented — see notes."
+    },
+    "mw_g_mol": 430.4,
+    "systems": [
+      "nervous",
+      "cardiovascular"
+    ],
+    "notes": "PubChem CID 18439621 (C17H26N4O9, 430.4), CAS 335591-03-2, re-queried 2026-09-26; the synonym list is name-specific (\"Cortagen\") and the IUPAC name resolves to Ala-Glu-Asp-Pro, so identity and mass agree. FUNCTIONAL EFFECT, rat sciatic nerve regeneration, verbatim: \"increased the growth rate and conduction velocity in the regenerating nerve fibers by 27% and 40%, respectively\" (PMID:11276314). CORROBORATING BUT NOT SOLE-SUBJECT: PMID:37042594 tests four peptides at once (Epitalon, Livagen, Cortagen, Vilon) in lymphocytes from 75-88-year-old donors, so its chromatin finding reaches this sequence as one arm of four rather than as a dedicated study. THE INDEXED CORPUS IS 13 RECORDS on `Cortagen[tiab]`, all rat, mouse, chicken, cell culture or review — no primary human study exists to find. SEARCH NOTE: Cortexin is a DIFFERENT thing, the polypeptide complex this tetrapeptide was derived from, and papers about Cortexin are not papers about Cortagen even where the two are discussed together (PMID:21476278 studies both). HUMAN USE IS ASSERTED BUT NOT DOCUMENTED: PMID:15159690 says \"In humans, Cortagen demonstrated a pronounced therapeutic effect upon the structural and functional posttraumatic recovery of peripheral nerve tissue\" — a background sentence in a mouse microarray paper, with no dose, no n, no route and no trial identifier. That is the secondary-citation shape HYGIENE R2 rejects, so it is recorded as an assertion and not treated as human exposure.",
+    "refs": [
+      "PMID:15159690",
+      "PMID:11276314",
+      "PMID:37042594"
+    ]
+  },
+  {
+    "slug": "vesugen",
+    "name": "Vesugen",
+    "aliases": [
+      "Lys-Glu-Asp",
+      "KED",
+      "KED peptide"
+    ],
+    "category": "peptide",
+    "mechanism": "Synthetic tripeptide Lys-Glu-Asp from the Khavinson short-peptide programme, assigned to vascular tissue. The trade name is equated with the sequence by PMID:22808515 verbatim: \"The expression of differentiation factors CXCL12, Hoxa3, and WEGC1 was tissue-specifically stimulated by short peptides: pancragen (Lys-Glu-Asp-Trp) in pancreatic cells, bronchogen (Ala-Glu-Asp-Leu) in bronchial epithelial cells, and vesugen (Lys-Glu-Asp) in fibroblasts.\" The proposed vascular mechanism is transcriptional — PMID:28539025 verbatim, \"KED peptide has normalized endothelin-1 expression, which increased during atherosclerosis and restenosis. KED peptide also restorates cells interactions by connexin expression.\" All of that is human cells in vitro. NO RECEPTOR IS NAMED AND NOTHING HERE IS EXPRESSIBLE AS AN OCCUPANCY ROW.",
+    "routes": [
+      "PO"
+    ],
+    "doses": {},
+    "half_life_hr": {},
+    "pk_unauthored": {
+      "reason": "research-only",
+      "note": "Humans have been given it, but no dose, no route and no kinetic parameter is published, so there is nothing to author. The primary human study (PMID:26390612) reports 32 patients without a dose, a route or a schedule; the only statement of a route is review-level (PMID:34173097), which is why PO is recorded and is recorded as review-sourced rather than measured."
+    },
+    "mw_g_mol": 390.39,
+    "systems": [
+      "cardiovascular",
+      "nervous"
+    ],
+    "notes": "MASS WARRANT. PubChem has NO entry under the trade name \"Vesugen\" (PUGREST.NotFound, 2026-09-26); the mass comes from the SEQUENCE, Lys-Glu-Asp = CID 87571363 (C15H26N4O8, 390.39, CAS 204271-66-9, CHEBI:159909), and the warrant for attaching it to this record is the PMID:22808515 sentence quoted in `mechanism` that equates vesugen with Lys-Glu-Asp. Without that sentence the mass would not be storable here. HUMAN DATA EXIST AND CARRY A SAFETY SIGNAL WORTH KEEPING. PMID:26390612 verbatim: \"32 people (18 men, 12 women) aged 41-83 years with polymorbidity and the organic brain syndrome in remission participated in the study. The preparations of Pinealon and Vesugen have had the significant anabolic effect.\" The SAME abstract reports harm: \"At the same time we have found the prooxidant activity through chemiluminescence. Decrease of markers CD34+ positive hematopoietic polypotent cells in blood has shown significant inhibition of hemopoiesis.\" A grey-market peptide whose one human study reports inhibited haematopoiesis is exactly the kind of record this catalog should carry, so the negative finding is on the record and not buried. NOTE the study is co-administration with Pinealon, already in this catalog, so neither effect is attributable to this peptide alone. The 2021 Alzheimer review PMID:34173097 is a REVIEW and is cited only for the route claim, never for a number. THE ROUTE IS REVIEW-SOURCED, NOT MEASURED: the only statement of one is PMID:34173097, a review — \"Oral application of KED (Lys-Glu-Asp) improved memory and attention in elderly individuals with functional CNS disorders\". It is cited for the route claim and never for a number.",
+    "refs": [
+      "PMID:22808515",
+      "PMID:28539025",
+      "PMID:26390612",
+      "PMID:34173097"
+    ]
+  },
+  {
+    "slug": "thymalin",
+    "name": "Thymalin",
+    "aliases": [
+      "Thymalinum"
+    ],
+    "category": "peptide",
+    "mechanism": "A thymus-derived POLYPEPTIDE PREPARATION, not a single molecule: PMID:33237528 verbatim, \"Thymalin is a polypeptide complex isolated from the thymus and regulating the functions of the immune system\", and PMID:37686182 verbatim, \"Thymalin is an immunomodulatory drug containing a polypeptide extract of thymus\". Two constituents are named as the active species — PMID:37686182, \"KE and EW dipeptides are active substances of Thymalin\" — where KE is Lys-Glu, the same dipeptide this catalog holds as `vilon`. Reported action is restoration of the T-cell arm: it pushes human haematopoietic stem cells toward mature T lymphocytes, and \"Thymalin and EW and KE dipeptides reduced the synthesis of IL-1β, IL-6, and TNF-α cytokines in human peripheral blood mononuclear cells by 1.4-6.0 times\" (PMID:37686182).",
+    "routes": [
+      "SC"
+    ],
+    "doses": {},
+    "half_life_hr": {},
+    "pk_unauthored": {
+      "reason": "mixture",
+      "note": "A multi-constituent thymic extract, so one curve cannot represent it — and no dose in any units appears in any abstract fetched, despite decades of clinical use and 293 indexed records. Targeted searches for one (`thymalin[tiab] AND intramuscular`, `thymalin[tiab] AND (dose OR mg)`) returned no abstract printing a Thymalin dose. Route is recorded from PMID:15605441, which places peptide mixtures including thymalin at \"the site of subcutaneous injections\"."
+    },
+    "systems": [
+      "immune-hematologic"
+    ],
+    "notes": "NO MOLECULAR WEIGHT IS STORED, AND THE REASON IS A TRAP OTHERS WILL HIT. Querying PubChem for `Thymalin` returns CID 3085284 (C33H54N12O15, 858.9) — but that CID`s synonym list, fetched 2026-09-26, is \"Nonathymulin\", \"Nonathymulin [INN]\", \"Thymic factor\", \"Thymulin (pig peptide moiety)\", CAS 63958-90-7, and the spelled-out nonapeptide pGlu-Ala-Lys-Ser-Gln-Gly-Gly-Ser-Asn. IT IS THYMULIN, a defined nonapeptide, which merely carries \"Thymalin\" in its synonym list. Storing 858.9 here would be a wrong-molecule mass. A multi-constituent preparation stores none, per HYGIENE gate 3 and the pentosan-polysulfate precedent. composition[] IS ALSO NOT AUTHORED: only two constituents are named (KE, EW) and no abstract gives an amount, while composition[].mg_per_g_extract is a required positive number — see the GAPS row. HUMAN DATA ARE CLINICAL OUTCOMES, NOT PK: PMID:33575961 (severe COVID-19, \"The addition of thymalin to standard therapy accelerated the decline in both these indicators and the indicators of the T cell system\"), PMID:31889704 (68 children, secretory otitis media). A DEFECT IN A PAPER, RECORDED SO NOBODY STORES ITS NUMBERS: PMID:36169363 reports hospital mortality as \"40,9; 28,4 and 20,6%\" in its English abstract while the Russian abstract in the same efetch response gives 40,9; 28,8 and 16,2% — THE TWO LANGUAGE VERSIONS OF ONE ABSTRACT DISAGREE ON TWO OF THREE NUMBERS, so none of them is storable without full text. A DOSE THAT MUST NOT BE IMPORTED: PMID:24734422 prints \"0.005 mg / kg and 0.05 mg /kg\" for TINROSTIM, a comparator, not for Thymalin. DISTINCT FROM `thymosin-alpha-1`, already in this catalog, which is a defined 28-residue peptide with real PK.",
+    "refs": [
+      "PMID:33237528",
+      "PMID:37686182",
+      "PMID:33575961",
+      "PMID:31889704",
+      "PMID:36169363",
+      "PMID:15605441"
+    ]
+  },
+  {
+    "slug": "pnc-27",
+    "name": "PNC-27",
+    "aliases": [
+      "PNC27"
+    ],
+    "category": "peptide",
+    "mechanism": "A chimeric peptide joining the p53 HDM-2-binding domain to a membrane-residency sequence, killing by membranolysis rather than by restoring p53 transcription. PMID:14967026 verbatim: \"we have performed two-dimensional NMR on a 32-residue sequence called PNC-27\", which \"forms amphipathic structures such that its hydrophobic residues coalesce on one face while the polar residues aggregate on the opposite face\". PMID:32878773 verbatim gives the mechanism and the selectivity basis: \"Anticancer peptide PNC-27 binds to HDM-2 protein on cancer cell membranes inducing the formation of cytotoxic transmembrane pores\", acting \"to induce cell necrosis and LDH release within 4 h\". Selectivity is attributed to membrane HDM-2 being displayed on cancer but not normal cells (PMID:40750238). NOTHING HERE IS EXPRESSIBLE AS A HILL OCCUPANCY ROW: the target is a membrane-displayed protein and the effect is pore formation, not graded receptor activation.",
+    "routes": [
+      "IV"
+    ],
+    "doses": {},
+    "half_life_hr": {},
+    "pk_unauthored": {
+      "reason": "research-only",
+      "note": "Preclinical only after two decades, and no in-vivo dose is printed in any abstract fetched. In-vivo work is asserted without numbers (PMID:28667027, a mouse ovarian ID8 model). The only stated in-vivo route is intraperitoneal, which this schema cannot express; IV is recorded as the plausible clinical route and is NOT taken from any study."
+    },
+    "mw_g_mol": 4032,
+    "systems": [
+      "immune-hematologic",
+      "reproductive"
+    ],
+    "notes": "PubChem CID 16201774 (C188H293N53O44S, 4032), CAS 1159861-00-3, re-queried 2026-09-26. The hit is name-specific — the synonym list is just \"PNC-27\" and the CAS — and 4032 Da is consistent with the 32-residue length PMID:14967026 states, which is the cross-check that makes the mass safe to store. NO HUMAN EXPOSURE, CONFIRMED BY TARGETED SEARCH: `PNC-27 AND (clinical OR patients OR phase)` returns 5 records, every one in vitro or ex vivo. The closest is PMID:26663795, whose title says \"Patient-Derived Epithelial Ovarian Cancer\" and whose own conclusion is \"the efficacy of PNC-27 on freshly isolated, primary human cancer cells\" — PATIENT-DERIVED CELLS, NOT PATIENTS, and it must not be read as a trial. The 2025 paper still writes in the conditional (\"PNC-27 may be an effective drug against this cancer\") 21 years after the 2004 structure paper, and the total indexed corpus is 25 records. THE RESIDUE SEQUENCE IS NOT IN ANY ABSTRACT READ — only \"32-residue\" and the domain description — so it is not recorded. PMID:21728981 is a REVIEW and is not cited here for any value. THE ONE POTENCY FIGURE IS A CONCENTRATION, NOT A DOSE, and is not stored as one: \"PNC-27 is cytotoxic even at low doses (IC50=12.4 microM) to the human HTB-35 cervical cancer squamous epithelial cell line but not to a counterpart normal human PCS-480 cell line\" (PMID:40750238).",
+    "refs": [
+      "PMID:14967026",
+      "PMID:32878773",
+      "PMID:40750238",
+      "PMID:28667027",
+      "PMID:26663795"
+    ]
+  },
+  {
+    "slug": "halofuginone",
+    "name": "Halofuginone",
+    "aliases": [
+      "Halofuginone hydrobromide",
+      "Tempostatin",
+      "NSC 713205"
+    ],
+    "category": "pharmacological",
+    "mechanism": "A febrifugine derivative that inhibits the prolyl-tRNA synthetase domain of human glutamyl-prolyl-tRNA synthetase. PMID:22327401 verbatim: \"Here we show that HF binds glutamyl-prolyl-tRNA synthetase (EPRS), inhibiting prolyl-tRNA synthetase activity; this inhibition is reversed by the addition of exogenous proline or EPRS.\" The target is the human enzyme — PMID:24100331 verbatim, \"Halofuginone (HF), a coccidiostat used in veterinary medicine, exerts its effects by acting as a high-affinity inhibitor of the enzyme glutamyl-prolyl-tRNA synthetase (EPRS)\". Blocking prolyl-tRNA charging triggers the amino-acid response, which is the proposed basis of its anti-fibrotic and TH17-suppressive activity; the anti-fibrotic arm is described as \"Inhibition of collagen synthesis by halofuginone is achieved by inhibiting transforming growth factor beta-dependent Smad3 phosphorylation\" (PMID:12869955, a review).",
+    "routes": [
+      "PO",
+      "TD"
+    ],
+    "doses": {
+      "PO": {
+        "min": 0.5,
+        "max": 3.5,
+        "typical": 0.5,
+        "unit": "mg"
+      }
+    },
+    "half_life_hr": {},
+    "pk_unauthored": {
+      "reason": "uncharacterized",
+      "note": "A human PK study exists and publishes no number. PMID:16815702 is a phase I PK study in advanced solid tumours with halofuginone as its subject, and its abstract reports only \"The PKs of halofuginone were linear over the dose range studied with a large interpatient variability\" — a paraphrase, not a value: no t1/2, F, V, Cmax, AUC or CL. It has no PMC record of its own, so its full text was NOT RETRIEVED. Animal PK (cow, mouse, rat) is recorded in notes, not authored as a curve."
+    },
+    "mw_g_mol": 414.7,
+    "systems": [
+      "integumentary",
+      "immune-hematologic",
+      "musculoskeletal"
+    ],
+    "notes": "PubChem free base CID 456390 (C16H17BrClN3O3, 414.7), re-queried 2026-09-26. THE SALT MATTERS: halofuginone hydrobromide is CID 11591339 (C16H18Br2ClN3O3, 495.6), and the veterinary material and much \"halofuginone hydrobromide\" dosing is the salt, so any molar work must first establish which species a dose refers to (HYGIENE R10). The stored mass is the free base. THE ORAL ROUTE IS STATED, not inferred: the phase I studied halofuginone \"when administered once or twice daily orally to patients with advanced solid tumours\" (PMID:16815702). DOSES are verbatim from the phase I (PMID:16815702): \"Patients were treated with escalating doses of halofuginone at doses ranging from 0.5 to 3.5 mg/day\", \"The 'acute' MTD was reached at 3.5 mg/day, with nausea, vomiting, and fatigue as DLT\", and \"The recommended dose for phase II studies of halofuginone is 0.5mg administered orally, once daily\" — which is why typical is 0.5 and not the midpoint of the escalation range. ANIMAL PK, RECORDED BUT DELIBERATELY NOT AUTHORED AS A CURVE. Cattle, oral 1.2 mg/kg repeated at 48 h (PMID:2590824): \"The apparent terminal elimination half-life ranged from 24.2 to 28.9 h with a harmonic mean of 27.3 h\" — 27.3 h is the paper's own harmonic mean, a published point value, not a midpoint. Mouse and rat (PMID:11761455): mouse IV 1.5 mg/kg gave \"an AUC of 19,874 ng/ml min, which corresponded to a total body clearance (CLtb) of 75 ml/min per kg\", and critically \"The bioavailability of HF after i.p. and oral delivery to mice was 100% and 0%, respectively\". A 0% oral F in mouse against a drug given orally to humans is a species discrepancy large enough that carrying any animal parameter onto this record would mislead, which is why the record stays uncharacterized — the R8 dofetilide lesson. THE TOPICAL ROUTE IS SUPPORTED BY A NEGATIVE: PMID:10609960, one patient, topical ointment for cutaneous cGVHD, \"No adverse effects were observed, and no plasma levels of halofuginone could be detected.\" NO TARGET CONSTANT IS STORED: no abstract states a Ki, Kd or IC50 for halofuginone against EPRS. PMID:24100331 says only \"high-affinity\", qualitatively — the ixekizumab defect shape in R2. Numerals that must NOT be imported: PMID:36394909's IC50 0.18 microM and Kd 30.3 nM belong to its designed compound 3, not to halofuginone; PMID:31821989's IC50 1.4 microM is compound 30d against Salmonella ThrRS. See the GAPS rows.",
+    "refs": [
+      "PMID:16815702",
+      "PMID:22327401",
+      "PMID:24100331",
+      "PMID:2590824",
+      "PMID:11761455",
+      "PMID:12869955",
+      "PMID:10609960"
+    ]
+  },
+  {
+    "slug": "mitoglitazone",
+    "name": "Mitoglitazone",
+    "aliases": [
+      "MSDC-0160",
+      "mTOT modulator MSDC-0160"
+    ],
+    "category": "pharmacological",
+    "mechanism": "A thiazolidinedione-derived insulin sensitiser that acts on the mitochondrial pyruvate carrier — the \"mitochondrial target of thiazolidinediones\" (mTOT) — rather than by activating PPAR-gamma, which is the stated basis for lowering glucose comparably to pioglitazone with less fluid retention. PMID:27928028 used it as the tool compound for that target: verbatim, \"To test this, we used MSDC-0160, a compound that specifically targets MPC, to reduce its activity\", and \"Targeting MPC in multiple models resulted in modulation of mitochondrial function and mTOR signaling, with normalization of autophagy and a reduction in glial cell activation.\" Its own trial describes it as \"an mTOT modulator\" (PMID:23462886). NO RECEPTOR-OCCUPANCY MECHANISM AND NO BINDING CONSTANT IS PUBLISHED.",
+    "routes": [
+      "PO"
+    ],
+    "doses": {
+      "PO": {
+        "min": 50,
+        "max": 150,
+        "typical": 150,
+        "unit": "mg"
+      }
+    },
+    "half_life_hr": {},
+    "pk_unauthored": {
+      "reason": "uncharacterized",
+      "note": "No pharmacokinetics exist in the indexed literature at all: `MSDC-0160 AND pharmacokinetics` returns 0 PubMed hits (2026-09-26), and the whole corpus is 14 records for MSDC-0160 plus 6 for mitoglitazone. Two human trials publish doses and no kinetic parameter — no Cmax, t1/2, F or V. This is a clean skip rather than an unread one: every clinical abstract in that corpus was fetched."
+    },
+    "mw_g_mol": 370.4,
+    "systems": [
+      "endocrine",
+      "nervous"
+    ],
+    "notes": "PubChem CID 10429242 under both `mitoglitazone` and `MSDC-0160` (C19H18N2O4S, 370.4), re-queried 2026-09-26. DOSES are verbatim from the two human trials, in both of which the compound is the subject. Type 2 diabetes, phase IIb, 12 weeks, steady state (PMID:23462886): \"258 patients with type 2 diabetes completed a 12-week protocol with 50, 100, or 150 mg of MSDC-0160 (an mTOT modulator), 45 mg pioglitazone HCl (a PPAR-gamma agonist), or a placebo.\" Mild Alzheimer's disease, 12 weeks (PMID:24931567): \"MSDC-0160 (150 mg once daily; N=16) compared to placebo (N=13) for 12 weeks did not result in a significant difference in glucose metabolism in pre-defined regions when referenced to the pons or whole brain.\" THE ROUTE IS AN INFERENCE, NOT A CITATION, and is flagged as such: neither abstract writes \"oral\" or \"PO\" anywhere. The dose form, the once-daily outpatient schedule over 12 weeks and the oral pioglitazone comparator all imply it, but PO here is this record's reasoning and not something either paper states. A CITATION DELIBERATELY NOT MADE: PMID:23690925 is the paper that identifies mTOT as Mpc1/Mpc2, but it never mentions MSDC-0160 — the agent it names is MSDC-0602. Citing it for THIS compound would be a textbook R2 secondary citation, so the mTOT claim here is taken from the compound's own trial and from PMID:27928028 instead. Also checked and rejected for numbers: PMID:41519796 (mouse/in-vitro osteoclast), PMID:35895232 (rat PD model), PMID:37755339 (review).",
+    "refs": [
+      "PMID:23462886",
+      "PMID:24931567",
+      "PMID:27928028"
+    ]
+  },
+  {
+    "slug": "skq1",
+    "name": "SkQ1",
+    "aliases": [
+      "Visomitin",
+      "plastoquinonyl-decyltriphenylphosphonium",
+      "SkQ1 bromide"
+    ],
+    "category": "pharmacological",
+    "mechanism": "A plastoquinone tethered by a decyl linker to a triphenylphosphonium cation, so membrane potential drives it to accumulate in the inner mitochondrial membrane, where the respiratory chain recycles it to the quinol and it quenches mitochondrial ROS. The accumulation is the whole mechanism and the authors quantify it: PMID:19120014 verbatim, \"taking into account distribution coefficient of SkQ1 between lipid and water (about 13,000 : 1)\" the \"SkQ1 concentration in the inner leaflet of the inner mitochondrial membrane should be 1.3x10(8) times higher than in the extracellular space\" — that figure is the paper's own declared calculation from an assumed membrane potential, not a measurement. At micromolar concentrations the same molecule is pro-oxidant and cytotoxic, giving the narrow window its authors contrast with MitoQ. IN HUMANS IT IS AN EYE DROP AND NOTHING ELSE.",
+    "routes": [
+      "TD"
+    ],
+    "doses": {},
+    "half_life_hr": {},
+    "pk_unauthored": {
+      "reason": "local-acting",
+      "note": "Human use is topical ophthalmic only and there is NO human systemic exposure data of any kind, so a plasma curve would be invented and any occupancy row against one would be meaningless (HYGIENE R14, the loperamide case). Searches run 2026-09-26: `SkQ1 AND (oral OR intravenous) AND human` 0 hits; `SkQ1 AND (phase 1 OR tolerability) AND systemic` 0 hits. The registered product is instilled in the eye, and its own trial abstract states no drop strength, so there is no numeric dose to store either."
+    },
+    "mw_g_mol": 617.6,
+    "systems": [
+      "integumentary"
+    ],
+    "notes": "THE STORED MASS INCLUDES A COUNTER-ION AND THAT IS DISCLOSED RATHER THAN HIDDEN. PubChem CID 16679091 for `SkQ1` is C36H42BrO2P at 617.6 (re-queried 2026-09-26) — read the formula: one Br and one P, i.e. the BROMIDE SALT of a permanently charged phosphonium cation. The active species is the cation. No separate cation CID was fetched and no cation mass was computed, because that would mean supplying an atomic mass from memory. Nothing in this record does molar arithmetic, so the salt mass corrupts no calculation today; a later author who needs the cation must fetch it (HYGIENE R10). ROUTE CONVENTION: eye drops are recorded as TD here, following `bimatoprost` and `brimonidine`. THE HUMAN TRIAL, verbatim (PMID:26660938, 240 subjects, 10 sites, SkQ1 the active ingredient and the subject): \"Visomitin is the first registered (in Russia) drug with a mitochondria-targeted antioxidant (SkQ1) as the active ingredient\"; \"study drug (Visomitin or placebo) was self-administered three times daily (TID) for 6 weeks, followed by a 6-week follow-up period\"; and the result, \"a 6-week course of TID topical instillation of Visomitin significantly improved the functional state of the cornea\". Regimen only — no strength, so doses stays empty. THE ONE IN-VITRO POTENCY IS NOT STORED AS AN EC50: PMID:19120014 reports for SkQ1 and SkQR1 that \"C(1/2) values for inhibition of the H2O2-induced apoptosis in fibroblasts appear to be as low as 1x10(-11) and 8x10(-13) M\" — human fibroblasts, in vitro, and \"appear to be as low as\" is a floor claim, not a fitted EC50. A RAT DOSE UNIT THAT WAS NOT REINTERPRETED: PMID:22117772 prints \"dosages from 0.02 up to 20 moles/kg per os\", which is almost certainly a typographical error for nmol/kg; it is quoted as printed and not silently corrected, and nothing is stored from it. Rejected as a source: PMID:39178922, where SkQ1 is a comparator to MitoTEMPO and the abstract carries no concentrations.",
+    "refs": [
+      "PMID:26660938",
+      "PMID:19120014",
+      "PMID:22117772"
+    ]
+  },
+  {
+    "slug": "pyridoxamine",
+    "name": "Pyridoxamine",
+    "aliases": [
+      "Pyridoxamine dihydrochloride",
+      "Pyridorin",
+      "PM"
+    ],
+    "category": "vitamin",
+    "mechanism": "The aminomethyl vitamer of vitamin B6, converted in vivo to the active cofactor pyridoxal-5-phosphate with only minimal conversion to pyridoxine — which is the stated rationale for preferring it, since pyridoxine is the vitamer whose high-dose neurotoxicity limits B6 therapy. Independently of the vitamer role it is an advanced-glycation-endproduct inhibitor: PMID:22034637 verbatim, \"Pyridoxamine dihydrochloride (Pyridorin, NephroGenex) inhibits formation of advanced glycation end products and scavenges reactive oxygen species and toxic carbonyls, but whether these actions translate into renoprotective effects is unknown.\" PMID:34229268 verbatim adds the framing: \"While PN toxicity is known to complicate several treatments, PM has shown promise in relation to the treatment of metabolic and age-related diseases by blocking oxidative degradation and scavenging toxic dicarbonyl compounds and reactive oxygen species.\" DISTINCT FROM `pyridoxine` and `p5p`, the two B6 vitamers already in this catalog.",
+    "routes": [
+      "PO"
+    ],
+    "doses": {
+      "PO": {
+        "min": 67,
+        "max": 300,
+        "typical": 200,
+        "unit": "mg"
+      }
+    },
+    "half_life_hr": {},
+    "pk_unauthored": {
+      "reason": "homeostatic",
+      "note": "A B6 vitamer with a non-zero endogenous baseline and saturable first-pass phosphorylation to PLP, so a one-compartment curve does not describe it — the tryptophan/tyrosine decision in HYGIENE R11. The one human study (PMID:34229268) publishes a Cmax and nothing else: no half-life (\"returned to baseline after ~10 h\" is an approximate duration, not a t1/2), no volume, and and no bioavailability: no IV arm exists anywhere, so no absolute F is obtainable. The figures are in notes."
+    },
+    "mw_g_mol": 168.19,
+    "systems": [
+      "nervous",
+      "renal",
+      "endocrine"
+    ],
+    "notes": "PubChem free base CID 1052 (C8H12N2O2, 168.19); the dihydrochloride is CID 10664 (C8H14Cl2N2O2, 241.11). Both re-queried 2026-09-26. THE SALT/BASE SPLIT IS UNRESOLVED AND MATTERS: every clinical dose below is of the dihydrochloride, and 168.19/241.11 = 0.6976 would be the dose_moiety_fraction if a record ever needed one — it is NOT set here, because the record authors no curve for it to correct and because PMID:34229268 writes \"200 mg PM\" without saying whether that is salt or base. HUMAN DATA, verbatim (PMID:34229268, 5 healthy volunteers, oral, NCT02954588, pyridoxamine the subject): \"After a single oral dose of 200 mg PM, plasma PM increased in the first 3 h to a maximum of 2324 +/- 266 nmol/L.\" Note Tmax is a WINDOW (\"in the first 3 h\"), not a point value, and is not stored as one. METABOLITE FIGURES FROM THE SAME ABSTRACT BELONG TO OTHER ANALYTES AND ARE NOT THIS RECORD'S PK: \"PLP increased to a maximum of 2787 +/- 329 nmol/L and reached a plateau\" and \"a small increase of PN to a maximum of 13.5 +/- 2.1 nmol/L\". AN ARITHMETIC THAT IS DELIBERATELY NOT STORED, written out so nobody re-derives it silently: 200 mg / 168.19 g/mol = 1.18913 mmol = 1,189,130 nmol; / 2324 nmol/L = 511.7 L. It is not authored because the numerator may be salt rather than base, because an endogenous baseline was not subtracted, because conversion to PLP is saturable and first-pass, and because the division ignores elimination during absorption — so it is a ceiling, not a volume. DOSES: 200 mg single oral and \"a three daily dose of 67 mg PM\" (PMID:34229268, route explicit); and as Pyridorin (PMID:22034637, 317 patients, 52 weeks) \"Pyridorin, 150 mg twice daily; or Pyridorin, 300 mg twice daily\" — that trial abstract never writes \"oral\", so the route for the Pyridorin arms is inferred. typical is set to 200 mg, the one dose whose route the literature states in words. NO AGE-INHIBITION CONSTANT IS STORED: `pyridoxamine AND dicarbonyl AND methylglyoxal AND IC50` returns 0 hits, and PMID:9038143 names pyridoxamine only qualitatively in a paper whose subject is aminoguanidine and a kinetic method. WRONG-VITAMER TRAPS: PMID:21079545 is doxylamine-PYRIDOXINE (Diclectin) and PMID:4056565 measures pyridoxal-phosphate clearance — neither is this molecule.",
+    "refs": [
+      "PMID:34229268",
+      "PMID:22034637",
+      "PMID:25532068"
     ]
   }
 ]
