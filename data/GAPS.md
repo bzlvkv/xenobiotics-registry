@@ -7376,3 +7376,25 @@ So there are **two independent ways to write a quote no gate will check**: put t
 quoting clause, or describe it with a verb the gate does not recognise. Both look like provenance in a
 diff and neither is. Anyone adding a quote should run `pnpm verify:quotes` and confirm **the count went
 up by the number of quotes they wrote** — the only reliable check, and now the recommended one.
+
+### epa-dha: the new half-life paper condemned a neighbouring record too
+
+Following the DPA source into `epa-dha` (`Omega-3 (EPA/DHA)`) found a record that **HYGIENE gate 3
+should have stopped**: a two-molecule mixture carrying a single curve and no `composition[]`.
+
+PMID:41956323 puts **EPA at 3.4 d and DHA at 6.3 d** — the constituents differ by **1.9×**, so no one
+curve can represent the pair, and the stored **t½ 46 h matched neither**. Its citation, PMID:22242645,
+turns out to be a **bioequivalence study reporting only 90% CI ratios between two formulations**
+(EPA 0.98–1.04, DHA 0.99–1.04 for AUC), sampling **to 24 h** — again shorter than either constituent's
+half-life, the same shape as levothyroxine's 50-hour window. It states no `F`, no volume and no
+half-life. `V` 10.5 L was 0.15 L/kg, a shared prior; `F` 0.7 appears nowhere in it.
+
+Now `pk_unauthored: mixture`, which is what the other 105 mixtures in the catalog carry. **To unlock:
+a curve per constituent under `composition[]`.**
+
+**The pattern worth naming:** a citation whose *observation window is shorter than the half-life hung on
+it* has now appeared three times in one session — `levothyroxine` (50 h window, 168 h claimed),
+`epa-dha` (24 h window, 46 h claimed), `dpa` (12 h window, 168 h claimed). It is mechanically
+detectable wherever an abstract states its sampling duration, and it is a **stronger signal than a
+missing number**, because it is self-contradictory rather than merely unsupported. Worth a screen of
+its own.

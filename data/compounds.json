@@ -34619,17 +34619,7 @@
         "unit": "g"
       }
     },
-    "half_life_hr": {
-      "PO": 46
-    },
-    "pk": {
-      "PO": {
-        "F": 0.7,
-        "V_L": 10.5,
-        "source_pmid": "PMID:22242645",
-        "note": "ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.3/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:22242645, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
-      }
-    },
+    "half_life_hr": {},
     "refs": [
       "PMID:30415628",
       "PMID:22332096"
@@ -34657,7 +34647,11 @@
     "mw_g_mol": 315.47,
     "systems": [
       "cardiovascular"
-    ]
+    ],
+    "pk_unauthored": {
+      "reason": "mixture",
+      "note": "PK REMOVED: A TWO-MOLECULE MIXTURE, AND NO SINGLE CURVE CAN CARRY IT. PMID:41956323 puts EPA at 3.4 d and DHA at 6.3 d, so the constituents differ by 1.9x and the stored t-half 46 h matched neither. Its citation, PMID:22242645, is a bioequivalence study reporting only 90% CI ratios between two formulations and sampling to 24 h, shorter than either half-life, and states no F, volume or half-life. V 10.5 L was 0.15 L/kg, a shared prior. TO UNLOCK: a curve per constituent. See GAPS 2026-09-27."
+    }
   },
   {
     "slug": "omeprazole",
