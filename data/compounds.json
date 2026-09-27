@@ -27790,7 +27790,7 @@
     "effect_compartment": {
       "keo_per_h": 1.8,
       "source_pmid": "PMID:28197931",
-      "note": "Dolder et al. 2017 Clin Pharmacokinet (PMID:28197931), 'Pharmacokinetics and Pharmacodynamics of Lysergic Acid Diethylamide in Healthy Subjects' — subject-primary PK-PD link (effect-compartment) modeling of oral LSD in healthy humans. Endpoint = subjective 'any drug effect' (the psychedelic response, 5-HT2A-mediated), matching the occupancy row. Table 2, 100-µg dose (registry typical): keo 1.8 ± 1.3 (1/h), T1/2,keo 35 ± 23 min; verbatim '\"Any drug effect\" 100 µg ... k eo (1/h) 1.8 ± 1.3 ... T…"
+      "note": "FULL TEXT, Dolder 2017 (PMC5591798) Table 2 — the ABSTRACT states no keo, so the abstract is legitimately silent and this value exists only in the table. Row \"Any drug effect\", 100 microg (the registry typical dose): keo 1.8 +/- 1.3 /h, T1/2 keo 35 +/- 23 min. Oral LSD, healthy humans, effect-compartment PK-PD model, LSD the paper subject. The endpoint is the subjective psychedelic response, which is what the 5-HT2A occupancy row models; the same table gives 3.4 /h at 200 microg, so this keo is dose-specific and not a drug constant."
     }
   },
   {
@@ -46364,7 +46364,7 @@
     "effect_compartment": {
       "keo_per_h": 0.4,
       "source_pmid": "PMID:18266399",
-      "note": "2 mg PO healthy volunteers, arterial SBP; abstract verbatim \"0.40 ± 0.006 h⁻¹ for systolic blood pressure\". Paper uses \"first-order rate constant of inhibitory Emax\" terminology, math-equivalent to kₑₒ"
+      "note": "2 mg PO healthy volunteers, arterial SBP; abstract verbatim \"0.40 ± 0.006 h⁻¹ for systolic blood pressure\". The paper frames it as a first-order rate constant of an inhibitory Emax model, which is math-equivalent to keo; that phrasing is described rather than quoted, since only the value above is offered as verbatim"
     },
     "receptor_occupancy": [
       {
@@ -48151,7 +48151,7 @@
         "ec50_mg_l": 2.37552,
         "hill_n": 1,
         "source_pmid": "PMID:10768298",
-        "note": "Dodgson 2000 verbatim: \"Topiramate Ki values for HCA I, HCA II, HCA IV, and HCA VI were approximately 100, 7, 10, and >100 microM, respectively.\" hCA II = 7 µM (18O/pH assay). SECONDARY/off-target — topiramate's primary anticonvulsant action is Na+/Ca²⁺ channel block; CA inhibition drives side effects (paresthesia, stones). The Supuran group calls it \"low nanomolar\" (PMID:12617904) but gives no abstract-quotable nM, so the verbatim 7 µM is used. ec50 = 7000 nM × 339.36 / 1e6.",
+        "note": "Dodgson 2000 verbatim: \"Topiramate Ki values for HCA I, HCA II, HCA IV, and HCA VI were approximately 100, 7, 10, and >100 microM, respectively.\" hCA II = 7 µM (18O/pH assay). SECONDARY/off-target — topiramate's primary anticonvulsant action is Na+/Ca²⁺ channel block; CA inhibition drives side effects (paresthesia, stones). A separate group (PMID:12617904) characterises this as low nanomolar but states no quotable figure, so the row keeps the 7 microM its OWN citation states. That phrase is described, not quoted: it belongs to that paper, not to PMID:10768298. ec50 = 7000 nM × 339.36 / 1e6.",
         "action": "inhibitor"
       }
     ],
