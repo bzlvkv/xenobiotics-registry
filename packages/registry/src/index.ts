@@ -73,6 +73,11 @@ export type { Citation, CoverageReport, ReceptorTarget } from './query';
 export { impliedExposure, PK_DEFAULTS } from './exposure';
 export type { ExposureInput, ImpliedExposure, InputSource, NoExposure } from './exposure';
 
+// The PD half of the same spot-check: what a record's affinity, keo and unbound
+// fraction jointly imply. The first code here to apply the R13 free-drug correction.
+export { impliedOccupancy, impliedOccupancies } from './occupancy';
+export type { ImpliedOccupancy, NoOccupancy, OccupancyBasis } from './occupancy';
+
 // The semantic gate.
 export {
   OCCUPANCY_TARGET_KEYS,
