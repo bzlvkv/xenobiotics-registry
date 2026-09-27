@@ -115,5 +115,7 @@ change commits separately from the data.
 - [ ] **T2** Wire `NCBI_API_KEY` into `packages/registry/src/pubmed.ts` and
       `scripts/verify-citations.ts`: 3 → 10 req/s. The key is not in this container's environment,
       so it needs adding as an environment secret first.
-- [ ] **T3** A `source_label` verifier. 26 rows cite DailyMed labels and **no gate checks them at
-      all**; resolve the set id and the effective date.
+- [x] **T3 DONE 2026-09-27.** Became an offline lint rule, `pk.label-revision`, not the network
+      verifier planned: only 3 of 28 label rows named the revision they quote. 20 are now pinned with
+      a DailyMed set id and effective date; the 3 unpinnable have no US SPL (agomelatine is EMA-only,
+      daclatasvir and tacrine are withdrawn) and carry GAPS rows.

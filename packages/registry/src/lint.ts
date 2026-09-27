@@ -246,6 +246,15 @@ function assertsOfThisRecord(sentence: string): boolean {
  */
 const CORRECTED_AWAY_FROM = /\b(?:previous\w*|corrected from|used to|formerly|earlier value)\b/i;
 
+/**
+ * A `source_label` that actually claims to BE a label. The field is also used as
+ * free prose recording a secondary source — trandolapril's names a review and a
+ * PMID, propylthiouracil's says "review-derived" — and a review does not get
+ * revised in place, so pinning a revision is meaningless for it. Only a string
+ * claiming a label is asked to say which revision.
+ */
+const CLAIMS_A_LABEL = /\b(?:label|prescribing information|SmPC|DailyMed|package insert)\b/i;
+
 /** A DailyMed SPL set id: the only stable handle on one revision of a US label. */
 const HAS_SET_ID = /\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b/i;
 
@@ -1594,6 +1603,7 @@ export function lintRegistry(registry: Registry): Finding[] {
        */
       if (
         pk.source_label &&
+        CLAIMS_A_LABEL.test(pk.source_label) &&
         !HAS_SET_ID.test(pk.source_label) &&
         !HAS_ISO_DATE.test(pk.source_label)
       ) {

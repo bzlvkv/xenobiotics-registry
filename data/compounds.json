@@ -4809,7 +4809,7 @@
         "ka_hr": 1.4,
         "V_L": 76,
         "F": 0.79,
-        "source_label": "Olumiant (baricitinib) prescribing information — V, F, ka and half-life are label-grade. No PubMed abstract states any of them, and the previously cited study states none of them either; it remains in refs[] for the clearance and Tmax it does report."
+        "source_label": "FDA label: Olumiant (baricitinib) prescribing information. DailyMed set id 866e9f35-9035-4581-a4b1-75a621ab55cf, effective 2026-06-30."
       }
     },
     "effect_compartment": {
@@ -4831,7 +4831,7 @@
     ],
     "fraction_unbound": 0.5,
     "fu_note": "LABEL-GRADE, and A NEW TRAP SHAPE: the label sentence reads \"Baricitinib is approximately 50% bound to plasma proteins and 45% bound to serum proteins\" — TWO TOTAL-BINDING FIGURES IN ONE SENTENCE, in different matrices. The Hill comparison needs the PLASMA one; taking serum would have given 0.55. Distinct from the isolated-protein trap, since both are total binding. Parent baricitinib, not appreciably metabolised. A fluorescence-quenching study against isolated AAG was rejected.",
-    "notes": "PK: ZERO OF FOUR FIELDS ARE SUPPORTED ANYWHERE IN PUBMED, and no fix is available. Four separate searches — absolute bioavailability, volume of distribution, elimination half-life, absorption rate constant — return COUNT 0 or nothing usable, and the cited paper, which is a genuine healthy-volunteer PK/PD study, states none of ka 1.4, V 76, F 0.79 or t-half 12. What it does state exposes a CLASS 12 DEFECT: the stored set implies CL/F 5.56 L/h against that paper own \"low oral-dose clearance (17 L/h)\", a 3.06-fold disagreement, so this record OVER-PREDICTS BARICITINIB EXPOSURE ABOUT THREEFOLD. The cause is that 76 L is a volume from a bi-exponential fit — the abstract says concentrations \"decline in a bi-exponential fashion\" — paired with that fit terminal half-life and fed to a one-compartment solver. Reproducing 17 L/h at 12 h would need V/F 294 L, which is verbatim nowhere. The label triple is kept, its false provenance is stripped, and the error is logged rather than closed with an invented number. A 99.42 L volume in the literature is n=1, critically ill and on haemofiltration."
+    "notes": "PK PROVENANCE, moved here from source_label when that field was shortened to a citation that names the label revision: Olumiant (baricitinib) prescribing information — V, F, ka and half-life are label-grade. No PubMed abstract states any of them, and the previously cited study states none of them either; it remains in refs[] for the clearance and Tmax it does report. PK: ZERO OF FOUR FIELDS ARE SUPPORTED ANYWHERE IN PUBMED, and no fix is available. Four separate searches — absolute bioavailability, volume of distribution, elimination half-life, absorption rate constant — return COUNT 0 or nothing usable, and the cited paper, which is a genuine healthy-volunteer PK/PD study, states none of ka 1.4, V 76, F 0.79 or t-half 12. What it does state exposes a CLASS 12 DEFECT: the stored set implies CL/F 5.56 L/h against that paper own \"low oral-dose clearance (17 L/h)\", a 3.06-fold disagreement, so this record OVER-PREDICTS BARICITINIB EXPOSURE ABOUT THREEFOLD. The cause is that 76 L is a volume from a bi-exponential fit — the abstract says concentrations \"decline in a bi-exponential fashion\" — paired with that fit terminal half-life and fed to a one-compartment solver. Reproducing 17 L/h at 12 h would need V/F 294 L, which is verbatim nowhere. The label triple is kept, its false provenance is stripped, and the error is logged rather than closed with an invented number. A 99.42 L volume in the literature is n=1, critically ill and on haemofiltration."
   },
   {
     "slug": "bcaa",
@@ -6699,7 +6699,7 @@
     "pk": {
       "PO": {
         "V_L": 56,
-        "source_label": "FDA label: Fioricet (butalbital/acetaminophen/caffeine), butalbital component — half-life 35 h, Vd ~0.8 L/kg (~56 L), 59-88% renal elimination."
+        "source_label": "FDA label: Fioricet (butalbital/acetaminophen/caffeine), butalbital component — half-life 35 h, Vd ~0.8 L/kg (~56 L), 59-88% renal elimination. DailyMed set id c018be7d-f7b8-45e2-97b8-8e7a71740657, effective 2025-12-10."
       }
     },
     "notes": "PK: no PubMed primary exists for butalbital, so this record stays label-cited by necessity and now says so. The volume of 0.8 L/kg does appear verbatim in a human case report (PMID:29124988), but as a BACKGROUND STATEMENT rather than a measurement, and the half-life of 35 h remains unverifiable against any abstract. F 0.95 and ka 1 /h are dropped: both were invented beyond what the quoted label states, which says nothing about either."
@@ -10567,13 +10567,13 @@
         "ka_hr": 0.7,
         "V_L": 99.5,
         "F": 1,
-        "source_label": "Derived from FDA label Tybost (cobicistat) 150 mg PO qd exposure figures: the label states Cmax, AUCtau, Ctau and t½ ~3–4 h but NO volume and NO clearance. V/F 99.5 L is back-derived as (dose/AUC)·(t½/ln2); ka 0.7 is a catalog default."
+        "source_label": "FDA label: Tybost (cobicistat) 150 mg PO qd exposure figures. DailyMed set id 3784c35c-e87f-410c-900b-8fd6313c6010, effective 2026-02-10."
       }
     },
     "half_life_hr": {
       "PO": 3.5
     },
-    "notes": "PK: THE MOST INTERNALLY COHERENT RECORD IN ITS GROUP, WITH TWO PROVENANCE DEFECTS AND NO ARITHMETIC ONE. Its exposure figures reproduce each other exactly and it passes the feasibility floor. But its label citation presented as a label figure a volume THE LABEL DOES NOT CONTAIN — that document gives peak, trough and exposure and NEITHER A VOLUME NOR A CLEARANCE — so the number is a legitimate back-derivation wearing the wrong clothes, and the attribution is rewritten to say so. THE INTERACTION CONSTANT IS DELETED RATHER THAN REPAIRED: it was computed from an exposure ratio, its note says so openly, and storing a computed affinity as a measured one is exactly what the verbatim rule forbids. TWO FURTHER PROBLEMS MADE REPAIR POINTLESS: the inhibitor concentration in that derivation is unsourced and disagrees with the label own peak, and the derivation inverts a COMPETITIVE relationship while the edge is flagged mechanism-based, so the two halves are inconsistent with each other. THE VERBATIM EFFECT IS KEPT IN PROSE — \"GS-9350 potently inhibited midazolam apparent clearance (95% reduction), similar in effect to ritonavir 100 mg\" — which is the honest quantity. AND A PERPETRATOR QUESTION IS ANSWERED PREEMPTIVELY: adding boosting edges here would DOUBLE-COUNT, because lopinavir and darunavir already declare in their own source labels that their apparent parameters are the ritonavir-boosted ones."
+    "notes": "PK PROVENANCE, moved here from source_label when that field was shortened to a citation that names the label revision: Derived from FDA label Tybost (cobicistat) 150 mg PO qd exposure figures: the label states Cmax, AUCtau, Ctau and t½ ~3–4 h but NO volume and NO clearance. V/F 99.5 L is back-derived as (dose/AUC)·(t½/ln2); ka 0.7 is a catalog default. PK: THE MOST INTERNALLY COHERENT RECORD IN ITS GROUP, WITH TWO PROVENANCE DEFECTS AND NO ARITHMETIC ONE. Its exposure figures reproduce each other exactly and it passes the feasibility floor. But its label citation presented as a label figure a volume THE LABEL DOES NOT CONTAIN — that document gives peak, trough and exposure and NEITHER A VOLUME NOR A CLEARANCE — so the number is a legitimate back-derivation wearing the wrong clothes, and the attribution is rewritten to say so. THE INTERACTION CONSTANT IS DELETED RATHER THAN REPAIRED: it was computed from an exposure ratio, its note says so openly, and storing a computed affinity as a measured one is exactly what the verbatim rule forbids. TWO FURTHER PROBLEMS MADE REPAIR POINTLESS: the inhibitor concentration in that derivation is unsourced and disagrees with the label own peak, and the derivation inverts a COMPETITIVE relationship while the edge is flagged mechanism-based, so the two halves are inconsistent with each other. THE VERBATIM EFFECT IS KEPT IN PROSE — \"GS-9350 potently inhibited midazolam apparent clearance (95% reduction), similar in effect to ritonavir 100 mg\" — which is the honest quantity. AND A PERPETRATOR QUESTION IS ANSWERED PREEMPTIVELY: adding boosting edges here would DOUBLE-COUNT, because lopinavir and darunavir already declare in their own source labels that their apparent parameters are the ritonavir-boosted ones."
   },
   {
     "slug": "codeine",
@@ -12445,7 +12445,7 @@
         "ka_hr": 1.1,
         "V_L": 221,
         "F": 1,
-        "source_label": "FDA label: Prezista (darunavir) — boosted 800/100 mg PO qd with ritonavir at steady state: V/F 221 L, CL/F 10.2 L/h, t½ 15 h."
+        "source_label": "FDA label: Prezista (darunavir) — boosted 800/100 mg PO qd with ritonavir at steady state: V/F 221 L, CL/F 10.2 L/h, t½ 15 h. DailyMed set id 814301f9-c990-46a5-b481-2879a521a16f, effective 2025-08-29."
       }
     },
     "half_life_hr": {
@@ -15343,7 +15343,7 @@
         "ka_hr": 1.3,
         "V_L": 288,
         "F": 0.32,
-        "source_label": "FDA label: Zepatier (elbasvir/grazoprevir), elbasvir component — 50 mg PO qd at steady state: Tmax 3 h, t½ 24 h, F 32%."
+        "source_label": "FDA label: Zepatier (elbasvir/grazoprevir), elbasvir component — 50 mg PO qd at steady state: Tmax 3 h, t½ 24 h, F 32%. DailyMed set id 164dc02a-9180-426a-b8b5-04ab39d2bbd4, effective 2026-03-13."
       }
     },
     "half_life_hr": {
@@ -17279,7 +17279,7 @@
         "ka_hr": 1.5,
         "V_L": 581,
         "F": 1,
-        "source_label": "FDA label: Afinitor (everolimus) — 10 mg PO qd: Tmax 1–2 h, t½ 16–19 h, CL/F 23 L/h, V/F 581 L."
+        "source_label": "FDA label: Afinitor (everolimus) — 10 mg PO qd: Tmax 1–2 h, t½ 16–19 h, CL/F 23 L/h, V/F 581 L. DailyMed set id 2150f73a-179b-4afc-b8ce-67c85cc72f04, effective 2026-06-01."
       }
     },
     "half_life_hr": {
@@ -21357,7 +21357,7 @@
         "ka_hr": 2.35,
         "V_L": 844,
         "F": 0.27,
-        "source_label": "FDA label: Zepatier (elbasvir/grazoprevir), grazoprevir component — 100 mg PO qd at steady state: Tmax 2 h, t½ 31 h, F 27%."
+        "source_label": "FDA label: Zepatier (elbasvir/grazoprevir), grazoprevir component — 100 mg PO qd at steady state: Tmax 2 h, t½ 31 h, F 27%. DailyMed set id 164dc02a-9180-426a-b8b5-04ab39d2bbd4, effective 2026-03-13."
       }
     },
     "half_life_hr": {
@@ -22825,7 +22825,7 @@
         "ka_hr": 0.8,
         "V_L": 122,
         "F": 0.029,
-        "source_label": "FDA label: Imbruvica 560 mg PO qd: Tmax 1-2 h, t half 4-6 h, F 2.9% fasted. V_L 122 is NOT a true volume — the label gives Vd 683 L and Vd,ss/F ~10,000 L. It is a fitted surrogate (4200 x F) the solver re-divides by F, reproducing the label AUC 708 ng*h/mL to 1.7%. Do not replace with 683."
+        "source_label": "FDA label: Imbruvica (ibrutinib) 560 mg PO qd. DailyMed set id 0dfd0279-ff17-4ea9-89be-9803c71bab44, effective 2025-10-21."
       }
     },
     "half_life_hr": {
@@ -22834,7 +22834,7 @@
     "refs": [
       "PMID:26382728"
     ],
-    "notes": "PK: THE NUMBERS ARE RIGHT, THE PROSE IS A FABRICATED CONSTRUCT, AND NOBODY SHOULD \"CORRECT\" THIS RECORD FIELD BY FIELD. At 420 mg it predicts an exposure of 720 ng.h/mL against the label verbatim \"The mean steady-state AUC (% coefficient of variation) observed in patients at 420 mg with CLL/SLL is 708 (71%) ng x h/mL\" — 1.7%. But its source_label claimed a \"true Vd ~122 L\" and an \"apparent V/F ~4200 L\", and the label says neither: \"The volume of distribution (Vd) was 683 L, and the apparent volume of distribution at steady state (Vd,ss/F) was approximately 10,000 L.\" NOTE THAT 4200 x 0.029 IS 121.8. THE STORED VOLUME WAS MANUFACTURED BY MULTIPLYING AN APPARENT VOLUME BY F AND RELABELLING THE PRODUCT A TRUE VOLUME, which the solver then divides by F again, restoring it. It is self-cancelling, which is why the exposure lands — and ANYONE WHO REPLACES IT WITH THE LABEL REAL 683 L INTRODUCES A 5.6x ERROR. Two further errors also cancel: the stored F is the FASTED single-dose figure, \"Absolute bioavailability of ibrutinib in fasted condition was 2.9%\", while the exposure it reproduces is from patients dosing without regard to food, where the measured availability is two to three times higher. The half-life is the midpoint of a printed \"4 hours to 6 hours\". Its refs[] was EMPTY."
+    "notes": "PK PROVENANCE, moved here from source_label when that field was shortened to a citation that names the label revision: FDA label: Imbruvica 560 mg PO qd: Tmax 1-2 h, t half 4-6 h, F 2.9% fasted. V_L 122 is NOT a true volume — the label gives Vd 683 L and Vd,ss/F ~10,000 L. It is a fitted surrogate (4200 x F) the solver re-divides by F, reproducing the label AUC 708 ng*h/mL to 1.7%. Do not replace with 683. PK: THE NUMBERS ARE RIGHT, THE PROSE IS A FABRICATED CONSTRUCT, AND NOBODY SHOULD \"CORRECT\" THIS RECORD FIELD BY FIELD. At 420 mg it predicts an exposure of 720 ng.h/mL against the label verbatim \"The mean steady-state AUC (% coefficient of variation) observed in patients at 420 mg with CLL/SLL is 708 (71%) ng x h/mL\" — 1.7%. But its source_label claimed a \"true Vd ~122 L\" and an \"apparent V/F ~4200 L\", and the label says neither: \"The volume of distribution (Vd) was 683 L, and the apparent volume of distribution at steady state (Vd,ss/F) was approximately 10,000 L.\" NOTE THAT 4200 x 0.029 IS 121.8. THE STORED VOLUME WAS MANUFACTURED BY MULTIPLYING AN APPARENT VOLUME BY F AND RELABELLING THE PRODUCT A TRUE VOLUME, which the solver then divides by F again, restoring it. It is self-cancelling, which is why the exposure lands — and ANYONE WHO REPLACES IT WITH THE LABEL REAL 683 L INTRODUCES A 5.6x ERROR. Two further errors also cancel: the stored F is the FASTED single-dose figure, \"Absolute bioavailability of ibrutinib in fasted condition was 2.9%\", while the exposure it reproduces is from patients dosing without regard to food, where the measured availability is two to three times higher. The half-life is the midpoint of a printed \"4 hours to 6 hours\". Its refs[] was EMPTY."
   },
   {
     "slug": "ibuprofen",
@@ -24474,10 +24474,10 @@
       "PO": {
         "F": 0.4,
         "source_pmid": "PMID:26910057",
-        "source_label": "F ~40% is a secondary/label figure; no primary abstract states an absolute bioavailability for ivabradine. Retained under label provenance rather than deleted, since the resolver default would overstate exposure about twofold."
+        "source_label": "FDA label: Corlanor (ivabradine) — the absolute bioavailability figure. DailyMed set id 92018a65-38f6-45f7-91d4-a34921b81d0d, effective 2025-11-10."
       }
     },
-    "notes": "PK: all four values were zero-content on a ST JOHN’S WORT INTERACTION STUDY that reports only peak concentration and exposure, with the half-life given as a direction and no number. The stored ka of 1.4 may collide with that paper \"for 14 days\" dosing duration, logged as a hypothesis. The 6 h half-life exists only in a systematic review and is retained on that footing. ABSORPTION IS MIXED ZERO- AND FIRST-ORDER, so a single rate constant is structurally wrong: the population model is \"a 2-compartment model with mixed 0- and first-order absorption, linked to a 2-compartment model for S18982\". THE ACTIVE METABOLITE SPLITS THE EFFECT IN TIME, which no single-analyte model can represent: \"the metabolite is responsible for the initial bradycardic effect, whereas the parent compound is responsible for the duration of action\". V 100 L dropped as unsourced."
+    "notes": "PK PROVENANCE, moved here from source_label when that field was shortened to a citation that names the label revision: F ~40% is a secondary/label figure; no primary abstract states an absolute bioavailability for ivabradine. Retained under label provenance rather than deleted, since the resolver default would overstate exposure about twofold. PK: all four values were zero-content on a ST JOHN’S WORT INTERACTION STUDY that reports only peak concentration and exposure, with the half-life given as a direction and no number. The stored ka of 1.4 may collide with that paper \"for 14 days\" dosing duration, logged as a hypothesis. The 6 h half-life exists only in a systematic review and is retained on that footing. ABSORPTION IS MIXED ZERO- AND FIRST-ORDER, so a single rate constant is structurally wrong: the population model is \"a 2-compartment model with mixed 0- and first-order absorption, linked to a 2-compartment model for S18982\". THE ACTIVE METABOLITE SPLITS THE EFFECT IN TIME, which no single-analyte model can represent: \"the metabolite is responsible for the initial bradycardic effect, whereas the parent compound is responsible for the duration of action\". V 100 L dropped as unsourced."
   },
   {
     "slug": "ivermectin",
@@ -27415,7 +27415,7 @@
         "ka_hr": 0.57,
         "V_L": 37,
         "F": 1,
-        "source_label": "FDA label: Kaletra (lopinavir/ritonavir) — boosted 400/100 mg PO bid at steady state: t½ ~6 h, CL/F ~4.3 L/h, V/F ~37 L."
+        "source_label": "FDA label: Kaletra (lopinavir/ritonavir) — boosted 400/100 mg PO bid at steady state: t½ ~6 h, CL/F ~4.3 L/h, V/F ~37 L. DailyMed set id 8290add3-4449-4e58-6c97-8fe1eec972e3, effective 2026-07-23."
       }
     },
     "half_life_hr": {
@@ -30509,10 +30509,10 @@
         "ka_hr": 0.5,
         "V_L": 113,
         "F": 0.65,
-        "source_label": "Zaroxolyn (metolazone) label — F ~65%, t half ~14 h. Label-grade: the cited study reports only dose-proportionality and a fed/fasted tmax ratio, and dosed 0.5/1/2 mg tablets — the rapid-acting Mykrox product, NOT interchangeable with the Zaroxolyn 2.5-20 mg this record doses."
+        "source_label": "FDA label: Zaroxolyn (metolazone). DailyMed set id 58935d94-5bf1-4065-b8b5-ac61292436a7, effective 2016-08-06."
       }
     },
-    "notes": "PK: A COMPLETE CITATION FAILURE PLUS A FORMULATION MISMATCH, AND THE MISMATCH IS PROVABLE FROM THE DOSE BLOCK. The cited study states not one of the four stored values — only that \"The AUC and Cmax showed dose proportionality\", that \"The tmax of metolazone was increased by approximately 100% in the fed condition\", and a null sex comparison — and it was the record ONLY reference. It also dosed 0.5, 1 and 2 mg tablets, the rapid-acting low-dose product, while this record is aliased Zaroxolyn and doses 2.5 to 20 mg; the two formulations differ about twofold and are explicitly not interchangeable. NO VERBATIM REPLACEMENT EXISTS: the canonical primary pharmacokinetic paper for this drug HAS NO ABSTRACT IN PUBMED AT ALL, only a title, and everything else indexed is rat, urinary-excretion pharmacodynamics or assay methodology. The four numbers are therefore kept and re-provenanced honestly to the label rather than left under a citation that cannot support them."
+    "notes": "PK PROVENANCE, moved here from source_label when that field was shortened to a citation that names the label revision: Zaroxolyn (metolazone) label — F ~65%, t half ~14 h. Label-grade: the cited study reports only dose-proportionality and a fed/fasted tmax ratio, and dosed 0.5/1/2 mg tablets — the rapid-acting Mykrox product, NOT interchangeable with the Zaroxolyn 2.5-20 mg this record doses. PK: A COMPLETE CITATION FAILURE PLUS A FORMULATION MISMATCH, AND THE MISMATCH IS PROVABLE FROM THE DOSE BLOCK. The cited study states not one of the four stored values — only that \"The AUC and Cmax showed dose proportionality\", that \"The tmax of metolazone was increased by approximately 100% in the fed condition\", and a null sex comparison — and it was the record ONLY reference. It also dosed 0.5, 1 and 2 mg tablets, the rapid-acting low-dose product, while this record is aliased Zaroxolyn and doses 2.5 to 20 mg; the two formulations differ about twofold and are explicitly not interchangeable. NO VERBATIM REPLACEMENT EXISTS: the canonical primary pharmacokinetic paper for this drug HAS NO ABSTRACT IN PUBMED AT ALL, only a title, and everything else indexed is rat, urinary-excretion pharmacodynamics or assay methodology. The four numbers are therefore kept and re-provenanced honestly to the label rather than left under a citation that cannot support them."
   },
   {
     "slug": "metoprolol",
@@ -33064,7 +33064,7 @@
         "V_L": 673,
         "F": 0.12,
         "source_pmid": "PMID:9112066",
-        "source_label": "F ~12% is a label/secondary figure; no abstract states an absolute bioavailability for nebivolol. Retained under label provenance because the resolver default would be sevenfold too high."
+        "source_label": "F ~12% is a label/secondary figure; no abstract states an absolute bioavailability for nebivolol. Retained under label provenance because the resolver default would be sevenfold too high. DailyMed set id 8b8ad213-1dc8-454e-a524-075685c0e1a8, effective 2024-08-01."
       }
     },
     "effect_compartment": {
@@ -37720,7 +37720,7 @@
     },
     "pk": {
       "SC": {
-        "source_label": "FDA label: Symlin (pramlintide acetate), clinical pharmacology — absolute bioavailability of a single subcutaneous dose approximately 30-40%."
+        "source_label": "FDA label: Symlin (pramlintide acetate), clinical pharmacology — absolute bioavailability of a single subcutaneous dose approximately 30-40%. DailyMed set id 4aea30ff-eb0d-45c1-b114-3127966328ff, effective 2019-12-18."
       }
     },
     "refs": [
@@ -39663,7 +39663,7 @@
         "V_L": 25,
         "F": 0.52,
         "lag_hr": 2.6,
-        "source_label": "Aciphex (rabeprazole) label — absolute F 52% vs intravenous; t half 1-2 h. The cited relative-bioavailability study of paediatric sprinkle granules supports none of the stored values."
+        "source_label": "Aciphex (rabeprazole) label — absolute F 52% vs intravenous; t half 1-2 h. The cited relative-bioavailability study of paediatric sprinkle granules supports none of the stored values. DailyMed set id 1eb38279-0237-4967-be7a-c53a826c1138, effective 2026-01-27."
       }
     },
     "notes": "PK: THE CLEARANCE IS RIGHT TO 0.3% AND NO ABSORPTION RATE CAN REPRODUCE THE PEAK. Against a verbatim \"the AUC(0-infinity) were 301.12\" at 10 mg this record predicts 300.1 — so the volume, bioavailability and half-life are COLLECTIVELY CORRECT and must not be moved on a failed verbatim check. But the Cmax-over-AUC identity is decisive in the other direction: the observed ratio is 0.656 per hour while the model ceiling at the published peak times is 52, 37 and 26 ng/mL against an observed 197. NO ka EXISTS THAT PRODUCES IT. Solving the identity gives an effective absorption window of five minutes once the enteric coat dissolves, which is exactly what an enteric-coated delayed-release tablet does — so the missing parameter is a LAG, not a rate, and the solver supports one. THE EMPTY EFFECT COMPARTMENT IS CORRECT AND THE ARGUMENT IS THE STRONGEST FORM YET FOUND: acid suppression builds over three to five days of once-daily dosing while the plasma profile is IDENTICAL on day one and day five, and A LINEAR FILTER HAS UNITY STEADY-STATE GAIN — its output tracks exposure per interval, which does not change — SO NO keo OF ANY MAGNITUDE PRODUCES DAY-OVER-DAY ACCUMULATION FROM A NON-ACCUMULATING CURVE. Recovery is set by proton-pump resynthesis, independent of concentration. The stored bioavailability is the label figure and correct; the cited paper is a RELATIVE study of granules in soft food."
@@ -40061,7 +40061,7 @@
         "ka_hr": 1.5,
         "V_L": 87,
         "F": 0.36,
-        "source_label": "FDA label: Azilect (rasagiline) — 1 mg PO qd at steady state: Tmax 1 h, t½ 3 h, F 36%, Vss 87 L."
+        "source_label": "FDA label: Azilect (rasagiline) — 1 mg PO qd at steady state: Tmax 1 h, t½ 3 h, F 36%, Vss 87 L. DailyMed set id a40d0e73-3f9f-4b01-979d-402c9cdaeb60, effective 2020-06-30."
       }
     },
     "half_life_hr": {
@@ -43404,7 +43404,7 @@
       "SC": {
         "V_L": 75.2,
         "F": 1,
-        "source_label": "FDA label: Imcivree (setmelanotide), clinical pharmacology — 3 mg SC qd at steady state: apparent V/F 75.2 L, effective t½ ~11 h, CL/F 7.15 L/h in a typical 120 kg patient."
+        "source_label": "FDA label: Imcivree (setmelanotide), clinical pharmacology — 3 mg SC qd at steady state: apparent V/F 75.2 L, effective t½ ~11 h, CL/F 7.15 L/h in a typical 120 kg patient. DailyMed set id 70c3ccf7-4df0-4c75-ba07-fede9970c8d9, effective 2026-04-01."
       }
     },
     "notes": "PK stays on the approval document, which is legitimate primary provenance here: no PubMed-indexed study reports a setmelanotide half-life, volume, absorption rate or bioavailability, so there is nothing to re-source to. Corrections applied 2026-09-06: the stored volume was 75 against the document's stated 75.2, a silent rounding of a cited figure; F 0.85 is removed because no bioavailability appears in that document at all, and pairing it with an explicitly APPARENT V/F double-counted absorption; F is pinned to 1 for that reason. ka 0.2 /h removed — the only absorption statement is a median time to peak of 8 h."
@@ -45045,7 +45045,7 @@
         "ka_hr": 0.3,
         "V_L": 7.5,
         "F": 0.15,
-        "source_label": "Azulfidine (sulfasalazine) label — Vdss 7.5 +/- 1.6 L and plasma half-life 7.6 +/- 3.4 h, both INTRAVENOUS. F 0.15 is the label upper bound (\"less than 15%\") stored as a point value; no primary publishes a point estimate."
+        "source_label": "Azulfidine (sulfasalazine) label — Vdss 7.5 +/- 1.6 L and plasma half-life 7.6 +/- 3.4 h, both INTRAVENOUS. F 0.15 is the label upper bound (\"less than 15%\") stored as a point value; no primary publishes a point estimate. DailyMed set id b9ef541a-93c8-4428-ba45-398aa0b327d1, effective 2026-05-29."
       }
     },
     "pk_analyte": "parent",
@@ -46236,7 +46236,7 @@
       "IV": {
         "V_L": 383.5,
         "F": 1,
-        "source_label": "FDA label: Torisel (temsirolimus) — 25 mg IV weekly: Cmax 585 ng/mL, AUC 1627 ng·h/mL, t½ 17.3 h (parent), Vss 172 L in whole blood."
+        "source_label": "FDA label: Torisel (temsirolimus) — 25 mg IV weekly: Cmax 585 ng/mL, AUC 1627 ng·h/mL, t½ 17.3 h (parent), Vss 172 L in whole blood. DailyMed set id 95b7dc92-2180-42f1-8699-3c28f609e674, effective 2025-12-26."
       }
     },
     "half_life_hr": {
@@ -50136,7 +50136,7 @@
         "ka_hr": 0.38,
         "V_L": 299,
         "F": 1,
-        "source_label": "FDA label: Venclexta (venetoclax) — 400 mg PO qd with a low-fat meal at steady state, V/F within the label 256–321 L range. t½ 17 h is NOT the label figure (the label says ~26 h) but an interior pick from PMID:27558232; ka is derived from a verbatim Tmax 5–8 h."
+        "source_label": "FDA label: Venclexta (venetoclax) 400 mg PO qd with a low-fat meal, steady state. DailyMed set id b118a40d-6b56-cee3-10f6-ded821a97018, effective 2026-05-20."
       }
     },
     "half_life_hr": {
@@ -50145,7 +50145,7 @@
     "refs": [
       "PMID:27558232"
     ],
-    "notes": "PK: A LABEL CITATION THAT ATTRIBUTES TO THE LABEL A NUMBER THE LABEL CONTRADICTS. The stored half-life is presented as a Venclexta label value and THE LABEL SAYS ABOUT TWENTY-SIX HOURS; the stored figure is a pick from inside a cited range, \"ranged between 14.1 and 18.2 hours at different doses\", and two other verbatim means exist that are neither. THE NUMBER IS KEPT AND THE ATTRIBUTION IS FIXED, because the label three exposure figures are mutually inconsistent in one compartment by a factor of 1.59 and the shorter half-life is what makes exposure close — which is precisely why it was picked. The absorption rate is the real defect: it implied a peak at 11.9 h against a verbatim \"Venetoclax peak exposures were achieved at 5 to 8 hours under low-fat conditions\" and under-predicted the peak roughly two-fold. The apparent volume is back-derived but LANDS INSIDE THE LABEL OWN STATED RANGE, so it is a near-miss and must not be corrected. MY ABIRATERONE COMPARISON IS REFUTED: the food effect is real and roughly four-fold, but the label MANDATES food and this record already declares the low-fat fed state, so a single fed-state parameterisation IS the clinically realised one — unlike abiraterone, where the label instruction and the food effect pull apart."
+    "notes": "PK PROVENANCE, moved here from source_label when that field was shortened to a citation that names the label revision: FDA label: Venclexta (venetoclax) — 400 mg PO qd with a low-fat meal at steady state, V/F within the label 256–321 L range. t½ 17 h is NOT the label figure (the label says ~26 h) but an interior pick from PMID:27558232; ka is derived from a verbatim Tmax 5–8 h. PK: A LABEL CITATION THAT ATTRIBUTES TO THE LABEL A NUMBER THE LABEL CONTRADICTS. The stored half-life is presented as a Venclexta label value and THE LABEL SAYS ABOUT TWENTY-SIX HOURS; the stored figure is a pick from inside a cited range, \"ranged between 14.1 and 18.2 hours at different doses\", and two other verbatim means exist that are neither. THE NUMBER IS KEPT AND THE ATTRIBUTION IS FIXED, because the label three exposure figures are mutually inconsistent in one compartment by a factor of 1.59 and the shorter half-life is what makes exposure close — which is precisely why it was picked. The absorption rate is the real defect: it implied a peak at 11.9 h against a verbatim \"Venetoclax peak exposures were achieved at 5 to 8 hours under low-fat conditions\" and under-predicted the peak roughly two-fold. The apparent volume is back-derived but LANDS INSIDE THE LABEL OWN STATED RANGE, so it is a near-miss and must not be corrected. MY ABIRATERONE COMPARISON IS REFUTED: the food effect is real and roughly four-fold, but the label MANDATES food and this record already declares the low-fat fed state, so a single fed-state parameterisation IS the clinically realised one — unlike abiraterone, where the label instruction and the food effect pull apart."
   },
   {
     "slug": "venlafaxine",
@@ -52680,7 +52680,7 @@
       "PO": {
         "V_L": 700,
         "F": 1,
-        "source_label": "FDA prescribing information, Wakix (pitolisant), clinical pharmacology — apparent volume of distribution approximately 700 L (5 to 10 L/kg), median half-life approximately 20 hours (7.5 to 24.2), median Tmax 3.5 hours."
+        "source_label": "FDA prescribing information, Wakix (pitolisant), clinical pharmacology — apparent volume of distribution approximately 700 L (5 to 10 L/kg), median half-life approximately 20 hours (7.5 to 24.2), median Tmax 3.5 hours. DailyMed set id 8daa5562-824e-476c-9652-26ceef3d4b0e, effective 2026-02-13."
       }
     },
     "mw_g_mol": 295.8,

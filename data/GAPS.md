@@ -6134,3 +6134,46 @@ HYGIENE R16, three times in one afternoon:
 - **`p021`'s dose evidence spans three papers in one sentence**, which leaves every quotation in it
   untagged by design (two or more PMIDs in a clause is ambiguity, not a citation). One of the three
   is now described instead. Splitting that sentence per paper would make all three checkable.
+
+## Label citations pinned to a revision — 20 of 23 (2026-09-27)
+
+`pk.label-revision` (roadmap T3) found that **only 3 of the 28 `source_label` rows named the
+revision they quote**. A label is revised in place, so "FDA label: Prezista" points at whatever it
+says today, and `pnpm verify` cannot help — it resolves PMIDs and a label has none. Twenty are now
+pinned with a DailyMed set id and an effective date, fetched this session.
+
+**Two rows stopped firing once the rule was made precise, and that was the rule's fault, not
+theirs.** `trandolapril` and `propylthiouracil` use `source_label` as free prose recording a
+**review** ("Review (PMID:10464907)…", "V 30 L is review-derived (PMID:6172233)"). A review is not
+revised in place, so asking it to name a revision is meaningless. The rule now fires only on a
+string that claims to be a label.
+
+**Six rows carried reasoning too long for the 300-character field.** That reasoning was not
+deleted: `baricitinib`, `cobicistat`, `ibrutinib`, `ivabradine`, `metolazone` and `venetoclax` now
+have a `source_label` that is a citation, and their provenance argument moved into `notes`, which
+has no cap. `ibrutinib`'s is worth keeping visible — its stored V_L 122 is a fitted surrogate, not
+the label's 683 L, and the note says "Do not replace with 683."
+
+### Products resolved, with the search term that found them
+
+The generic name is often the wrong search: it returns a repackager or a combination product.
+
+| Compound | Searched | Resolved to |
+| --- | --- | --- |
+| `butalbital` | **Fioricet**, not "butalbital" — the latter returns a RemedyRepack repackager label | FIORICET (butalbital, acetaminophen, caffeine) |
+| `ivabradine` | **Corlanor**, not "ivabradine" — the latter returns a Novadoz generic | CORLANOR |
+| `nebivolol` | **Bystolic**, not "nebivolol" — the latter returns a Major generic | BYSTOLIC |
+| `elbasvir`, `grazoprevir` | Zepatier | One SPL serves both components, so both rows pin the same set id |
+| `pramlintide` | Symlin | SYMLINPEN — Symlin itself is discontinued, so the pen is the live label |
+
+**A trap avoided:** searching `trandolapril` returns *trandolapril and verapamil hydrochloride
+extended-release* — a combination product whose Clinical Pharmacology is not the trandolapril-alone
+figure the record cites. It was not pinned, and it no longer fires anyway.
+
+### Not pinnable — no US SPL exists
+
+| Compound | Field | Why skipped | Re-author target |
+| --- | --- | --- | --- |
+| **`agomelatine`** | `pk.PO.source_label` | Never approved in the US, so DailyMed has nothing. The citation is the **EMA SmPC for Valdoxan**, which has no set id. | The SmPC's own revision date, from the EMA product page. An ISO date satisfies the rule and is the right handle for an EMA document. |
+| **`daclatasvir`** | `pk.PO.source_label` | Daklinza was **withdrawn from the US market**, so no current SPL exists. DailyMed returns nothing for the brand. | An archived SPL version, or the EMA SmPC. |
+| **`tacrine`** | `pk.PO.source_label` | Cognex was **withdrawn in 2013**; DailyMed returns nothing. The record already discloses the withdrawal. | An archived label. Low value — the record exists as a historical reference, and its note already flags that the V 349 L is IV-derived rather than label-derived. |
