@@ -547,6 +547,37 @@ hyperbola by assumption**. The one exception is `atracurium`'s `hill_n` 4.04, fr
 sigmoidicity factor. Similarly, 71 occupancy rows saturate above 99% at the peak dose and most of
 those are correct pharmacology — adalimumab against TNF, apixaban against factor Xa (sweep). Neither is a defect class; both belong in the note.
 
+## R20. Before removing a value, look for its source ELSEWHERE on the record.
+
+A row's `source_pmid` is not the record's only provenance. A value can be sourced in the compound's
+`notes`, or on a **sibling route** that cites a different paper, and a screen that tests the row's own
+PMID alone reads it as unsourced.
+
+**The shipped defect.** `methyldopa.PO` was stripped on 2026-09-27 as an unsourced 0.60 L/kg prior. Its
+42 L is sourced — to PMID:7047042, a review that the record's own notes name and flag review-grade, and
+that its **IV row cites directly**. Only the PO row's citation, PMID:781212, is silent. The strip was
+caught and reverted before shipping, in the same session whose previous commit had named that exact row
+as the reason not to bulk-strip.
+
+**This is the second instance of one shape.** `verify:quotes` had the same blind spot: a quoted span in
+a compound-level `notes` field was invisible because the field has no `source_pmid` and the gate never
+looked wider than the clause. Both gates asked "what does this row cite?" when the question is "what
+does this record cite?"
+
+**So before any strip, for each candidate row:**
+
+1. Compare **every sibling route's** `source_pmid` against the row's. A different one carrying the same
+   value is provenance, not a coincidence.
+2. Read the compound's `notes` for the value or its per-kilogram form. Distinguish prose that *sources*
+   it from prose that *disclaims* it — "0.60 L/kg from PMID:7047042" is a source; "states no volume" and
+   "likewise the default" are not.
+3. Compare PMIDs in a normalised form. A first pass at this check flagged **12 of 24 rows** purely
+   because it compared bare digits against `"PMID:x"` strings; fixing that took the count to **1**. A
+   check that flags half your batch is broken, not thorough.
+
+Of the 24 rows in that volume pass, exactly one had provenance elsewhere. The check is cheap and it is
+the difference between an honest strip and a deleted citation.
+
 ---
 
 ## Smells — run your own batch against this before validating
@@ -562,6 +593,7 @@ Ten checks, cheapest first. Each one has caught a shipped defect.
 | 5 | The paper's *subject* is a different molecule, and yours is a comparator, a reference standard, or a parent scaffold. | R2. 84 confirmed secondary citations. |
 | 6 | The paper is an outcomes trial, a review, a med-chem discovery paper, a bioequivalence study, or an assay-development paper. | R2. 65 confirmed abstract-silent. |
 | 7 | The abstract quotes a range, and your number is inside it but not an endpoint. | R3. A range interior is not a measurement. |
+| 7b | You are about to DELETE a value. Did you check every sibling route's citation and the compound `notes` for its source? | R20. `methyldopa.PO`'s 0.60 L/kg was sourced on its IV row and in its notes, and was stripped anyway. |
 | 8 | An apparent volume (`V/F`) sits beside an independently sourced `F`; or a `Vc` from a population fit sits in a one-compartment slot. | R15. Divides the dose by F twice. |
 | 9 | The Cmax or AUC you divided by was measured at steady state, or in patients where your half-life is from healthy volunteers. | R9 and R15. Mixing populations is the defect the audit spends most of its time removing. |
 | 10 | Open the record's **What the stored values imply** card. Does Tmax and Cmax match the paper? Is any input you meant to store marked `default`? | R15. |
