@@ -17079,9 +17079,9 @@
     ],
     "doses": {
       "IV": {
-        "min": 0.2,
-        "max": 0.4,
-        "typical": 0.3,
+        "min": 14,
+        "max": 42,
+        "typical": 21,
         "unit": "mg"
       }
     },
@@ -17120,7 +17120,8 @@
       "note": "Imidazole IV induction agent. Adult-healthy abstract-verbatim Vd not surfaced in PubMed search budget."
     },
     "fraction_unbound": 0.249,
-    "fu_note": "Free fraction stated directly, healthy volunteers: \"markedly increased in patients with renal failure and in patients with hepatic cirrhosis, when compared with a group of healthy volunteers (43.4 +/- 2.9% and 44.2 +/- 2.1 versus 24.9 +/- 1.4%)\" (PMID:455872). A second human study gives 76.5% bound, agreeing within 6%. THREE TRAPS IN THAT CORROBORATING ABSTRACT WERE AVOIDED: a dog value of 75.4% in the same sentence, a separate figure for the metabolite R 28 141, and an ISOLATED 4% HSA figure of 78.5% that is HIGHER than whole plasma. fu roughly doubles in renal failure and cirrhosis."
+    "fu_note": "Free fraction stated directly, healthy volunteers: \"markedly increased in patients with renal failure and in patients with hepatic cirrhosis, when compared with a group of healthy volunteers (43.4 +/- 2.9% and 44.2 +/- 2.1 versus 24.9 +/- 1.4%)\" (PMID:455872). A second human study gives 76.5% bound, agreeing within 6%. THREE TRAPS IN THAT CORROBORATING ABSTRACT WERE AVOIDED: a dog value of 75.4% in the same sentence, a separate figure for the metabolite R 28 141, and an ISOLATED 4% HSA figure of 78.5% that is HIGHER than whole plasma. fu roughly doubles in renal failure and cirrhosis.",
+    "notes": "DOSE CORRECTED FROM A PER-KILOGRAM VALUE STORED AS AN ABSOLUTE ONE. The IV block read {\"min\":0.2,\"max\":0.4,\"typical\":0.3,\"unit\":\"mg\"} — those are mg/kg, not mg, and `doses` admits only absolute mg/g/mcg/IU, so occupancy was being judged at about a seventieth of a real dose. Label verbatim: \"The dose for induction of anesthesia in adult patients and in pediatric patients above the age of ten (10) years will vary between 0.2 mg/kg and 0.6 mg/kg of body weight\". At the 70 kg reference that is 14-42 mg, typical 21 mg — ARITHMETIC, mg/kg x 70 kg. Source: Amidate (etomidate) injection, DailyMed set id b7ed5bf8-ba75-44dc-8f81-96b4ad5766be, v27 published 2026-05-25. THE TYPICAL IS NOT THE LABEL’S: it states a range and no single figure, so 0.3 mg/kg is kept from the old row as the conventional induction dose INSIDE that range, and the stored max rises from the old 0.4 to the label’s 0.6. FOUND BY `occupancy.ts`: nothing reading one field at a time can see this, because every number in the row is individually well-formed."
   },
   {
     "slug": "etoricoxib",
@@ -24664,9 +24665,9 @@
     ],
     "doses": {
       "IV": {
-        "min": 0.5,
-        "max": 2,
-        "typical": 1,
+        "min": 70,
+        "max": 140,
+        "typical": 70,
         "unit": "mg"
       }
     },
@@ -24715,7 +24716,7 @@
         "source_pmid": "PMID:12516077"
       }
     },
-    "notes": "PK: intranasal F 0.45 is verbatim and stands, though from only three subjects; an independent paediatric figure of 0.50 exists (PMID:8881626). The stored 2.5 h matched NO paper — four genuine sources give 2.0, 2.17, 3.1 and 5.2/6.1 h — and is replaced by Domino 1984 (PMID:6488686), eight healthy males on 2.2 mg/kg intravenously, verbatim \"elimination (beta t 1/2) = 2.17 hr\". THAT SAME PAPER SHOWS DISPOSITION IS THREE-PHASE, so a one-compartment curve is a real simplification here. V 392 L is 5.6 L/kg, the LOWER of the two enantiomer steady-state volumes stated in PMID:34019627 (S 6.6, R 5.6 L/kg) — no racemic human volume appears in any abstract found, and the stored 200 L was roughly half either figure. ka 6 /h dropped and refuted rather than merely unsourced: it implies a seven-minute absorption half-life against an observed nasal peak at about 20 minutes. A prolonged-release oral arm exists in the literature whose 10-11 h half-life is absorption flip-flop and must never reach an immediate-release row.",
+    "notes": "DOSE CORRECTED FROM A PER-KILOGRAM VALUE STORED AS AN ABSOLUTE ONE. The IV block read {\"min\":0.5,\"max\":2,\"typical\":1,\"unit\":\"mg\"} — those are mg/kg, not mg, and `doses` admits only absolute mg/g/mcg/IU, so occupancy was being judged at about a seventieth of a real dose. Label verbatim: \"Alternatively, administer a dose of 1 to 2 mg/kg at a rate of 0.5 mg/kg/min\". At the 70 kg reference that is 70-140 mg, typical 70 mg — ARITHMETIC, mg/kg x 70 kg. Source: Ketalar (ketamine hydrochloride) injection, DailyMed set id 14e8f864-8b8a-4e7e-8439-e510d3107063, v33 published 2026-03-26. The typical takes the LOW end of the label range, which under-doses rather than over-doses the rendered curve. The old row’s 0.5 min had no label support. FOUND BY `occupancy.ts`: nothing reading one field at a time can see this, because every number in the row is individually well-formed. PK: intranasal F 0.45 is verbatim and stands, though from only three subjects; an independent paediatric figure of 0.50 exists (PMID:8881626). The stored 2.5 h matched NO paper — four genuine sources give 2.0, 2.17, 3.1 and 5.2/6.1 h — and is replaced by Domino 1984 (PMID:6488686), eight healthy males on 2.2 mg/kg intravenously, verbatim \"elimination (beta t 1/2) = 2.17 hr\". THAT SAME PAPER SHOWS DISPOSITION IS THREE-PHASE, so a one-compartment curve is a real simplification here. V 392 L is 5.6 L/kg, the LOWER of the two enantiomer steady-state volumes stated in PMID:34019627 (S 6.6, R 5.6 L/kg) — no racemic human volume appears in any abstract found, and the stored 200 L was roughly half either figure. ka 6 /h dropped and refuted rather than merely unsourced: it implies a seven-minute absorption half-life against an observed nasal peak at about 20 minutes. A prolonged-release oral arm exists in the literature whose 10-11 h half-life is absorption flip-flop and must never reach an immediate-release row.",
     "fraction_unbound": 0.4,
     "fu_note": "MY \"~12% BOUND\" PRIOR WAS WRONG BY FIVEFOLD. Human serum: \"The percentage of drug bound to serum proteins at 30 degrees C was found to be 69%, 60% and 50% for DHNK, ketamine and NK\" (PMID:11956671) — a THREE-ANALYTE sentence whose MIDDLE figure is ketamine. The classic source behind the 12% figure has NO PubMed abstract, and that paper's own opening says why it exists: \"Scarce data were observed in the literature about the binding of ketamine to human plasma proteins.\" SERUM not plasma; binding falls as temperature rises, so true fu is likely slightly above 0.40."
   },
@@ -41719,9 +41720,9 @@
     ],
     "doses": {
       "IV": {
-        "min": 0.6,
-        "max": 1.2,
-        "typical": 1,
+        "min": 42,
+        "max": 84,
+        "typical": 42,
         "unit": "mg"
       }
     },
@@ -41755,7 +41756,8 @@
       "note": "Steroidal NMBA; IV-only with rapid plasma redistribution. Abstract-verbatim Vd/F not surfaced; clinical PK is bolus + reversal dominated."
     },
     "fraction_unbound": 0.7,
-    "fu_note": "LABEL-GRADE, verified on two independent SPLs: \"Rocuronium is approximately 30% bound to human plasma proteins.\" Species and matrix both stated explicitly. The intravenous anaesthesia frame is fine — the figure comes from surgical patients, which is the drug actual use. TWO SPECIES TRAPS REJECTED: both papers reporting rocuronium unbound concentrations are in ANAESTHETIZED DOGS. The human ultrafiltration paper this catalog already uses for vecuronium and atracurium does not cover rocuronium. A 1.43x correction."
+    "fu_note": "LABEL-GRADE, verified on two independent SPLs: \"Rocuronium is approximately 30% bound to human plasma proteins.\" Species and matrix both stated explicitly. The intravenous anaesthesia frame is fine — the figure comes from surgical patients, which is the drug actual use. TWO SPECIES TRAPS REJECTED: both papers reporting rocuronium unbound concentrations are in ANAESTHETIZED DOGS. The human ultrafiltration paper this catalog already uses for vecuronium and atracurium does not cover rocuronium. A 1.43x correction.",
+    "notes": "DOSE CORRECTED FROM A PER-KILOGRAM VALUE STORED AS AN ABSOLUTE ONE. The IV block read {\"min\":0.6,\"max\":1.2,\"typical\":1,\"unit\":\"mg\"} — those are mg/kg, not mg, and `doses` admits only absolute mg/g/mcg/IU, so occupancy was being judged at about a seventieth of a real dose. Label verbatim: \"Tracheal intubation : Recommended initial dose is 0.6 mg/kg\". At the 70 kg reference that is 42-84 mg, typical 42 mg — ARITHMETIC, mg/kg x 70 kg. Source: Rocuronium Bromide Injection, DailyMed set id 04c9812d-5aa3-4949-ad02-c618028f1bb0, v1 published 2026-08-17. The label’s own recommended initial dose is the typical; 1.2 mg/kg is its rapid-sequence upper end. FOUND BY `occupancy.ts`: nothing reading one field at a time can see this, because every number in the row is individually well-formed."
   },
   {
     "slug": "roflumilast",
@@ -44871,9 +44873,9 @@
     ],
     "doses": {
       "IV": {
-        "min": 1,
-        "max": 2,
-        "typical": 1.5,
+        "min": 21,
+        "max": 77,
+        "typical": 42,
         "unit": "mg"
       }
     },
@@ -44910,7 +44912,8 @@
       "note": "Depolarizing NMBA; metabolized by plasma butyrylcholinesterase in seconds. Plasma t½ ~1 min — no classical PK profile."
     },
     "fraction_unbound": 0.8,
-    "fu_note": "Stated as a FREE fraction: \"free fraction (from 31% for vecuronium to 80% for succinylcholine)\" (PMID:15169739), by ultrafiltration. The direction is internally confirmed — this drug is also the logD extreme in the same sentence at -4.15, consistent for a small bis-quaternary dication. A BINDING FIGURE DOES EXIST, so my doubt about the frame was unwarranted, as it was for atracurium."
+    "fu_note": "Stated as a FREE fraction: \"free fraction (from 31% for vecuronium to 80% for succinylcholine)\" (PMID:15169739), by ultrafiltration. The direction is internally confirmed — this drug is also the logD extreme in the same sentence at -4.15, consistent for a small bis-quaternary dication. A BINDING FIGURE DOES EXIST, so my doubt about the frame was unwarranted, as it was for atracurium.",
+    "notes": "DOSE CORRECTED FROM A PER-KILOGRAM VALUE STORED AS AN ABSOLUTE ONE. The IV block read {\"min\":1,\"max\":2,\"typical\":1.5,\"unit\":\"mg\"} — those are mg/kg, not mg, and `doses` admits only absolute mg/g/mcg/IU, so occupancy was being judged at about a seventieth of a real dose. Label verbatim: \"The average dose required to produce neuromuscular blockade and to facilitate tracheal intubation is 0.6 mg/kg ANECTINE given intravenously\". At the 70 kg reference that is 21-77 mg, typical 42 mg — ARITHMETIC, mg/kg x 70 kg. Source: Anectine (succinylcholine chloride) injection, DailyMed set id 04a4e6f5-6fa1-42e1-a3f9-21fca7786b15, v9 published 2026-08-03. THE LABEL SUPPLIES ALL THREE FIGURES: 0.6 mg/kg is its own stated average, and the next sentence gives the spread — \"The optimum intravenous dose will vary among patients and may be from 0.3 to 1.1 mg/kg for adults\". FOUND BY `occupancy.ts`: nothing reading one field at a time can see this, because every number in the row is individually well-formed."
   },
   {
     "slug": "sufentanil",
