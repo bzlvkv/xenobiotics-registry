@@ -5382,10 +5382,10 @@
     "category": "pharmacological",
     "mechanism": "High-potency fluorinated synthetic glucocorticoid (~25× cortisol). Topical Class I-III strength depending on vehicle + ester form. Systemic IM/IV used for fetal lung maturation in preterm labor. Cushingoid risk with chronic high-potency topical use over large body areas.",
     "routes": [
+      "PO",
       "TD",
       "IM",
-      "IV",
-      "PO"
+      "IV"
     ],
     "doses": {
       "TD": {
@@ -5425,7 +5425,7 @@
         "source_pmid": "PMID:6487477"
       }
     },
-    "notes": "PK: three routes, three separate failures. The oral half-life of 8.1 h is verbatim and stands, but it was copied onto the intravenous row from a study comparing ORAL WITH TOPICAL dosing; the intravenous value is 6.5 h (PMID:6662164, eight healthy adults on a phosphate bolus). The intramuscular row cited a DEPOT product whose own paper gives 9.6 h for betamethasone and 80.8 h for the 17-monopropionate ester (PMID:21899210), so no single intramuscular half-life represents that product and 9.6 h is stored for the immediate species only; intramuscular F of 1 holds only for a phosphate-only solution (PMID:6487477), the same paper showing depot availability is much lower. THE TRANSDERMAL ROW CONTRADICTED ITS OWN CITATION: 5 h against a stated 16.6 h. All three volumes of 67 L are dropped — no abstract found states any numeric betamethasone volume — along with oral F 0.72 (from a paper with no intravenous arm) and both absorption rates, which sit beside stated peaks at 2.8 h."
+    "notes": "ROUTES REORDERED so the dosing default is a solvable route. TD stays declared and remains the commonest use, but it carries no pk block: a topical corticosteroid’s systemic availability depends on vehicle, site and occlusion, so one scalar F would be a fiction. PO is authored and becomes the default. PK: three routes, three separate failures. The oral half-life of 8.1 h is verbatim and stands, but it was copied onto the intravenous row from a study comparing ORAL WITH TOPICAL dosing; the intravenous value is 6.5 h (PMID:6662164, eight healthy adults on a phosphate bolus). The intramuscular row cited a DEPOT product whose own paper gives 9.6 h for betamethasone and 80.8 h for the 17-monopropionate ester (PMID:21899210), so no single intramuscular half-life represents that product and 9.6 h is stored for the immediate species only; intramuscular F of 1 holds only for a phosphate-only solution (PMID:6487477), the same paper showing depot availability is much lower. THE TRANSDERMAL ROW CONTRADICTED ITS OWN CITATION: 5 h against a stated 16.6 h. All three volumes of 67 L are dropped — no abstract found states any numeric betamethasone volume — along with oral F 0.72 (from a paper with no intravenous arm) and both absorption rates, which sit beside stated peaks at 2.8 h."
   },
   {
     "slug": "betaxolol",
@@ -6360,6 +6360,12 @@
         "V_L": 301,
         "F": 0.107,
         "source_pmid": "PMID:6958498"
+      },
+      "INH": {
+        "F": 0.39,
+        "V_L": 210,
+        "source_label": "FDA label: Pulmicort Flexhaler (budesonide) inhalation powder. DailyMed set id ae1105cd-69fc-4c15-937f-c535304341c2, effective 2026-07-31.",
+        "note": "INHALED ROUTE AUTHORED FROM THE PULMICORT FLEXHALER LABEL, which is the form this drug is mostly used in. Section 12.3 verbatim: \"an absolute systemic availability of 39% of the metered dose\" and \"The volume of distribution of budesonide was approximately 3 L/kg\", so V is 3 x 70 = 210 L at the reference weight. THE DENOMINATOR IS THE METERED DOSE, not the delivered or lung dose, so a dose entered here must be the metered one; the same section puts lung deposition at 34% and measured that with a DIFFERENT dry-powder inhaler. The stored INH half-life of 2.8 h sits inside the label’s \"terminal half-life, 2 to 3 hours\". NO PEAK TIME IS STATED for the inhaled route, so no ka is authored and the resolver’s 1.0/h stands — the shape is a guess, the exposure is not."
       }
     },
     "effect_compartment": {
@@ -15964,8 +15970,8 @@
     "category": "pharmacological",
     "mechanism": "Endogenous catecholamine and emergency drug. Mixed α1/α2/β1/β2/β3 agonist (with higher β-affinity than norepinephrine due to the N-methyl group added by PNMT). Endogenously synthesized in adrenal medulla + brainstem PNMT-expressing neurons under sympathetic activation. Clinical use: IM anaphylaxis (0.3-0.5 mg adult / 0.15 mg pediatric), ACLS cardiac arrest (1 mg IV q3-5 min), septic shock vasopressor, local-anesthetic vasoconstrictor (with lidocaine to extend block + reduce systemic absorption), nebulized for upper-airway croup. Extremely short t½ (~2-3 min IV) due to rapid MAO/COMT degradation — bolus or infusion only. PK (Coté 2009 critical-care popPK PMID:19534820 + EpiPen label): IV anaphylaxis/cardiac-arrest workhorse + IM autoinjector for outpatient anaphylaxis. t½ ~3.5 min — among the shortest of all clinical drugs. Vd 8 L (vascular + minimal tissue). Clearance dominated by hepatic MAO + COMT extraneuronal metabolism (cross-link: monoamine_oxidase_metabolism + catecholamine_synthesis). Oral F essentially zero (massive first-pass MAO/COMT). IM/SC absorption via local vasoconstriction is paradoxically variable; IM thigh (vastus lateralis) preferred over deltoid for autoinjector use (faster + more reliable absorption).",
     "routes": [
-      "IM",
       "IV",
+      "IM",
       "SC",
       "INH"
     ],
@@ -16005,7 +16011,7 @@
       "PMID:33685510",
       "PMID:37604314"
     ],
-    "notes": "PK: MY HOMEOSTATIC PRIOR IS REFUTED — THE CITATION ARGUES THE OPPOSITE, VERBATIM. I expected an endogenous catecholamine with a strong basal concentration to belong with the minerals in the unauthored class. Its source concludes \"Epinephrine pharmacokinetics is linear in septic shock patients, without any saturation at high doses\" and explicitly checked the basal question: \"Basal neurohormonal status does not influence epinephrine pharmacokinetics.\" A dosed first-order curve is the right object here, and the record keeps it. The defect is smaller and ordinary: that paper states its clearance as an equation, \"CL (L/hr) = 127 x (BW/70)0.60 x (SAPS II/50)-0.67\", which at this catalogue seventy-kilogram reference and the score the equation is centred on is 127 L/h, against a stored assertion of 96 — a third too slow. The half-life is verbatim, \"The corresponding half-life was 3.5 minutes\", so the volume moves to the one that clearance implies at that rate. TWO CAVEATS TRAVEL WITH IT: the cohort is septic-shock patients under steady-state infusion, not healthy volunteers, and an intramuscular route is declared with a dose but NO parameters, so the autoinjector dose the record carries yields no curve at all. PK: THE INTRAMUSCULAR ROUTE IS THIS RECORD DEFAULT AND ITS COMMONEST REAL USE — the anaphylaxis autoinjector — AND IT CANNOT BE MODELLED HERE. That is a finding, not an omission, and the model proves it. A one-compartment peak time is bounded, because Tmax = ln(ka/ke)/(ka-ke) rises as ka approaches ke and cannot exceed 1/ke; at this record verbatim intravenous half-life of 3.5 minutes that CEILING IS 5.0 MINUTES. The published intramuscular peak is \"Tmax 5-10 min\" — at the ceiling at best and past it at worst — SO NO ABSORPTION RATE REPRODUCES IT. The reason is flip-flop kinetics: intramuscular absorption is slower than elimination, so this route apparent terminal slope reflects ABSORPTION rather than elimination and cannot inherit the intravenous half-life. Authoring it needs an intramuscular-specific apparent half-life and no indexed abstract states one. AND THE PROFILE IS BIPHASIC REGARDLESS: a systematic review of the intramuscular literature reports verbatim that \"Most investigators found two Cmax's with Tmax 5-10 min and 30-50 min, respectively\", while a single first-order rate produces exactly one peak — so even with a correct half-life this route would be structurally misrepresented. Recorded before someone fits a rate to the first peak and calls the record finished."
+    "notes": "ROUTES REORDERED so the dosing default is a solvable route. IM stays declared and is the emergency route, but the EpiPen label states no bioavailability, volume or half-life, and IM epinephrine PK is dominated by local vasoconstriction at the injection site, which a first-order ka cannot represent. IV is authored and becomes the default. PK: MY HOMEOSTATIC PRIOR IS REFUTED — THE CITATION ARGUES THE OPPOSITE, VERBATIM. I expected an endogenous catecholamine with a strong basal concentration to belong with the minerals in the unauthored class. Its source concludes \"Epinephrine pharmacokinetics is linear in septic shock patients, without any saturation at high doses\" and explicitly checked the basal question: \"Basal neurohormonal status does not influence epinephrine pharmacokinetics.\" A dosed first-order curve is the right object here, and the record keeps it. The defect is smaller and ordinary: that paper states its clearance as an equation, \"CL (L/hr) = 127 x (BW/70)0.60 x (SAPS II/50)-0.67\", which at this catalogue seventy-kilogram reference and the score the equation is centred on is 127 L/h, against a stored assertion of 96 — a third too slow. The half-life is verbatim, \"The corresponding half-life was 3.5 minutes\", so the volume moves to the one that clearance implies at that rate. TWO CAVEATS TRAVEL WITH IT: the cohort is septic-shock patients under steady-state infusion, not healthy volunteers, and an intramuscular route is declared with a dose but NO parameters, so the autoinjector dose the record carries yields no curve at all. PK: THE INTRAMUSCULAR ROUTE IS THIS RECORD DEFAULT AND ITS COMMONEST REAL USE — the anaphylaxis autoinjector — AND IT CANNOT BE MODELLED HERE. That is a finding, not an omission, and the model proves it. A one-compartment peak time is bounded, because Tmax = ln(ka/ke)/(ka-ke) rises as ka approaches ke and cannot exceed 1/ke; at this record verbatim intravenous half-life of 3.5 minutes that CEILING IS 5.0 MINUTES. The published intramuscular peak is \"Tmax 5-10 min\" — at the ceiling at best and past it at worst — SO NO ABSORPTION RATE REPRODUCES IT. The reason is flip-flop kinetics: intramuscular absorption is slower than elimination, so this route apparent terminal slope reflects ABSORPTION rather than elimination and cannot inherit the intravenous half-life. Authoring it needs an intramuscular-specific apparent half-life and no indexed abstract states one. AND THE PROFILE IS BIPHASIC REGARDLESS: a systematic review of the intramuscular literature reports verbatim that \"Most investigators found two Cmax's with Tmax 5-10 min and 30-50 min, respectively\", while a single first-order rate produces exactly one peak — so even with a correct half-life this route would be structurally misrepresented. Recorded before someone fits a rate to the first peak and calls the record finished."
   },
   {
     "slug": "epitalon",
@@ -53780,8 +53786,8 @@
     ],
     "mechanism": "Six-carbon sugar alcohol (hexitol), the reduced form of mannose, non-glycemic and non-cariogenic. Orally it is poorly absorbed — lacking an active intestinal transporter, it crosses the mucosa slowly by passive diffusion, so the bulk reaches the colon where it draws water osmotically (laxative) and is fermented by gut flora to short-chain fatty acids and gas, yielding only ~1.6 kcal/g; the absorbed fraction is largely excreted unchanged in urine, not metabolised by hexokinase. Given intravenously it is a distinct clinical agent: confined to extracellular fluid, freely filtered at the glomerulus and essentially non-reabsorbed, it acts as an osmotic diuretic and raises plasma osmolality to pull water from brain and ocular tissue, lowering intracranial and intraocular pressure before renal clearance largely intact.",
     "routes": [
-      "PO",
-      "IV"
+      "IV",
+      "PO"
     ],
     "doses": {
       "PO": {
@@ -53805,7 +53811,7 @@
     ],
     "mw_g_mol": 182.17,
     "recon3d_metabolite_id": "mnl",
-    "notes": "E421 sugar-alcohol bulk sweetener, ~50-60% as sweet as sucrose at ~1.6 kcal/g; JECFA ADI \"not specified\" and EU-permitted quantum satis, but foods exceeding ~10% polyol must carry a \"excessive consumption may produce laxative effects\" warning. The IV form (Osmitrol) is a prescription osmotic diuretic, a distinct use from the food additive. IV PK (Cloyd 1986, n=4 humans): apparent Vd ~0.47 L/kg (≈32.9 L/70 kg, high inter-subject variance) and terminal t½ ~71 min (1.19 h) — a 1-compartment approximation of the reported 2-compartment fit (the ~2 min distribution phase is negligible here). PK: THE NOTE CLAIMED A ONE-COMPARTMENT APPROXIMATION THAT DOES NOT CLOSE. All three numbers are verbatim from four human subjects — \"the mean ... elimination half-life was 71.15 +/- 27.02 min\", \"The volume of distribution was 0.47 +/- 0.50 liters/kg and total body clearance was 7.15 +/- 10.23 ml X min-1 X kg-1\" — but the stored volume paired with the stored half-life asserts a clearance of 19.2 L/h against that paper own 30.0, HALF AGAIN TOO SLOW, so the record was not the approximation it said it was. The volume becomes the verbatim clearance over the verbatim rate, and exposure now reproduces the paper. A CAVEAT LARGER THAN THE CORRECTION: this is four subjects and EVERY REPORTED STANDARD DEVIATION EXCEEDS ITS OWN MEAN, so the 1.56-fold gap sits comfortably inside the noise and the fix buys internal coherence rather than accuracy. THE ORAL ROUTE IS DELIBERATELY LEFT WITHOUT PARAMETERS: it is declared with a food-additive dose and no pharmacokinetics, so it yields no curve at all — and here that is CORRECT rather than broken, because oral mannitol is minimally absorbed and acts osmotically in the gut lumen, which is also why the laxative warning exists.",
+    "notes": "ROUTES REORDERED so the dosing default is a solvable route, and the reason is pharmacology rather than presentation: ORAL MANNITOL IS ESSENTIALLY UNABSORBED and acts luminally as an osmotic agent, so there is no systemic curve to render for it. PO stays declared because it is a real use; IV is the route with an exposure. E421 sugar-alcohol bulk sweetener, ~50-60% as sweet as sucrose at ~1.6 kcal/g; JECFA ADI \"not specified\" and EU-permitted quantum satis, but foods exceeding ~10% polyol must carry a \"excessive consumption may produce laxative effects\" warning. The IV form (Osmitrol) is a prescription osmotic diuretic, a distinct use from the food additive. IV PK (Cloyd 1986, n=4 humans): apparent Vd ~0.47 L/kg (≈32.9 L/70 kg, high inter-subject variance) and terminal t½ ~71 min (1.19 h) — a 1-compartment approximation of the reported 2-compartment fit (the ~2 min distribution phase is negligible here). PK: THE NOTE CLAIMED A ONE-COMPARTMENT APPROXIMATION THAT DOES NOT CLOSE. All three numbers are verbatim from four human subjects — \"the mean ... elimination half-life was 71.15 +/- 27.02 min\", \"The volume of distribution was 0.47 +/- 0.50 liters/kg and total body clearance was 7.15 +/- 10.23 ml X min-1 X kg-1\" — but the stored volume paired with the stored half-life asserts a clearance of 19.2 L/h against that paper own 30.0, HALF AGAIN TOO SLOW, so the record was not the approximation it said it was. The volume becomes the verbatim clearance over the verbatim rate, and exposure now reproduces the paper. A CAVEAT LARGER THAN THE CORRECTION: this is four subjects and EVERY REPORTED STANDARD DEVIATION EXCEEDS ITS OWN MEAN, so the 1.56-fold gap sits comfortably inside the noise and the fix buys internal coherence rather than accuracy. THE ORAL ROUTE IS DELIBERATELY LEFT WITHOUT PARAMETERS: it is declared with a food-additive dose and no pharmacokinetics, so it yields no curve at all — and here that is CORRECT rather than broken, because oral mannitol is minimally absorbed and acts osmotically in the gut lumen, which is also why the laxative warning exists.",
     "pk": {
       "IV": {
         "F": 1,
@@ -55602,8 +55608,8 @@
     "category": "alkaloid",
     "mechanism": "Very fast, very potent tryptamine psychedelic. A serotonergic agonist with affinity rank 5-HT1A >> 5-HT2A (5-HT1A is the primary high-affinity target, ~300-fold over 5-HT2A). O-demethylated by CYP2D6 to bufotenine and an MAO substrate. Found in Bufo alvarius (Sonoran toad) venom. Risks: extreme intensity, transient hypertension, rare serotonin toxicity when MAOI-combined.",
     "routes": [
-      "INH",
-      "IN"
+      "IN",
+      "INH"
     ],
     "doses": {
       "INH": {
@@ -55631,7 +55637,7 @@
     "systems": [
       "nervous"
     ],
-    "notes": "PubChem CID 1832. PK: Rucker 2024 (PMID:38616411) verbatim \"the mean terminal elimination half-life was <27 min\" (Tmax ~8–10 min) for intranasal BPL-003 5-MeO-DMT benzoate; authored as 0.45 h. 5-HT2A occupancy not authored — 5-HT2A is the weak target (5-HT1A primary) and its Ki is table-only (see AUTHORING_GAPS).",
+    "notes": "ROUTES REORDERED so the dosing default is a solvable route. INH (vaporised) is the commonest real-world route and stays declared, but no human study reports an inhaled parameter for it, so it rendered a dose against no curve. IN is the route this record actually has PK for. PubChem CID 1832. PK: Rucker 2024 (PMID:38616411) verbatim \"the mean terminal elimination half-life was <27 min\" (Tmax ~8–10 min) for intranasal BPL-003 5-MeO-DMT benzoate; authored as 0.45 h. 5-HT2A occupancy not authored — 5-HT2A is the weak target (5-HT1A primary) and its Ki is table-only (see AUTHORING_GAPS).",
     "refs": [
       "PMID:38616411"
     ]

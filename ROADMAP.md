@@ -115,9 +115,13 @@ change commits separately from the data.
 - [ ] Known dead, do not re-chase: PMC3911487 (no `<body>`), PMC5945293 (MitoQ value is
       figure-only).
 
-## Batch 7 — `pk.unsolvable-default-route` · 5 records
+## Batch 7 — `pk.unsolvable-default-route` · 5 records — **DONE 2026-09-27**
 
-- [ ] 5-meo-dmt, betamethasone, budesonide, epinephrine, mannitol. `routes[0]` yields no
+budesonide's INH route authored from the Pulmicort label (F 0.39 of the metered dose, V 210 L). The
+other four reordered with the reason on each record: for mannitol the reason is pharmacology, since
+oral mannitol is unabsorbed and acts luminally.
+
+- [x] 5-meo-dmt, betamethasone, budesonide, epinephrine, mannitol. `routes[0]` yields no
       elimination rate, so the commonest path through each record renders nothing.
 
 ## Batch 8 — singletons

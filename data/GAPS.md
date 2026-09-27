@@ -6574,3 +6574,37 @@ bioavailability being verbatim: at F 0.03 an oral dose is …", where the colon 
 reads prose, and it was cheaper to fix the sentence than to weaken the rule.**
 
 Gate coverage 637 → 642 quotes, still 0 missing. The rule now fires nowhere.
+
+## 2026-09-27 — `pk.unsolvable-default-route` · 5 records
+
+Each declared a `routes[0]` with no elimination rate, so the dosing UI defaulted to it and the
+commonest path through the record selected a dose and rendered nothing. The rule offers two fixes —
+author the route, or order `routes[]` so a solvable one leads — and **which of the two is right is a
+pharmacological question, not a presentational one.**
+
+### One authored: `budesonide` INH
+
+The one where the unsolvable route is what the drug actually *is*. The Pulmicort Flexhaler label
+supplies both missing numbers verbatim: *"an absolute systemic availability of 39% of the metered
+dose"* and *"The volume of distribution of budesonide was approximately 3 L/kg"* (set id
+`ae1105cd-69fc-4c15-937f-c535304341c2`, effective 2026-07-31), so F 0.39 and V 210 L at the
+reference weight. The stored INH half-life of 2.8 h sits inside the label's *"2 to 3 hours"*.
+
+**Two caveats are on the record.** The denominator is the **metered** dose, not the delivered or
+lung dose — the same section puts lung deposition at 34% and measured that with a *different*
+dry-powder inhaler — so a dose entered against this route must be the metered one. And no peak time
+is stated for the inhaled route, so no `ka` is authored: the shape is the resolver's 1.0/h default,
+while the exposure is real.
+
+### Four reordered, each for a stated reason
+
+| Compound | `routes[0]` was | is | Why the route cannot be authored |
+| --- | --- | --- | --- |
+| `mannitol` | PO | IV | **Pharmacology, not presentation: oral mannitol is essentially unabsorbed** and acts luminally as an osmotic agent. There is no systemic curve to render. PO stays declared because it is a real use. |
+| `betamethasone` | TD | PO | A topical corticosteroid's systemic availability depends on vehicle, site and occlusion. **One scalar F would be a fiction**, and TD remains the commonest use. |
+| `epinephrine` | IM | IV | The EpiPen label states no bioavailability, volume or half-life, and **IM epinephrine's absorption is dominated by local vasoconstriction at the injection site** — which a first-order `ka` cannot represent at all. |
+| `5-meo-dmt` | INH | IN | Vaporised is the commonest real-world route and stays declared, but no human study reports an inhaled parameter. IN is the route this record has PK for. |
+
+No route was removed from any `routes[]`; the set is identical in all four and the script refused to
+run otherwise. **Reordering changes which route a reader lands on first, not what the compound is
+used by.**
