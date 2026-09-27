@@ -1214,3 +1214,42 @@ describe('pd.template-keo', () => {
     expect(fired(five)).toBe(true);
   });
 });
+
+describe('pd.occupancy-flat', () => {
+  const rec = (over: Record<string, unknown>): Compound =>
+    compound({
+      slug: 'z',
+      name: 'Z',
+      doses: { PO: { min: 10, max: 10, typical: 10, unit: 'mg' } },
+      half_life_hr: { PO: 4 },
+      pk: { PO: { F: 1, V_L: 100, ka_hr: 2 } },
+      effect_compartment: { keo_per_h: 0.5, source_pmid: 'PMID:1' },
+      ...over,
+    } as unknown as Partial<Compound> & { slug: string; name: string });
+
+  const site = (ec50: number) =>
+    [
+      { receptor: 'r', emax: 1, ec50_mg_l: ec50, hill_n: 1 },
+    ] as unknown as Compound['receptor_occupancy'];
+
+  it('fires when the affinity is unreachable at the typical dose', () => {
+    // 10 mg into 100 L cannot approach an EC50 of 1000 mg/L.
+    expect(rules(lint([rec({ receptor_occupancy: site(1000) })]))).toContain('pd.occupancy-flat');
+  });
+
+  it('fires when the row is saturated from the first dose', () => {
+    expect(rules(lint([rec({ receptor_occupancy: site(1e-9) })]))).toContain('pd.occupancy-flat');
+  });
+
+  it('stays quiet inside the usable band', () => {
+    // EC50 near the effect-site peak puts occupancy mid-band.
+    expect(rules(lint([rec({ receptor_occupancy: site(0.03) })]))).not.toContain(
+      'pd.occupancy-flat',
+    );
+  });
+
+  it('does not fire on a record whose PD cannot be resolved at all', () => {
+    const c = rec({ receptor_occupancy: site(1000), effect_compartment: undefined });
+    expect(rules(lint([c]))).not.toContain('pd.occupancy-flat');
+  });
+});

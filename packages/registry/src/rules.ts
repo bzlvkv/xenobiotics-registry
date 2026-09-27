@@ -160,6 +160,12 @@ export const LINT_RULES: Readonly<Record<string, RuleInfo>> = {
     summary:
       'One approximated keo is the declared estimate on many unrelated compounds, and no per-compound surface shows the concentration.',
   },
+  'pd.occupancy-flat': {
+    level: 'warning',
+    standing: true,
+    summary:
+      'A record\u2019s dose, exposure, keo, unbound fraction and affinity jointly imply a peak occupancy outside 1-99%, so its dose-response is a flat line.',
+  },
   'pd.needs-solvable-pk': {
     level: 'warning',
     summary: 'PD is authored but no route yields elimination, so Ce(t) is never computed.',

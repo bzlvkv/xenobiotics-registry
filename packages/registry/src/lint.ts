@@ -24,6 +24,7 @@
  */
 
 import { PK_DEFAULTS } from './exposure';
+import { impliedOccupancies } from './occupancy';
 import { SYSTEM_IDS } from './types';
 import type { Compound, Registry, RoutePk } from './types';
 
@@ -240,6 +241,14 @@ const DEFAULT_KA_PER_HR = PK_DEFAULTS.kaPerHr;
  * a group worth a real fit surfaces while it is still small.
  */
 const TEMPLATE_KEO_MIN_IDENTITIES = 5;
+
+/**
+ * The band a peak occupancy must land in for a record's PD numbers to be jointly
+ * usable. Outside it the Hill curve is a flat line: either nothing binds at any
+ * reachable concentration, or everything is saturated from the first dose.
+ */
+const OCCUPANCY_FLOOR = 0.01;
+const OCCUPANCY_CEILING = 0.99;
 const DEFAULT_V_L_PER_KG = PK_DEFAULTS.vLPerKg;
 const DEFAULT_V_L_PER_KG_PROTEIN = PK_DEFAULTS.vLPerKgProtein;
 const REFERENCE_WEIGHT_KG = PK_DEFAULTS.referenceWeightKg;
@@ -1130,6 +1139,45 @@ export function lintRegistry(registry: Registry): Finding[] {
         '(catalog)',
         'pd.template-keo',
         `keo ${keo} /h is the declared approximation on ${identities.size} unrelated compounds — each honestly flagged, but a reader on any one of them cannot see the other ${identities.size - 1}, and occupancy on all of them runs against a Ce(t) built from this one guess: ${slugs.join(', ')}`,
+      );
+    }
+  }
+
+  // ── A dose-response with no response in it ──────────────────────────
+  // THE FIRST RULE HERE THAT RESOLVES THE WHOLE RECORD RATHER THAN READING FIELDS.
+  // `occupancy.ts` turns a record's dose, volume, bioavailability, half-life, ka,
+  // keo, unbound fraction and affinity into one number — peak occupancy at the
+  // typical dose — and a number outside 1-99% means those values cannot jointly
+  // produce a dose-response curve. It is the PD analogue of the teriparatide
+  // defect: every input correctly cited, and jointly impossible.
+  //
+  // BOTH READINGS ARE REAL, WHICH IS WHY THIS IS A WARNING AND STANDING. Some
+  // extremes are the honest answer: `cbd` shows 0.004% at CB1 because its CB1 Ki
+  // really is micromolar and it does not act by direct CB1 agonism, and a
+  // neutralising antibody in molar excess over its cytokine really does sit near
+  // 100%. Others are defects the rule exists to surface — the sweep that added it
+  // found five records storing a PER-KILOGRAM or PER-HOUR dose as an absolute
+  // single dose, which is a 70-fold error that nothing reading one field at a time
+  // could see.
+  //
+  // The message names which inputs were DEFAULTED, because an extreme that rests
+  // on an unmeasured number is attributable to that number, while one on fully
+  // stored inputs is either pharmacology or a real defect.
+  {
+    const flat: string[] = [];
+    for (const c of data) {
+      for (const o of impliedOccupancies(c)) {
+        if (!o.ok) continue;
+        if (o.peakOccupancy >= OCCUPANCY_FLOOR && o.peakOccupancy <= OCCUPANCY_CEILING) continue;
+        const defaulted = o.fu.from === 'default' ? ' (fu defaulted to 1)' : '';
+        flat.push(`${c.slug}.${o.receptor} ${(o.peakOccupancy * 100).toPrecision(3)}%${defaulted}`);
+      }
+    }
+    if (flat.length) {
+      warn(
+        '(catalog)',
+        'pd.occupancy-flat',
+        `${flat.length} occupancy rows imply a peak below ${OCCUPANCY_FLOOR * 100}% or above ${OCCUPANCY_CEILING * 100}% at the record's typical dose, so the stored dose, exposure, keo, unbound fraction and affinity cannot jointly produce a dose-response. Some are the honest answer and some are defects — this sweep found five records storing a per-kilogram or per-hour dose as an absolute one: ${flat.join(', ')}`,
       );
     }
   }
