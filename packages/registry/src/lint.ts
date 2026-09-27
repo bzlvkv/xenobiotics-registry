@@ -61,6 +61,61 @@ export const RECEPTOR_ALIASES: Readonly<Record<string, string>> = {
   nicotinic_ach: 'nachr_muscle',
 };
 
+/**
+ * A note that ANNOUNCES a quotation: "verbatim:", "abstract states:".
+ *
+ * The colon is the whole of it. "0.83 and 0.96 h are both verbatim and stand" is
+ * an assertion ABOUT values and offers no sentence; "Shahid 2009 verbatim: …"
+ * promises one. 172 notes use the word, and only the announcing form can be held
+ * to producing a quotation.
+ */
+const ANNOUNCES_QUOTE = /\b(?:verbatim|abstract (?:states|reads))\s*:/gi;
+
+/** Any opening quotation mark, straight or curly, single or double. */
+const OPENS_QUOTE = /["\u201c']/;
+
+/**
+ * Every announced quotation in a note that is not followed by one.
+ *
+ * SEGMENTED BY ANNOUNCEMENT, NOT BY CLAUSE, and that is not a detail. A good note
+ * announces twice — once for the stored value and once for what it replaced — and
+ * a quotation may contain a full stop, so any clause-based split cuts a true
+ * quotation in half and reports the half without the marks. That mistake was made
+ * while writing this rule: it reported 109 notes, of which about a hundred were
+ * quoting perfectly well across a sentence boundary. Each announcement therefore
+ * owns the text up to the next one, or to the end.
+ */
+function unquotedAnnouncements(note: string): string[] {
+  const at = [...note.matchAll(ANNOUNCES_QUOTE)].map((m) => m.index! + m[0].length);
+  const out: string[] = [];
+  for (let i = 0; i < at.length; i++) {
+    const seg = note.slice(at[i]!, i + 1 < at.length ? at[i + 1]! : note.length);
+    if (!OPENS_QUOTE.test(seg)) out.push(seg.trim());
+  }
+  return out;
+}
+
+/** The note-ish fields a record may carry, in the order a reader meets them. */
+const NOTE_FIELDS = ['note', 'notes', 'fu_note', 'dose_moiety_note'] as const;
+
+/** Walk a record for announced-but-missing quotations, reporting each field path. */
+function announcedQuoteGaps(node: unknown, path: string, out: string[]): void {
+  if (node == null || typeof node !== 'object') return;
+  if (Array.isArray(node)) {
+    node.forEach((v, i) => announcedQuoteGaps(v, `${path}[${i}]`, out));
+    return;
+  }
+  const rec = node as Record<string, unknown>;
+  for (const key of NOTE_FIELDS) {
+    const text = rec[key];
+    if (typeof text !== 'string') continue;
+    if (unquotedAnnouncements(text).length > 0) out.push(path ? `${path}.${key}` : key);
+  }
+  for (const [k, v] of Object.entries(rec)) {
+    if (typeof v === 'object' && v !== null) announcedQuoteGaps(v, path ? `${path}.${k}` : k, out);
+  }
+}
+
 /** Map a possibly-aliased receptor key to its canonical form. */
 export function canonicalReceptor(key: string): string {
   return RECEPTOR_ALIASES[key] ?? key;
@@ -1652,6 +1707,31 @@ export function lintRegistry(registry: Registry): Finding[] {
       // all five and on nothing else. Per-field provenance would let this be checked
       // properly; until then, saying which value came from where in `note` is the
       // contract.
+    }
+
+    // ── a quotation announced and not given ───────────────────────────
+    // `verify:quotes` is OPT-IN BY KEYWORD: it checks a quoted span, so a note that
+    // says "verbatim:" and then paraphrases is invisible to it and passes a gate it
+    // never entered. That is not hypothetical — three separate rows this month
+    // claimed a verbatim value with no quotation, and reading the sources showed one
+    // of them (`tolterodine`) had two candidate figures in the cited sentence, of
+    // which the stored one was right and the neighbouring one was a DIFFERENT
+    // SPECIES. The paraphrase hid a choice that mattered.
+    //
+    // A table cell is the honest exception and is NOT a defect: a figure read from
+    // Table 1 is not a sentence and cannot be quoted as one. The fix for those rows
+    // is to say "full text", which `verify:quotes` already exempts by design, rather
+    // than to invent a sentence around a number.
+    {
+      const gaps: string[] = [];
+      announcedQuoteGaps(c, '', gaps);
+      for (const origin of gaps) {
+        warn(
+          c.slug,
+          'note.announced-quote-missing',
+          `${origin} announces a quotation ("verbatim:") and gives none, so verify:quotes cannot check it — quote the sentence, or say "full text" if the value came from a table`,
+        );
+      }
     }
 
     // ── systems[] tagging ─────────────────────────────────────────────

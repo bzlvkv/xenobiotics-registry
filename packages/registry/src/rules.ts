@@ -192,6 +192,11 @@ export const LINT_RULES: Readonly<Record<string, RuleInfo>> = {
     level: 'error',
     summary: 'An intravenous route stores F other than 1.',
   },
+  'note.announced-quote-missing': {
+    level: 'warning',
+    summary:
+      'A note announces a quotation ("verbatim:") and gives none, so verify:quotes cannot check it.',
+  },
   'pk.label-revision': {
     level: 'warning',
     summary:

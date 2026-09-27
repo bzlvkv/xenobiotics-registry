@@ -1108,3 +1108,37 @@ describe('muscarinic subtype keys bridge to the catalogued CHRM genes', () => {
     expect(targetKeyFor('alpha_1')).toBe('alpha_1');
   });
 });
+
+describe('note.announced-quote-missing', () => {
+  const fired = (note: string): boolean =>
+    rules(
+      lint([compound({ slug: 'x', name: 'X', pk_unauthored: { reason: 'no_human_pk', note } })]),
+    ).includes('note.announced-quote-missing');
+
+  it('fires when a note announces a quotation and paraphrases instead', () => {
+    expect(fired('Shahid 2009 verbatim: asenapine D2 pKi 8.9, human.')).toBe(true);
+  });
+
+  it('does not fire when the quotation is given', () => {
+    expect(fired('Shahid 2009 verbatim: "asenapine showed high affinity" here.')).toBe(false);
+  });
+
+  it('does not fire on an assertion ABOUT values, which promises no sentence', () => {
+    // agomelatine: "0.96 h is verbatim and stands" offers no sentence to check.
+    expect(fired('F 0.83 and t1/2 0.96 h are both verbatim and stand.')).toBe(false);
+  });
+
+  it('does not report a true quotation that contains a full stop', () => {
+    // The mistake made while writing this rule: a clause-based split cut a real
+    // quotation in half and flagged the half without the marks.
+    expect(fired('PMID:1 verbatim: "the first sentence ends. and it continues" after.')).toBe(
+      false,
+    );
+  });
+
+  it('judges each announcement separately', () => {
+    expect(
+      fired('PMID:1 verbatim: "a proper quotation here". PMID:2 verbatim: a paraphrase.'),
+    ).toBe(true);
+  });
+});
