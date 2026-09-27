@@ -31,7 +31,7 @@ describe('LINT_RULES', () => {
   });
 
   it('marks only warnings as standing caveats', () => {
-    expect(STANDING_CAVEAT_RULES.size).toBe(7);
+    expect(STANDING_CAVEAT_RULES.size).toBe(8);
     for (const id of STANDING_CAVEAT_RULES) expect(LINT_RULES[id]!.level).toBe('warning');
   });
 });

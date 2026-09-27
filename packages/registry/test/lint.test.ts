@@ -1253,3 +1253,42 @@ describe('pd.occupancy-flat', () => {
     expect(rules(lint([c]))).not.toContain('pd.occupancy-flat');
   });
 });
+
+describe('pk.template-volume', () => {
+  const withV = (slug: string, V_L: number, routes: string[] = ['PO']): Compound =>
+    compound({
+      slug,
+      name: slug.toUpperCase(),
+      routes,
+      doses: Object.fromEntries(routes.map((r) => [r, { min: 1, max: 1, typical: 1, unit: 'mg' }])),
+      half_life_hr: Object.fromEntries(routes.map((r) => [r, 4])),
+      pk: Object.fromEntries(routes.map((r) => [r, { F: 0.9, V_L, source_pmid: 'PMID:1' }])),
+    } as unknown as Partial<Compound> & { slug: string; name: string });
+
+  const fired = (cs: Compound[]): boolean => rules(lint(cs)).includes('pk.template-volume');
+
+  it('fires once five unrelated compounds store the same volume', () => {
+    expect(fired(['a', 'b', 'c', 'd', 'e'].map((s) => withV(s, 28)))).toBe(true);
+  });
+
+  it('stays quiet below the threshold', () => {
+    expect(fired(['a', 'b', 'c', 'd'].map((s) => withV(s, 28)))).toBe(false);
+  });
+
+  it('counts compounds, not route rows — one volume may repeat across a compound’s routes', () => {
+    // fentanyl carries the same 280 L on four routes and morphine on five, which is
+    // correct practice; counting rows would report two compounds as nine.
+    const two = [
+      withV('a', 28, ['PO', 'IV', 'IM', 'SC']),
+      withV('b', 28, ['PO', 'IV', 'IM', 'SC', 'IN']),
+    ];
+    expect(fired(two)).toBe(false);
+  });
+
+  it('reports the per-kilogram equivalent, which is what gives a prior away', () => {
+    const f = lint(['a', 'b', 'c', 'd', 'e'].map((s) => withV(s, 28))).find(
+      (x) => x.rule === 'pk.template-volume',
+    );
+    expect(f?.message).toContain('0.400 L/kg');
+  });
+});

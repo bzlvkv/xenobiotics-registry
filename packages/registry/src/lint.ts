@@ -247,6 +247,10 @@ const TEMPLATE_KEO_MIN_IDENTITIES = 5;
  * usable. Outside it the Hill curve is a flat line: either nothing binds at any
  * reachable concentration, or everything is saturated from the first dose.
  */
+/** Distinct compounds that must share one V_L before it is reported. Five, matching
+ *  `pk.template-ka` and `pd.template-keo`, which found the same shape in other fields. */
+const TEMPLATE_VOLUME_MIN_IDENTITIES = 5;
+
 const OCCUPANCY_FLOOR = 0.01;
 const OCCUPANCY_CEILING = 0.99;
 const DEFAULT_V_L_PER_KG = PK_DEFAULTS.vLPerKg;
@@ -1093,6 +1097,49 @@ export function lintRegistry(registry: Registry): Finding[] {
         '(catalog)',
         'pk.template-ka',
         `ka ${ka} /h is shared by ${identities.size} unrelated compounds under ${citations.size} different citations — a plausible number reached for repeatedly, not ${rows.length} independent measurements: ${rows.map((r) => `${r.slug}.${r.route}`).join(', ')}`,
+      );
+    }
+  }
+
+  // ── A volume shared by many unrelated compounds ─────────────────────
+  // THE THIRD INSTANCE OF ONE SHAPE, and the most consequential field it has
+  // appeared in. `pk.template-ka` found it in absorption rates and
+  // `pd.template-keo` in effect-compartment constants; this finds it in V_L, where
+  // `pk.defaulted-volume` already says what is at stake — a volume "sets the whole
+  // concentration scale".
+  //
+  // AND `pk.defaulted-volume` CANNOT SEE THIS ONE, which is why the rule is
+  // separate rather than an extension. That rule counts volumes that are ABSENT. A
+  // templated volume is PRESENT and carries a source_pmid, so it reads as authored.
+  //
+  // What gives it away is the per-kilogram equivalent. The shared values divide by
+  // the 70 kg reference into textbook priors — 0.4 L/kg is roughly total body
+  // water, 0.2 L/kg extracellular fluid, 0.11 L/kg the plasma-plus-interstitial
+  // figure a monoclonal is assumed to occupy — and 15 unrelated compounds cannot
+  // each have measured exactly 28 L. Spot-checking six of the cited abstracts on
+  // 2026-09-27 found no volume language of any kind in any of them.
+  //
+  // COUNTED BY DISTINCT COMPOUND, not by route row, because one measured volume
+  // legitimately repeats across a compound's own routes: fentanyl carries the same
+  // 280 L on four routes and morphine on five, which is correct practice and would
+  // otherwise dominate the count.
+  {
+    const byV = new Map<number, Set<string>>();
+    for (const c of data) {
+      const vals = new Set<number>();
+      for (const [, pk] of pkRoutes(c)) if (pk.V_L != null) vals.add(pk.V_L);
+      for (const v of vals) {
+        const owner = canonicalOwner.get(identityKey(c.name)) ?? c.slug;
+        byV.set(v, (byV.get(v) ?? new Set()).add(owner));
+      }
+    }
+    for (const [v, owners] of [...byV].sort((a, b) => b[1].size - a[1].size)) {
+      if (owners.size < TEMPLATE_VOLUME_MIN_IDENTITIES) continue;
+      const perKg = v / PK_DEFAULTS.referenceWeightKg;
+      warn(
+        '(catalog)',
+        'pk.template-volume',
+        `V_L ${v} L is stored by ${owners.size} unrelated compounds, which is ${perKg.toFixed(3)} L/kg at the ${PK_DEFAULTS.referenceWeightKg} kg reference — a per-kilogram prior reached for repeatedly, not ${owners.size} independent measurements, and each one sets its record's whole concentration scale: ${[...owners].sort().join(', ')}`,
       );
     }
   }

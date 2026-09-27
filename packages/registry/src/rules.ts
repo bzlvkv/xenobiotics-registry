@@ -249,6 +249,12 @@ export const LINT_RULES: Readonly<Record<string, RuleInfo>> = {
     summary:
       'Unrelated compounds store an identical ka/V/F set under different citations — a repeated default, not independent measurements.',
   },
+  'pk.template-volume': {
+    level: 'warning',
+    standing: true,
+    summary:
+      'One V_L is stored by many unrelated compounds as a per-kilogram prior, and each sets its record\u2019s whole concentration scale.',
+  },
   'pk.unsolvable-default-route': {
     level: 'warning',
     summary:
