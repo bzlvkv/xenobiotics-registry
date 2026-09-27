@@ -3422,7 +3422,7 @@
         "ec50_mg_l": 0.00035986,
         "hill_n": 1,
         "source_pmid": "PMID:18308814",
-        "note": "Shahid 2009 verbatim: asenapine D2 pKi 8.9 (→ Ki 1.26 nM), human. ec50 = 1.26 nM × 285.79 / 1e6.",
+        "note": "Shahid 2009 (PMID:18308814) abstract verbatim: \"dopamine receptors (D1 [8.9], D2 [8.9], D3 [9.4] and D4 [9.0])\" — cloned HUMAN receptors, so D2 pKi 8.9 → Ki 1.26 nM. The other three figures in that clause are other subtypes and are not this row. ec50 = 1.26 nM × 285.79 / 1e6.",
         "action": "antagonist"
       },
       {
@@ -3432,7 +3432,7 @@
         "ec50_mg_l": 0.00001803,
         "hill_n": 1,
         "source_pmid": "PMID:18308814",
-        "note": "Shahid 2009 verbatim: asenapine 5-HT2A pKi 10.2 (→ Ki 0.063 nM), human — among the most potent. ec50 = 0.063 nM × 285.79 / 1e6.",
+        "note": "Shahid 2009 (PMID:18308814) abstract verbatim: \"5-HT2A [10.2]\", one of eight serotonin pKi values listed for cloned HUMAN receptors, so 10.2 → Ki 0.063 nM — among the most potent in the catalog. ec50 = 0.063 nM × 285.79 / 1e6.",
         "action": "antagonist"
       },
       {
@@ -16096,7 +16096,7 @@
         "ec50_mg_l": 0.295531,
         "hill_n": 1,
         "source_pmid": "PMID:26073023",
-        "note": "Arai 2015 verbatim: eplerenone MR IC50 713 nM (³H-aldosterone binding). ec50 = 713 nM × 414.49 / 1e6.",
+        "note": "Arai 2015 (PMID:26073023) abstract verbatim: \"its potency was superior to that of spironolactone and eplerenone, whose IC50s were 36 and 713nM, respectively\" — RESPECTIVELY MATTERS: 36 nM is spironolactone and 713 nM is eplerenone, which is this row. ³H-aldosterone binding. ec50 = 713 nM × 414.49 / 1e6.",
         "action": "antagonist"
       }
     ],
@@ -25550,7 +25550,7 @@
         "ec50_mg_l": 0.007698,
         "hill_n": 1,
         "source_pmid": "PMID:15655528",
-        "note": "Baker 2005 (PMC1576008) Table 1 verbatim: labetalol human β1 logKD −7.63 ± 0.05 → Kᵢ 23.4 nM. Human β1 in CHO, [3H]CGP-12177. ec50 = 23.4 nM × 328.4 / 1e6.",
+        "note": "Baker 2005 (PMID:15655528), full text Table 1 of PMC1576008: labetalol human β1 logKD −7.63 ± 0.05 → Kᵢ 23.4 nM. A TABLE CELL IS NOT A SENTENCE and is not quoted as one; the abstract states no per-drug figure. Human β1 in CHO, [3H]CGP-12177. ec50 = 23.4 nM × 328.4 / 1e6.",
         "action": "antagonist"
       },
       {
@@ -32597,7 +32597,7 @@
         "ec50_mg_l": 0.018218,
         "hill_n": 1,
         "source_pmid": "PMID:15655528",
-        "note": "Baker 2005 (PMC1576008) Table 1 verbatim: nadolol human β1 logKD −7.23 ± 0.04 → Kᵢ 58.9 nM. Human β1 in CHO. ec50 = 58.9 nM × 309.4 / 1e6.",
+        "note": "Baker 2005 (PMID:15655528), full text Table 1 of PMC1576008: nadolol human β1 logKD −7.23 ± 0.04 → Kᵢ 58.9 nM. A TABLE CELL IS NOT A SENTENCE and is not quoted as one; the abstract states no per-drug figure. Human β1 in CHO. ec50 = 58.9 nM × 309.4 / 1e6.",
         "action": "antagonist"
       }
     ],
@@ -48099,7 +48099,7 @@
         "ec50_mg_l": 0.001074,
         "hill_n": 1,
         "source_pmid": "PMID:9200560",
-        "note": "CLASS KEY muscarinic KEPT: NATIVE HUMAN BLADDER expresses M2 and M3 together, and this paper finds tolterodine NOT M3-selective. Nilvebrant 1997 (PMID:9200560) abstract verbatim: tolterodine bound with high affinity to muscarinic receptors in urinary bladder from humans (Ki 3.3 nM). ec50 = 3.3 nM × 325.49 / 1e6. Re-cited from comparator paper PMID:20590605 to this primary tolterodine characterization - 2026-06-28 data-quality audit.",
+        "note": "CLASS KEY muscarinic KEPT: NATIVE HUMAN BLADDER expresses M2 and M3 together, and this paper finds tolterodine NOT M3-selective. Nilvebrant 1997 (PMID:9200560) abstract verbatim: \"and in urinary bladder from humans (K(i) 3.3 nM)\". THE SPECIES IS THE TRAP: the same sentence gives K(i) 2.7 nM for bladder, 1.6 nM for heart and 0.75 nM for cortex from GUINEA PIGS, and 3.3 nM is the only human figure in it. ec50 = 3.3 nM × 325.49 / 1e6. Re-cited from comparator paper PMID:20590605 to this primary tolterodine characterization - 2026-06-28 data-quality audit.",
         "action": "antagonist"
       }
     ],
@@ -51065,7 +51065,7 @@
         "ec50_mg_l": 0.005671,
         "hill_n": 1,
         "source_pmid": "PMID:21486038",
-        "note": "Bang-Andersen 2011 (PMID:21486038) abstract verbatim: 5-HT(7) Ki = 19 nM; recombinant human, antagonist. ec50 = 19 nM × 298.45 / 1e6. Corrected from a stale GtoPdb 450 nM value that contradicted the cited abstract - 2026-06-28 data-quality audit.",
+        "note": "Bang-Andersen 2011 (PMID:21486038) abstract verbatim: \"5-HT(7) (K(i) = 19 nM)\", recombinant HUMAN, and the same paper reports antagonist properties at 5-HT7. ec50 = 19 nM × 298.45 / 1e6. Corrected from a stale GtoPdb 450 nM value that contradicted the cited abstract - 2026-06-28 data-quality audit.",
         "action": "antagonist"
       }
     ],
@@ -58437,7 +58437,7 @@
       "cardiovascular",
       "digestive"
     ],
-    "notes": "PubChem CID 5983 (C15H21N3O2). PK: Walter 1995 (PMID:7756100), six healthy male volunteers, three-way crossover of a transdermal system (PTS), an oral solution and an i.v. infusion. Verbatim: \"A mean absolute bioavailability of 36% was determined for the transdermal system and 3% for the oral solution\"; \"A single application of the patch over 24 h produced detectable plasma drug concentrations after a mean lag-time of 4 h\"; \"the drug was absorbed continuously from the PTS and putative therapeutic plasma concentrations were measured over approximately 18 h\"; \"After removing the PTS, the mean apparent half-life of elimination was 4.9 h, compared with 0.5 h for the i.v. infusion\"; \"The mean amount of physostigmine released from the transdermal system after 24 h was 5.7 mg\". MODELLING NOTE — the 4.9 h is deliberately NOT stored as the transdermal half-life. The paper itself attributes it to absorption, not disposition (\"This indicates continued drug absorption from a skin depot\"), so storing it would model a flip-flop artefact as elimination AND then double-count it against the zero-order input. Instead TD carries the real disposition half-life (0.5 h, the i.v. value) with the patch represented as what it is: a 4 h lag then an 18 h constant-rate input at F 0.36, which is the schema's zo_dur_hr path. PO IS NOT AUTHORED despite its bioavailability being verbatim: at F 0.03 an oral dose is almost entirely destroyed pre-systemically, oral physostigmine is not a marketed form, and offering a PO route would invite a log that renders a near-flat curve as though it were a therapy. IV dose range is the conventional antidote range and is NOT from the cited abstract, which reports an infusion without stating its dose; the TD dose is the verbatim 24 h released amount. No volume is published in the abstract for any route — all three default, and the record is counted by pk.defaulted-volume.",
+    "notes": "PubChem CID 5983 (C15H21N3O2). PK: Walter 1995 (PMID:7756100), six healthy male volunteers, three-way crossover of a transdermal system (PTS), an oral solution and an i.v. infusion. Verbatim: \"A mean absolute bioavailability of 36% was determined for the transdermal system and 3% for the oral solution\"; \"A single application of the patch over 24 h produced detectable plasma drug concentrations after a mean lag-time of 4 h\"; \"the drug was absorbed continuously from the PTS and putative therapeutic plasma concentrations were measured over approximately 18 h\"; \"After removing the PTS, the mean apparent half-life of elimination was 4.9 h, compared with 0.5 h for the i.v. infusion\"; \"The mean amount of physostigmine released from the transdermal system after 24 h was 5.7 mg\". MODELLING NOTE — the 4.9 h is deliberately NOT stored as the transdermal half-life. The paper itself attributes it to absorption, not disposition (\"This indicates continued drug absorption from a skin depot\"), so storing it would model a flip-flop artefact as elimination AND then double-count it against the zero-order input. Instead TD carries the real disposition half-life (0.5 h, the i.v. value) with the patch represented as what it is: a 4 h lag then an 18 h constant-rate input at F 0.36, which is the schema's zo_dur_hr path. PO IS NOT AUTHORED despite its bioavailability being stated verbatim in the source — at F 0.03 an oral dose is almost entirely destroyed pre-systemically, oral physostigmine is not a marketed form, and offering a PO route would invite a log that renders a near-flat curve as though it were a therapy. IV dose range is the conventional antidote range and is NOT from the cited abstract, which reports an infusion without stating its dose; the TD dose is the verbatim 24 h released amount. No volume is published in the abstract for any route — all three default, and the record is counted by pk.defaulted-volume.",
     "refs": [
       "PMID:7756100",
       "PMID:8128833"

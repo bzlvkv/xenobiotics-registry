@@ -6549,3 +6549,28 @@ Reading the primary sources to pin subtypes, two rows looked like fabrications a
 and then gives the sentence **with no quotation marks**, so `verify:quotes` cannot see it — the same
 class of hole fixed in `0b0f1d4`. A note that claims "verbatim" and quotes nothing is unguarded by
 construction, and that is worth a lint rule.
+
+## 2026-09-27 — the 8 rows `note.announced-quote-missing` found on its first run
+
+Five were paraphrases of a sentence the abstract does state, and are now quoted. **Every one of the
+five checked out**: no stored value was wrong. What the paraphrases hid was the *disambiguation*,
+and in three of the five that disambiguation is the whole difficulty of the row:
+
+| Compound | What the paraphrase hid |
+| --- | --- |
+| `tolterodine` | **The species.** The cited sentence gives K(i) 2.7 nM bladder, 1.6 nM heart and 0.75 nM cortex from **guinea pigs**, and only then "and in urinary bladder from humans (K(i) 3.3 nM)". The stored 3.3 nM is the one human figure in it, and nothing on the record said so. |
+| `eplerenone` | **A "respectively".** *"superior to that of spironolactone and eplerenone, whose IC50s were 36 and 713nM, respectively"* — 36 nM is spironolactone. Reading the pair in the wrong order would put a 20× error on this row. |
+| `asenapine` ×2 | **A list of eight.** The pKi values arrive as `5-HT1A [8.6], 5-HT1B [8.4], 5-HT2A [10.2] …` and `D1 [8.9], D2 [8.9], D3 [9.4], D4 [9.0]`. Picking the wrong bracket is a silent subtype swap. |
+| `vortioxetine` | Least of the five: 5-HT7 K(i) = 19 nM sits in a list of six affinities for the same compound. |
+
+Two are the honest exception the rule's own text names. `labetalol` and `nadolol` take their β1
+logKD from **Table 1 of PMC1576008**, and Baker 2005's abstract states no per-drug figure at all.
+**A table cell is not a sentence and must not be quoted as one** — those two now say "full text",
+which `verify:quotes` exempts by design, instead of claiming a verbatim the paper never wrote.
+
+One was a false positive and the prose deserved it: `physostigmine`'s note read "despite its
+bioavailability being verbatim: at F 0.03 an oral dose is …", where the colon introduces a
+*consequence*, not a quotation. Reworded. **One soft positive in eight is the cost of a rule that
+reads prose, and it was cheaper to fix the sentence than to weaken the rule.**
+
+Gate coverage 637 → 642 quotes, still 0 missing. The rule now fires nowhere.
