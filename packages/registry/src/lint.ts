@@ -1329,13 +1329,34 @@ export function lintRegistry(registry: Registry): Finding[] {
 
     // ── receptor_occupancy needs effect_compartment ──────────────────
     // The Hill curve runs against Ce(t), not Cp(t). Without a keo there is no Ce,
-    // which means the occupancy curve is identically zero — useless and confusing.
+    // so the TIME COURSE cannot be computed.
+    //
+    // SCOPED TO RECORDS THAT COULD HAVE ONE, and the narrowing was earned. This
+    // fired as a flat error and its justification — "the occupancy curve is
+    // identically zero, useless and confusing" — is about a curve, while the
+    // affinity table is rendered from the rows alone and never touches
+    // `effect_compartment` at all. Its own sibling three rules down says so
+    // outright: `pd.needs-solvable-pk` calls the same shape a WARNING and adds
+    // "affinity and dose-response still render". Both could not be right.
+    //
+    // So the split follows what a keo could actually buy. With a solvable route
+    // the curve is computable and simply is not computed — an authoring gap, and
+    // still an error. With NO solvable route there is no Cp to equilibrate with,
+    // a keo would change nothing, and `effect_compartment.source_pmid` is
+    // REQUIRED, so a record whose drug has no published equilibration study
+    // cannot supply one without inventing a citation. Erroring there forced the
+    // choice between fabricating a keo and discarding a real, sourced affinity.
+    // That case is not silent: `pd.needs-solvable-pk` already warns on it.
+    //
+    // halofuginone is the case that exposed this. Its EPRS Ki is verbatim from
+    // full text, its one human PK study publishes no parameter, and no paper
+    // anywhere reports an equilibration constant for it.
     if (c.receptor_occupancy && c.receptor_occupancy.length > 0) {
-      if (!c.effect_compartment?.keo_per_h) {
+      if (!c.effect_compartment?.keo_per_h && anyRouteSolvable(c)) {
         err(
           c.slug,
           'receptor.needs-keo',
-          `${c.receptor_occupancy.length} receptor_occupancy entr${c.receptor_occupancy.length === 1 ? 'y' : 'ies'} but no effect_compartment.keo_per_h — Ce(t) can't be computed`,
+          `${c.receptor_occupancy.length} receptor_occupancy entr${c.receptor_occupancy.length === 1 ? 'y' : 'ies'} and a solvable route, but no effect_compartment.keo_per_h — Ce(t) is computable and is not computed`,
         );
       }
       // Receptor keys must be canonical: anything that unions per-compound curves

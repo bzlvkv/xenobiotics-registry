@@ -279,7 +279,7 @@ export const LINT_RULES: Readonly<Record<string, RuleInfo>> = {
   'receptor.needs-keo': {
     level: 'error',
     summary:
-      'Occupancy rows exist with no effect compartment, so occupancy never gets a time course.',
+      'Occupancy rows and a solvable route exist with no effect compartment, so a computable time course is not computed.',
   },
   'receptor.pmid': {
     level: 'error',

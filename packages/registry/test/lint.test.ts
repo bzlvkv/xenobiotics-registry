@@ -1144,3 +1144,32 @@ describe('note.announced-quote-missing', () => {
     ).toBe(true);
   });
 });
+
+describe('receptor.needs-keo is scoped to records a keo could help', () => {
+  const occ = [
+    { receptor: 'eprs', emax: 1, ec50_mg_l: 0.0076, hill_n: 1, source_pmid: 'PMID:22327401' },
+  ] as unknown as Compound['receptor_occupancy'];
+
+  it('errors when a route is solvable, because the curve is computable and is not computed', () => {
+    const c = compound({
+      slug: 'a',
+      name: 'A',
+      pk: { PO: { F: 0.9, V_L: 50 } },
+      half_life_hr: { PO: 4 },
+      receptor_occupancy: occ,
+    });
+    expect(rules(lint([c]))).toContain('receptor.needs-keo');
+  });
+
+  it('does not error when no route is solvable, because no keo could change that', () => {
+    // halofuginone: a verbatim EPRS Ki, a human PK study that publishes no
+    // parameter, and no equilibration study anywhere. effect_compartment
+    // requires a source_pmid, so erroring here forces a fabricated citation or
+    // the loss of a real affinity.
+    const c = compound({ slug: 'b', name: 'B', half_life_hr: {}, receptor_occupancy: occ });
+    const fired = rules(lint([c]));
+    expect(fired).not.toContain('receptor.needs-keo');
+    // and it is not silent — the sibling warning already covers exactly this
+    expect(fired).toContain('pd.needs-solvable-pk');
+  });
+});
