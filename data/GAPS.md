@@ -6964,3 +6964,68 @@ above** the observed in-vivo EC50. Either fu, the Ki, or the assumption that CB1
 subjective high is wrong. **An `in_vivo_plasma_ec50` basis on that row would sidestep all three**,
 and 23.8 ng/mL is verbatim and available. Not done here: changing an occupancy row's basis is a
 different concern from the keo.
+
+## 2026-09-27 — the PD half of the spot-check, and the dose defect it found
+
+### The registry had no consumer for its own PD layer
+
+`exposure.ts` says outright that "the PK/PD solver that used to do this is gone, so
+this is the smallest honest replacement" — and it replaced only the **PK** half.
+Before `occupancy.ts`, **nothing in this repository consumed `receptor_occupancy` or
+`effect_compartment` at all**: `ec50_mg_l` appeared in two web tables, and
+`fraction_unbound` was displayed on a compound page and applied to nothing.
+
+So three rules described a consumer that did not exist. `pd.occupancy-needs-fu`
+warned that a free-drug affinity "is being compared against the TOTAL plasma curve";
+nothing made that comparison. `receptor.needs-keo` said "Ce(t) can't be computed";
+nothing computed Ce(t) either way. **303 occupancy rows over 249 effect compartments
+had no consumer to be wrong in front of** — which is also why narrowing
+`receptor.needs-keo` earlier today cost nothing.
+
+`occupancy.ts` is the PD analogue of the exposure module: one number per row, peak
+occupancy at the typical dose, every input labelled `stored`/`derived`/`default`. It
+is the first code here to **apply** the R13 free-drug correction rather than warn
+about it. Validated against two limits a worked example would miss — Ce must peak
+after Cp, and Ce must collapse onto Cp as keo grows, which pins the leading
+coefficient of the three-term form.
+
+### What it found immediately: a per-kilogram dose stored as an absolute one
+
+**Five records store a per-kilogram or per-hour dose in the `doses` block, which
+allows only absolute mg/g/mcg/IU.** `authoring/FIELDS.md` says `typical` is "what
+occupancy is judged at", so each of these judges occupancy at roughly 1/70th of the
+real dose. The schema had already caught the sibling version of this defect and said
+so in its own words: *"a silent default on a dose is a hundred- or thousandfold error
+waiting to happen."*
+
+| Compound | Stored | What it actually is | At 70 kg |
+| --- | --- | --- | --- |
+| `etomidate` | IV 0.2–0.4, typical **0.3 mg** | induction dose **mg/kg** | ~21 mg |
+| `succinylcholine` | IV 1–2, typical **1.5 mg** | **mg/kg** | ~105 mg |
+| `remifentanil` | IV 0.05–2, typical **0.25 mcg** | infusion **mcg/kg/min** | 17.5 mcg/min |
+| `dexmedetomidine` | IV 0.2–1.4, typical **0.7 mcg** | infusion **mcg/kg/h** | 49 mcg/h |
+| `fentanyl` | TD 0.0125–0.1, typical **0.025 mg** | patch **mcg/h** (12.5–100) | 1.8 mg over the stored 72 h |
+
+The giveaway in each case is that the stored min/max **exactly match the per-kg or
+per-hour clinical range**. Two are simple repairs (× 70 kg, a declared derivation);
+three are infusions and patches where "typical single dose" has no clean meaning at
+all, and the `zo_dur_hr 72` already on fentanyl's TD row is the field that says so.
+**Not repaired here** — a dose needs its own cited source, so this is a batch with
+five label fetches in it, not a multiplication.
+
+### `pd.occupancy-flat`, and why it is standing rather than a task list
+
+46 of 287 resolvable rows fall outside a 1–99% peak. **Both readings are real**,
+which is the whole reason the rule warns rather than errors:
+
+- **Honest**: `cbd` at 0.004% for CB1 — its CB1 Ki really is micromolar and it does
+  not act by direct CB1 agonism. A neutralising antibody in molar excess over its
+  cytokine really does sit near 100%, and for a mAb `fu` ≈ 1 makes the default right.
+- **Artefact**: `montelukast` at 99.92% with no `fu`, when it is >99% protein bound.
+- **Frame error**: `sevoflurane` 0.004% and `isoflurane` 0.014% at GABA-A. Their own
+  `fu_note` from this morning's Batch 2 already said the stored `ec50` "is already an
+  aqueous bath concentration" and that these drugs are partition-governed. The module
+  now puts a number on that mismatch.
+
+Split by provenance, the 46 divide **23 resting on a defaulted input and 23 on fully
+stored ones** — and that split is the triage order for whoever works it.
