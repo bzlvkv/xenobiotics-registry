@@ -14753,9 +14753,9 @@
       }
     },
     "effect_compartment": {
-      "keo_per_h": 0.5,
-      "note": "Approximation; no published kₑₒ. Oral Δ9-THC psychoactive onset ~1–2 h (slow absorption + CNS distribution).",
-      "approximated": true
+      "keo_per_h": 0.988,
+      "source_pmid": "PMID:35692186",
+      "note": "FITTED, FROM THE SAME MOLECULE BY ANOTHER ROUTE. Dronabinol IS delta-9-THC, same molecule and same occupancy rows as `thc`, and PMID:35692186 fits keo 0.988/h in 85 humans, verbatim: \"The distribution rate constant in the effect compartment was estimated to be 0.988 (95%CI 0.964-1.010)/h\". THAT STUDY DOSED SMOKED MARIJUANA AND THIS RECORD IS ORAL: keo links plasma to the effect site, which the model makes route-independent, so the number carries while the route difference is the caveat a reader should weigh. Not marked approximated, because the value is a published fit rather than a guess."
     },
     "receptor_occupancy": [
       {
@@ -46863,9 +46863,9 @@
       "note": "Δ9-tetrahydrocannabinol; clinical PK varies dramatically by formulation (smoke/vapor/oral/sublingual). Abstract-verbatim ka/V/F values rarely co-located."
     },
     "effect_compartment": {
-      "keo_per_h": 0.5,
-      "note": "Approximation; no published kₑₒ. CB1 binding tracks brain Ce; psychoactive onset is route-dependent (minutes smoked, 1–3 h oral).",
-      "approximated": true
+      "keo_per_h": 0.988,
+      "source_pmid": "PMID:35692186",
+      "note": "A PUBLISHED FIT REPLACES THE APPROXIMATION. PMID:35692186, 85 humans, three crossover studies, smoked marijuana, effect-compartment model on reported highness, verbatim: \"The distribution rate constant in the effect compartment was estimated to be 0.988 (95%CI 0.964-1.010)/h\". THE OLD NOTE CALLED keo ROUTE-DEPENDENT, from onset being minutes smoked and hours oral, AND THAT IS ABSORPTION: keo links plasma to the effect site, which the model makes route-independent. CAVEAT: chronic users there need higher plasma levels for equal effect, so one keo carries no tolerance term."
     },
     "receptor_occupancy": [
       {

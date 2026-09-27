@@ -6897,3 +6897,70 @@ some future paper quoting the numbers.
 **This does not block the EPRS occupancy row**, which is authored and stands. That was the point of
 narrowing `receptor.needs-keo`: the affinity never depended on the PK, and the earlier note that
 said it did was wrong.
+
+## 2026-09-27 — the approximated-keo layer: rule added, and the first two converted
+
+`pd.template-keo` (`378b846`) now surfaces what no per-compound page could: **170 of 196 approximated
+keos sit on ten round values** — keo 1 on 46 unrelated compounds, 0.5 on 39, 0.1 on 18, 0.02 on 13 —
+and **213 of the 303 authored occupancy rows run their Hill curve against a Ce(t) built from one of
+them.** Each row was already honest (`approximated: true`, a note saying "no published kₑₒ"); what was
+missing was the count.
+
+### Why this layer is mostly irreducible, measured rather than assumed
+
+All 170 compounds in those ten groups were swept against PubMed for the phrasings that produced the
+catalog's existing 53 fitted values — `ke0`, `keo`, `k(e0)`, "effect compartment", "equilibration
+half". **Only 43 of 170 return anything at all**, and of the ten highest-leverage hits screened by
+abstract, **nine state no number**: they say an effect-compartment model was applied, or that
+hysteresis was collapsed, without publishing the constant.
+
+That is the finding, and it explains the catalog's shape. **keo is an anaesthesia and analgesia
+modelling parameter.** The 53 fitted values cluster in exactly those classes plus cardiovascular
+drugs, because that is where the literature fits effect compartments and prints the constant. For
+antipsychotics, SSRIs, orexin antagonists and most small molecules it is not published, so those
+approximations are not a backlog — which is why the new rule is marked `standing`.
+
+Also recorded from the same sweep: the catalog's own fitted values mostly came from **full-text
+tables**, not abstracts (lsd's from Table 2 of PMC5591798, celecoxib's, digoxin's). A future pass
+should read tables, not screen abstracts.
+
+### The one conversion: THC, and dronabinol with it
+
+**PMID:35692186** — 85 human subjects, three controlled crossover studies, smoked marijuana 13–49 mg,
+population effect-compartment model on reported psychological highness — states it verbatim: *"The
+distribution rate constant in the effect compartment was estimated to be 0.988 (95%CI
+0.964-1.010)/h"*.
+
+- **`thc`**: keo **0.5 → 0.988**, now fitted. **The old note's reasoning was wrong, not just its
+  number:** it called keo route-dependent, arguing from onset being minutes when smoked and hours
+  when oral. That is **absorption**. keo links plasma to the effect site, and the model makes it
+  route-independent — which is exactly why the same value can carry to another formulation.
+- **`dronabinol`**: keo **0.5 → 0.988**, fitted, because dronabinol *is* Δ9-THC — same molecule, same
+  MW, same occupancy rows. The caveat on the record is the route (that study smoked; this record is
+  oral), not the number's provenance.
+
+Caveat on both: the same paper finds chronic users need higher plasma concentrations for equal
+effect, so a single keo carries **no tolerance term**.
+
+### Two of my own errors the gates caught, in one edit
+
+Worth recording because both were caught by rules rather than by review:
+
+1. I wrote the **old note's** words in quotation marks inside a clause naming PMID:35692186, so
+   `verify:quotes` read them as a quote from that paper and failed. It was right to: a reader cannot
+   tell the difference either. The catalog's own prior prose must not be quoted next to a citation.
+2. I marked dronabinol `approximated: true` **and** gave it a `source_pmid`, reasoning "the value is
+   published, the transfer is inferred". `effect.approx-conflict` errors on exactly that — *"a fitted
+   value is not an estimate; drop whichever claim is untrue"* — and the rule is right. The number is a
+   published fit of the same molecule; only its applicability to the oral form is a judgement, and
+   that belongs in the note, not in the flag.
+
+### A substantive lead for a later batch
+
+That paper also gives a population **in-vivo EC50 of 23.8 ng/mL** for the subjective high. THC's
+stored CB1 row is an in-vitro Ki at **7.89 ng/mL**. With THC's fu near 0.03, the R13 free-drug
+correction would put the required total-plasma concentration near 260 ng/mL — an **order of magnitude
+above** the observed in-vivo EC50. Either fu, the Ki, or the assumption that CB1 binding drives the
+subjective high is wrong. **An `in_vivo_plasma_ec50` basis on that row would sidestep all three**,
+and 23.8 ng/mL is verbatim and available. Not done here: changing an occupancy row's basis is a
+different concern from the keo.
