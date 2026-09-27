@@ -10330,9 +10330,9 @@
         "unit": "mg"
       },
       "TD": {
-        "min": 0.1,
-        "max": 0.3,
-        "typical": 0.167,
+        "min": 0.7,
+        "max": 2.1,
+        "typical": 1.169,
         "unit": "mg"
       },
       "IV": {
@@ -10393,7 +10393,7 @@
         "action": "agonist"
       }
     ],
-    "notes": "PK: THE TRANSDERMAL LAG OF 48 HOURS IS DELETED AS A CATEGORY ERROR. It appears in no cited paper; its likely origin is a review sentence that maximum blood-pressure reduction occurs two to three DAYS after application — a time to maximum EFFECT under a week-long zero-order input, which is an emergent property of the model rather than an input delay. Keeping it would have delayed predicted concentrations by two days past data showing plasma rises immediately. THE REST OF THE PATCH PARAMETERISATION IS RIGHT AND IS KEPT: the 168 h zero-order duration is verbatim, \"a relatively reproducible and consistent rate of 4.32 micrograms h-1 over a 7-day period\", and its bioavailability of about 60% is a genuine intravenous-referenced absolute figure. The half-life of 12 h was the MIDPOINT of a stated 9.0 to 15.1 h range and is replaced by an intravenous-derived 8.5 h. F 0.85 matched none of the four published values and was not a midpoint of any; 0.752 is the adult intravenous-referenced figure. NO ADULT HUMAN VOLUME EXISTS in any abstract found — 181.5 L is size-standardised from a pooled PAEDIATRIC dataset that includes intravenous dosing, and it cross-checks against the adult clearance to within about 1%.",
+    "notes": "DOSE CORRECTED FROM A DELIVERY RATE STORED AS AN ABSOLUTE DOSE. The TD block read {\"min\":0.1,\"max\":0.3,\"typical\":0.167,\"unit\":\"mg\"}, which is the patch's mg/day strength, not the amount it delivers. This row already stores zo_dur_hr, so the wear interval was on the record while the dose contradicted it. Label verbatim: \"Apply Catapres‑TTS ® (clonidine transdermal system) once every 7 days to a hairless area of intact skin on the upper outer arm or chest\". Delivered over the interval that gives 0.7-2.1 mg, typical 1.169 mg — ARITHMETIC, rate x interval. Source: Catapres-TTS (clonidine transdermal system), DailyMed set id 39e1d35e-533c-4647-8649-8168a6e92dfa, v1 published 2026-03-31. A TRAP IN THE SAME TABLE: it prints \"Programmed Delivery ... Per Day\" of 0.1 mg beside a \"Clonidine Content\" of 3.09 mg for TTS-1. The content is what is in the patch, not what reaches the patient, and 3.09 mg is NOT the dose — 0.7 mg over the week is. THE CATALOG ALREADY DID THIS RIGHT ELSEWHERE, which is how the defect was spotted: nicotine stores 7-21 mg against a 24 h duration and rivastigmine 4.6-13.3 mg against 24 h, both being what the patch delivers over that interval rather than its hourly rate. PK: THE TRANSDERMAL LAG OF 48 HOURS IS DELETED AS A CATEGORY ERROR. It appears in no cited paper; its likely origin is a review sentence that maximum blood-pressure reduction occurs two to three DAYS after application — a time to maximum EFFECT under a week-long zero-order input, which is an emergent property of the model rather than an input delay. Keeping it would have delayed predicted concentrations by two days past data showing plasma rises immediately. THE REST OF THE PATCH PARAMETERISATION IS RIGHT AND IS KEPT: the 168 h zero-order duration is verbatim, \"a relatively reproducible and consistent rate of 4.32 micrograms h-1 over a 7-day period\", and its bioavailability of about 60% is a genuine intravenous-referenced absolute figure. The half-life of 12 h was the MIDPOINT of a stated 9.0 to 15.1 h range and is replaced by an intravenous-derived 8.5 h. F 0.85 matched none of the four published values and was not a midpoint of any; 0.752 is the adult intravenous-referenced figure. NO ADULT HUMAN VOLUME EXISTS in any abstract found — 181.5 L is size-standardised from a pooled PAEDIATRIC dataset that includes intravenous dosing, and it cross-checks against the adult clearance to within about 1%.",
     "fraction_unbound": 0.8,
     "fu_note": "Label, DURACLON injection (DailyMed setid 8c126bb8-732a-4949-8754-2f50b5543638, effective 2021-03-17): \"The binding of clonidine to plasma protein is primarily to albumin and varies between 20 and 40% in vitro.\" IN VITRO, stated. A RANGE, stored at its UNDER-CORRECTING endpoint: 20% bound gives fu 0.80, 40% gives 0.60. THREE CAVEATS: the sentence says \"plasma protein\" without naming a species; the citation is the EPIDURAL label while this record carries PO and TD; and binding RISES in renal failure (PMID:3392889 gives the correlation but no figure). At fu 0.80 the correction is nearly inert."
   },
@@ -16725,9 +16725,9 @@
         "unit": "mg"
       },
       "TD": {
-        "min": 0.025,
-        "max": 0.1,
-        "typical": 0.05,
+        "min": 0.175,
+        "max": 0.7,
+        "typical": 0.35,
         "unit": "mg"
       }
     },
@@ -16776,7 +16776,7 @@
     ],
     "fraction_unbound": 0.016,
     "fu_note": "Free fraction stated directly, so no flip risk: \"No difference in the free fraction of oestradiol was found between women with breast cancer (1.8 +/- 0.4%, mean +/- SD) and normal women (1.6 +/- 0.3%)\" (PMID:4039300) — the normal comparator is stored. THE NEXT SENTENCE IS AN ISOLATED-PROTEIN SPLIT, not total binding: 40% albumin and 60% SHBG OF THE BOUND FRACTION. Population is postmenopausal women, n=8. SHBG rises severalfold with oral oestrogen, pregnancy and hyperthyroidism, cutting fu — non-pregnant adults only.",
-    "notes": "PK: THE STORED ABSORPTION RATE WAS THE SOLVER DEFAULT WEARING A CITATION. A ka of 1.0/h is exactly what resolvePk substitutes when the field is ABSENT, and no source on this record states one. Removing it is NUMERICALLY A NO-OP — the resolver supplies the identical number — so no curve moves; what changes is that the record stops asserting an absorption rate it never measured. This is the same shape already found on a volume of 35 L, which is likewise the default at the seventy-kilogram reference. THE WIDER DEBT IS LEFT ALONE ON PURPOSE: twelve values account for 152 of the 276 authored absorption rates, but the other eleven are NOT the default, so deleting those would move their curves rather than leave them, which is the error this audit spent a batch documenting."
+    "notes": "DOSE CORRECTED FROM A DELIVERY RATE STORED AS AN ABSOLUTE DOSE. The TD block read {\"min\":0.025,\"max\":0.1,\"typical\":0.05,\"unit\":\"mg\"}, which is the patch's mg/day strength, not the amount it delivers. This row already stores zo_dur_hr, so the wear interval was on the record while the dose contradicted it. Label verbatim: \"Start therapy with Climara 0.025 mg per day applied to the skin once weekly\". Delivered over the interval that gives 0.175-0.7 mg, typical 0.35 mg — ARITHMETIC, rate x interval. Source: Climara (estradiol) patch, DailyMed set id 1e9702c4-f2d7-4ea8-b6e8-7dca31671864, v25 published 2026-03-30. The once-weekly wear matches the 168 h zero-order duration already on the row, so the patch really does deliver seven daily portions per application. The 0.025 mg/day the label names as the STARTING dose is the stored minimum. THE CATALOG ALREADY DID THIS RIGHT ELSEWHERE, which is how the defect was spotted: nicotine stores 7-21 mg against a 24 h duration and rivastigmine 4.6-13.3 mg against 24 h, both being what the patch delivers over that interval rather than its hourly rate. PK: THE STORED ABSORPTION RATE WAS THE SOLVER DEFAULT WEARING A CITATION. A ka of 1.0/h is exactly what resolvePk substitutes when the field is ABSENT, and no source on this record states one. Removing it is NUMERICALLY A NO-OP — the resolver supplies the identical number — so no curve moves; what changes is that the record stops asserting an absorption rate it never measured. This is the same shape already found on a volume of 35 L, which is likewise the default at the seventy-kilogram reference. THE WIDER DEBT IS LEFT ALONE ON PURPOSE: twelve values account for 152 of the 276 authored absorption rates, but the other eleven are NOT the default, so deleting those would move their curves rather than leave them, which is the error this audit spent a batch documenting."
   },
   {
     "slug": "eszopiclone",
@@ -17825,9 +17825,9 @@
     ],
     "doses": {
       "TD": {
-        "min": 0.0125,
-        "max": 0.1,
-        "typical": 0.025,
+        "min": 0.864,
+        "max": 7.2,
+        "typical": 1.8,
         "unit": "mg"
       }
     },
@@ -17891,7 +17891,7 @@
     },
     "fraction_unbound": 0.156,
     "fu_note": "Human plasma, HEALTHY VOLUNTEERS — the population I did not expect to get: \"In human plasma, 84.4% of fentanyl was bound, 92.5% of sufentanil, 92.1% of alfentanil and 93.6% of lofentanil. Plasma protein binding of the four analgesics was INDEPENDENT OF THEIR CONCENTRATION over the whole therapeutic range\" (PMID:6214227) — that second sentence rebuts the skip criterion in the source own words. Rats and dogs are in the same paper and three analogues in the same sentence.",
-    "notes": "EFFECT COMPARTMENT: A RAT VALUE THAT READ AS HUMAN. The rate is verbatim, correctly fitted and correctly attributed — its source reports buprenorphine and fentanyl in ONE SENTENCE, the exact shape that has produced transplants elsewhere in this catalogue, AND THIS RECORD TOOK THE RIGHT HALF OF IT. But the study is rat tail-flick antinociception and the species field was unset, so the value counted among the records claiming a fitted HUMAN keo and was labelled as one on every surface. Declared. The neighbouring buprenorphine record was checked at the same time and is CLEAN: it does not carry this paper's buprenorphine figure at all, citing instead a separate study in healthy volunteers."
+    "notes": "DOSE CORRECTED FROM A DELIVERY RATE STORED AS AN ABSOLUTE DOSE. The TD block read {\"min\":0.0125,\"max\":0.1,\"typical\":0.025,\"unit\":\"mg\"}, which is the patch's mcg/hour strength, not the amount it delivers. This row already stores zo_dur_hr, so the wear interval was on the record while the dose contradicted it. Label verbatim: \"Each transdermal system is intended to be worn continuously for up to 72 hours\". Delivered over the interval that gives 0.864-7.2 mg, typical 1.8 mg — ARITHMETIC, rate x interval. Source: Fentanyl Transdermal System (SpecGx LLC), DailyMed set id e15a7e9b-8025-49dd-9a6d-bafcccf1959f, v58 published 2026-05-06. The strengths are stated in mcg/HOUR — the same label sets dose increments \"using the ratio of 45 mg/24 hours of oral morphine to a 12 mcg/hour increase\". The old min of 0.0125 mg matched the Duragesic-era 12.5 mcg/h; the cited label says 12. THE CATALOG ALREADY DID THIS RIGHT ELSEWHERE, which is how the defect was spotted: nicotine stores 7-21 mg against a 24 h duration and rivastigmine 4.6-13.3 mg against 24 h, both being what the patch delivers over that interval rather than its hourly rate. EFFECT COMPARTMENT: A RAT VALUE THAT READ AS HUMAN. The rate is verbatim, correctly fitted and correctly attributed — its source reports buprenorphine and fentanyl in ONE SENTENCE, the exact shape that has produced transplants elsewhere in this catalogue, AND THIS RECORD TOOK THE RIGHT HALF OF IT. But the study is rat tail-flick antinociception and the species field was unset, so the value counted among the records claiming a fitted HUMAN keo and was labelled as one on every surface. Declared. The neighbouring buprenorphine record was checked at the same time and is CLEAN: it does not carry this paper's buprenorphine figure at all, citing instead a separate study in healthy volunteers."
   },
   {
     "slug": "fenugreek",

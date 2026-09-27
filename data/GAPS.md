@@ -7029,3 +7029,68 @@ which is the whole reason the rule warns rather than errors:
 
 Split by provenance, the 46 divide **23 resting on a defaulted input and 23 on fully
 stored ones** — and that split is the triage order for whoever works it.
+
+## 2026-09-27 — the dose defect class, repaired: seven records, two shapes
+
+`occupancy.ts` found it; the labels identified it. **Ten records stored a rate or a
+per-kilogram figure in a `doses` block that admits only absolute mg/g/mcg/IU**, and
+`authoring/FIELDS.md` says `typical` is "what occupancy is judged at" — so each was
+judging occupancy at a fraction of a real dose. Seven are repaired here; three are
+recorded below as not repairable in this schema.
+
+### Shape 1 — a per-kilogram dose stored as absolute mg (4 records)
+
+| Compound | Was | Label verbatim | Now |
+| --- | --- | --- | --- |
+| `etomidate` | 0.2–0.4, typ 0.3 | *"will vary between 0.2 mg/kg and 0.6 mg/kg of body weight"* | **14–42, typ 21 mg** |
+| `succinylcholine` | 1–2, typ 1.5 | *"The average dose … is 0.6 mg/kg ANECTINE given intravenously"* | **21–77, typ 42 mg** |
+| `ketamine` | 0.5–2, typ 1 | *"administer a dose of 1 to 2 mg/kg"* | **70–140, typ 70 mg** |
+| `rocuronium` | 0.6–1.2, typ 1 | *"Recommended initial dose is 0.6 mg/kg"* | **42–84, typ 42 mg** |
+
+`etomidate`'s stored **max was also wrong** — the label's range runs to 0.6 mg/kg,
+not 0.4. `succinylcholine` is the cleanest of the four because the label supplies all
+three figures itself, its own "average dose" plus a 0.3–1.1 mg/kg spread.
+
+### Shape 2 — a patch's hourly or daily rate stored as its dose (3 records)
+
+Each of these **already stored `zo_dur_hr`**, so the wear interval was on the record
+while the dose contradicted it.
+
+| Compound | Was | Actually | Now (rate × interval) |
+| --- | --- | --- | --- |
+| `fentanyl` TD | 0.0125–0.1 mg | 12–100 **mcg/hour** over 72 h | **0.864–7.2, typ 1.8 mg** |
+| `estradiol` TD | 0.025–0.1 mg | 0.025–0.1 **mg/day** over 168 h | **0.175–0.7, typ 0.35 mg** |
+| `clonidine` TD | 0.1–0.3 mg | 0.1–0.3 **mg/day** over 168 h | **0.7–2.1, typ 1.169 mg** |
+
+**A trap named on the clonidine record:** the Catapres-TTS table prints "Programmed
+Delivery … Per Day" of 0.1 mg beside a "Clonidine Content" of **3.09 mg** for the same
+patch. The content is what is in the patch, not what reaches the patient — 3.09 mg is
+not the dose, and it is sitting right next to the number that is.
+
+### Three that this schema cannot hold: continuous infusions
+
+`remifentanil` (0.05–2 **mcg/kg/min**), `dexmedetomidine` (0.2–1.4 **mcg/kg/hour**) and
+`norepinephrine` (its label names an absolute *"maintenance dose of 2–4 mcg/min"*) are
+titrated infusions. There is no single dose to store, and `doses` has no rate unit.
+Both anaesthetic labels do give a citable **bolus** — remifentanil *"an initial dose of
+1 mcg/kg … over 30 to 60 seconds"*, dexmedetomidine a *"loading infusion of 1 mcg/kg
+over 10 minutes"* — so 70 mcg each is authorable and would be an improvement on a
+70-fold-low rate. **Not done here:** substituting a bolus for a maintenance infusion
+changes what the record describes, which is a modelling decision rather than a repair.
+`norepinephrine` has no bolus at all.
+
+### How they were found, and one method that did not work
+
+The signature is a stored min/max that **exactly matches a per-kg or per-hour clinical
+range**, and the contrast that exposed it was internal: `atracurium` stores 28–35 mg and
+`vecuronium` 5.6–7 mg — already weight-multiplied — while their neighbours stored the
+per-kg figure. `nicotine` (7–21 mg over 24 h) and `rivastigmine` (4.6–13.3 mg over 24 h)
+are the patch equivalents done right. **The catalog was doing both, inconsistently.**
+
+**A test that looked convincing and is worthless**, recorded so nobody repeats it:
+recompute occupancy at dose × 70 kg and keep the rows that land in a usable band. It
+endorses almost anything, because multiplying a sub-1% occupancy by seventy lands it in
+band by arithmetic — it "confirmed" `amiodarone` at 14,000 mg and `zaleplon` at 700 mg.
+**The model cannot identify this defect. Only the labels can.**
+
+`pd.occupancy-flat` 46 → 43 rows.
