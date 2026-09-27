@@ -6778,3 +6778,65 @@ when a rule that counts *invented values* falls to zero.
 Four rules went to zero over the run — `pd.occupancy-needs-fu`, `pk.template-ka`,
 `pk.unsolvable-default-route` and `compound.retired-alias-clash` — and two new rules were added that
 now also fire nowhere, `pk.label-revision` aside.
+
+## 2026-09-27 — halofuginone's EPRS affinity, authored on the second attempt
+
+The earlier pass retrieved the Ki, wrote the row, watched validation reject it, and recorded the
+sequence to unblock it as "PK for halofuginone → keo → catalog entry → the Ki". **That sequence was
+wrong at its first step, and the correction is the finding.**
+
+### The PK is not the blocker, and chasing it would have failed anyway
+
+`effect_compartment.source_pmid` is **required**, so a keo must be cited and cannot be reasoned into
+existence. **No paper reports an equilibration constant for halofuginone** — so even a complete
+human PK curve would not have produced a keo, and the chain would have stopped one step later.
+
+The PK was chased regardless, to be sure. PMID:16815702 (EORTC phase I, 24 patients) is the only
+human PK study and its abstract gives only *"The PKs of halofuginone were linear over the dose range
+studied with a large interpatient variability"* — a paraphrase, no number. Its full text is
+**subscription-only**: no PMC record, Europe PMC reports `isOpenAccess: N` with the sole full-text
+URL being the paywalled DOI, and its text-mined annotations cover the **abstract section only**. The
+Elsevier article API would serve it and **`api.elsevier.com` is denied by this environment's egress
+policy** (`connect_rejected`), so the one key that could open it cannot be used from here. Five
+further PubMed searches found no second human study: every PK hit is cow, mouse, rat, chicken or a
+TMPRSS2 screening paper.
+
+### What actually blocked it was a lint rule stricter than its own reasoning
+
+`receptor.needs-keo` errored on any occupancy row without an effect compartment, justified as "the
+occupancy curve is identically zero — useless and confusing". **That is a claim about a curve, and
+it does not survive contact with the renderer:** `occupancy()` in the compound view builds its table
+from the rows alone and never reads `effect_compartment`; every other consumer guards on its
+presence; nothing computes or displays a zero curve. The rule's own sibling says so in as many
+words — `pd.needs-solvable-pk` calls the same shape a **warning** and adds *"affinity and
+dose-response still render"*. Both could not be right.
+
+So the error is now scoped to records where a keo **could** help: with a solvable route the curve is
+computable and is not computed, which is a real authoring gap and stays an error. With no solvable
+route a keo changes nothing and cannot be sourced, and `pd.needs-solvable-pk` already warns. The
+catalog lints identically either way — **0 errors, and the narrowing admits only a shape that was
+previously impossible to author at all.**
+
+**The rule was forcing a choice between fabricating a citation and discarding a real sourced
+affinity.** That is the shape worth recognising: when a gate leaves only those two options, suspect
+the gate.
+
+### What is stored
+
+`eprs` added to `nonGpcrTargets` (gene EPRS1, class enzyme, **`gtp_id: 0`** — this file's convention
+for a target GtoPdb does not carry, already used by six entries; GtoPdb's Web Services return 401
+without an API key, so no id could be looked up). The row: Ki **18.3 nM → ec50 0.00758901 mg/L**,
+`basis: in_vitro_ki`, inhibitor.
+
+Two corrections made while checking the source rather than trusting the first read:
+
+- **The assay was described wrongly on the first pass.** It is not rabbit reticulocyte lysate
+  translation — RRL is the *translation* experiment elsewhere in the paper. The Ki comes from a
+  **tRNA-Pro charging assay using the purified prolyl-tRNA synthetase domain of EPRS**.
+- **The species is human**, which the first note said was unstated: *"The prolyl tRNA synthetase
+  domain of human EPRS (ProRS) was expressed in E. coli"*. R8 satisfied, and it matters — the same
+  paper separately used full-length EPRS purified from **rat** liver.
+
+An `fu_note` records that R13 is **dormant** here rather than ignored: with no plasma curve there is
+no total-plasma comparison for a free-drug Ki to overstate. It becomes live the moment PK is
+authored.

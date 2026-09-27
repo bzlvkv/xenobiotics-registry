@@ -3058,6 +3058,24 @@
   ],
   "nonGpcrTargets": [
     {
+      "key": "5ht3",
+      "name": "5-HT3A",
+      "family": "5-HT3 receptors",
+      "gene": "HTR3A",
+      "full_name": "5-hydroxytryptamine receptor 3A",
+      "class": "ion_channel",
+      "gtp_id": 373
+    },
+    {
+      "key": "androgen_receptor",
+      "name": "Androgen receptor",
+      "family": "3C. 3-Ketosteroid receptors",
+      "gene": "AR",
+      "full_name": "androgen receptor",
+      "class": "nuclear_receptor",
+      "gtp_id": 628
+    },
+    {
       "key": "aromatase",
       "name": "CYP19A1",
       "family": "CYP11, CYP17, CYP19, CYP20 and CYP21 families",
@@ -3085,177 +3103,6 @@
       "gtp_id": 3092
     },
     {
-      "key": "cox_1",
-      "name": "COX-1",
-      "family": "Cyclooxygenase",
-      "gene": "PTGS1",
-      "full_name": "prostaglandin-endoperoxide synthase 1",
-      "class": "enzyme",
-      "gtp_id": 1375
-    },
-    {
-      "key": "cox_2",
-      "name": "COX-2",
-      "family": "Cyclooxygenase",
-      "gene": "PTGS2",
-      "full_name": "prostaglandin-endoperoxide synthase 2",
-      "class": "enzyme",
-      "gtp_id": 1376
-    },
-    {
-      "key": "dpp4",
-      "name": "dipeptidyl peptidase 4",
-      "family": "S9: Prolyl oligopeptidase",
-      "gene": "DPP4",
-      "full_name": "dipeptidyl peptidase 4",
-      "class": "enzyme",
-      "gtp_id": 1612
-    },
-    {
-      "key": "factor_xa",
-      "name": "coagulation factor X",
-      "family": "Blood coagulation components",
-      "gene": "F10",
-      "full_name": "coagulation factor X",
-      "class": "enzyme",
-      "gtp_id": 2359
-    },
-    {
-      "key": "hmgcr",
-      "name": "hydroxymethylglutaryl-CoA reductase",
-      "family": "Lanosterol biosynthesis pathway",
-      "gene": "HMGCR",
-      "full_name": "3-hydroxy-3-methylglutaryl-CoA reductase",
-      "class": "enzyme",
-      "gtp_id": 639
-    },
-    {
-      "key": "jak1",
-      "name": "Janus kinase 1",
-      "family": "Janus kinase (JakA) family",
-      "gene": "JAK1",
-      "full_name": "Janus kinase 1",
-      "class": "enzyme",
-      "gtp_id": 2047
-    },
-    {
-      "key": "pde3",
-      "name": "phosphodiesterase 3A",
-      "family": "Phosphodiesterases, 3',5'-cyclic nucleotide (PDEs)",
-      "gene": "PDE3A",
-      "full_name": "phosphodiesterase 3A",
-      "class": "enzyme",
-      "gtp_id": 1298
-    },
-    {
-      "key": "pde4",
-      "name": "phosphodiesterase 4B",
-      "family": "Phosphodiesterases, 3',5'-cyclic nucleotide (PDEs)",
-      "gene": "PDE4B",
-      "full_name": "phosphodiesterase 4B",
-      "class": "enzyme",
-      "gtp_id": 1301
-    },
-    {
-      "key": "pde5",
-      "name": "phosphodiesterase 5A",
-      "family": "Phosphodiesterases, 3',5'-cyclic nucleotide (PDEs)",
-      "gene": "PDE5A",
-      "full_name": "phosphodiesterase 5A",
-      "class": "enzyme",
-      "gtp_id": 1304
-    },
-    {
-      "key": "srd5a2",
-      "name": "steroid 5 alpha-reductase 2",
-      "family": "1.-.-.- Oxidoreductases",
-      "gene": "SRD5A2",
-      "full_name": "steroid 5 alpha-reductase 2",
-      "class": "enzyme",
-      "gtp_id": 2633
-    },
-    {
-      "key": "thrombin",
-      "name": "coagulation factor II, thrombin",
-      "family": "Blood coagulation components",
-      "gene": "F2",
-      "full_name": "coagulation factor II, thrombin",
-      "class": "enzyme",
-      "gtp_id": 2362
-    },
-    {
-      "key": "xanthine_oxidase",
-      "name": "xanthine dehydrogenase",
-      "family": "1.-.-.- Oxidoreductases",
-      "gene": "XDH",
-      "full_name": "xanthine dehydrogenase",
-      "class": "enzyme",
-      "gtp_id": 2646
-    },
-    {
-      "key": "dat",
-      "name": "DAT",
-      "family": "Monoamine transporter subfamily",
-      "gene": "SLC6A3",
-      "full_name": "solute carrier family 6 member 3",
-      "class": "transporter",
-      "gtp_id": 927
-    },
-    {
-      "key": "gat1",
-      "name": "GAT1",
-      "family": "GABA transporter subfamily",
-      "gene": "SLC6A1",
-      "full_name": "solute carrier family 6 member 1",
-      "class": "transporter",
-      "gtp_id": 929
-    },
-    {
-      "key": "na_k_atpase",
-      "name": "sodium/potassium-transporting ATPase subunit α-1",
-      "family": "Na+/K+-ATPases",
-      "gene": "ATP1A1",
-      "full_name": "ATPase Na+/K+ transporting subunit alpha 1",
-      "class": "transporter",
-      "gtp_id": 833
-    },
-    {
-      "key": "net",
-      "name": "NET",
-      "family": "Monoamine transporter subfamily",
-      "gene": "SLC6A2",
-      "full_name": "solute carrier family 6 member 2",
-      "class": "transporter",
-      "gtp_id": 926
-    },
-    {
-      "key": "SERT",
-      "name": "SERT",
-      "family": "Monoamine transporter subfamily",
-      "gene": "SLC6A4",
-      "full_name": "solute carrier family 6 member 4",
-      "class": "transporter",
-      "gtp_id": 928
-    },
-    {
-      "key": "sglt2",
-      "name": "Sodium/glucose cotransporter 2",
-      "family": "Hexose transporter family",
-      "gene": "SLC5A2",
-      "full_name": "solute carrier family 5 member 2",
-      "class": "transporter",
-      "gtp_id": 916
-    },
-    {
-      "key": "5ht3",
-      "name": "5-HT3A",
-      "family": "5-HT3 receptors",
-      "gene": "HTR3A",
-      "full_name": "5-hydroxytryptamine receptor 3A",
-      "class": "ion_channel",
-      "gtp_id": 373
-    },
-    {
       "key": "cav_alpha2delta",
       "name": "Cavα2δ-1 subunit",
       "family": "Voltage-gated calcium channels (Cav)",
@@ -3274,6 +3121,78 @@
       "gtp_id": 529
     },
     {
+      "key": "cox_1",
+      "name": "COX-1",
+      "family": "Cyclooxygenase",
+      "gene": "PTGS1",
+      "full_name": "prostaglandin-endoperoxide synthase 1",
+      "class": "enzyme",
+      "gtp_id": 1375
+    },
+    {
+      "key": "cox_2",
+      "name": "COX-2",
+      "family": "Cyclooxygenase",
+      "gene": "PTGS2",
+      "full_name": "prostaglandin-endoperoxide synthase 2",
+      "class": "enzyme",
+      "gtp_id": 1376
+    },
+    {
+      "key": "dat",
+      "name": "DAT",
+      "family": "Monoamine transporter subfamily",
+      "gene": "SLC6A3",
+      "full_name": "solute carrier family 6 member 3",
+      "class": "transporter",
+      "gtp_id": 927
+    },
+    {
+      "key": "dpp4",
+      "name": "dipeptidyl peptidase 4",
+      "family": "S9: Prolyl oligopeptidase",
+      "gene": "DPP4",
+      "full_name": "dipeptidyl peptidase 4",
+      "class": "enzyme",
+      "gtp_id": 1612
+    },
+    {
+      "key": "egfr",
+      "name": "epidermal growth factor receptor",
+      "family": "Type I RTKs: ErbB (epidermal growth factor) receptor family",
+      "gene": "EGFR",
+      "full_name": "epidermal growth factor receptor",
+      "class": "catalytic_receptor",
+      "gtp_id": 1797
+    },
+    {
+      "key": "eprs",
+      "name": "EPRS1",
+      "family": "Aminoacyl-tRNA synthetases",
+      "gene": "EPRS1",
+      "full_name": "glutamyl-prolyl-tRNA synthetase 1",
+      "class": "enzyme",
+      "gtp_id": 0
+    },
+    {
+      "key": "estrogen_receptor",
+      "name": "Estrogen receptor-α",
+      "family": "3A. Estrogen receptors",
+      "gene": "ESR1",
+      "full_name": "estrogen receptor 1",
+      "class": "nuclear_receptor",
+      "gtp_id": 620
+    },
+    {
+      "key": "factor_xa",
+      "name": "coagulation factor X",
+      "family": "Blood coagulation components",
+      "gene": "F10",
+      "full_name": "coagulation factor X",
+      "class": "enzyme",
+      "gtp_id": 2359
+    },
+    {
       "key": "gaba_a",
       "name": "GABAA receptor α1 subunit",
       "family": "GABAA receptors",
@@ -3290,6 +3209,24 @@
       "full_name": "gamma-aminobutyric acid type A receptor subunit alpha1",
       "class": "ion_channel",
       "gtp_id": 404
+    },
+    {
+      "key": "gat1",
+      "name": "GAT1",
+      "family": "GABA transporter subfamily",
+      "gene": "SLC6A1",
+      "full_name": "solute carrier family 6 member 1",
+      "class": "transporter",
+      "gtp_id": 929
+    },
+    {
+      "key": "glucocorticoid",
+      "name": "Glucocorticoid receptor",
+      "family": "3C. 3-Ketosteroid receptors",
+      "gene": "NR3C1",
+      "full_name": "nuclear receptor subfamily 3 group C member 1",
+      "class": "nuclear_receptor",
+      "gtp_id": 625
     },
     {
       "key": "glycine_receptor",
@@ -3319,112 +3256,13 @@
       "gtp_id": 572
     },
     {
-      "key": "nachr_a4b2",
-      "name": "nicotinic acetylcholine receptor α4 subunit",
-      "family": "Nicotinic acetylcholine receptors  (nACh)",
-      "gene": "CHRNA4",
-      "full_name": "cholinergic receptor nicotinic alpha 4 subunit",
-      "class": "ion_channel",
-      "gtp_id": 465
-    },
-    {
-      "key": "nachr_muscle",
-      "name": "nicotinic acetylcholine receptor α1 subunit",
-      "family": "Nicotinic acetylcholine receptors  (nACh)",
-      "gene": "CHRNA1",
-      "full_name": "cholinergic receptor nicotinic alpha 1 subunit",
-      "class": "ion_channel",
-      "gtp_id": 462
-    },
-    {
-      "key": "nav",
-      "name": "Nav1.2",
-      "family": "Voltage-gated sodium channels (NaV)",
-      "gene": "SCN2A",
-      "full_name": "sodium voltage-gated channel alpha subunit 2",
-      "class": "ion_channel",
-      "gtp_id": 579
-    },
-    {
-      "key": "nav1_5",
-      "name": "Nav1.5",
-      "family": "Voltage-gated sodium channels (NaV)",
-      "gene": "SCN5A",
-      "full_name": "sodium voltage-gated channel alpha subunit 5",
-      "class": "ion_channel",
-      "gtp_id": 582
-    },
-    {
-      "key": "nmda",
-      "name": "GluN1",
-      "family": "Ionotropic glutamate receptors",
-      "gene": "GRIN1",
-      "full_name": "glutamate ionotropic receptor NMDA type subunit 1",
-      "class": "ion_channel",
-      "gtp_id": 455
-    },
-    {
-      "key": "androgen_receptor",
-      "name": "Androgen receptor",
-      "family": "3C. 3-Ketosteroid receptors",
-      "gene": "AR",
-      "full_name": "androgen receptor",
-      "class": "nuclear_receptor",
-      "gtp_id": 628
-    },
-    {
-      "key": "estrogen_receptor",
-      "name": "Estrogen receptor-α",
-      "family": "3A. Estrogen receptors",
-      "gene": "ESR1",
-      "full_name": "estrogen receptor 1",
-      "class": "nuclear_receptor",
-      "gtp_id": 620
-    },
-    {
-      "key": "glucocorticoid",
-      "name": "Glucocorticoid receptor",
-      "family": "3C. 3-Ketosteroid receptors",
-      "gene": "NR3C1",
-      "full_name": "nuclear receptor subfamily 3 group C member 1",
-      "class": "nuclear_receptor",
-      "gtp_id": 625
-    },
-    {
-      "key": "mineralocorticoid",
-      "name": "Mineralocorticoid receptor",
-      "family": "3C. 3-Ketosteroid receptors",
-      "gene": "NR3C2",
-      "full_name": "nuclear receptor subfamily 3 group C member 2",
-      "class": "nuclear_receptor",
-      "gtp_id": 626
-    },
-    {
-      "key": "ppar_alpha",
-      "name": "Peroxisome proliferator-activated receptor-α",
-      "family": "1C. Peroxisome proliferator-activated receptors",
-      "gene": "PPARA",
-      "full_name": "peroxisome proliferator activated receptor alpha",
-      "class": "nuclear_receptor",
-      "gtp_id": 593
-    },
-    {
-      "key": "progesterone_receptor",
-      "name": "Progesterone receptor",
-      "family": "3C. 3-Ketosteroid receptors",
-      "gene": "PGR",
-      "full_name": "progesterone receptor",
-      "class": "nuclear_receptor",
-      "gtp_id": 627
-    },
-    {
-      "key": "egfr",
-      "name": "epidermal growth factor receptor",
-      "family": "Type I RTKs: ErbB (epidermal growth factor) receptor family",
-      "gene": "EGFR",
-      "full_name": "epidermal growth factor receptor",
-      "class": "catalytic_receptor",
-      "gtp_id": 1797
+      "key": "hmgcr",
+      "name": "hydroxymethylglutaryl-CoA reductase",
+      "family": "Lanosterol biosynthesis pathway",
+      "gene": "HMGCR",
+      "full_name": "3-hydroxy-3-methylglutaryl-CoA reductase",
+      "class": "enzyme",
+      "gtp_id": 639
     },
     {
       "key": "ige",
@@ -3463,6 +3301,87 @@
       "gtp_id": 0
     },
     {
+      "key": "jak1",
+      "name": "Janus kinase 1",
+      "family": "Janus kinase (JakA) family",
+      "gene": "JAK1",
+      "full_name": "Janus kinase 1",
+      "class": "enzyme",
+      "gtp_id": 2047
+    },
+    {
+      "key": "mineralocorticoid",
+      "name": "Mineralocorticoid receptor",
+      "family": "3C. 3-Ketosteroid receptors",
+      "gene": "NR3C2",
+      "full_name": "nuclear receptor subfamily 3 group C member 2",
+      "class": "nuclear_receptor",
+      "gtp_id": 626
+    },
+    {
+      "key": "na_k_atpase",
+      "name": "sodium/potassium-transporting ATPase subunit α-1",
+      "family": "Na+/K+-ATPases",
+      "gene": "ATP1A1",
+      "full_name": "ATPase Na+/K+ transporting subunit alpha 1",
+      "class": "transporter",
+      "gtp_id": 833
+    },
+    {
+      "key": "nachr_a4b2",
+      "name": "nicotinic acetylcholine receptor α4 subunit",
+      "family": "Nicotinic acetylcholine receptors  (nACh)",
+      "gene": "CHRNA4",
+      "full_name": "cholinergic receptor nicotinic alpha 4 subunit",
+      "class": "ion_channel",
+      "gtp_id": 465
+    },
+    {
+      "key": "nachr_muscle",
+      "name": "nicotinic acetylcholine receptor α1 subunit",
+      "family": "Nicotinic acetylcholine receptors  (nACh)",
+      "gene": "CHRNA1",
+      "full_name": "cholinergic receptor nicotinic alpha 1 subunit",
+      "class": "ion_channel",
+      "gtp_id": 462
+    },
+    {
+      "key": "nav",
+      "name": "Nav1.2",
+      "family": "Voltage-gated sodium channels (NaV)",
+      "gene": "SCN2A",
+      "full_name": "sodium voltage-gated channel alpha subunit 2",
+      "class": "ion_channel",
+      "gtp_id": 579
+    },
+    {
+      "key": "nav1_5",
+      "name": "Nav1.5",
+      "family": "Voltage-gated sodium channels (NaV)",
+      "gene": "SCN5A",
+      "full_name": "sodium voltage-gated channel alpha subunit 5",
+      "class": "ion_channel",
+      "gtp_id": 582
+    },
+    {
+      "key": "net",
+      "name": "NET",
+      "family": "Monoamine transporter subfamily",
+      "gene": "SLC6A2",
+      "full_name": "solute carrier family 6 member 2",
+      "class": "transporter",
+      "gtp_id": 926
+    },
+    {
+      "key": "nmda",
+      "name": "GluN1",
+      "family": "Ionotropic glutamate receptors",
+      "gene": "GRIN1",
+      "full_name": "glutamate ionotropic receptor NMDA type subunit 1",
+      "class": "ion_channel",
+      "gtp_id": 455
+    },
+    {
       "key": "pd_1",
       "name": "programmed cell death 1 (CD279)",
       "family": "CD molecules",
@@ -3472,6 +3391,87 @@
       "gtp_id": 2760
     },
     {
+      "key": "pde3",
+      "name": "phosphodiesterase 3A",
+      "family": "Phosphodiesterases, 3',5'-cyclic nucleotide (PDEs)",
+      "gene": "PDE3A",
+      "full_name": "phosphodiesterase 3A",
+      "class": "enzyme",
+      "gtp_id": 1298
+    },
+    {
+      "key": "pde4",
+      "name": "phosphodiesterase 4B",
+      "family": "Phosphodiesterases, 3',5'-cyclic nucleotide (PDEs)",
+      "gene": "PDE4B",
+      "full_name": "phosphodiesterase 4B",
+      "class": "enzyme",
+      "gtp_id": 1301
+    },
+    {
+      "key": "pde5",
+      "name": "phosphodiesterase 5A",
+      "family": "Phosphodiesterases, 3',5'-cyclic nucleotide (PDEs)",
+      "gene": "PDE5A",
+      "full_name": "phosphodiesterase 5A",
+      "class": "enzyme",
+      "gtp_id": 1304
+    },
+    {
+      "key": "ppar_alpha",
+      "name": "Peroxisome proliferator-activated receptor-α",
+      "family": "1C. Peroxisome proliferator-activated receptors",
+      "gene": "PPARA",
+      "full_name": "peroxisome proliferator activated receptor alpha",
+      "class": "nuclear_receptor",
+      "gtp_id": 593
+    },
+    {
+      "key": "progesterone_receptor",
+      "name": "Progesterone receptor",
+      "family": "3C. 3-Ketosteroid receptors",
+      "gene": "PGR",
+      "full_name": "progesterone receptor",
+      "class": "nuclear_receptor",
+      "gtp_id": 627
+    },
+    {
+      "key": "SERT",
+      "name": "SERT",
+      "family": "Monoamine transporter subfamily",
+      "gene": "SLC6A4",
+      "full_name": "solute carrier family 6 member 4",
+      "class": "transporter",
+      "gtp_id": 928
+    },
+    {
+      "key": "sglt2",
+      "name": "Sodium/glucose cotransporter 2",
+      "family": "Hexose transporter family",
+      "gene": "SLC5A2",
+      "full_name": "solute carrier family 5 member 2",
+      "class": "transporter",
+      "gtp_id": 916
+    },
+    {
+      "key": "srd5a2",
+      "name": "steroid 5 alpha-reductase 2",
+      "family": "1.-.-.- Oxidoreductases",
+      "gene": "SRD5A2",
+      "full_name": "steroid 5 alpha-reductase 2",
+      "class": "enzyme",
+      "gtp_id": 2633
+    },
+    {
+      "key": "thrombin",
+      "name": "coagulation factor II, thrombin",
+      "family": "Blood coagulation components",
+      "gene": "F2",
+      "full_name": "coagulation factor II, thrombin",
+      "class": "enzyme",
+      "gtp_id": 2362
+    },
+    {
       "key": "tnf_alpha",
       "name": "TNF-α",
       "family": "Tumour necrosis factor family",
@@ -3479,6 +3479,15 @@
       "full_name": "tumor necrosis factor",
       "class": "immune",
       "gtp_id": 0
+    },
+    {
+      "key": "xanthine_oxidase",
+      "name": "xanthine dehydrogenase",
+      "family": "1.-.-.- Oxidoreductases",
+      "gene": "XDH",
+      "full_name": "xanthine dehydrogenase",
+      "class": "enzyme",
+      "gtp_id": 2646
     }
   ]
 }
