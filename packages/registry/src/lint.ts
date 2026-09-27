@@ -1341,16 +1341,22 @@ export function lintRegistry(registry: Registry): Finding[] {
     //
     // So the split follows what a keo could actually buy. With a solvable route
     // the curve is computable and simply is not computed — an authoring gap, and
-    // still an error. With NO solvable route there is no Cp to equilibrate with,
-    // a keo would change nothing, and `effect_compartment.source_pmid` is
-    // REQUIRED, so a record whose drug has no published equilibration study
-    // cannot supply one without inventing a citation. Erroring there forced the
-    // choice between fabricating a keo and discarding a real, sourced affinity.
-    // That case is not silent: `pd.needs-solvable-pk` already warns on it.
+    // still an error. With NO solvable route there is no Cp AT ALL to equilibrate
+    // against, so a keo is not merely unhelpful but meaningless: it is the rate
+    // of approach to a concentration this record does not have. Erroring there
+    // demanded a number that could describe nothing. That case is not silent —
+    // `pd.needs-solvable-pk` already warns on it, and says exactly that.
+    //
+    // AN EARLIER VERSION OF THIS COMMENT ARGUED FROM A FALSE PREMISE, that
+    // `source_pmid` is required on an effect compartment so a keo could not be
+    // supplied without inventing a citation. It is OPTIONAL — 196 records carry
+    // an `approximated: true` keo with a note and no PMID. The narrowing does not
+    // rest on that and never needed to: it rests on the renderer, which reads the
+    // occupancy rows and never reads `effect_compartment`.
     //
     // halofuginone is the case that exposed this. Its EPRS Ki is verbatim from
-    // full text, its one human PK study publishes no parameter, and no paper
-    // anywhere reports an equilibration constant for it.
+    // full text; its one human PK study publishes no parameter, so there is no
+    // curve for a keo to belong to.
     if (c.receptor_occupancy && c.receptor_occupancy.length > 0) {
       if (!c.effect_compartment?.keo_per_h && anyRouteSolvable(c)) {
         err(

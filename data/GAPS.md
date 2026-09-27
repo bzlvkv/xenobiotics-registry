@@ -6787,9 +6787,19 @@ wrong at its first step, and the correction is the finding.**
 
 ### The PK is not the blocker, and chasing it would have failed anyway
 
+**CORRECTED 2026-09-27, later the same day:** this section first claimed that
 `effect_compartment.source_pmid` is **required**, so a keo must be cited and cannot be reasoned into
-existence. **No paper reports an equilibration constant for halofuginone** — so even a complete
-human PK curve would not have produced a keo, and the chain would have stopped one step later.
+existence. That is **false** — `pmid` is `.optional()` in the schema, and **196 records carry an
+`approximated: true` keo with a note and no PMID at all**. The claim was wrong when written and is
+struck here rather than quietly edited, because it was repeated in a commit message and cannot be
+unsaid there.
+
+What is true, and is what the chain actually turns on: **no paper reports an equilibration constant
+for halofuginone**, and more decisively **this record has no plasma curve at all**, so a keo has
+nothing to describe the approach to. Every one of the 196 approximated keos is anchored to an
+observed time-to-peak effect; an estimate here would be anchored to nothing. So a complete human PK
+curve would still not have produced a keo, and the chain would have stopped one step later — the
+conclusion survives, the reasoning that reached it did not.
 
 The PK was chased regardless, to be sure. PMID:16815702 (EORTC phase I, 24 patients) is the only
 human PK study and its abstract gives only *"The PKs of halofuginone were linear over the dose range
@@ -6813,7 +6823,9 @@ dose-response still render"*. Both could not be right.
 
 So the error is now scoped to records where a keo **could** help: with a solvable route the curve is
 computable and is not computed, which is a real authoring gap and stays an error. With no solvable
-route a keo changes nothing and cannot be sourced, and `pd.needs-solvable-pk` already warns. The
+route there is no Cp to equilibrate against, so a keo is not merely unhelpful but meaningless, and
+`pd.needs-solvable-pk` already warns. **The narrowing rests on the renderer, not on the false
+premise above** — `occupancy()` reads the rows and never reads `effect_compartment`. The
 catalog lints identically either way — **0 errors, and the narrowing admits only a shape that was
 previously impossible to author at all.**
 
