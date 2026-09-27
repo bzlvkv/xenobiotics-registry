@@ -7545,7 +7545,8 @@
     "mw_g_mol": 314.46,
     "refs": [
       "PMID:30534073",
-      "PMID:17245363"
+      "PMID:17245363",
+      "PMID:15033394"
     ],
     "systems": [
       "nervous",
@@ -7578,7 +7579,7 @@
         "ec50_mg_l": 1.540854,
         "hill_n": 1,
         "source_pmid": "PMID:17245363",
-        "note": "Thomas 2007 Table 1 (PMC2189767) verbatim: cannabidiol CB1 Ki \"4.9 μM (2.1 and 11.3 μM)\", mouse brain membranes, [3H]CP55940 displacement. Weak; functional antagonist (not agonist). ec50 = 4.9 µM × 314.46 / 1000.",
+        "note": "FULL TEXT, Thomas 2007 Table 1 (PMC2189767) — the abstract states no number, only that cannabidiol is \"a high potency antagonist\". The table column is \"Ki for displacement of [3H]CP55940 (95% CI)\" and the row reads 4.9 microM (2.1 and 11.3 microM), n=5-12, MOUSE BRAIN membranes (an occupancy row has no source_species field, so species is recorded here). ec50 = 4.9 microM x 314.46 / 1000. THAT TABLE MARKS THIS DATUM FOOTNOTE b, \"Data previously published in Thomas et al. (2004)\" (PMID:15033394, in refs), so the 2007 paper reproduces an earlier measurement rather than making a new one.",
         "action": "antagonist"
       },
       {
@@ -7588,7 +7589,7 @@
         "ec50_mg_l": 1.320732,
         "hill_n": 1,
         "source_pmid": "PMID:17245363",
-        "note": "Thomas 2007 Table 1 (PMC2189767) verbatim: cannabidiol CB2 Ki \"4.2 μM (2.9 and 6.2 μM)\", human CB2 (hCB2-CHO). Weak; functional antagonist. ec50 = 4.2 µM × 314.46 / 1000.",
+        "note": "FULL TEXT, Thomas 2007 Table 1 (PMC2189767) — the abstract states no number. Column \"Ki for displacement of [3H]CP55940 (95% CI)\", row 4.2 microM (2.9 and 6.2 microM), n=6-8, hCB2-CHO cells, i.e. HUMAN CB2 (recorded here because an occupancy row has no source_species field). ec50 = 4.2 microM x 314.46 / 1000. Unlike the CB1 row this one carries NO previously-published footnote, so it is original to this paper. Weak; functional antagonist, not an agonist.",
         "action": "antagonist"
       }
     ],
@@ -8113,7 +8114,7 @@
         "ec50_mg_l": 0.120579,
         "hill_n": 1,
         "source_pmid": "PMID:20002104",
-        "note": "Cascio 2010 verbatim: cannabigerol Ki \"381 nM (231 and 627 nM) for displacement from brain membranes\" (mouse brain), [3H]CP55940; low-efficacy/partial. ec50 = 381 nM × 316.48 / 1e6.",
+        "note": "FULL TEXT, Cascio 2010 (PMC2823359) Figure 1 legend — the abstract says only that cannabigerol \"displayed significant affinity\", with no number. The legend reads: \"Mean K i values with 95% confidence limits shown in brackets are (A) 381 nM (231 and 627 nM) for displacement from brain membranes\". The body gives the species: cannabigerol reduced specific binding of [3H]CP55940 to MF1 MOUSE BRAIN membranes (species recorded here, as an occupancy row has no source_species field). ec50 = 381 nM x 316.48 / 1e6. Cannabigerol is this paper subject, so the legend is its own datum.",
         "action": "partial_agonist"
       },
       {
@@ -8123,7 +8124,7 @@
         "ec50_mg_l": 0.822848,
         "hill_n": 1,
         "source_pmid": "PMID:20002104",
-        "note": "Cascio 2010 verbatim: cannabigerol Ki \"2.6 µM (1.4 and 4.7 µM) for displacement from CHO-hCB2 cell membranes\" (human CB2). ec50 = 2.6 µM × 316.48 / 1000.",
+        "note": "FULL TEXT, Cascio 2010 (PMC2823359) Figure 1 legend, the same sentence as the CB1 row: \"(B) 2.6 microM (1.4 and 4.7 microM) for displacement from CHO-hCB 2 cell membranes\" — HUMAN CB2, recorded here because an occupancy row has no source_species field. ec50 = 2.6 microM x 316.48 / 1000. The abstract states no number, so this value exists only in the full text.",
         "action": "partial_agonist"
       }
     ]
@@ -21570,10 +21571,10 @@
         "receptor": "il23_p19",
         "pathway": "neutralizer",
         "emax": 1,
-        "ec50_mg_l": 0.00518,
+        "ec50_mg_l": 0.005145,
         "hill_n": 1,
         "source_pmid": "PMID:34460338",
-        "note": "Zhou 2021 verbatim: \"Risankizumab and guselkumab exhibited high affinity to human scIL-23 with mean KDs of 21 pM and 35 pM, respectively\" — guselkumab 35 pM, SPR. Soluble IL-23 (p19) neutralisation. ec50 = 0.035 nM × 148000 / 1e6.",
+        "note": "FULL TEXT, Zhou 2021 (PMC8409790) — the abstract carries a different sentence and no constant. The body has the number: \"Risankizumab and guselkumab exhibited high affinity to human scIL-23 with mean K D s of 21 pM and 35 pM, respectively\" — 35 pM is GUSELKUMAB, 21 pM is risankizumab and must not migrate here. SPR, human single-chain IL-23, 1:1 model; all four antibodies are co-subjects, so not a comparator value. ec50 = 0.035 nM x 147000 / 1e6. RECOMPUTED from this record own mw_g_mol: the previous note derived it from 148000, a mass the record does not store.",
         "action": "neutralizer"
       }
     ],
