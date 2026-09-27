@@ -7229,3 +7229,60 @@ lesson is the one this batch keeps re-teaching: **the screen orders the work, th
 `alpha-gpc`, `berberine` and `bromantane` were also read: their abstracts contain **no PK sentence
 with a number at all**, so their stored volumes, F and half-lives are genuinely unsourced and belong
 to the per-record strip pass rather than to a quick fix.
+
+### The screen had a seconds blind spot, and fixing it purged 38 false alarms
+
+Adding ×3600 and ÷24 to the printed forms (seconds and days, alongside the minutes and
+per-kilogram forms it already tried) moved the half-life column from **73 misses to 43** and ka from
+**22 to 14**. Thirty-eight of the original flags were the screen's fault, not the data's — a **16%
+false-alarm rate** on the worklist — and the none-matched set fell from **12 rows to 7**.
+`arachidonic-acid`, `calcifediol` and `colchicine` cite half-lives stated in **days**; `adenosine`'s
+was in **seconds**. Any future column of this screen should be assumed to have a units gap until the
+inverse is checked.
+
+### levothyroxine: the citation's observation window was shorter than the half-life it was made to support
+
+The strongest defect the screen has produced. `levothyroxine` stored **V 11 L** and **t½ 168 h** on
+both routes against PMID:6688797, whose **entire abstract is 689 characters**, states no volume and no
+half-life, and collected serum data *"over a period of 50 h"* — **shorter than the 168 h half-life the
+record hung on it**, which that paper therefore could not have measured. The 11 L was also 0.157 L/kg,
+one of the shared priors `pk.template-volume` reports.
+
+Rebuilt from PMID:29212434, a stable-isotope 13C-LT4 study: CL/F, V/F and Tmax *"were estimated to be
+0.712 L/h, 164.9 L, 4 h"*, and the *"half-life of the terminal distribution phase"* is *"and 172.2 h,
+respectively"*. Half-life now **172.2 h**, verbatim.
+
+**The volume is a declared derivation, not a copy.** 164.9 L is an *apparent* `V/F`, and FIELDS
+forbids pairing one with an independent `F` because the resolver already multiplies by `F` — storing
+164.9 beside `F` 0.66 would correct for bioavailability twice. `V = (V/F) × F = 164.9 × 0.66 = 108.8 L`.
+**The derivation's weakest joint is declared on the record:** its two inputs are different studies, a
+2018 isotope study and the 1983 tablet study. Coherence holds — 108.8 L at 172.2 h implies CL 0.438 L/h
+against 0.47 L/h from the paper's own `CL/F`, seven percent apart, the same slack the paper carries
+internally.
+
+### testosterone-enanthate: four numbers, none of them in the cited paper
+
+PMID:6800853 reports serial hormone levels and a dosing recommendation, and states **no half-life, no
+volume, no bioavailability and no absorption rate** — none of the four numbers the row carried.
+Re-sourced to PMID:2333732, which states it verbatim: *"Mean half-life estimates of the terminal
+elimination phase were 4 and 7 days for testosterone-enanthate"*. **t½ 108 h → 96 h** (the 7 days is
+dihydrotestosterone-enanthate, a different ester, and is not what is stored).
+
+`V` 77 L, `F` 0.95 and `ka` 0.008/h remain unsourced and are **kept rather than deleted**: this is an
+oil depot, and the resolver's 1.0/h default would absorb it in hours instead of weeks, which is more
+wrong than an undocumented number. Flagged for the volume pass.
+
+### Still open from the 7
+
+`alpha-gpc`, `berberine`, `bromantane` (abstracts contain no PK sentence with a number at all) and
+`dpa` (PMID:27151222 is a 12-hour bioavailability crossover of a three-fatty-acid oil and states no
+half-life, while the record claims 168 h). All four need a source or a strip, per-record.
+
+### A gate limitation worth knowing before writing a note
+
+A quoted span in a **compound-level `notes`** field registers with `verify:quotes` only if **its own
+clause names exactly one PMID** — compound notes have no row `source_pmid` to fall back on. The first
+draft of the levothyroxine note put the PMID in one sentence and the quotes in the next, and **all
+three quotes were silently invisible to the gate**. Naming the PMID inside each quoting clause fixed
+it (651 → 654 claims). A quote that does not register is worse than no quote: it looks like provenance
+and is checked by nothing.

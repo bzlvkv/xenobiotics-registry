@@ -26518,20 +26518,21 @@
       }
     },
     "half_life_hr": {
-      "PO": 168,
-      "IV": 168
+      "PO": 172.2,
+      "IV": 172.2
     },
     "pk": {
       "PO": {
-        "V_L": 11,
+        "V_L": 108.8,
         "F": 0.66,
         "source_pmid": "PMID:6688797",
         "note": "F 0.69 -> 0.66. PMID:6688797 verbatim: \"The absolute bioavailabilities of the two tablet preparations were 66% and 72%, respectively\" — 0.69 was their MEAN and is in no source; R3 takes the lower arm, and that spread is formulation. ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.5/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:6688797, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
       },
       "IV": {
-        "V_L": 11,
+        "V_L": 108.8,
         "F": 1,
-        "source_pmid": "PMID:6688797"
+        "source_pmid": "PMID:6688797",
+        "note": "V and half-life come from the derivation in this compound’s notes, not from PMID:6688797, which states neither. F 1 is definitional for the intravenous route."
       }
     },
     "refs": [
@@ -26569,7 +26570,8 @@
     "systems": [
       "endocrine"
     ],
-    "mw_g_mol": 776.87
+    "mw_g_mol": 776.87,
+    "notes": "VOLUME AND HALF-LIFE REBUILT 2026-09-27, both routes. The previous V 11 L and t1/2 168 h were hung on PMID:6688797, whose whole abstract is 689 characters and states neither. That paper collected serum data over a period of 50 h — SHORTER THAN THE 168 h HALF-LIFE THE RECORD CLAIMED, which it therefore could not have measured. 11 L was also 0.157 L/kg at the reference weight, one of the shared per-kilogram priors pk.template-volume now reports.\n\nThe replacements come from a stable-isotope 13C-LT4 study. PMID:29212434 states verbatim that CL/F, V/F and Tmax \"were estimated to be 0.712 L/h, 164.9 L, 4 h\". PMID:29212434 reports the \"half-life of the terminal distribution phase\" verbatim as \"and 172.2 h, respectively\", and the half-life is stored at that 172.2 h.\n\nTHE VOLUME IS A DECLARED DERIVATION, because 164.9 L is an APPARENT V/F and FIELDS forbids pairing an apparent volume with an independent F: the resolver already multiplies by F, so storing 164.9 beside F 0.66 would correct for bioavailability twice. Arithmetic: V = (V/F) x F = 164.9 x 0.66 = 108.8 L. The F input is the 0.66 quoted on the PO row, so THE TWO INPUTS ARE DIFFERENT STUDIES (a 2018 isotope study and a 1983 tablet study) and that is the derivation’s weakest joint; it is declared rather than hidden. An absolute volume is a property of the molecule, so the same 108.8 L is stored on the IV route.\n\nCOHERENCE CHECK: 108.8 L with t1/2 172.2 h implies CL = ln2/172.2 x 108.8 = 0.438 L/h, against 0.712 x 0.66 = 0.47 L/h from the same paper’s CL/F. Seven percent apart, which is the slack that paper carries internally (its stated 172.2 h against the 160.5 h its own V/F and CL/F imply), so the stored numbers are jointly possible."
   },
   {
     "slug": "lgd-3303",
@@ -46760,14 +46762,15 @@
       }
     },
     "half_life_hr": {
-      "IM": 108
+      "IM": 96
     },
     "pk": {
       "IM": {
         "ka_hr": 0.008,
         "F": 0.95,
         "V_L": 77,
-        "source_pmid": "PMID:6800853"
+        "source_pmid": "PMID:2333732",
+        "note": "HALF-LIFE RE-SOURCED AND CORRECTED, 108 h -> 96 h. The previous citation, PMID:6800853, reports serial hormone levels and a dosing recommendation, and states no half-life, volume, bioavailability or absorption rate — none of the four numbers this row carries. PMID:2333732 states the half-life verbatim: \"Mean half-life estimates of the terminal elimination phase were 4 and 7 days for testosterone-enanthate\" (the 7 days is dihydrotestosterone-enanthate, a different ester). 4 days is 96 h. STILL UNSOURCED: V 77 L, F 0.95, ka 0.008/h. Kept rather than deleted because this is a depot and the 1.0/h default would absorb an oil injection in hours instead of weeks. Flagged for the volume pass."
       }
     },
     "refs": [
