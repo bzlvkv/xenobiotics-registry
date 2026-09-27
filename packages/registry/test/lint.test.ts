@@ -1112,7 +1112,9 @@ describe('muscarinic subtype keys bridge to the catalogued CHRM genes', () => {
 describe('note.announced-quote-missing', () => {
   const fired = (note: string): boolean =>
     rules(
-      lint([compound({ slug: 'x', name: 'X', pk_unauthored: { reason: 'no_human_pk', note } })]),
+      lint([
+        compound({ slug: 'x', name: 'X', pk_unauthored: { reason: 'uncharacterized', note } }),
+      ]),
     ).includes('note.announced-quote-missing');
 
   it('fires when a note announces a quotation and paraphrases instead', () => {
