@@ -195,3 +195,28 @@ describe('verbatimClaims reaches inline-cited prose', () => {
     expect(origins.has('notes')).toBe(true);
   });
 });
+
+describe('normalizeForMatch — renderings that are the same sentence', () => {
+  it('folds a vulgar fraction against its spelled-out form', () => {
+    // perampanel: PubMed prints `mean t½, 109 h`; the note writes `t1/2`.
+    expect(
+      quoteFound('mean t1/2, 109 h', 'were median tss,max, 1.25 h; mean t½, 109 h; mean Css,max'),
+    ).toBe(true);
+  });
+
+  it('folds a Lancet middle-dot decimal against an ordinary point', () => {
+    // survodutide: the abstract prints `0·6, 2·4, 3·6, or 4·8 mg`.
+    const abstract =
+      'to subcutaneous survodutide (0·6, 2·4, 3·6, or 4·8 mg) or placebo once-weekly for 46 weeks';
+    expect(
+      quoteFound(
+        'subcutaneous survodutide (0.6, 2.4, 3.6, or 4.8 mg) or placebo once-weekly',
+        abstract,
+      ),
+    ).toBe(true);
+  });
+
+  it('does not fold a middle dot that is not between digits', () => {
+    expect(normalizeForMatch('A·B')).not.toBe(normalizeForMatch('A.B'));
+  });
+});

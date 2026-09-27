@@ -285,20 +285,39 @@ const GREEK: Readonly<Record<string, string>> = {
 };
 
 export function normalizeForMatch(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/[\u2018\u2019\u02bc]/g, "'")
-    .replace(/[\u201c\u201d]/g, '"')
-    .replace(/[\u207b\u2070\u00b9\u00b2\u00b3\u2074-\u2079]/g, (ch) => SUPERSCRIPTS[ch] ?? ch)
-    .replace(/[\u2010-\u2015\u2212]/g, '-')
-    .replace(/[\u223c\u02dc]/g, '~')
-    .replace(/\u00b5/g, 'micro')
-    .replace(/\u03bc(?=\s*[mgl])/g, 'micro')
-    .replace(/[\u03b1\u03b2\u03b3\u03b4\u03ba\u03bc\u03c3\u03c4]/g, (ch) => GREEK[ch] ?? ch)
-    .replace(/\u00b1/g, '+/-')
-    .replace(/[()[\]]/g, '')
-    .replace(/\bu([mgl])\b/g, 'micro$1')
-    .replace(/\s+/g, '');
+  return (
+    text
+      .toLowerCase()
+      .replace(/[\u2018\u2019\u02bc]/g, "'")
+      .replace(/[\u201c\u201d]/g, '"')
+      .replace(/[\u207b\u2070\u00b9\u00b2\u00b3\u2074-\u2079]/g, (ch) => SUPERSCRIPTS[ch] ?? ch)
+      .replace(/[\u2010-\u2015\u2212]/g, '-')
+      .replace(/[\u223c\u02dc]/g, '~')
+      .replace(/\u00b5/g, 'micro')
+      .replace(/\u03bc(?=\s*[mgl])/g, 'micro')
+      .replace(/[\u03b1\u03b2\u03b3\u03b4\u03ba\u03bc\u03c3\u03c4]/g, (ch) => GREEK[ch] ?? ch)
+      .replace(/\u00b1/g, '+/-')
+      /*
+       * A vulgar fraction against its spelled-out form. PubMed prints
+       * perampanel's steady-state half-life as `mean t\u00bd, 109 h` while the note
+       * writes `t1/2`, which is how every other record in this catalog writes it.
+       * Same symbol, two renderings, and nothing else stood between them.
+       */
+      .replace(/\u00bd/g, '1/2')
+      .replace(/\u00bc/g, '1/4')
+      .replace(/\u00be/g, '3/4')
+      /*
+       * A DECIMAL POINT SET AS A MIDDLE DOT, which is Lancet house style:
+       * survodutide's phase 2 abstract prints `0\u00b76, 2\u00b74, 3\u00b76, or 4\u00b78 mg` where
+       * the note has `0.6, 2.4`. Folded only BETWEEN DIGITS, because U+00B7 is
+       * also an ordinary separator elsewhere and this gate should not quietly
+       * equate `A\u00b7B` with `A.B` outside a number.
+       */
+      .replace(/(?<=\d)[\u00b7\u22c5](?=\d)/g, '.')
+      .replace(/[()[\]]/g, '')
+      .replace(/\bu([mgl])\b/g, 'micro$1')
+      .replace(/\s+/g, '')
+  );
 }
 
 /** An author's elision inside a quote. Each side of it must still be present. */
