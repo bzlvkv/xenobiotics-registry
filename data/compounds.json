@@ -59845,7 +59845,7 @@
       "PO": {
         "F": 1,
         "source_pmid": "PMID:33661566",
-        "note": "t1/2 5.8 h is the NORMAL-HEPATIC-FUNCTION arm of a hepatic-impairment study, single oral 450 mg, n=8 of 16 (mean age 59.2 y, 62.5% female), abstract verbatim: \"Mean elimination half-life was 5.8 and 7.8 hours in the normal and hepatic impairment groups, respectively.\" Those are two parallel groups, NOT a range, and are never averaged. CHOSEN OVER THE LARGER PK PAPER ON PURPOSE: PMID:38924087's \"approximately 4.5 hours\" is hedged, covers \"single or multiple dosing\" so it fits neither, and that paper has an ERRATUM (PMID:39520093) whose content could not be retrieved. See notes. F IS PINNED TO 1: no absolute bioavailability is published and the Vafseo label states none. NO V_L: neither the label section 12.3 nor any fetched abstract gives a volume."
+        "note": "t1/2 5.8 h is the NORMAL-HEPATIC-FUNCTION arm of a hepatic-impairment study, single oral 450 mg, n=8 of 16 (mean age 59.2 y, 62.5% female), abstract verbatim: \"Mean elimination half-life was 5.8 and 7.8 hours in the normal and hepatic impairment groups, respectively.\" Those are two parallel groups, NOT a range, and are never averaged. CHOSEN OVER THE LARGER PK PAPER ON PURPOSE: the 4.5 h figure in PMID:38924087 is hedged, its sentence spans single and multiple dosing so it fits neither, and that paper carries an erratum whose content could not be retrieved. See notes. F IS PINNED TO 1: no absolute bioavailability is published and the Vafseo label states none. NO V_L: neither the label section 12.3 nor any fetched abstract gives a volume."
       }
     },
     "mw_g_mol": 306.7,
