@@ -6645,3 +6645,69 @@ Marked standing in `packages/registry/src/rules.ts`. The edges stay.
 
 No source states whether its doses are the mesylate salt or the mitoquinone cation. Still a
 documented standing caveat, not a task.
+
+## 2026-09-27 — Batch 6, the full-text re-chase · all three retrieved, none stored as a value
+
+The PMC article route worked cleanly on all three — HTTP 200, no reCAPTCHA, no backoff needed — and
+each target value was found. **Then none of the three became a stored number, for three different
+reasons, and the reasons are the deliverable.** Every value is written into its record's prose so
+nobody re-chases it.
+
+PMC → PMID resolved through the id converter rather than from memory: PMC3281520 → PMID:22327401,
+PMC7072805 → PMID:32053994, PMC3579463 → PMID:23228986.
+
+### `halofuginone` — the value is real, and the registry's shape cannot hold it yet
+
+Found, verbatim from full text where the abstract states no constant: *"The slope of the resulting
+line yields a K i for HF of 18.3 nM+/− 0.5"* — HF is halofuginone, the enzyme is EPRS1. At MW 414.7
+that is 0.00758901 mg/L.
+
+**The row was written, and validation rejected it, correctly.** An occupancy entry requires an
+`effect_compartment.keo_per_h`; a keo requires a curve; and this record has no authored PK because
+its one human study publishes no parameter. Authoring the row would have forced an invented keo, so
+`receptor.needs-keo` fired as an **error** and the row came back out. A lint rule stopping an author
+from fabricating a third value to support a second one is the gate working exactly as designed.
+
+Two things were prepared and then reverted with it, and are recorded here as the unlock: an `eprs`
+entry in `nonGpcrTargets` (gene EPRS1, class enzyme, **`gtp_id: 0`** — the file's standing convention
+for a target GtoPdb does not carry, already used by six entries), and an `fu_note`. **GtoPdb's Web
+Services now return 401 without an API key**, so no real `gtp_id` can be looked up from this
+environment even if one exists. The sequence to author this row is: PK for halofuginone → keo →
+catalog entry → the Ki above.
+
+Also a distinction worth keeping: this is a **derived** Ki, taken from the slope of IC50 against
+proline (20–480 nM) for a tight-binding competitive inhibitor. It is substrate-corrected by
+construction and is **not** interchangeable with a single-concentration IC50.
+
+### `somapacitan` — retrieved, and the wrong quantity to store
+
+Found: *"binding between somapacitan and GHBP in the absence of albumin could be characterized by two
+sets of binding sites with a KD1 of 9.1 nM (high affinity binding site) and a KD2 of 103.9 nM (low
+affinity binding site)"*.
+
+**"In the absence of albumin" is fatal for this compound specifically.** Somapacitan is an
+albumin-binding GH derivative — binding albumin is the whole design — so the albumin-free affinity is
+not the affinity anything in plasma has. The same paper says albumin-bound somapacitan binds the
+receptor with about **fivefold lower** affinity. And two sites cannot be one `ec50` anyway. Storing
+9.1 nM would have overstated potency at the one condition that never obtains in a patient. **A
+retrieved number is not the same as an applicable one.**
+
+### `acadesine` — the one that paid off, as corroboration rather than as data
+
+The CLL phase I publishes the table its abstract omits. At the 210 mg/kg optimal biological dose the
+median AUC(0–24) is 123,125 ng·h/mL; at the 70 kg reference that dose is 14,700 mg, so
+CL = 14,700 / 123.125 = **119 L/h**.
+
+**That independently checks the R15 call made on this record earlier.** The stored derivation
+(V = 175 × 1.4 / ln2 = 353.5 L) implies **175 L/h**; the verbatim Vss of 112 L would have implied
+**55 L/h**. The derived figure lands within 1.5× of an independent patient study while the verbatim
+one is off by 2.2× in the other direction. R15 said to store the volume the record's own clearance
+implies, and a study nobody had read when that call was made agrees with it.
+
+The CLL half-lives are **not** portable and are not imported: the same table gives medians from 3.9
+to 61.4 h with within-cohort spreads of 2.6 to 106 h, against 1.4 h in healthy men.
+
+### Confirmed dead, do not re-chase
+
+`PMC3911487` (no `<body>`) and `PMC5945293` (the MitoQ value is figure-only) — unchanged from the
+earlier assessment.

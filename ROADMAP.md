@@ -108,11 +108,17 @@ Pin each row to the subtype **its cited assay measured** (α1A/1B/1D, M1–M5) �
 the paper did not measure. Needs an `OCCUPANCY_TARGET_KEYS` line plus a catalog entry, so the code
 change commits separately from the data.
 
-## Batch 6 — full-text re-chase · 7 "not retrieved" rows + 20 named PMC ids
+## Batch 6 — full-text re-chase — **DONE 2026-09-27**
 
-- [ ] Best targets: **PMC3281520** (halofuginone EPRS IC50, would unblock an occupancy row),
+All three retrieved through the PMC article route; none became a stored value, for three different
+reasons, and each value is written into its record's prose. halofuginone's Ki 18.3 nM cannot be a row
+until the record has PK, because an occupancy entry needs a keo and validation refused the row
+without one. somapacitan's KD1 9.1 nM is albumin-free and this compound binds albumin by design.
+acadesine's table independently corroborated the R15 volume derivation. Findings in `data/GAPS.md`.
+
+- [x] Best targets: **PMC3281520** (halofuginone EPRS IC50, would unblock an occupancy row),
       **PMC7072805** (somapacitan ITC constants), **PMC3579463** (acadesine CLL PK table).
-- [ ] Known dead, do not re-chase: PMC3911487 (no `<body>`), PMC5945293 (MitoQ value is
+- [x] Known dead, do not re-chase: PMC3911487 (no `<body>`), PMC5945293 (MitoQ value is
       figure-only).
 
 ## Batch 7 — `pk.unsolvable-default-route` · 5 records — **DONE 2026-09-27**
