@@ -6435,3 +6435,48 @@ nearest endpoint is out of reach, which confirms what that record's own prose al
 ("NO ka EXISTS THAT PRODUCES IT") and locates the defect: a delayed-release PPI is release-limited
 and this row authors no lag. `metolazone` is the one label with no peak time anywhere; it goes to
 part 2.
+
+## 2026-09-27 — `pk.template-ka`, part 2: 78 rows stripped · the rule now fires nowhere
+
+The remainder of the 121. Each cited document was fetched and **states no peak time for the named
+compound**, so the stored rate was not merely unsourced but *unfalsifiable against its own source* —
+there is nothing in the citation it could be checked against, in either direction.
+
+| Why it was stripped | Rows |
+| --- | --- |
+| Cited abstract states no peak time at all | 74 |
+| Cited abstract states one the stored rate does not produce, and that figure is not a Tmax | 2 |
+| Cited abstract has no text (`mct-c8`) | 1 |
+| Cites only a label, and the label states no peak time (`metolazone`) | 1 |
+
+The two in the third row are worth naming because they are the near-misses of this audit.
+`aripiprazole`'s abstract gives *"5% of peak plasma concentration [C(max)] values at 0.5 hours
+postdose"* — **a fraction of the peak at a time, not the time of the peak**, and a screen for a
+number beside peak language reads it as a Tmax. It is not one. `dapoxetine` was the mirror image and
+the mistake this pass actually made: its abstract *does* state *"peak plasma concentrations reached
+approximately 1 hour after dosing"*, it was stripped in the same sweep, and it is now derived
+(ka 2.671/h) rather than defaulted. **Both directions of the screen are wrong often enough that the
+sentence has to be read.**
+
+### What stripping costs, stated rather than avoided
+
+Removal is not free the way a defaulted `F` or `V` removal is. The resolver supplies **1.0/h**, so
+the peak moves on every one of the 78 — exposure does not, since the absorption rate cancels out of
+AUC. On **three** rows the fallback is worse than a shape change, and each says so on its own
+record: `carnosine` (ke 34.66/h), `menadione` (1.54/h) and `yohimbine` (1.16/h) all eliminate
+*faster* than 1.0/h, so the default makes the curve **absorption-limited where it was not** —
+flip-flop introduced by a default. Keeping an invented number to avoid that would be trading a
+visible modelling artefact for an invisible fabrication, which is the wrong direction.
+
+`pk.template-ka` now fires **nowhere**, and `pk.defaulted-ka-slow` rose from 14 to 24. That is the
+whole point of the batch: the debt did not go away, it became **visible**. A rule that counts silent
+defaults is doing its job when it rises after an audit.
+
+### The one prior this batch refuted
+
+Several of the 78 records' own prose defended the stored rate — *"unsourced BUT ACQUITTED ON SHAPE"*,
+*"formulation-coherent"*, *"its absorption rate is slower than its elimination rate, which correctly
+encodes flip-flop"*. The last of those, on `pentoxifylline`, **is arithmetically false**: at a 1.63 h
+half-life its ke is 0.425/h and the stored ka was 0.5/h, so absorption was *faster* than elimination
+and no flip-flop was encoded. A shape argument is checkable, and this one was never checked. Only two
+of the 121 rows had ka < ke at all.
