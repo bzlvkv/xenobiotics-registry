@@ -7332,3 +7332,47 @@ refusal is commented at the site and held by two tests, so nobody re-derives it.
 **So the 238 are not cheap after all.** Each needs its source established by reading, like the 559 —
 the only difference is that a candidate is already written down, and it is as likely to be the
 rejected paper as the right one.
+
+### Closing the last four of the seven: three curves removed, one half-life found
+
+**`dpa` — the half-life exists, and it is the first one ever published.** The record claimed 168 h
+against PMID:27151222, a 12-hour bioavailability crossover of a three-fatty-acid oil that states no
+half-life — and *could not* have stated one, because PMID:41956323 says its own figure
+*"added the first estimate for n-3 DPA half-life and turnover rate"*. That paper reports
+*"half-lives of EPA, n-3 DPA, and DHA (3.4 ± 2.7, 6.4 ± 5.3, and 6.3 ± 8.9 d, mean ± SD,
+respectively)"*, so **t½ is now 153.6 h** (6.4 d), verbatim and re-cited. **The spread is nearly the
+mean** — 5.3 d SD on 6.4 d, from plasma ¹³C turnover rather than a dosed curve — and the record says so.
+The same paper gives EPA 3.4 d and DHA 6.3 d, which the `epa-dha` record (currently 46 h) should be
+checked against.
+
+**Three curves removed as unsourceable**, each searched this session before removal:
+
+| Compound | What it claimed | What the literature has |
+| --- | --- | --- |
+| `alpha-gpc` | V 28 L, F 0.4, t½ 4 h | `choline+alfoscerate+pharmacokinetics` returns **nothing**; the two plausible `alpha-glycerylphosphorylcholine` papers (PMID:1662399, PMID:8243501) state **no human PK parameter**. Now `uncharacterized`. |
+| `berberine` | V 600 L, F 0.05, t½ 5 h | PMID:35010998 samples plasma to **120 min** after 500 mg oral and reports Cmax 0.4 ng/mL — no half-life, volume or F. *"Poor oral bioavailability"* in words is not a number (R3), and **F 0.05 biased exposure high by about an order of magnitude** for a compound usually put below 1%. Now `uncharacterized`. |
+| `bromantane` | V 350 L, F 0.7, t½ 10 h | `bromantane+pharmacokinetics` returns **exactly two records**: PMID:7795204 and PMID:9314900, a one-page Lancet doping letter with **no abstract**. Now `research-only` — the literature is a doping note and a behavioural paper, not a thin PK set. |
+
+`alpha-gpc`'s 28 L was 0.4 L/kg and its F was 0.4 — **the same assumption written twice**, which is
+what a per-kilogram prior looks like when it also sets bioavailability.
+
+Coverage moves from 633/632 to **630 authored / 635 explained, and `unvisited` stays 0**, which is the
+number that matters. Removing three curves made one hidden thing visible: `alpha-gpc` now trips
+`pd.needs-solvable-pk`, because it carries an effect-compartment keo with no PK left to solve. That
+warning is correct and was previously masked by the unsourced curve.
+
+**All seven none-matched rows are now closed** — 3 repaired in the first slice, 2 re-sourced, 3 removed,
+1 (`levothyroxine`) rebuilt across both routes.
+
+### A second gate trap, found the same way as the first
+
+The DPA note initially registered **no claims at all**, because `verify:quotes` only reads a note that
+uses a claim word — *verbatim*, *abstract states*, *abstract reads*, *quoting the abstract*. The note
+said "PMID:41956323 says its own figure …" and quoted two sentences, and **the word `says` is not in
+that vocabulary**, so both quotes were invisible exactly as the levothyroxine ones had been, for a
+different reason. Rewording to "states verbatim" registered both (654 → 656).
+
+So there are **two independent ways to write a quote no gate will check**: put the PMID outside the
+quoting clause, or describe it with a verb the gate does not recognise. Both look like provenance in a
+diff and neither is. Anyone adding a quote should run `pnpm verify:quotes` and confirm **the count went
+up by the number of quotes they wrote** — the only reliable check, and now the recommended one.

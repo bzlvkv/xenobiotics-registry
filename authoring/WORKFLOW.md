@@ -276,7 +276,18 @@ finished, and there is no rung you may skip because the edit looked small.
   the quote was paraphrased, came from the full text (say so, and it is then exempt), or is from a
   different paper. It does **not** check that the number in the quote is the number you stored,
   and a note that quotes nothing is never checked — so a green run is not a read abstract either.
-  **19 quotes are missing today** and are not yours; check that your batch did not add a 20th.
+  **0 quotes are missing today**, so any MISSING your run prints is yours.
+- **Confirm the quoted count went UP by the number of quotes you wrote.** This is the only reliable
+  check that your quotes are being checked at all, and there are two independent ways to write one
+  that no gate will ever read. A quote registers only if its own clause names exactly one PMID —
+  a compound-level `notes` field has no `source_pmid` to fall back on, so naming the paper in the
+  *previous* sentence leaves the quote invisible. And the note must use a claim word the gate knows
+  (*verbatim*, *abstract states*, *abstract reads*, *quoting the abstract*); "PMID:x **says** …" is
+  not one of them. Both mistakes were shipped on 2026-09-27, in the same session that built the
+  counter, and each looks exactly like provenance in a diff.
+- The run also prints how many quoted spans it **cannot** check: 797 today, more than it checks.
+  Those are not failures and not a backlog you can clear by rewording — a note's lone PMID is
+  often the source the record *rejected* (see GAPS 2026-09-27).
 - In `pnpm dev`, check what the record *does*. Each compound page with PK carries a **What the
   stored values imply** card: the one-compartment Cmax, Tmax, AUC and clearance at the typical dose,
   with defaults badged and derived values marked. Compare them with the paper, and treat a

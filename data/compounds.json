@@ -1776,17 +1776,7 @@
         "unit": "mg"
       }
     },
-    "half_life_hr": {
-      "PO": 4
-    },
-    "pk": {
-      "PO": {
-        "V_L": 28,
-        "F": 0.4,
-        "source_pmid": "PMID:8243501",
-        "note": "ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 1.5/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:8243501, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
-      }
-    },
+    "half_life_hr": {},
     "effect_compartment": {
       "keo_per_h": 0.7,
       "note": "Cognitive effects emerge within 1-2h of dosing — keo ~0.7/hr captures the moderate Cp→effect-site lag for choline incorporation into ACh synthesis. Approximation; no human keo modeling published.",
@@ -1825,7 +1815,11 @@
     "mw_g_mol": 257.22,
     "systems": [
       "nervous"
-    ]
+    ],
+    "pk_unauthored": {
+      "reason": "uncharacterized",
+      "note": "PK REMOVED AS UNSOURCEABLE. V 28 L, F 0.4 and t-half 4 h were hung on PMID:8243501, whose abstract contains no PK sentence with a number in it. The 28 L was also 0.4 L/kg, a shared per-kilogram prior (pk.template-volume). Searched 2026-09-27: choline+alfoscerate+pharmacokinetics returns nothing, and the two plausible alpha-glycerylphosphorylcholine papers state no human PK parameter. TO UNLOCK: a plasma choline or GPC curve after an oral dose. See GAPS 2026-09-27."
+    }
   },
   {
     "slug": "alpha-linolenic-acid",
@@ -5176,9 +5170,7 @@
         "unit": "mg"
       }
     },
-    "half_life_hr": {
-      "PO": 5
-    },
+    "half_life_hr": {},
     "notes": "Take with meals to blunt glucose response. PK: THE STORED ABSORPTION RATE WAS THE SOLVER DEFAULT WEARING A CITATION. A ka of 1.0/h is exactly what resolvePk substitutes when the field is ABSENT, and no source on this record states one. Removing it is NUMERICALLY A NO-OP — the resolver supplies the identical number — so no curve moves; what changes is that the record stops asserting an absorption rate it never measured. This is the same shape already found on a volume of 35 L, which is likewise the default at the seventy-kilogram reference. THE WIDER DEBT IS LEFT ALONE ON PURPOSE: twelve values account for 152 of the 276 authored absorption rates, but the other eleven are NOT the default, so deleting those would move their curves rather than leave them, which is the error this audit spent a batch documenting.",
     "refs": [
       "PMID:18397984",
@@ -5205,12 +5197,9 @@
       "cardiovascular",
       "endocrine"
     ],
-    "pk": {
-      "PO": {
-        "V_L": 600,
-        "F": 0.05,
-        "source_pmid": "PMID:21671182"
-      }
+    "pk_unauthored": {
+      "reason": "uncharacterized",
+      "note": "PK REMOVED AS UNSOURCEABLE. V 600 L, F 0.05 and t-half 5 h were hung on PMID:21671182, which states none of them. Searched 2026-09-27: PMID:35010998 samples plasma to 120 min after a 500 mg oral dose and reports Cmax 0.4 ng/mL with no half-life, volume or bioavailability; poor oral bioavailability in words is not a number (R3). F 0.05 also biased exposure high by about an order of magnitude. TO UNLOCK: an intravenous arm. See GAPS 2026-09-27."
     }
   },
   {
@@ -6259,24 +6248,18 @@
         "unit": "mg"
       }
     },
-    "half_life_hr": {
-      "PO": 10
-    },
-    "pk": {
-      "PO": {
-        "F": 0.7,
-        "V_L": 350,
-        "source_pmid": "PMID:7795204",
-        "note": "ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.5/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:7795204, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
-      }
-    },
+    "half_life_hr": {},
     "refs": [
       "PMID:7795204"
     ],
     "mw_g_mol": 227.34,
     "systems": [
       "nervous"
-    ]
+    ],
+    "pk_unauthored": {
+      "reason": "research-only",
+      "note": "PK REMOVED AS UNSOURCEABLE. V 350 L, F 0.7 and t-half 10 h were hung on PMID:7795204, a Russian-language paper whose abstract contains no PK sentence with a number. Searched 2026-09-27: bromantane+pharmacokinetics returns exactly two records, that one and PMID:9314900, a one-page Lancet doping letter with no abstract. No indexed human pharmacokinetic study of this compound exists to cite. TO UNLOCK: a plasma curve from the Russian clinical literature, needing full text and translation."
+    }
   },
   {
     "slug": "brompheniramine",
@@ -14094,11 +14077,12 @@
       }
     },
     "half_life_hr": {
-      "PO": 168
+      "PO": 153.6
     },
     "pk": {
       "PO": {
-        "source_pmid": "PMID:27151222"
+        "source_pmid": "PMID:41956323",
+        "note": "HALF-LIFE RE-SOURCED AND CORRECTED, 168 h -> 153.6 h. The previous citation, PMID:27151222, is a 12-hour bioavailability crossover of a three-fatty-acid oil and states no half-life; it also cannot have supported one, because PMID:41956323 states verbatim that its own figure \"added the first estimate for n-3 DPA half-life and turnover rate\". PMID:41956323 reports verbatim \"half-lives of EPA, n-3 DPA, and DHA (3.4 ± 2.7, 6.4 ± 5.3, and 6.3 ± 8.9 d, mean ± SD, respectively)\", so DPA is 6.4 d = 153.6 h. THE SPREAD IS NEARLY THE MEAN: 5.3 d SD on 6.4 d, from plasma 13C turnover rather than a dosed curve, so treat this as an order of magnitude and not a measured constant."
       }
     },
     "refs": [
