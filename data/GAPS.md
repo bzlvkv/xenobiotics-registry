@@ -6241,3 +6241,75 @@ Removal is a no-op and the lag survives, which is the identifiable half.
 **Five of the sixteen records carried no `notes` field at all.** A value can be silently defaulted
 and then acquire a citation precisely where there is no prose for a reader to check it against, so
 absence of a note is itself a weak signal for this rule. All five now carry one.
+
+## 2026-09-27 — `fraction_unbound` for the 19 records driving an in-vitro Ki (R13)
+
+Every one compared a **free-drug** affinity against a **total** plasma curve, overstating occupancy
+by roughly 1/fu. All nineteen are now resolved: **five carry a value, fourteen carry an `fu_note`
+with no value**, which is a decision rather than a gap and silences `pd.occupancy-needs-fu`
+honestly. The rule count fell 108 → 89 warnings.
+
+The pass that chased these on 2026-09-08 searched **PubMed only**. Three of the five values came
+out of an **FDA label**, which is where protein binding usually lives — that is the reusable lesson
+of this batch, not any single number.
+
+### Values stored — all five label-sourced
+
+| Compound | fu | Shape | Source |
+| --- | --- | --- | --- |
+| `suvorexant` | **0.01** | **Inequality**: *">99%"* bound. Stored at the maximum fu the label permits, so it cannot over-correct. | BELSOMRA, setid `e5b72731-1acb-45b7-9c13-290ad12d3951`, eff 2025-03-10 |
+| `cariprazine` | **0.09** | **Range** 91–97% bound. Under-correcting endpoint. | VRAYLAR, setid `4b5f7c65-aa2d-452a-b3db-bc85c06ff12f`, eff 2025-12-18 |
+| `tasimelteon` | **0.10** | Point value, *"about 90%"*. | HETLIOZ, setid `ca4a9b63-708e-49e9-8f9b-010625443b90`, eff 2026-08-04 |
+| `citalopram` | **0.20** | Point value, *"about 80%"*, **human plasma** stated. | CELEXA, setid `4259d9b1-de34-43a4-85a8-41dd214e9177`, eff 2023-10-09 |
+| `clonidine` | **0.80** | **Range** 20–40% bound, **in vitro** stated. Under-correcting endpoint. | DURACLON, setid `8c126bb8-732a-4949-8754-2f50b5543638`, eff 2021-03-17 |
+
+Two caveats worth carrying forward. **Three of the five sentences are JOINT across parent and
+metabolites** (cariprazine with DCAR/DDCAR, citalopram with DCT/DDCT) — they name the compound so
+R2 is satisfied literally, but the spread may be across molecules rather than assay scatter. And
+**clonidine's citation is the epidural label** while the record carries PO and TD; binding is
+route-independent but the citation is not, and at fu 0.80 the correction is nearly inert anyway.
+
+### Four frame refusals — the missing field is not `fraction_unbound`
+
+For these the quantity is not merely unmeasured but not a property of the molecule as stored.
+Recording fu = 1.0 would assert a measurement nobody made; **the real defect is the occupancy row's
+`basis: in_vitro_ki`.**
+
+- `glycine`, `taurine` — endogenous free amino acids, quantified in plasma as the free species.
+  Every taurine search route collapses onto **sodium taurocholate in the isolated perfused rat
+  liver** (PMID:3199317, PMID:3193365): a bile salt, a different molecule, a different species.
+- `isoflurane`, `sevoflurane` — exposure is governed by **blood:gas and tissue partition**. The
+  sevoflurane label has a section literally headed **"Protein Binding"** and it is a trap: it
+  concerns sevoflurane displacing *other* drugs (*"have not been investigated"*), not its own. The
+  one on-topic isoflurane paper (PMID:15791110) is calorimetry against **isolated** albumin — site
+  chemistry, not a plasma free fraction.
+
+### One saturable — `prednisolone`
+
+Not a gap and not storable: binding is **concentration-dependent across the ordinary therapeutic
+dose range**, per PMID:7310640 and confirmed by PMID:3834071 and PMID:3593903. It also moves with
+**population** (transcortin capacity rises on oestrogen and in pregnancy) and with competing
+endogenous cortisol. **A trap recorded:** the free fraction 0.250 in PMID:3834071's abstract is
+**prednisone**, not prednisolone — do not transcribe it onto this record.
+
+### Nine honest gaps, each with its own reason
+
+| Compound | Why it stays open |
+| --- | --- |
+| `promethazine` | **The one relevant measurement FAILED**, and that is the finding: PMID:29529010 reports that promethazine *"concentrations in ultrafiltrated serum were not possible to measure because of low concentrations and nonspecific binding"*. Label silent. |
+| `nalbuphine` | The obvious query returns **exactly one id**, a paper about dezocine where nalbuphine is a comparator. The Hospira label is old-format with **no Distribution subsection at all**. |
+| `desmopressin` | **Five SPLs fetched, all silent**, and §12.3 of DDAVP injection has **no Distribution subsection** — Elimination, Metabolism, Excretion only. |
+| `exenatide` | The strongest negative available: BYETTA §12.3 **has** a Distribution subsection and it **omits** binding, giving only the 28.3 L volume. **Scope note:** exenatide is a 39-mer that is NOT albumin-acylated, so the acylated-peptide warning (that an fu correction may point backwards) does not transfer. |
+| `7-hydroxymitragynine` | Two near-misses, each disqualified differently. PMID:40119246's 73.1% is **rat plasma**, and its sentence is garbled enough the figure may belong to mitragynine. PMID:24841968 has the right method but is an **inequality** and **never names the plasma species** — R8 forbids inferring human from its use of human microsomes elsewhere. **No PMC record exists, so the one unlocking fact needs the publisher PDF.** |
+| `cbg` | The obvious query returns **zero**. **Refused on R2:** PMID:36944160 asserts in passing that cannabinoids are 90–95% protein bound — an uncited class-wide background claim in a cell-viability paper, for no named compound. Storing it would give this record a fabricated ~13-fold correction. |
+| `cbn` | Five searches; the only hit naming an unbound quantity reports Ki values only. The standing characterisation stands: **known magnitude, unfixable** — fu plausibly below 0.01, occupancy likely overstated ~100×. |
+| `lsd` | Every "LSD binding" hit is **[³H]LSD as a radioligand**, not LSD as the analyte. The three definitive human PK papers state no binding. **The better fix is not an fu:** PMID:28197931 gives a total-plasma in-vivo EC50 near 1 ng/mL, and `basis: in_vivo_plasma_ec50` needs no correction at all. |
+| `psilocin` | Same shape. Every "binding" hit is receptor binding. **PMID:30685771** reports that *"plasma psilocin levels and 5-HT2AR occupancy conformed to a single-site binding model"* from [¹¹C]Cimbi-36 PET in 8 volunteers — a **human in-vivo total-plasma occupancy curve**, which removes R13 entirely. Its abstract omits the numeric EC50, so authoring it needs full text (a Batch 6 target). |
+
+### The gate did not see any of this until it was made to
+
+All nineteen notes passed `verify:quotes` on the first run **because none of them was checked**:
+the gate only inspects a note containing the word "verbatim", and five of these quote a PubMed
+abstract without using it. Adding the word exposed two real defects in the gate itself, fixed in
+`0b0f1d4`. **A gate that is opt-in by keyword reports a pass it did not earn** — worth remembering
+before trusting a green run on new prose.

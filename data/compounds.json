@@ -388,7 +388,8 @@
       "keo_per_h": 2.77,
       "note": "No measured human keo exists; approximated from time-to-peak antinociceptive EFFECT (t_eq) in MICE. Matsumoto et al. 2004, Life Sci 74(17):2143-55 (PMID:14969718, subject-primary on 7-OH): hot-plate 7-OH 10 mg/kg s.c. 'peaked at 94% at 15 min'; tail-flick 5 mg/kg s.c. 'reached 100% between 15–30 min'. Using t_eq = 0.25 h -> keo = ln2/0.25 = 2.77/h. FLAG: mouse, s.c. route (time-to-peak-effect is absorption-confounded, i.e. an upper bound on true t_eq -> this keo is a conservative lower bound)…",
       "approximated": true
-    }
+    },
+    "fu_note": "NOT SOURCED FOR HUMANS; two near-misses, each disqualified differently. PMID:40119246 states verbatim \"a relatively low plasma protein binding of 73.1\" percent, but its methods say RAT PLASMA, and the sentence is garbled enough that the figure may belong to mitragynine. PMID:24841968 has the right method — over 90% by equilibrium dialysis, 7-HMG among three compounds — but it is an INEQUALITY and its abstract NEVER NAMES THE PLASMA SPECIES; R8 forbids inferring human from its use of human microsomes elsewhere. No PMC record exists, so the species is unresolvable without the publisher PDF."
   },
   {
     "slug": "9-me-bc",
@@ -7894,7 +7895,9 @@
         "action": "partial_agonist"
       }
     ],
-    "notes": "PK: A HUMAN PET MEASUREMENT PINS THIS RECORD ERROR, AND THE MISSING VOLUME — NOT THE AFFINITY — WAS THE CAUSE. With no volume stored, the solver silently substituted 0.5 L/kg, putting steady-state cariprazine at 185 ng/mL on 3 mg daily and driving modelled D2 occupancy to 98.7% — AGAINST ITS OWN CITATION VERBATIM \"Doses >= 1.5 mg/d yielded 69 - 75% D2/D3 receptor occupancy as measured in positron emission tomography scans\". Back-solving from that anchor gives about a thousand litres, i.e. THE CONCENTRATION SCALE WAS ROUGHLY THIRTYFOLD TOO HIGH. The value stored is that PET-anchored figure and is disclosed as derived: no cariprazine volume appears in ANY indexed abstract — the population analysis, the paediatric studies, the interaction study and the orodispersible bioequivalence study all report structure or ratios only. MY WRONG-MASS PRIOR IS REFUTED: the stored mass IS the free base, the species the PK claims to describe, and both occupancy conversions check exactly. THE REAL OCCUPANCY DEFECT IS DIFFERENT AND IS LOGGED: the two rows come from mutually inconsistent scales, encoding a 63-fold selectivity where this record own other reference says about tenfold — and the PET anchor ACQUITS THE D2 ROW, since the stored affinity requires a steady-state concentration in exactly the real therapeutic range while the alternative would require one far below it. THE HALF-LIFE IS ALSO THE WRONG ANALYTE: \"Terminal half-lives of cariprazine, desmethyl-cariprazine, and didesmethyl-cariprazine ranged from 31.6 to 68.4, 29.7 to 37.5, and 314 to 446 hours\", so the stored 72 h sits ABOVE the parent own measured range while the total active moiety runs about a week. PK: THE ABSENT ABSORPTION RATE IS ACQUITTED AGAINST OPEN-ACCESS FULL TEXT. With no ka the solver substitutes 1.0/h and renders a peak at 4.7 h, and PMC13269304 states \"Cariprazine is rapidly and well absorbed following oral administration, reaching peak plasma concentrations (C max ) approximately 3 to 6 h post-dose\" — SO THE DEFAULT FALLS INSIDE THE PUBLISHED RANGE. Nothing is authored: storing a number would assert a measurement where the honest description is that the default happens to land correctly. A SEPARATE CAVEAT IS LEFT STANDING: this record models the parent, whose active metabolite DDCAR has a far longer half-life and accumulates over weeks, so the single-dose shape corrected here is not the whole pharmacology."
+    "notes": "PK: A HUMAN PET MEASUREMENT PINS THIS RECORD ERROR, AND THE MISSING VOLUME — NOT THE AFFINITY — WAS THE CAUSE. With no volume stored, the solver silently substituted 0.5 L/kg, putting steady-state cariprazine at 185 ng/mL on 3 mg daily and driving modelled D2 occupancy to 98.7% — AGAINST ITS OWN CITATION VERBATIM \"Doses >= 1.5 mg/d yielded 69 - 75% D2/D3 receptor occupancy as measured in positron emission tomography scans\". Back-solving from that anchor gives about a thousand litres, i.e. THE CONCENTRATION SCALE WAS ROUGHLY THIRTYFOLD TOO HIGH. The value stored is that PET-anchored figure and is disclosed as derived: no cariprazine volume appears in ANY indexed abstract — the population analysis, the paediatric studies, the interaction study and the orodispersible bioequivalence study all report structure or ratios only. MY WRONG-MASS PRIOR IS REFUTED: the stored mass IS the free base, the species the PK claims to describe, and both occupancy conversions check exactly. THE REAL OCCUPANCY DEFECT IS DIFFERENT AND IS LOGGED: the two rows come from mutually inconsistent scales, encoding a 63-fold selectivity where this record own other reference says about tenfold — and the PET anchor ACQUITS THE D2 ROW, since the stored affinity requires a steady-state concentration in exactly the real therapeutic range while the alternative would require one far below it. THE HALF-LIFE IS ALSO THE WRONG ANALYTE: \"Terminal half-lives of cariprazine, desmethyl-cariprazine, and didesmethyl-cariprazine ranged from 31.6 to 68.4, 29.7 to 37.5, and 314 to 446 hours\", so the stored 72 h sits ABOVE the parent own measured range while the total active moiety runs about a week. PK: THE ABSENT ABSORPTION RATE IS ACQUITTED AGAINST OPEN-ACCESS FULL TEXT. With no ka the solver substitutes 1.0/h and renders a peak at 4.7 h, and PMC13269304 states \"Cariprazine is rapidly and well absorbed following oral administration, reaching peak plasma concentrations (C max ) approximately 3 to 6 h post-dose\" — SO THE DEFAULT FALLS INSIDE THE PUBLISHED RANGE. Nothing is authored: storing a number would assert a measurement where the honest description is that the default happens to land correctly. A SEPARATE CAVEAT IS LEFT STANDING: this record models the parent, whose active metabolite DDCAR has a far longer half-life and accumulates over weeks, so the single-dose shape corrected here is not the whole pharmacology.",
+    "fraction_unbound": 0.09,
+    "fu_note": "Label, VRAYLAR (DailyMed setid 4b5f7c65-aa2d-452a-b3db-bc85c06ff12f, effective 2025-12-18), 12.3 Distribution: \"Cariprazine and its major active metabolites are highly bound (91 to 97%) to plasma proteins.\" A RANGE, stored at its UNDER-CORRECTING endpoint: 91% bound gives fu 0.09, 97% would give 0.03, the smallest correction the label allows. TWO CAVEATS: the sentence is JOINT across cariprazine and its DCAR/DDCAR metabolites, so the spread may be across molecules rather than assay scatter; and neither population nor method is stated. No concentration dependence stated."
   },
   {
     "slug": "carisoprodol",
@@ -8125,7 +8128,8 @@
         "note": "FULL TEXT, Cascio 2010 (PMC2823359) Figure 1 legend, the same sentence as the CB1 row: \"(B) 2.6 microM (1.4 and 4.7 microM) for displacement from CHO-hCB 2 cell membranes\" — HUMAN CB2, recorded here because an occupancy row has no source_species field. ec50 = 2.6 microM x 316.48 / 1000. The abstract states no number, so this value exists only in the full text.",
         "action": "partial_agonist"
       }
-    ]
+    ],
+    "fu_note": "NOT SOURCED, and the one class figure is refused. The obvious query returns ZERO hits. Four further queries surfaced only in-silico ADME and microsomal-prep papers containing no binding language at all. REJECTED ON R2: PMID:36944160 asserts in passing that cannabinoids are 90-95% protein bound — an uncited class-wide background claim inside a cell-viability paper, for no named compound. That is exactly the secondary-citation shape R2 exists to reject, and storing an fu derived from it would give this record a fabricated 13-fold occupancy correction."
   },
   {
     "slug": "cdp-choline",
@@ -9738,7 +9742,9 @@
         "action": "inhibitor"
       }
     ],
-    "notes": "PK: ITS CITATION WAS A BIOEQUIVALENCE ABSTRACT REPORTING ONLY AUC, Cmax AND tmax — none of the four stored values. F 0.8 is nevertheless RIGHT, verbatim in a real intravenous-and-oral study: \"The absolute bioavailability of citalopram tablets in healthy subjects was 80%\", which also gives 36.8 h against an unsourced 35. ka 1.5 IS A BACK-DERIVATION: against the old half-life it reproduces 2.92 h, and the cited abstract states \"3 (1-6) hours (reference)\". V 840 L survives only because deleting it would invoke a resolver default twenty-fold too small; it is 12 L/kg x 70, hand-scaled, and it under-predicts its own citation AUC by 40%. Two published quantities disagree about what should replace it — the paper own exposure implies about 530 L, an independent oral clearance implies about 1100 — so no number is invented. THE ENANTIOMER PAIR IS INTERNALLY INCONSISTENT: this racemate transporter affinity is stored as equal to pure escitalopram, which would require the R-enantiomer to be equipotent, while escitalopram own citation says it \"was approximately 30-fold more potent than R-citalopram\"."
+    "notes": "PK: ITS CITATION WAS A BIOEQUIVALENCE ABSTRACT REPORTING ONLY AUC, Cmax AND tmax — none of the four stored values. F 0.8 is nevertheless RIGHT, verbatim in a real intravenous-and-oral study: \"The absolute bioavailability of citalopram tablets in healthy subjects was 80%\", which also gives 36.8 h against an unsourced 35. ka 1.5 IS A BACK-DERIVATION: against the old half-life it reproduces 2.92 h, and the cited abstract states \"3 (1-6) hours (reference)\". V 840 L survives only because deleting it would invoke a resolver default twenty-fold too small; it is 12 L/kg x 70, hand-scaled, and it under-predicts its own citation AUC by 40%. Two published quantities disagree about what should replace it — the paper own exposure implies about 530 L, an independent oral clearance implies about 1100 — so no number is invented. THE ENANTIOMER PAIR IS INTERNALLY INCONSISTENT: this racemate transporter affinity is stored as equal to pure escitalopram, which would require the R-enantiomer to be equipotent, while escitalopram own citation says it \"was approximately 30-fold more potent than R-citalopram\".",
+    "fraction_unbound": 0.2,
+    "fu_note": "Label, CELEXA (DailyMed setid 4259d9b1-de34-43a4-85a8-41dd214e9177, effective 2023-10-09), Pharmacokinetics/Distribution: \"the binding of citalopram (CT), demethylcitalopram (DCT) and didemethylcitalopram (DDCT) to human plasma proteins is about 80%.\" HUMAN PLASMA, stated. A point value, but rounded and hedged with \"about\", and JOINT across parent plus two metabolites — which satisfies R2 literally, since citalopram is named, though the 80% is not necessarily the parent alone. Population and method unstated. No concentration dependence stated."
   },
   {
     "slug": "citrulline",
@@ -10377,7 +10383,9 @@
         "action": "agonist"
       }
     ],
-    "notes": "PK: THE TRANSDERMAL LAG OF 48 HOURS IS DELETED AS A CATEGORY ERROR. It appears in no cited paper; its likely origin is a review sentence that maximum blood-pressure reduction occurs two to three DAYS after application — a time to maximum EFFECT under a week-long zero-order input, which is an emergent property of the model rather than an input delay. Keeping it would have delayed predicted concentrations by two days past data showing plasma rises immediately. THE REST OF THE PATCH PARAMETERISATION IS RIGHT AND IS KEPT: the 168 h zero-order duration is verbatim, \"a relatively reproducible and consistent rate of 4.32 micrograms h-1 over a 7-day period\", and its bioavailability of about 60% is a genuine intravenous-referenced absolute figure. The half-life of 12 h was the MIDPOINT of a stated 9.0 to 15.1 h range and is replaced by an intravenous-derived 8.5 h. F 0.85 matched none of the four published values and was not a midpoint of any; 0.752 is the adult intravenous-referenced figure. NO ADULT HUMAN VOLUME EXISTS in any abstract found — 181.5 L is size-standardised from a pooled PAEDIATRIC dataset that includes intravenous dosing, and it cross-checks against the adult clearance to within about 1%."
+    "notes": "PK: THE TRANSDERMAL LAG OF 48 HOURS IS DELETED AS A CATEGORY ERROR. It appears in no cited paper; its likely origin is a review sentence that maximum blood-pressure reduction occurs two to three DAYS after application — a time to maximum EFFECT under a week-long zero-order input, which is an emergent property of the model rather than an input delay. Keeping it would have delayed predicted concentrations by two days past data showing plasma rises immediately. THE REST OF THE PATCH PARAMETERISATION IS RIGHT AND IS KEPT: the 168 h zero-order duration is verbatim, \"a relatively reproducible and consistent rate of 4.32 micrograms h-1 over a 7-day period\", and its bioavailability of about 60% is a genuine intravenous-referenced absolute figure. The half-life of 12 h was the MIDPOINT of a stated 9.0 to 15.1 h range and is replaced by an intravenous-derived 8.5 h. F 0.85 matched none of the four published values and was not a midpoint of any; 0.752 is the adult intravenous-referenced figure. NO ADULT HUMAN VOLUME EXISTS in any abstract found — 181.5 L is size-standardised from a pooled PAEDIATRIC dataset that includes intravenous dosing, and it cross-checks against the adult clearance to within about 1%.",
+    "fraction_unbound": 0.8,
+    "fu_note": "Label, DURACLON injection (DailyMed setid 8c126bb8-732a-4949-8754-2f50b5543638, effective 2021-03-17): \"The binding of clonidine to plasma protein is primarily to albumin and varies between 20 and 40% in vitro.\" IN VITRO, stated. A RANGE, stored at its UNDER-CORRECTING endpoint: 20% bound gives fu 0.80, 40% gives 0.60. THREE CAVEATS: the sentence says \"plasma protein\" without naming a species; the citation is the EPIDURAL label while this record carries PO and TD; and binding RISES in renal failure (PMID:3392889 gives the correlation but no figure). At fu 0.80 the correction is nearly inert."
   },
   {
     "slug": "clopidogrel",
@@ -12819,7 +12827,8 @@
         "action": "agonist"
       }
     ],
-    "notes": "PK: the half-life is an IV value — Rembratt 2004 (PMID:15197520) verbatim \"terminal half-life, which was 3.1 h at night and 2.8 h in the daytime\", corroborated at \"2.97 +/- 0.24\" h by Callreus 1998 (PMID:9868744) — and is carried on the other two routes as an assumption, since neither cited paper reports a route-specific half-life. Oral F 0.0008 is verbatim, \"The bioavailability was 0.08%\", and describes the TABLET; it is fragile as a point estimate because oral concentrations exceeded the assay limit in only about half the samples. V 16 L dropped 2026-09-06 as unsourced — the best human figure is a steady-state volume of 373 mL/kg, about 26 L (PMID:9868744) — along with the ka values on both extravascular routes. CAVEAT: the intranasal F of 0.08 is specific to AV002/SER120, an emulsified microdose spray with a permeation enhancer; a conventional desmopressin nasal spray is nearer 3.4% (PMID:8435898)."
+    "notes": "PK: the half-life is an IV value — Rembratt 2004 (PMID:15197520) verbatim \"terminal half-life, which was 3.1 h at night and 2.8 h in the daytime\", corroborated at \"2.97 +/- 0.24\" h by Callreus 1998 (PMID:9868744) — and is carried on the other two routes as an assumption, since neither cited paper reports a route-specific half-life. Oral F 0.0008 is verbatim, \"The bioavailability was 0.08%\", and describes the TABLET; it is fragile as a point estimate because oral concentrations exceeded the assay limit in only about half the samples. V 16 L dropped 2026-09-06 as unsourced — the best human figure is a steady-state volume of 373 mL/kg, about 26 L (PMID:9868744) — along with the ka values on both extravascular routes. CAVEAT: the intranasal F of 0.08 is specific to AV002/SER120, an emulsified microdose spray with a permeation enhancer; a conventional desmopressin nasal spray is nearer 3.4% (PMID:8435898).",
+    "fu_note": "NOT SOURCED. Five SPLs fetched, all silent, and the strongest negative is that section 12.3 of DDAVP injection (setid 651f6fee-a2c7-431b-8d5d-58b156c72244, effective 2022-09-28) HAS NO DISTRIBUTION SUBSECTION AT ALL — it runs Elimination, Metabolism and Excretion only. The tablet, STIMATE and two generics are silent too; NOCDURNA and NOCTIVA have no SPL records at all. Four queries returned renal markers, nephrogenic DI and doping studies, zero binding. For a 1069 Da nonapeptide cleared renally as unchanged drug the honest statement is \"never measured\", not fu = 1."
   },
   {
     "slug": "desoximetasone",
@@ -17436,7 +17445,8 @@
         "action": "agonist"
       }
     ],
-    "notes": "PK describes the twice-daily IMMEDIATE-RELEASE product, not the weekly formulation. Bray 2006 (PMID:16484515), verbatim \"The mean apparent volume of distribution after administration of a single subcutaneous dose is 28.3 L\" and \"The terminal half-life of the drug is 2.4 hours\". F is pinned to 1 because that volume is explicitly apparent. The previous citation (PMID:28085521) is a review whose abstract carries no numbers and covers both formulations. F 0.7 dropped: its only source says \"Based on animal studies ... between 65% and 75%\" without naming a species, so it cannot be labelled under the species policy, and 0.7 was a range midpoint besides. ka 0.3 /h dropped — no source, and inconsistent with the 2.1 h time to peak. Note Zhao 2008 (PMID:18793576) measured a materially lower 0.99-1.25 h and 19.2-22.3 L in 24 volunteers; not averaged."
+    "notes": "PK describes the twice-daily IMMEDIATE-RELEASE product, not the weekly formulation. Bray 2006 (PMID:16484515), verbatim \"The mean apparent volume of distribution after administration of a single subcutaneous dose is 28.3 L\" and \"The terminal half-life of the drug is 2.4 hours\". F is pinned to 1 because that volume is explicitly apparent. The previous citation (PMID:28085521) is a review whose abstract carries no numbers and covers both formulations. F 0.7 dropped: its only source says \"Based on animal studies ... between 65% and 75%\" without naming a species, so it cannot be labelled under the species policy, and 0.7 was a range midpoint besides. ka 0.3 /h dropped — no source, and inconsistent with the 2.1 h time to peak. Note Zhao 2008 (PMID:18793576) measured a materially lower 0.99-1.25 h and 19.2-22.3 L in 24 volunteers; not averaged.",
+    "fu_note": "NOT SOURCED, and the negative is as strong as they get: BYETTA section 12.3 HAS a Distribution subsection that OMITS binding, stating only \"The mean apparent volume of distribution of exenatide following SC administration of a single dose of BYETTA is 28.3 L\" (setid 53d03c03-ebf7-418d-88a8-533eabd2ee4f, effective 2025-09-02). The Amneal generic is silent too, and three searches returned only albumin-CONJUGATION chemistry for long-acting analogues. SCOPE NOTE: exenatide is a 39-mer that is NOT albumin-acylated, so the acylated-peptide warning about a backwards fu correction does not transfer."
   },
   {
     "slug": "ezetimibe",
@@ -20932,7 +20942,8 @@
       "integumentary"
     ],
     "recon3d_metabolite_id": "gly",
-    "notes": "F 0.9 REMOVED as an R6 stored default, and the cited design forbids the value outright: PMID:8212419 administered glycine by INTRAVENOUS INFUSION, so it cannot state an oral bioavailability. Its headline finding is that glycine kinetics are non-linear — \"The apparent half-life of glycine varied 10-fold (range 26-245 min) and increased in direct proportion to the amount of glycine given\" — which a dose-independent F contradicts rather than rests on. Numerically a no-op against the 0.9 default."
+    "notes": "F 0.9 REMOVED as an R6 stored default, and the cited design forbids the value outright: PMID:8212419 administered glycine by INTRAVENOUS INFUSION, so it cannot state an oral bioavailability. Its headline finding is that glycine kinetics are non-linear — \"The apparent half-life of glycine varied 10-fold (range 26-245 min) and increased in direct proportion to the amount of glycine given\" — which a dose-independent F contradicts rather than rests on. Numerically a no-op against the 0.9 default.",
+    "fu_note": "EXAMINED AND DELIBERATELY NOT AUTHORED — the frame is wrong, not the data missing. Glycine is an endogenous free amino acid and a nutrient, quantified in plasma as the free species; reversible plasma protein binding is not a measured property of it, and \"protein-bound\" in the nutrition literature means INCORPORATED INTO PROTEIN, which is not a free fraction. Four searches returned no measurement for glycine — every small hit set was a different subject entirely. THE REAL DEFECT IS THE OCCUPANCY ROW basis in_vitro_ki, not a missing fu; recording fu = 1.0 would assert a measurement nobody made."
   },
   {
     "slug": "glycolic-acid",
@@ -24024,7 +24035,8 @@
     "pk_unauthored": {
       "reason": "research-only",
       "note": "Volatile inhalational anesthetic. PK described by blood:gas partition coefficient (~1.4) and MAC, not classical first-order ka/V/F."
-    }
+    },
+    "fu_note": "EXAMINED AND DELIBERATELY NOT AUTHORED — exposure is governed by PARTITION, not plasma protein binding. FORANE (DailyMed setid 3d30eb8d-a62e-475f-926b-78ba63bee9c8, effective 2024-12-09) section 12.3 reads in full: \"Isoflurane undergoes minimal biotransformation in man. In the postanesthesia period, only 0.17% of the isoflurane taken up can be recovered as urinary metabolites.\" No binding, no volume. The one on-topic paper, PMID:15791110, is calorimetry against ISOLATED human serum albumin — site chemistry, not a plasma free fraction. Recording fu = 1.0 would be an active lie."
   },
   {
     "slug": "isoleucine",
@@ -27787,7 +27799,8 @@
       "keo_per_h": 1.8,
       "source_pmid": "PMID:28197931",
       "note": "FULL TEXT, Dolder 2017 (PMC5591798) Table 2 — the ABSTRACT states no keo, so the abstract is legitimately silent and this value exists only in the table. Row \"Any drug effect\", 100 microg (the registry typical dose): keo 1.8 +/- 1.3 /h, T1/2 keo 35 +/- 23 min. Oral LSD, healthy humans, effect-compartment PK-PD model, LSD the paper subject. The endpoint is the subjective psychedelic response, which is what the 5-HT2A occupancy row models; the same table gives 3.4 /h at 200 microg, so this keo is dose-specific and not a drug constant."
-    }
+    },
+    "fu_note": "NOT SOURCED, and the better fix is probably not an fu at all. Every \"LSD binding\" hit is [3H]LSD used as a RADIOLIGAND at 5-HT2A, not LSD as the bound analyte. The three definitive human PK papers — PMID:28197931, PMID:26108222, PMID:34035391 — report Cmax, half-life, urine recovery and a CYP2D6 split, and none states protein binding. PMID:870953 is a fluorescence shift on serotonin-binding protein, absent with BOVINE albumin. NOTABLE: Dolder 2017 gives a total-plasma in-vivo EC50 near 1 ng/mL; authored as basis in_vivo_plasma_ec50 this record would need no fu correction."
   },
   {
     "slug": "lubiprostone",
@@ -32661,7 +32674,8 @@
         "action": "partial_agonist"
       }
     ],
-    "notes": "PK: FOUR SEPARATE CROSS-ARM AVERAGES IN ONE RECORD. V 282 L is the mean of two dose arms stated separately (290 and 274); intramuscular F 0.82 is the mean of 81 and 83; the 2.4 h half-lives are the midpoint of a stated \"ranged between 2.2 and 2.6 h\"; and subcutaneous F 0.78 is neither of the stated 79 and 76 nor even their mean. Each is now the single stated 10 mg arm value, and one disposition half-life of 2.3 h is shared, which the paper itself licenses: the values held \"regardless of dose given or route administered\", and intramuscular and subcutaneous dosing \"appear to be interchangeable\". ka 1 is dropped as unsourced AND as quantitatively incompatible with the stated peak at 30 to 40 minutes, which it would place near 1.7 h. DESIGN CAVEAT NOT PREVIOUSLY RECORDED: the study used THREE PARALLEL GROUPS of twelve, not a crossover, so its bioavailability figures are between-group ratios. Oral half-lives of 6.9-7.7 h exist in the literature and are formulation-specific through enterohepatic recirculation; they must never be mixed into these parenteral rows. Two references are removed as a receptor-autoradiography study and a medicinal-chemistry synthesis paper, neither containing pharmacokinetics."
+    "notes": "PK: FOUR SEPARATE CROSS-ARM AVERAGES IN ONE RECORD. V 282 L is the mean of two dose arms stated separately (290 and 274); intramuscular F 0.82 is the mean of 81 and 83; the 2.4 h half-lives are the midpoint of a stated \"ranged between 2.2 and 2.6 h\"; and subcutaneous F 0.78 is neither of the stated 79 and 76 nor even their mean. Each is now the single stated 10 mg arm value, and one disposition half-life of 2.3 h is shared, which the paper itself licenses: the values held \"regardless of dose given or route administered\", and intramuscular and subcutaneous dosing \"appear to be interchangeable\". ka 1 is dropped as unsourced AND as quantitatively incompatible with the stated peak at 30 to 40 minutes, which it would place near 1.7 h. DESIGN CAVEAT NOT PREVIOUSLY RECORDED: the study used THREE PARALLEL GROUPS of twelve, not a crossover, so its bioavailability figures are between-group ratios. Oral half-lives of 6.9-7.7 h exist in the literature and are formulation-specific through enterohepatic recirculation; they must never be mixed into these parenteral rows. Two references are removed as a receptor-autoradiography study and a medicinal-chemistry synthesis paper, neither containing pharmacokinetics.",
+    "fu_note": "NOT SOURCED. PubMed has essentially nothing: the obvious query returns exactly one id, PMID:24263237 — a paper on DEZOCINE targets where nalbuphine is only a kappa-agonist comparator, carrying no binding value. Two further queries return zero hits. The PMID this record already cites, PMID:18467078, is EEG PK/PD of six opioids and its abstract is silent on binding. The Hospira injection label (setid a99fe500-f52b-483c-807c-178f1a78a02b, effective 2026-07-16) is old-format with NO Distribution subsection and no occurrence of \"bound\" anywhere. Needs full text or the original NDA summary."
   },
   {
     "slug": "naloxone",
@@ -37993,7 +38007,8 @@
         "note": "verbatim: \"prednisolone (P) for glucocorticoid receptor affinity (P IC50 = 28 nM)\". GR competition; rat H4-II-C3 context (species flag). ec50 = 28 nM × 360.45 / 1e6.",
         "action": "agonist"
       }
-    ]
+    ],
+    "fu_note": "EXAMINED AND DELIBERATELY NOT AUTHORED: binding is SATURABLE across the ordinary therapeutic dose range, so no scalar represents it. PMID:7310640, 6 healthy men, oral and IV, equilibrium dialysis, verbatim: \"The binding of prednisolone to plasma proteins was markedly concentration-dependent, and a two compartment, nonlinear equation was used to characterize the effective binding of prednisolone to transcortin and albumin.\" Two further human papers agree (PMID:3834071, PMID:3593903). fu also moves with POPULATION: transcortin capacity rises on oestrogen and in pregnancy."
   },
   {
     "slug": "prednisone",
@@ -38446,7 +38461,8 @@
         "action": "antagonist"
       }
     ],
-    "notes": "PK: A NEW DEFECT SHAPE — A DROPPED LEADING DIGIT. V 970 is 1970 with its first digit lost: \"Promethazine disposition is characterised by a large volume of distribution (1970 l) and a high blood clearance (1.14 l min-1)\". The same paper states this record F verbatim (\"the oral availability of promethazine is only 25%\"), which the previously cited study gives only as an interval, \"12.3 to 40%\". THE FIX CANNOT BE APPLIED TO V ALONE: {970, 12 h} implies a clearance 18% BELOW the published figure and {1970, 12 h} implies 67% ABOVE it; only the coherent pair {1970 L, 20 h} works, and that half-life is DERIVED from the paper own volume and clearance rather than quoted, which is recorded here rather than hidden. The stored 12 h was itself the midpoint of a REVIEW range, \"promethazine 10 to 14 hours\". MATRIX CAVEAT: this study measured BLOOD, not plasma. My suspicion that one PMID could not serve both routes was REFUTED — it dosed \"75 mg (orally) and ... 50 mg (intravenously)\". ka 0.7 dropped. Two routes declared with no parameters are removed."
+    "notes": "PK: A NEW DEFECT SHAPE — A DROPPED LEADING DIGIT. V 970 is 1970 with its first digit lost: \"Promethazine disposition is characterised by a large volume of distribution (1970 l) and a high blood clearance (1.14 l min-1)\". The same paper states this record F verbatim (\"the oral availability of promethazine is only 25%\"), which the previously cited study gives only as an interval, \"12.3 to 40%\". THE FIX CANNOT BE APPLIED TO V ALONE: {970, 12 h} implies a clearance 18% BELOW the published figure and {1970, 12 h} implies 67% ABOVE it; only the coherent pair {1970 L, 20 h} works, and that half-life is DERIVED from the paper own volume and clearance rather than quoted, which is recorded here rather than hidden. The stored 12 h was itself the midpoint of a REVIEW range, \"promethazine 10 to 14 hours\". MATRIX CAVEAT: this study measured BLOOD, not plasma. My suspicion that one PMID could not serve both routes was REFUTED — it dosed \"75 mg (orally) and ... 50 mg (intravenously)\". ka 0.7 dropped. Two routes declared with no parameters are removed.",
+    "fu_note": "NOT SOURCED, and the one relevant measurement FAILED, which is itself the finding. PMID:29529010, 100 paired patient serum samples, Centrifree ultrafiltration, verbatim: \"promethazine concentrations in ultrafiltrated serum were not possible to measure because of low concentrations and nonspecific binding.\" So the free fraction is not merely unpublished; it was unmeasurable by the obvious method. The label is silent (setid 6728bb41-5d50-4abb-bb73-993dcc16ee66, effective 2026-09-10) with zero hits for any binding language. Older work is qualitative or has no abstract at all."
   },
   {
     "slug": "propafenone",
@@ -43451,7 +43467,8 @@
     "pk_unauthored": {
       "reason": "research-only",
       "note": "Volatile inhalational anesthetic. PK described by blood:gas partition (~0.65) and MAC, not classical kinetics."
-    }
+    },
+    "fu_note": "EXAMINED AND DELIBERATELY NOT AUTHORED, and the label section headed \"Protein Binding\" IS A TRAP: it concerns sevoflurane displacing OTHER drugs, not its own binding. SEVOFLURANE liquid (DailyMed setid 22700993-851a-48aa-941e-1d2b6b04081f, effective 2025-04-30), verbatim: \"The effects of sevoflurane on the displacement of drugs from serum and tissue proteins have not been investigated.\" The distribution primitive sits in the same section, a blood/gas partition coefficient of 0.63-0.69, and the stored ec50 is already an aqueous bath concentration. Recording fu = 1.0 would be a fabrication."
   },
   {
     "slug": "shiitake",
@@ -45365,7 +45382,9 @@
         "action": "antagonist"
       }
     ],
-    "notes": "ABSORPTION-RATE PROVENANCE: this value was derived by inverting the one-compartment peak-time relation in 2026-05-26-wave25-ka-from-tmax.ts, whose header claimed every peak time was verbatim from a primary human study. ALL FORTY-FOUR ENTRIES HAVE NOW BEEN CHECKED AND TWENTY-EIGHT FAIL. This one fails because a value appearing nowhere in a verbatim \"ranged from 1.5 to 4.0 h\", and not its midpoint either. It is DISCLOSED RATHER THAN DELETED: a midpoint of a narrow range is usually inside the true spread, and removing it would fall back on the solver default of 1.0 per hour, which is worse for most of these records."
+    "notes": "ABSORPTION-RATE PROVENANCE: this value was derived by inverting the one-compartment peak-time relation in 2026-05-26-wave25-ka-from-tmax.ts, whose header claimed every peak time was verbatim from a primary human study. ALL FORTY-FOUR ENTRIES HAVE NOW BEEN CHECKED AND TWENTY-EIGHT FAIL. This one fails because a value appearing nowhere in a verbatim \"ranged from 1.5 to 4.0 h\", and not its midpoint either. It is DISCLOSED RATHER THAN DELETED: a midpoint of a narrow range is usually inside the true spread, and removing it would fall back on the solver default of 1.0 per hour, which is worse for most of these records.",
+    "fraction_unbound": 0.01,
+    "fu_note": "Label, BELSOMRA (DailyMed setid e5b72731-1acb-45b7-9c13-290ad12d3951, effective 2025-03-10), 12.3 Distribution: \"Suvorexant is extensively bound (>99%) to human plasma proteins and does not preferentially distribute into red blood cells.\" HUMAN PLASMA. AN INEQUALITY, NOT A MEASUREMENT: >99% bound puts fu below 0.01, so the stored value is the MAXIMUM the label permits and the least correction consistent with it — the true fu may be far lower, and this cannot over-correct. No point value exists in PubMed. Red cells are excluded by the same sentence."
   },
   {
     "slug": "synephrine",
@@ -45875,7 +45894,9 @@
       "keo_per_h": 1,
       "note": "No tasimelteon PK-PD hysteresis / effect-compartment / phase-response-curve study exists (literature explicitly states no PRC data for tasimelteon). keo approximated from the soporific effect timing in Rajaratnam et al. 2009 (Lancet 373:482-91, PMID 19054552), a genuine tasimelteon-subject phase II/III trial: tasimelteon was 'given ... 30 min before bedtime' and 'improved sleep latency, sleep efficiency, and wake after sleep onset', i.e. peak soporific effect coincides with sleep onset ~0.7 h…",
       "approximated": true
-    }
+    },
+    "fraction_unbound": 0.1,
+    "fu_note": "Label, HETLIOZ / HETLIOZ LQ (DailyMed setid ca4a9b63-708e-49e9-8f9b-010625443b90, effective 2026-08-04), 12.3 Distribution: \"At therapeutic concentrations, tasimelteon is about 90% bound to proteins.\" A point value, hedged twice and deliberately not tightened here: \"about\" 90%, and \"proteins\" rather than human plasma proteins — though the sentence sits in the human Distribution subsection beside the human steady-state volume of 59-126 L. Scoping to therapeutic concentrations says the value holds there, not that binding is concentration-independent. Method unstated. No PubMed corroboration."
   },
   {
     "slug": "taurine",
@@ -45943,7 +45964,8 @@
     "systems": [
       "nervous"
     ],
-    "recon3d_metabolite_id": "tau"
+    "recon3d_metabolite_id": "tau",
+    "fu_note": "EXAMINED AND DELIBERATELY NOT AUTHORED — the frame is wrong, not the data missing. Taurine is an endogenous free zwitterionic amino acid, quantified in plasma as the free species; reversible plasma protein binding is not a measured property of it. Every search route collapses on substring noise: the only on-topic hits are SODIUM TAUROCHOLATE in the isolated perfused RAT liver (PMID:3199317, PMID:3193365) — a bile salt, a different molecule, a different species. THE REAL DEFECT IS THE OCCUPANCY ROW basis in_vitro_ki; recording fu = 1.0 would be a fabrication."
   },
   {
     "slug": "taxifolin",
@@ -55287,7 +55309,8 @@
         "V_L": 3500,
         "source_pmid": "PMID:2960395"
       }
-    }
+    },
+    "fu_note": "NOT SOURCED. Five searches: the only hit naming an unbound quantity is PMID:30833288, a CES1-inhibition paper whose verbatim \"potential unbound plasma concentrations attainable clinically\" sits beside Ki values only (cannabinol 0.263 microM) and stating no free fraction. The rest are rat muscarinic binding, mouse splenocyte cAMP and PBPK papers with no cannabinol fu. The standing characterisation stands: a solvable curve drives an in-vitro CB2 Ki against a TOTAL plasma curve, fu is plausibly below 0.01, and occupancy is likely overstated around 100x. Known magnitude, unfixable."
   },
   {
     "slug": "thcv",
@@ -55461,7 +55484,8 @@
       "PMID:36507738",
       "PMID:36049313"
     ],
-    "pk_analyte": "parent"
+    "pk_analyte": "parent",
+    "fu_note": "NOT SOURCED, and as with lsd the better fix is a different basis. Five searches found no plasma free fraction: every \"binding\" hit is receptor binding — PMID:39865564 is MD in the 5-HT2A pocket, PMID:33922330 a molecular-imaging review. NOTABLE: PMID:30685771, 8 volunteers, [11C]Cimbi-36 PET, verbatim: \"plasma psilocin levels and 5-HT2AR occupancy conformed to a single-site binding model\" — a HUMAN IN-VIVO TOTAL-PLASMA occupancy curve, which removes the R13 problem entirely. Its abstract omits the numeric EC50, so authoring it needs full text."
   },
   {
     "slug": "2c-b",
