@@ -86,6 +86,16 @@ export function canonicalReceptor(key: string): string {
  * subtype-nonselective class, and pinning them to one subtype would state a
  * selectivity no cited value measured.
  *
+ * THAT RULE IS WHAT ADDED `m1` AND `m3`, not an exception to it. Of the thirteen
+ * rows on those two class keys, nine name the subtype their assay measured in
+ * their own note — five human alpha1A figures from cloned-subtype binding, three
+ * human M3, and atropine's cortical M1 — and those nine are pinned. The four that
+ * remain are the ones the rule is about: `doxazosin` and `prazosin` were measured
+ * in NATIVE human prostate, `tolterodine` in native human bladder, and
+ * `risperidone`'s note records a table figure without saying which subtype it came
+ * from. A native tissue expresses a mixture, so its Ki belongs to no single
+ * subtype, and the class key is the honest anchor for it.
+ *
  * This is a lookup, not an alias: `receptor.alias` still requires the canonical
  * occupancy key on the row, and nothing here rewrites data.
  */
@@ -126,6 +136,8 @@ export const OCCUPANCY_TARGET_KEYS: Readonly<Record<string, string>> = {
   gipr: 'GIPR',
   glp_1r: 'GLP1R',
   kappa_opioid: 'OPRK1',
+  m1: 'CHRM1',
+  m3: 'CHRM3',
   mt1: 'MTNR1A',
   mt2: 'MTNR1B',
   mu_opioid: 'OPRM1',

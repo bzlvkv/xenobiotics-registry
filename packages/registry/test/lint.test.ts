@@ -13,7 +13,7 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import { OCCUPANCY_TARGET_KEYS, lintRegistry } from '../src/index';
+import { OCCUPANCY_TARGET_KEYS, lintRegistry, targetKeyFor } from '../src/index';
 import type { Compound, Pathway, ReceptorCatalog, Registry } from '../src/index';
 import { readRegistry } from '../src/read';
 
@@ -1092,5 +1092,19 @@ describe('pk.label-revision', () => {
     for (const slug of ['somapacitan', 'macimorelin', 'prucalopride']) {
       expect(named.has(slug), `${slug} should be pinned`).toBe(false);
     }
+  });
+});
+
+describe('muscarinic subtype keys bridge to the catalogued CHRM genes', () => {
+  it('maps m1 and m3, which receptors.json already carries from GtoPdb', () => {
+    expect(targetKeyFor('m1')).toBe('CHRM1');
+    expect(targetKeyFor('m3')).toBe('CHRM3');
+  });
+
+  it('still leaves the class keys unmapped, because a native tissue is a mixture', () => {
+    // doxazosin and prazosin were measured in native human prostate, tolterodine
+    // in native human bladder: a Ki from a mixture belongs to no single subtype.
+    expect(targetKeyFor('muscarinic')).toBe('muscarinic');
+    expect(targetKeyFor('alpha_1')).toBe('alpha_1');
   });
 });
