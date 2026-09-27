@@ -6840,3 +6840,48 @@ Two corrections made while checking the source rather than trusting the first re
 An `fu_note` records that R13 is **dormant** here rather than ignored: with no plasma curve there is
 no total-plasma comparison for a free-drug Ki to overstate. It becomes live the moment PK is
 authored.
+
+## 2026-09-27 — halofuginone human PK: the chase is closed, not open
+
+`api.elsevier.com` was added to the environment's allowlist to reach the EORTC phase I
+(PMID:16815702), the only human PK study of halofuginone. **The allowlist change worked and the
+paper is still unreachable**, for a different reason than expected, and the distinction is worth
+recording because it changes who can fix it.
+
+### The host is reachable; the key is not entitled
+
+The proxy no longer rejects the CONNECT — Elsevier itself answers. It answers **403
+`AUTHENTICATION_ERROR: "Requestor configuration settings insufficient for access to this resource"`**
+on every view of the article, including `META`, and on the `entitlement` endpoint. The decisive
+control: **the same key fails identically on an open-access Elsevier article**, and the
+ScienceDirect search endpoint returns 401 `AUTHORIZATION_ERROR`. So this is not this paper's
+paywall — **the key's account is not entitled from this network at all.** Elsevier's text-mining
+access is bound to a registered institutional IP range or an InstToken, neither of which a cloud
+container has. **No allowlist entry can fix that.**
+
+### Every other route, tried and exhausted
+
+| Route | Result |
+| --- | --- |
+| PMC | No record for this article |
+| Europe PMC full text | `isOpenAccess: N`, sole full-text URL is the paywalled DOI |
+| Europe PMC annotations | Mined text covers the **abstract section only** |
+| Unpaywall, OpenAlex, CORE | Outside this environment's egress policy (`connect_rejected`) |
+| **All 42 PMC articles citing the phase I** | Fetched and searched. **Not one quotes its parameters.** Every halofuginone sentence carrying a PK token is either animal, in vitro, or qualitative |
+| 15 further human-flagged halofuginone studies | No PK value in any abstract |
+
+A note on method: the first attempt fetched those 42 through the PMC article route and **29 came
+back as reCAPTCHA** — the fetch rate, not the content, was the problem. Europe PMC's
+`/PMC{id}/fullTextXML` endpoint is an API, has no such gate, and returned 31 of the 42 cleanly. **For
+a bulk full-text sweep, use the API and not the article route.**
+
+### What this means for the record
+
+`pk_unauthored` stays `uncharacterized`, and its note now says the chase is **closed** rather than
+outstanding — the difference between "nobody has looked" and "everything reachable has been looked
+at" is the whole value of a GAPS row. What would unlock it: institutional Elsevier entitlement, or
+some future paper quoting the numbers.
+
+**This does not block the EPRS occupancy row**, which is authored and stands. That was the point of
+narrowing `receptor.needs-keo`: the affinity never depended on the PK, and the earlier note that
+said it did was wrong.
