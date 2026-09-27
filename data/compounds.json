@@ -5250,10 +5250,9 @@
         "slug": "simvastatin",
         "name": "Simvastatin",
         "level": "warn",
-        "note": "Le Goff-Klein 2004 (PMID:15285845) verbatim: \"in human liver microsomes the K(i) values are similar in BG and NRG (K(i)=34+/-5 microM and 29+/-11 microM, respectively)\" measured against simvastatin metabolism. Reversible mixed-type Ki, distinct from the mechanism-based K_I (7.7 µM, He 1998) on CYP3A4 generally.",
+        "note": "Le Goff-Klein 2004, HUMAN liver microsomes, abstract verbatim: \"in human liver microsomes ... Ki = 34 +/- 5 microM\". That is the CO-INCUBATION value; the same sentence gives 22 +/- 5 and 27 +/- 11 microM for pre-incubation without and with NADPH. mbi REMOVED: the abstract confines mechanism-based inhibition to rat and calls bergamottin mixed-type \"in rat and man\". The quote previously stored here compared BG with NRG and appears nowhere in this abstract.",
         "kinetics": {
-          "ki_uM": 34,
-          "mbi": true
+          "ki_uM": 34
         },
         "source_pmid": "PMID:15285845"
       }
@@ -9427,11 +9426,11 @@
         "slug": "warfarin",
         "name": "Warfarin",
         "level": "caution",
-        "note": "CYP2C9 inhibition. Kirch 1984 review (PMID:6096071) verbatim: \"warfarin clearance was significantly reduced from 66.7 to 48.7 ml/min by ranitidine, and by cimetidine to 42.9 ml/min\". CL ratio 66.7/42.9 = 1.555 → AUC ratio 1.55×. Ki ≈ 5/0.55 = 9.01 µM. Caveat: secondary reporting in a review paper (Kirch); primary source is Serlin/Toon era 1980-83 studies.",
+        "note": "CYP2C9 inhibition. Serlin 1979, this row own primary, abstract verbatim: \"increased the PT from 19.4 to 22.9 s and the plasma-warfarin concentration from 0.96 to 1.76 microgram/ml\". Css ratio 1.76/0.96 = 1.8333 on daily dosing, so AUC-proportional; ki = 5/(1.8333-1) = 6.0 microM. REPLACES a 1.5548 ratio built from clearance figures in a ranitidine REVIEW (PMID:6096071, now in refs) in which cimetidine is the comparator — figures this row cited but never stated.",
         "kinetics": {
-          "ki_uM": 9.0123,
+          "ki_uM": 6.00024,
           "ki_basis": "calibrated_from_auc",
-          "auc_ratio": 1.5548,
+          "auc_ratio": 1.8333,
           "assumed_perp_uM": 5
         },
         "source_pmid": "PMID:89387"
@@ -9952,7 +9951,7 @@
         "slug": "colchicine",
         "name": "Colchicine",
         "level": "contraindicated",
-        "note": "CYP3A4 + P-gp inhibition. Davis/Wason 2013 (PMID:23462027) by URL Pharma (NDA holder) reports verbatim \"Cmax and AUC of colchicine are increased by 277% and 282%\" with clarithromycin coadministration → AUC ratio 3.82. Ki ≈ 3/(3.82−1) = 1.06 µM. FDA boxed warning; reported fatalities from severe GI tox + bone marrow suppression + multiorgan failure.",
+        "note": "CYP3A4 + P-gp inhibition. The row cites Terkeltaub 2011, the seven-study DDI programme that produced the data, but its abstract gives only ratios \">125% across all studies\", no per-drug figure, and it is NOT in PMC, so full text NOT RETRIEVED. The 277% Cmax / 282% AUC figure is reported by PMID:23462027 (now in refs), a 2013 review, and is described rather than quoted against this row PMID. Terkeltaub 2011 also carries an erratum. auc_ratio 3.82 rests on the review; see GAPS.",
         "kinetics": {
           "ki_uM": 1.06383,
           "mbi": true,
@@ -50923,7 +50922,7 @@
         "slug": "rapamycin",
         "name": "Sirolimus",
         "level": "contraindicated",
-        "note": "CYP3A4 inhibition (label-only DDI, no indexed primary PMID). Vfend label Section 7 verbatim: \"increased the Cmax and AUC of sirolimus (2 mg single dose) an average of 7-fold (90% CI: 5.7, 7.5) and 11-fold (90% CI: 9.9, 12.6), respectively, in healthy male subjects\". Vori 200 mg q12h × 8d + 2 mg sirolimus single dose. Label CONTRAINDICATED — sirolimus toxicity risk.",
+        "note": "CYP3A4 inhibition. The fold-changes are the LABEL figures, not this PMID, so they are described rather than quoted: the voriconazole label (set id c620b2d7-3c2b-4252-8cfc-2f322d624435, effective 2026-08-27) states repeat-dose oral voriconazole increased sirolimus Cmax an average of 7-fold (90% CI 5.7, 7.5) and AUC 11-fold (9.9, 12.6), and contraindicates the pair. The cited PMID:16635790 is the clinical series behind the level: 11 HSCT patients, \"an empiric initial 90% sirolimus dose reduction\".",
         "source_pmid": "PMID:16635790"
       }
     ],

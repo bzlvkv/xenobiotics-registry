@@ -6033,3 +6033,55 @@ These are the batch's most reusable findings. Each was re-queried directly 2026-
 (somapacitan ITC binding constants), PMC3579463 (acadesine CLL trial PK table), PMC8332591,
 PMC6325982, PMC9175552, PMC11271340 (somapacitan, may carry absolute PK in tables). Any value
 taken from one must say **"full text"** in the note.
+
+## verify:quotes to green — 12 quotes repaired, 0 values invented (2026-09-27)
+
+`pnpm verify:quotes` was failing on `main` at 12 findings. All twelve are now closed and the gate
+PASSES at 232 quotes checked. **Not one stored value turned out to be wrong**, and nothing was
+removed: every failure was a quote that did not belong to the PMID it was written beside. That is
+worth stating plainly, because the batch was planned expecting to strip rows.
+
+### The class this batch actually found
+
+A note quotes a sentence; the gate attributes every quoted span to that row's `source_pmid`. Eight
+of the twelve were a phrase from a **different document** sitting in quotation marks — another
+paper's characterisation, the paper's own terminology, a review's figure, or a drug label's. The
+value was fine; the record was making a verbatim claim against a document that never said it.
+`vadadustat` (fixed in `e8e5d68`) was the same defect, introduced the day before by this author.
+
+**It is invisible wherever a note cites PMIDs inline in prose rather than beside a `source_pmid`**,
+which is how every stub record added on 2026-09-26 is written. That is roadmap item T1.
+
+### Values confirmed by full text, via the PMC article route
+
+`https://pmc.ncbi.nlm.nih.gov/articles/PMCnnnnnnn/` worked on all four papers tried, including two
+where `efetch db=pmc` returns front matter only. One (PMC5591798) needed **two 45-second backoffs**
+before it served anything but a reCAPTCHA — the behaviour this ledger already describes. Notes on
+these now say "full text", the exemption `verify-quotes` documents.
+
+| Cell | Confirmed | Location |
+| --- | --- | --- |
+| `cbd` CB1 / CB2 | Ki 4.9 µM and 4.2 µM | Thomas 2007 Table 1 (PMC2189767), column "Ki for displacement of [3H]CP55940" |
+| `cbg` CB1 / CB2 | Ki 381 nM and 2.6 µM | Cascio 2010 Figure 1 legend (PMC2823359) |
+| `guselkumab` | KD 35 pM | Zhou 2021 body (PMC8409790) |
+| `lsd` keo | 1.8 ± 1.3 /h | Dolder 2017 Table 2 (PMC5591798), row "Any drug effect", 100 µg |
+
+### Findings that only reading the source produced
+
+| Record | Finding | What was done |
+| --- | --- | --- |
+| **`cbd`** CB1 | Thomas 2007 Table 1 marks the 4.9 µM datum **footnote b, "Data previously published in Thomas et al. (2004)"** — the 2007 paper reproduces an earlier measurement. | Kept the 2007 citation and disclosed the footnote. Re-citing to PMID:15033394 would be **worse**: its abstract states no Ki and its subject is the azido analogue, so cannabidiol is not its subject either. That PMID is in `refs[]`. |
+| **`cbd`**, **`cbg`** | Both CB1 rows are **mouse brain** membranes, both CB2 rows human CHO lines. An occupancy row has no `source_species`, so R8 puts species in the note; two of the four carried it only implicitly. | Species now explicit on all four. |
+| **`guselkumab`** | `ec50_mg_l` was derived from MW **148000** while the record stores **147000**. | Recomputed against the record's own mass, 0.005180 → 0.005145 mg/L. A declared derivation whose input is not the record's own value is not reconstructible. |
+| **`bergamottin`** | The stored quote compared **BG with NRG** and appears nowhere in PMID:15285845. The abstract *does* state the value: "in human liver microsomes … Ki = 34 +/- 5 microM" (co-incubation; 22 and 27 µM for pre-incubation ± NADPH). Separately `mbi: true` **contradicted the abstract**, which confines mechanism-based inhibition to **rat** and calls it mixed-type "in rat and man". | Quote replaced with the real sentence; `mbi` removed. |
+| **`cimetidine`** | `auc_ratio` 1.5548 came from clearance figures (66.7 → 42.9 ml/min) in **PMID:6096071, a *ranitidine* review in which cimetidine is the comparator** — while the row cited PMID:89387, which states none of them. | Recalibrated from the row's own primary, verbatim: "the plasma-warfarin concentration from 0.96 to 1.76 microgram/ml" → ratio 1.8333, ki 5/(1.8333−1) = **6.0 µM** (was 9.01). The review is in `refs[]`. |
+| **`topiramate`** | `"low nanomolar"` belongs to PMID:12617904, quoted inside a row citing PMID:10768298 (whose abstract *does* state the 7 µM the row uses). | Described, not quoted; ownership named. |
+| **`terazosin`** | The failing span was the **paper's terminology**, which the note itself already said. The value quote passes and is untouched. | Terminology described. |
+| **`voriconazole`** | The 7-fold/11-fold figures are the **label's**, not PMID:16635790's — which states no fold-change. An interaction row carries only `source_pmid` and has no `source_label` field. | Figures described and the label named precisely (set id `c620b2d7-3c2b-4252-8cfc-2f322d624435`, effective 2026-08-27, verified this session). The PMID stays as the clinical series behind the `contraindicated` level, quoted where it does speak: "an empiric initial 90% sirolimus dose reduction". |
+
+### Open, carried forward
+
+| Compound | Field | Why skipped | Re-author target |
+| --- | --- | --- | --- |
+| **`clarithromycin`** | `interactions[5].kinetics.auc_ratio` | The row cites Terkeltaub 2011 (PMID:21480191), the seven-study DDI programme that produced the data, but its abstract gives only ">125% across all studies" with **no per-drug figure**, and the paper is **not in PMC** — full text NOT RETRIEVED. The stored 3.82 comes from the 277%/282% reported in PMID:23462027, a 2013 review. So the ratio rests on a review while the citation points at the primary. Also: Terkeltaub 2011 carries an **erratum, "Dosage error in article text"** (Arthritis Rheum 2011;63(11):3521), unread. | Publisher full text of PMID:21480191 for the per-inhibitor table, and its erratum. Until then the review is named in `refs[]` and the dependency is on the record. |
+| **`cimetidine`** | the new 6.0 µM | The 1.76/0.96 ratio is a **steady-state Css ratio** at subtherapeutic daily warfarin, not a single-dose AUC ratio. It is AUC-proportional at steady state, which is why it is usable, but it is not the same object as a single-dose AUC fold-change. | A single-dose crossover AUC ratio for cimetidine + warfarin; the note names the Serlin/Toon-era studies as where to look. |

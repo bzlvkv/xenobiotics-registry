@@ -16,23 +16,26 @@ a separate commit.
 
 ---
 
-## Batch 1 — get `verify:quotes` green · 12 cells
+## Batch 1 — get `verify:quotes` green · 12 cells — **DONE 2026-09-27**
+
+Gate PASSES at 232 quotes, 0 missing. No stored value was wrong and nothing was removed: all twelve
+were quotes attributed to the wrong document. Findings are in `data/GAPS.md`.
 
 A failing gate outranks every warning, so this goes first. Three sub-classes, three fixes, one
 commit each.
 
-- [ ] **1a — full text reachable? (5 cells)** `cbd` ×2 (PMID:17245363), `cbg` ×2
+- [x] **1a — full text reachable? (5 cells)** `cbd` ×2 (PMID:17245363), `cbg` ×2
       (PMID:20002104), `guselkumab` (PMID:34460338). GAPS records that
       `https://pmc.ncbi.nlm.nih.gov/articles/PMCnnnnnnn/` serves tables where `efetch db=pmc` and
       Europe PMC both fail; that route is untested on these three. Fetch → find the value in the
       table → say **"full text"** in the note, which the gate exempts by design. If unreachable,
       remove the rows and write the GAPS row. This decides whether four cannabinoid occupancy
       rows survive.
-- [ ] **1b — paraphrase sold as a quote (3 cells)** `topiramate` "low nanomolar",
+- [x] **1b — paraphrase sold as a quote (3 cells)** `topiramate` "low nanomolar",
       `terazosin` "first-order rate constant of inhibitory Emax", `lsd` "Any drug effect". These
       break R3 independently of the gate: a paraphrase is not a value. Expect removal + GAPS, not
       re-sourcing.
-- [ ] **1c — interaction notes whose number is not in the abstract (4 cells)** `bergamottin`
+- [x] **1c — interaction notes whose number is not in the abstract (4 cells)** `bergamottin`
       (PMID:15285845), `cimetidine` (PMID:89387), `clarithromycin` (PMID:21480191),
       `voriconazole` (PMID:16635790). Re-source to a paper that states it, or mark full text.
 
