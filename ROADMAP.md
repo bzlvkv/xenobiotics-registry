@@ -8,7 +8,7 @@ should be believed over `pnpm report`.
 
 State measured 2026-09-27: 1,265 compounds · 633 authored PK · 632 explained · 0 unvisited ·
 `validate` 0 errors / 104 warnings · `verify` 2,694/2,694 resolved · **`verify:quotes` FAILING at
-12**.
+12**. As of the Batch 2 commit: 89 warnings, 602 quotes checked, all gates PASS.
 
 Rules for every batch below: one concern per commit; `pnpm check` then `pnpm verify` is the finish
 condition; a skip is a deliverable and gets its GAPS row; if the diff touches `packages/`, that is
@@ -53,9 +53,13 @@ one concern per diff forbids touching them twice.
 Done in four commits: inline attribution, two normaliser folds, whole-note quotation pairing, and
 22 data repairs. Coverage 232 -> 590 quotes; gate PASSES. Findings in `data/GAPS.md`.
 
-## Batch 2 — `fraction_unbound` · 19 records
+## Batch 2 — `fraction_unbound` · 19 records — **DONE 2026-09-27**
 
-- [ ] 7-hydroxymitragynine, cariprazine, cbg, cbn, citalopram, clonidine, desmopressin, exenatide,
+Five values stored (all label-sourced), four frame refusals, one saturable, nine honest gaps.
+`pd.occupancy-needs-fu` goes to zero. Findings in `data/GAPS.md`; the gate holes this batch
+exposed are fixed in `0b0f1d4`.
+
+- [x] 7-hydroxymitragynine, cariprazine, cbg, cbn, citalopram, clonidine, desmopressin, exenatide,
       glycine, isoflurane, lsd, nalbuphine, prednisolone, promethazine, psilocin, sevoflurane,
       suvorexant, tasimelteon, taurine.
 
@@ -64,9 +68,12 @@ DailyMed labels carry protein binding for the approved ones. Concentration-depen
 reason **not** to store a scalar — `fu_note` with no value, which is a decision and silences the
 rule honestly.
 
-## Batch 3 — stored values equal to a consumer default · 16 route rows
+## Batch 3 — stored values equal to a consumer default · 16 route rows — **DONE 2026-09-27**
 
-- [ ] `V_L 5.6`: adalimumab.SC, omalizumab.SC. `ka 1`: gemfibrozil.PO. `F 0.9`:
+Ten stripped, one corrected (omalizumab 5.6 -> 5.9 L), one shown underdetermined (gemfibrozil ka),
+four confirmed and kept. Findings in `data/GAPS.md`.
+
+- [x] `V_L 5.6`: adalimumab.SC, omalizumab.SC. `ka 1`: gemfibrozil.PO. `F 0.9`:
       arachidonic-acid, bisoprolol, clonazepam, dextroamphetamine, gla, glycine, mct-c10,
       medroxyprogesterone, mixed-amphetamine-salts, moclobemide, pregabalin, prucalopride,
       theobromine.

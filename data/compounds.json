@@ -4762,10 +4762,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 0.5,
+        "ka_hr": 1.249,
         "V_L": 1180,
         "F": 1,
-        "source_pmid": "PMID:35176206"
+        "source_pmid": "PMID:35176206",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 0.5/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:35176206 verbatim: \"Baloxavir acid plasma concentration peaked 4 h postdose\". With the stored half-life of 79.1 h fixing ke at 0.0088/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 1.249/h, which reproduces 4.00 h on substitution. The analyte is the active metabolite baloxavir acid, which is what this record stores. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "notes": "PK: THE MASS DESCRIBED A SPECIES NEVER PRESENT IN PLASMA — the fourth instance of this shape after fenofibrate, misoprostol and eslicarbazepine. The stored 571.55 is baloxavir MARBOXIL, the prodrug; the circulating and measured species is baloxavir acid at 483.5, and the record own source says so — \"PK parameters of BALOXAVIR ACID were estimated by noncompartmental analysis\". An 18.2% error, carried by a record whose name field compounds the conflation. That citation also states none of the four stored values, and measured against its own verbatim numbers — \"Mean maximum concentration (Cmax) was 107.6 and 206.9 ng/ml, and mean ... AUC0-inf was 6955 and 9643 ng.h/ml in the 40 and 80 mg cohorts\" — the record was 2.7x low on exposure and 5.2x low on peak. F 0.96 is class 6 and its likely donor is the label PRODRUG CONVERSION sentence, an \"almost completely converted\" efficiency read as an oral bioavailability; no absolute bioavailability has ever been determined and every published volume is explicitly apparent. The label volume and clearance are internally coherent and are adopted together. A RESIDUE REMAINS AND IS DISCLOSED: no one-compartment fit of this drug exists in the literature at all — every published model is two or three compartments WITH AN ABSORPTION LAG this solver has no term for. ANALYTE: the stored mass was BALOXAVIR MARBOXIL, the prodrug, while its own citation measured the acid — \"PK parameters of baloxavir acid were estimated by noncompartmental analysis\". 18.2% high for a species never present in plasma.",
@@ -6558,10 +6559,11 @@
     },
     "pk": {
       "PO": {
-        "ka_hr": 0.5,
+        "ka_hr": 0.6194,
         "V_L": 6695,
         "F": 1,
-        "source_pmid": "PMID:16368442"
+        "source_pmid": "PMID:16368442",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 0.5/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:16368442 verbatim: \"T(max), approximately 5 hours\". With the stored half-life of 21 h fixing ke at 0.0330/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 0.6194/h, which reproduces 5.00 h on substitution. The 5 h is the XL arm, and this record is declared XL; the same sentence gives 1.5 h for IR and 3 h for SR, which a scalar ka cannot also carry. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "refs": [
@@ -7553,10 +7555,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 0.5,
+        "ka_hr": 0.8776,
         "V_L": 1300,
         "F": 0.06,
-        "source_pmid": "PMID:30374683"
+        "source_pmid": "PMID:30374683",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 0.5/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:30374683 verbatim: \"time to maximum plasma concentration (tmax) was approximately 4-5 h\". With the stored half-life of 60 h fixing ke at 0.0116/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 0.8776/h, which reproduces 5.00 h on substitution. A RANGE; the 5 h endpoint is taken, giving the slowest absorption the citation allows. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       },
       "INH": {
         "ka_hr": 89.33,
@@ -8229,10 +8232,10 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 0.5,
         "V_L": 48,
         "F": 1,
-        "source_pmid": "PMID:15631795"
+        "source_pmid": "PMID:15631795",
+        "note": "ABSORPTION RATE REMOVED, AND ITS CITED PEAK TIME IS UNREACHABLE. The stored 0.5/h was one of this catalog's shared round rates with no source. Its citation DOES state a peak time — PMID:15631795 verbatim: \"the Tmax, Cmax and T1/2beta of cefdinir and cefpodoxime after oral administration of 100 mg were 2.5 h +/- 0.48 h\" — but no ka can reproduce it: at the stored half-life of 1.73 h, ke is 0.4007/h and the peak time approaches a ceiling of 1/ke = 2.50 h as absorption slows, so 2.50 h is OUT OF REACH at any rate. That is an inconsistency between the stored half-life and the cited peak, not a missing rate, and it is recorded rather than papered over with a number. The resolver now supplies its 1.0/h default."
       }
     },
     "notes": "PK: THE LARGEST ERROR IN THIS BATCH AT 24.5x, AND IT IS A DOUBLE DIVISION. The cited paper supports only three quantities — \"the Tmax, Cmax and T1/2beta of cefdinir and cefpodoxime after oral administration of 100 mg were 2.5 h +/- 0.48 h, 0.81 mg/L +/- 0.19 mg/L, 1.73 h +/- 0.3 h\" — and states no volume, clearance or bioavailability at all. The stored pair gave an effective apparent volume of 1167 L and a clearance of 476 L/h FOR A RENALLY CLEARED BETA-LACTAM, more than five times hepatic blood flow. Against a verbatim \"AUC(0-12) ... 10.3 +/- 1.35 micrograms.hr/ml\" the model produced 0.42. CLASS 6 IS PROVABLE HERE RATHER THAN INFERRED: cefdinir has NO INTRAVENOUS FORMULATION, so an absolute bioavailability cannot have been measured and any published volume must be apparent. The replacement is triangulated two independent ways — from that exposure and from the peak — landing on the same apparent volume within 7%, and it reproduces both to within 5%. A NEAR-MISS IS RECORDED SO NOBODY TAKES THE OBVIOUS SHORTCUT: 245 is exactly ten times the textbook 24.5 L, a tempting dropped-decimal story, BUT AT 24.5 L THE RECORD IS STILL 2.45x LOW — the defect is the double division, not a lost decimal point. Its own Tmax of 2.5 h also exceeds the one-compartment ceiling its own half-life implies."
@@ -10615,10 +10618,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 1.4,
+        "ka_hr": 1.624,
         "V_L": 245,
         "F": 0.5,
-        "source_pmid": "PMID:8227477"
+        "source_pmid": "PMID:8227477",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 1.4/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:8227477 verbatim: \"tmax) (1.0 +/- 0.4 versus 1.4 +/- 1.0 hours\". With the stored half-life of 3 h fixing ke at 0.2310/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 1.624/h, which reproduces 1.40 h on substitution. Two arms: 1.4 h is the HEALTHY CONTROLS, 1.0 h the sickle-cell patients. The healthy arm is taken. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "pk_analyte": "parent"
@@ -12117,9 +12121,10 @@
     },
     "pk": {
       "PO": {
-        "ka_hr": 0.8,
+        "ka_hr": 0.54,
         "F": 0.4,
-        "source_pmid": "PMID:12672914"
+        "source_pmid": "PMID:12672914",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 0.8/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:12672914 verbatim: \"Peak serum daidzein and genistein concentrations were attained after 4-8 h\". With the stored half-life of 7.8 h fixing ke at 0.0889/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 0.54/h, which reproduces 4.00 h on substitution. A RANGE, and one JOINT across daidzein and genistein. The 4 h endpoint is taken. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "refs": [
@@ -12386,10 +12391,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 3,
+        "ka_hr": 3.891,
         "V_L": 31,
         "F": 0.62,
-        "source_pmid": "PMID:39118245"
+        "source_pmid": "PMID:39118245",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 3/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:39118245 verbatim: \"Daridorexant reached a peak plasma concentration within 1.0 h\". With the stored half-life of 8 h fixing ke at 0.0866/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 3.891/h, which reproduces 1.00 h on substitution. WITHIN 1.0 h is an upper bound, so the derived rate is the SLOWEST the citation allows. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "effect_compartment": {
@@ -12729,10 +12735,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 0.6,
+        "ka_hr": 1.252,
         "V_L": 3430,
         "F": 1,
-        "source_pmid": "PMID:12169042"
+        "source_pmid": "PMID:12169042",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 0.6/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:12169042 verbatim: \"were reached at a mean of 3.17 and 4.76 hours (t(max)), respectively\". With the stored half-life of 27 h fixing ke at 0.0257/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 1.252/h, which reproduces 3.17 h on substitution. The pair is parent then 3-OH metabolite; 3.17 h is desloratadine. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "effect_compartment": {
@@ -16787,10 +16794,11 @@
     },
     "pk": {
       "PO": {
-        "ka_hr": 2,
+        "ka_hr": 3.251,
         "V_L": 90,
         "F": 0.8,
-        "source_pmid": "PMID:23038043"
+        "source_pmid": "PMID:23038043",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 2/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:23038043 verbatim: \"Tmax of 0.94+/-0.39, 1.04+/-0.63 and 1.08+/-0.51 h\". With the stored half-life of 5.5 h fixing ke at 0.1260/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 3.251/h, which reproduces 1.04 h on substitution. Three dose arms, 1.5/3/6 mg; 1.04 h is the 3 mg arm, nearest this record 1.67 mg typical dose. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "refs": [
@@ -19884,9 +19892,10 @@
     },
     "pk": {
       "PO": {
-        "ka_hr": 0.8,
+        "ka_hr": 0.6181,
         "F": 0.16,
-        "source_pmid": "PMID:12672914"
+        "source_pmid": "PMID:12672914",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 0.8/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:12672914 verbatim: \"Peak serum daidzein and genistein concentrations were attained after 4-8 h\". With the stored half-life of 10.1 h fixing ke at 0.0686/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 0.6181/h, which reproduces 4.00 h on substitution. A RANGE, and one JOINT across daidzein and genistein. The 4 h endpoint is taken. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "refs": [
@@ -20420,10 +20429,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 0.5,
+        "ka_hr": 0.4572,
         "V_L": 390,
         "F": 1,
-        "source_pmid": "PMID:37661787"
+        "source_pmid": "PMID:37661787",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 0.5/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:37661787 verbatim: \"GLE and PIB reached maximum concentration in 4-5 hours\". With the stored half-life of 5.9 h fixing ke at 0.1175/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 0.4572/h, which reproduces 4.00 h on substitution. A RANGE, and one JOINT with pibrentasvir. The 4 h endpoint is taken. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "notes": "PK: BOTH OF MY PRIORS WERE WRONG AND THE RECORD STILL NEEDED FIXING. The elvitegravir shape does NOT transfer: glecaprevir was studied alone, and the boosting is ONE-DIRECTIONAL - \"Glecaprevir C max and AUC values during coadministration were less than 1.5-fold of the values when glecaprevir was administered alone\", while glecaprevir raises pibrentasvir up to sevenfold. So its combination values ARE its monotherapy values and there is nothing the schema needs to express. My food-effect claim is also refuted: \"Food had a minimal effect on ABT-493 exposures\". t-half 6 was a rounding of the verbatim \"a terminal elimination half-life of 5.9 and 25 hours\". F 0.05 IS THE MOST DANGEROUS VALUE HERE: it is unsourced - five searches found no bioavailability, volume or absorption rate for glecaprevir anywhere - and if V 390 L is apparent, which is the only kind of volume published for this drug, the record discounted by F twice for a TWENTYFOLD exposure error. F is pinned to 1. ka and V are retained as declared gaps. SPILLOVER RECORDED: pibrentasvir carries PMID:28688001 for its ka, V, F and half-life, and that abstract states none of those four either; its half-life is available verbatim as 25 h from the same source used here."
@@ -20502,10 +20512,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 0.6,
+        "ka_hr": 0.6238,
         "V_L": 19.5,
         "F": 1,
-        "source_pmid": "PMID:8848822"
+        "source_pmid": "PMID:8848822",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 0.6/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:8848822 verbatim: \"Tmax = 3.1 +/- 1.2\". With the stored half-life of 5 h fixing ke at 0.1386/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 0.6238/h, which reproduces 3.10 h on substitution. The round 0.6 already implied 3.18 h, so this is the same number made exact and declared. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "notes": "PK: SMALL, REAL AND ENTIRELY DECIDABLE INSIDE ONE ABSTRACT. The stored half-life appears nowhere — its own citation says \"t1/2 = 5.0 +/- 2.3 vs. 5.2 +/- 2.0 h\" — and the clearance test runs entirely within that same paper, which states \"CL/F, 2.3 +/- 1.0 vs. 2.0 +/- 1.0 L/h\" against a stored assertion 47 percent higher. SUBSTITUTING THE ONE VERBATIM VALUE CUTS THE ERROR BY TWO THIRDS. The volume is verbatim but is the OBESE ARM of a two-arm study, rendered here at the seventy-kilogram reference while the non-obese figure is equally verbatim and closer to that reference — recorded, not changed, since the difference is inside the reported spread. MY SAME-CLASS COLLISION PRIOR IS REFUTED: checked in both directions against glimepiride, there is no shared or near-shared numeral, and the only value the two have in common is an absorption rate they also share with an unrelated record, most likely two independent guesses at fast absorption. A FORMULATION FLAG IS LOGGED: the stored dose range matches the extended-release ceiling while the cited study is unambiguously immediate-release, and a zero-order duration would be the honest way to carry that."
@@ -22115,10 +22126,11 @@
     },
     "pk": {
       "PO": {
-        "ka_hr": 1.5,
+        "ka_hr": 4.549,
         "F": 0.97,
         "V_L": 140,
-        "source_pmid": "PMID:18348466"
+        "source_pmid": "PMID:18348466",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 1.5/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:18348466 verbatim: \"Cmax of 2.59 +/- 0.37 ng/ml at 58.33 +/- 3.89 min\". With the stored half-life of 12 h fixing ke at 0.0578/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 4.549/h, which reproduces 0.97 h on substitution. Stated in minutes; 58.33 min is 0.9722 h. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "refs": [
@@ -24611,10 +24623,11 @@
     },
     "pk": {
       "PO": {
-        "ka_hr": 0.6,
+        "ka_hr": 1.095,
         "F": 0.02,
         "V_L": 84,
-        "source_pmid": "PMID:19722166"
+        "source_pmid": "PMID:19722166",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 0.6/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:19722166 verbatim: \"t(max) approximately 1-2 h\". With the stored half-life of 4 h fixing ke at 0.1733/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 1.095/h, which reproduces 2.00 h on substitution. A RANGE; the 2 h endpoint is taken. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "refs": [
@@ -24732,10 +24745,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 2.5,
+        "ka_hr": 1.877,
         "V_L": 88.31,
         "F": 1,
-        "source_pmid": "PMID:3767339"
+        "source_pmid": "PMID:3767339",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 2.5/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:3767339 verbatim: \"attained at 1.7, 1.2, and 1.0 h, respectively, after administration of the tablet, suspension, and solution\". With the stored half-life of 7.7 h fixing ke at 0.0900/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 1.877/h, which reproduces 1.70 h on substitution. Three dose forms in one sentence; 1.7 h is the TABLET, which is what this record doses. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "interactions": [
@@ -27601,10 +27615,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 2.5,
+        "ka_hr": 2.249,
         "V_L": 111,
         "F": 0.33,
-        "source_pmid": "PMID:8529329"
+        "source_pmid": "PMID:8529329",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 2.5/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:8529329 verbatim: \"peak concentrations of losartan were reached in 1 hour\". With the stored half-life of 2.1 h fixing ke at 0.3301/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 2.249/h, which reproduces 1.00 h on substitution. The 3 1/2 h in the next sentence belongs to the metabolite EXP3174, not to losartan. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "effect_compartment": {
@@ -27762,10 +27777,11 @@
     },
     "pk": {
       "PO": {
-        "ka_hr": 1.5,
+        "ka_hr": 1.607,
         "F": 0.7,
         "V_L": 28,
-        "source_pmid": "PMID:26108222"
+        "source_pmid": "PMID:26108222",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 1.5/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:26108222 verbatim: \"were reached (median, range) 1.5 (0.5-4) hours after administration\". With the stored half-life of 3.6 h fixing ke at 0.1925/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 1.607/h, which reproduces 1.50 h on substitution. A MEDIAN with a 0.5-4 h spread; the median is taken and the spread is inter-individual, not a measurement range. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "refs": [
@@ -29251,9 +29267,9 @@
     },
     "pk": {
       "PO": {
-        "ka_hr": 3,
         "F": 0.15,
-        "source_pmid": "PMID:37438493"
+        "source_pmid": "PMID:37438493",
+        "note": "ABSORPTION RATE REMOVED, AND ITS CITED PEAK TIME IS UNREACHABLE. The stored 3/h was one of this catalog's shared round rates with no source. Its citation DOES state a peak time — PMID:37438493 verbatim: \"Tmax: 64.2 +/- 44.2 min\" — but no ka can reproduce it: at the stored half-life of 0.7 h, ke is 0.9902/h and the peak time approaches a ceiling of 1/ke = 1.01 h as absorption slows, so 1.07 h is OUT OF REACH at any rate. That is an inconsistency between the stored half-life and the cited peak, not a missing rate, and it is recorded rather than papered over with a number. The resolver now supplies its 1.0/h default."
       },
       "SL": {
         "ka_hr": 6,
@@ -30358,10 +30374,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 1.5,
+        "ka_hr": 0.7897,
         "V_L": 90,
         "F": 0.85,
-        "source_pmid": "PMID:10758783"
+        "source_pmid": "PMID:10758783",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 1.5/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:10758783 verbatim: \"Time to reach maximum plasma concentration (tmax) was 2.2 h for both preparations\". With the stored half-life of 3 h fixing ke at 0.2310/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 0.7897/h, which reproduces 2.20 h on substitution. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       },
       "IV": {
         "V_L": 90,
@@ -30898,10 +30915,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 0.7,
+        "ka_hr": 2.018,
         "V_L": 103,
         "F": 0.4,
-        "source_pmid": "PMID:11858883"
+        "source_pmid": "PMID:11858883",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 0.7/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:11858883 verbatim: \"are reached within 1-2 h after oral administration\". With the stored half-life of 18 h fixing ke at 0.0385/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 2.018/h, which reproduces 2.00 h on substitution. WITHIN 1-2 h is a bound on a range; 2 h is the slowest reading. The old 0.7/h implied 4.38 h, outside the range entirely. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "effect_compartment": {
@@ -33123,10 +33141,10 @@
     },
     "pk": {
       "PO": {
-        "ka_hr": 2,
         "F": 0.8,
         "V_L": 70,
-        "source_pmid": "PMID:17725178"
+        "source_pmid": "PMID:17725178",
+        "note": "ABSORPTION RATE REMOVED, AND ITS CITED PEAK TIME IS UNREACHABLE. The stored 2/h was one of this catalog's shared round rates with no source. Its citation DOES state a peak time — PMID:17725178 verbatim: \"Peak niacin and NUA levels occurred at 4.6 h (median)\" — but no ka can reproduce it: at the stored half-life of 0.9 h, ke is 0.7702/h and the peak time approaches a ceiling of 1/ke = 1.30 h as absorption slows, so 4.60 h is OUT OF REACH at any rate. That is an inconsistency between the stored half-life and the cited peak, not a missing rate, and it is recorded rather than papered over with a number. The resolver now supplies its 1.0/h default."
       }
     },
     "refs": [
@@ -33695,10 +33713,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 0.6,
+        "ka_hr": 1.422,
         "V_L": 104.7,
         "F": 1,
-        "source_pmid": "PMID:42090083"
+        "source_pmid": "PMID:42090083",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 0.6/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:42090083 verbatim: \"Nirmatrelvir was rapidly absorbed, with a median tmax of approximately 2 h\". With the stored half-life of 6.84 h fixing ke at 0.1013/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 1.422/h, which reproduces 2.00 h on substitution. A median, hedged with APPROXIMATELY. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "notes": "PK: CLASS 6 IN ITS UNAMBIGUOUS FORM. The Paxlovid label reports, for nirmatrelvir given with ritonavir, \"V z /F (L), mean 104.7\" with its own abbreviation key spelling out that Vz/F is the APPARENT volume of distribution — and the record stored that figure beside an F of 0.5, dividing by an availability twice. There is no human intravenous nirmatrelvir, absolute bioavailability has never been determined, and 0.5 has no source; this is not one of the reversible class-6 judgements. The damage is measured against the record OWN cited abstract: \"Geometric mean nirmatrelvir Cmax and AUC were 3.08 microg/mL and 19.66 microg.h/mL after the first dose and increased to 4.50 microg/mL and 32.01 microg.h/mL at steady state ... a mean terminal half-life of 6.84 h\" — against which the stored record was 2.2x low on exposure and 2.9x low on peak. The half-life also becomes that verbatim 6.84. I CONSIDERED AND REJECTED THE elvitegravir PRECEDENT: that record was stripped because its boosted and unboosted states differ threefold with no way to declare which, whereas nirmatrelvir has NO CLINICAL UNBOOSTED STATE and every label figure is already measured with ritonavir. There is nothing ambiguous to declare."
@@ -36862,10 +36881,10 @@
     },
     "pk": {
       "PO": {
-        "ka_hr": 0.5,
         "F": 0.1,
         "V_L": 10.5,
-        "source_pmid": "PMID:17158229"
+        "source_pmid": "PMID:17158229",
+        "note": "ABSORPTION RATE REMOVED, AND ITS CITED PEAK TIME IS UNREACHABLE. The stored 0.5/h was one of this catalog's shared round rates with no source. Its citation DOES state a peak time — PMID:17158229 verbatim: \"Both K(1) and MK-7 were absorbed well, with peak serum concentrations at 4 hours after intake\" — but no ka can reproduce it: at the stored half-life of 1.5 h, ke is 0.4621/h and the peak time approaches a ceiling of 1/ke = 2.16 h as absorption slows, so 4.00 h is OUT OF REACH at any rate. That is an inconsistency between the stored half-life and the cited peak, not a missing rate, and it is recorded rather than papered over with a number. The resolver now supplies its 1.0/h default."
       },
       "IV": {
         "V_L": 10.5,
@@ -37106,10 +37125,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 1.5,
+        "ka_hr": 2.291,
         "V_L": 17,
         "F": 0.83,
-        "source_pmid": "PMID:11594240"
+        "source_pmid": "PMID:11594240",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 1.5/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:11594240 verbatim: \"reaching maximum concentrations in around 1.5 hours\". With the stored half-life of 8.3 h fixing ke at 0.0835/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 2.291/h, which reproduces 1.50 h on substitution. AND THIS SENTENCE IS WHERE THE OLD ka CAME FROM: the stored rate was 1.5/h, the same numeral as the 1.5 h peak time, which is a peak-time-as-rate transcription. Derived properly it is not 1.5. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "notes": "PK: THE HALF-LIFE WAS REFUTED BY THE ABSTRACT THE RECORD ALREADY CITED, which states the control value verbatim in the course of reporting an interaction — \"prolonged its elimination half-life (t (1/2) ) from 8.3 to 22.7 hours\". The stored 7 matches that paper, nor a 4.9 h value at 30 mg, nor a review \"about 9 hours\". F 0.83 becomes verbatim from a paper that was not cited at all: \"It is well-absorbed, with a mean absolute bioavailability of 83% and reaching maximum concentrations in around 1.5 hours\". THAT SAME SENTENCE IS ALSO THE PROBABLE ORIGIN OF ka 1.5, WHERE 1.5 IS A Tmax — and as a rate it does not even reproduce it, peaking at 2.04 h where 1.5 h would need about 2.3. Flagged as a strong candidate rather than a certainty, because 1.5 is also a round default elsewhere in this catalog; the co-location of both stored numbers in one sentence of an uncited paper is what makes it hard to read otherwise. CLASS 12 IS ACQUITTED: the cited study shows a perpetrator raising exposure 3.2x and half-life 2.7x with \"no significant effect on its peak concentration (C max)\", a pure clearance effect, so one compartment describes this drug well. V 17 is in no abstract and is NOT called as class 6, because it matches no obvious multiple of the label apparent volume."
@@ -38827,10 +38847,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 1.2,
+        "ka_hr": 0.977,
         "V_L": 280,
         "F": 0.53,
-        "source_pmid": "PMID:40284409"
+        "source_pmid": "PMID:40284409",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 1.2/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:40284409 verbatim: \"absorbed with Tmax values ranging from 1.8 to 4 h following oral administration\". With the stored half-life of 2.5 h fixing ke at 0.2773/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 0.977/h, which reproduces 1.80 h on substitution. A RANGE ACROSS STUDIES in a review, for PSILOCIN after psilocybin; the 1.8 h endpoint is taken. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     }
   },
@@ -39218,10 +39239,11 @@
     },
     "pk": {
       "PO": {
-        "ka_hr": 0.5,
+        "ka_hr": 6.737,
         "F": 0.02,
         "V_L": 98,
-        "source_pmid": "PMID:11361045"
+        "source_pmid": "PMID:11361045",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 0.5/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:11361045 verbatim: \"were reached after 0.7 +/- 0.2 hours and 0.7 +/- 0.3 hours\". With the stored half-life of 11 h fixing ke at 0.0630/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 6.737/h, which reproduces 0.70 h on substitution. Both arms agree at 0.7 h. The old 0.5/h implied 4.74 h, a nearly sevenfold error in peak time. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "refs": [
@@ -42490,10 +42512,11 @@
     },
     "pk": {
       "PO": {
-        "ka_hr": 0.8,
+        "ka_hr": 0.2843,
         "F": 0.03,
         "V_L": 28,
-        "source_pmid": "PMID:19302903"
+        "source_pmid": "PMID:19302903",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 0.8/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:19302903 verbatim: \"T(max), 5.40 (1.14) and 5.20 (1.48) hours\". With the stored half-life of 6.17 h fixing ke at 0.1123/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 0.2843/h, which reproduces 5.40 h on substitution. Two arms, men then women; 5.40 h (men) is taken rather than a midpoint of the two. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       },
       "IV": {
         "V_L": 28,
@@ -43758,9 +43781,10 @@
     },
     "pk": {
       "PO": {
-        "ka_hr": 0.5,
+        "ka_hr": 0.7922,
         "F": 0.03,
-        "source_pmid": "PMID:17913795"
+        "source_pmid": "PMID:17913795",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 0.5/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:17913795 verbatim: \"Near the plasma peak times (1-3 h)\". With the stored half-life of 7 h fixing ke at 0.0990/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 0.7922/h, which reproduces 3.00 h on substitution. A parenthetical RANGE; the 3 h endpoint is taken. The old 0.5/h implied 4.04 h, outside it. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "refs": [
@@ -49804,10 +49828,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 1.4,
+        "ka_hr": 1.436,
         "V_L": 22.2,
         "F": 0.23,
-        "source_pmid": "PMID:9174680"
+        "source_pmid": "PMID:9174680",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 1.4/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:9174680 verbatim: \"Plasma levels peaked 2 h after oral administration of the 80 mg capsule\". With the stored half-life of 7 h fixing ke at 0.0990/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 1.436/h, which reproduces 2.00 h on substitution. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "effect_compartment": {
@@ -51208,11 +51233,11 @@
     },
     "pk": {
       "PO": {
-        "ka_hr": 1.4,
+        "ka_hr": 1.843,
         "V_L": 8500,
         "F": 0.05,
         "source_pmid": "PMID:39963957",
-        "note": "PK from Sharma 2025 Drug Metab Pers Ther — single 400 mg oral W. somnifera extract, range across 4 bioactives Cmax 0.47–4.47 ng/mL, Tmax 1.0–1.4 h, t½ 1.7–4.4 h. Withaferin-A is the higher-Cmax constituent per rat data (Modi 2022 PMID:35268576 — Cmax ratio withaferin:withanolide ≈ 17:1). F=0.05 is class-wide estimate (low oral BA of withanolides); V_L derived from CL/F × t½/ln2."
+        "note": "ka DERIVED FROM THE CITED PEAK TIME, replacing the shared round 1.4/h that no abstract stated. PMID:39963957 verbatim: \"1.000-1.416 h (Tmax)\". ke is ln2/4 h = 0.1733/h, and ln(ka/ke)/(ka-ke) = Tmax inverts to ka 1.843/h, reproducing 1.42 h. A RANGE JOINT across four bioactives the abstract does not resolve per constituent; the 1.416 h endpoint is taken. AUC is unchanged; only the shape moves. PK from Sharma 2025 Drug Metab Pers Ther — single 400 mg oral W. somnifera extract, range across 4 bioactives Cmax 0.47–4.47 ng/mL, Tmax 1.0–1.4 h, t½ 1.7–4.4 h. Withaferin-A is the higher-Cmax constituent per rat data (Modi 2022 PMID:35268576 — Cmax ratio withaferin:withanolide ≈ 17:1). F=0.05 is class-wide estimate (low oral BA of withanolides); V_L derived from CL/F × t½/ln2."
       }
     },
     "mw_g_mol": 470.6,
@@ -51250,11 +51275,11 @@
     },
     "pk": {
       "PO": {
-        "ka_hr": 1.4,
+        "ka_hr": 1.596,
         "V_L": 6000,
         "F": 0.05,
         "source_pmid": "PMID:39963957",
-        "note": "Same human-PK source as withaferin-A (Sharma 2025) — range-midpoints used; per-bioactive numerics not in abstract. Rat ratios (Modi 2022 PMID:35268576) show withanolide-A as the lower-Cmax constituent (Cmax 7.3 ng/mL vs withaferin-A 124 ng/mL at 500 mg/kg). Authored with slightly shorter t½ (3 h vs 4 h) reflecting Modi rat data showing faster clearance."
+        "note": "ka DERIVED FROM THE CITED PEAK TIME, replacing the shared round 1.4/h that no abstract stated. PMID:39963957 verbatim: \"1.000-1.416 h (Tmax)\". ke is ln2/3 h = 0.2310/h, and ln(ka/ke)/(ka-ke) = Tmax inverts to ka 1.596/h, reproducing 1.42 h. A RANGE JOINT across four bioactives the abstract does not resolve per constituent; the 1.416 h endpoint is taken. AUC is unchanged; only the shape moves. Same human-PK source as withaferin-A (Sharma 2025) — range-midpoints used; per-bioactive numerics not in abstract. Rat ratios (Modi 2022 PMID:35268576) show withanolide-A as the lower-Cmax constituent (Cmax 7.3 ng/mL vs withaferin-A 124 ng/mL at 500 mg/kg). Authored with slightly shorter t½ (3 h vs 4 h) reflecting Modi rat data showing faster clearance."
       }
     },
     "mw_g_mol": 470.6,
@@ -52053,10 +52078,11 @@
     },
     "pk": {
       "PO": {
-        "ka_hr": 2.5,
+        "ka_hr": 2.775,
         "V_L": 38,
         "F": 0.7,
-        "source_pmid": "PMID:21302033"
+        "source_pmid": "PMID:21302033",
+        "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 2.5/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:21302033 verbatim: \"The tmax, times taken to reach Cmax, were 0.91+/-0.42 and 1.44+/-0.61 h\". With the stored half-life of 2.4 h fixing ke at 0.2888/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 2.775/h, which reproduces 0.91 h on substitution. 0.91 h is zolpidem alone; 1.44 h is after ciprofloxacin pre-treatment and is an interaction arm. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "refs": [

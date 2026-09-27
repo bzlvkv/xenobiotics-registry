@@ -6313,3 +6313,93 @@ the gate only inspects a note containing the word "verbatim", and five of these 
 abstract without using it. Adding the word exposed two real defects in the gate itself, fixed in
 `0b0f1d4`. **A gate that is opt-in by keyword reports a pass it did not earn** — worth remembering
 before trusting a green run on new prose.
+
+## 2026-09-27 — `pk.template-ka`, part 1: 32 rows where the citation DID state a peak time
+
+The roadmap predicted strips, on the precedent that all seven `pk.template-quartet` groups were
+real template-fill. **That prediction was half wrong, and the rule's own text says why:** *"real
+absorption rates are fitted to a Tmax and land on untidy numbers."* That is a testable claim, so
+all 121 rows in the eleven groups were tested against it — every cited abstract fetched, every
+stored ka inverted to the peak time it implies, and the two compared.
+
+| Outcome | Rows |
+| --- | --- |
+| Citation states **no peak time at all** — the ka is unfalsifiable against its own source | 89 |
+| Citation **does** state one, and a real ka is now derived from it | **28** |
+| Citation states one that **no ka can reach** — an internal inconsistency | **4** |
+| Already sourced or already a declared derivation, left alone | 3 |
+
+This section covers the 32 in the middle two rows. The 89 are part 2.
+
+### 28 rows: a round guess replaced by a declared derivation
+
+Each row's abstract states a peak time verbatim for the named compound. With the stored half-life
+fixing ke, `ln(ka/ke)/(ka−ke) = Tmax` fixes ka uniquely — arithmetic, not an estimate — and the
+arithmetic is written on each record. **Exposure is unchanged**; the absorption rate cancels out of
+AUC, so only the shape moves. All 28 quotes verify against their abstracts.
+
+The scale of the errors being corrected is the point:
+
+| Compound | ka was | ka is | Implied peak was | Cited peak |
+| --- | --- | --- | --- | --- |
+| `quercetin` | 0.5 | **6.737** | 4.74 h | **0.7 h** |
+| `huperzine-a` | 1.5 | **4.549** | 2.26 h | **0.97 h** (58.33 min) |
+| `mifepristone` | 0.7 | **2.018** | 4.38 h | **1–2 h** |
+| `desloratadine` | 0.6 | **1.252** | 5.49 h | **3.17 h** |
+| `baloxavir` | 0.5 | **1.249** | 8.23 h | **4 h** |
+| `same` | 0.8 | **0.2843** | 2.85 h | **5.40 h** |
+| `nirmatrelvir` | 0.6 | **1.422** | 3.57 h | **2 h** |
+
+and twenty-one more: `bupropion`, `cbd`, `codeine`, `daidzein`, `daridorexant`, `eszopiclone`,
+`genistein`, `glecaprevir`, `glipizide`, `kaempferol`, `ketoconazole`, `losartan`, `lsd`,
+`methylprednisolone`, `pioglitazone`, `psilocybin`, `silymarin`, `valsartan`, `withaferin-a`,
+`withanolide-a`, `zolpidem`.
+
+**The single most useful finding is `pioglitazone`.** Its stored ka was **1.5/h** and its citation
+says the drug reaches maximum concentrations *"in around 1.5 hours"* — the same numeral, a peak
+**time** transcribed into a rate **constant**. The record's own prose had already guessed this
+("THAT SAME SENTENCE IS ALSO THE PROBABLE ORIGIN OF ka 1.5") and this pass confirms it: derived
+properly the rate is 2.291/h, not 1.5. **A peak time and a rate constant are reciprocal-ish in
+magnitude over the ordinary therapeutic range, which is what makes the transcription survive a
+plausibility check.** Worth looking for wherever a ka equals a Tmax.
+
+Traps handled rather than walked into, each recorded on its record:
+
+- **A second analyte in the same sentence.** `losartan`'s abstract gives 1 h for losartan and 3½ h
+  for **EXP3174**, its metabolite. `desloratadine`'s gives 3.17 h and 4.76 h for parent and 3-OH
+  metabolite.
+- **A second arm.** `zolpidem`'s 1.44 h is the **ciprofloxacin** arm; `codeine`'s 1.0 h is the
+  **sickle-cell** arm against 1.4 h in healthy controls; `same`'s two figures are men and women,
+  and 5.40 h (men) is stored rather than a midpoint of the pair.
+- **A second dose form.** `ketoconazole`'s sentence gives 1.7, 1.2 and 1.0 h for tablet, suspension
+  and solution; the tablet is what this record doses. `bupropion`'s 5 h is the **XL** arm, which is
+  what this record is declared as — and a scalar ka cannot also carry the IR and SR peaks in the
+  same sentence.
+- **Ranges** (`cbd` 4–5 h, `daidzein`/`genistein` 4–8 h, `kaempferol` 1–2 h, `psilocybin` 1.8–4 h,
+  `silymarin` 1–3 h, `glecaprevir` 4–5 h) take an endpoint, never a midpoint, and each note says
+  which and why. Three are **joint** statements across two or more analytes, which is a caveat
+  carried on the record rather than a disqualification.
+
+### 4 rows: a cited peak time NO ka can reach
+
+The most interesting class, and one this audit found only because it did the arithmetic. As
+absorption slows, the peak time of a one-compartment model **rises toward a ceiling of 1/ke** and
+never passes it. So a stored half-life and a cited peak time can be mutually impossible, and for
+these four they are:
+
+| Compound | Half-life | Ceiling 1/ke | Cited peak |
+| --- | --- | --- | --- |
+| `niacin` | 0.9 h | **1.30 h** | 4.6 h (median) |
+| `phylloquinone` | 1.5 h | **2.16 h** | 4 h |
+| `melatonin` | 0.7 h | **1.01 h** | 1.07 h (64.2 min, tablet) |
+| `cefdinir` | 1.73 h | **2.50 h** | 2.5 h ± 0.48 |
+
+`cefdinir` is the boundary case: its cited Tmax **equals** its ceiling exactly, so ka is
+unidentifiable rather than impossible — the peak is only reached in the limit of infinitely slow
+absorption. `melatonin` misses by 6%, within the ±44.2 min spread of its own measurement.
+`niacin` misses by 3.5×, and its own citation gives 8.6 and 11.1 h for the two metabolites, so
+the 0.9 h half-life is very likely the parent's while the peak is a longer-lived species.
+
+In all four the ka is removed and the inconsistency written on the record. **The half-life is the
+more likely defect** — a peak at 4.6 h cannot belong to something cleared with a 0.9 h half-life —
+but re-sourcing a half-life is a different concern from this batch and is not done here.
