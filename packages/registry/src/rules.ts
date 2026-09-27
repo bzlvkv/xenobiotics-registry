@@ -154,6 +154,12 @@ export const LINT_RULES: Readonly<Record<string, RuleInfo>> = {
     level: 'error',
     summary: "A step's via_slug names a compound no record has.",
   },
+  'pd.template-keo': {
+    level: 'warning',
+    standing: true,
+    summary:
+      'One approximated keo is the declared estimate on many unrelated compounds, and no per-compound surface shows the concentration.',
+  },
   'pd.needs-solvable-pk': {
     level: 'warning',
     summary: 'PD is authored but no route yields elimination, so Ce(t) is never computed.',

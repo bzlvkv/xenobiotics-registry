@@ -233,6 +233,13 @@ const SHORTHAND_FOR_GENE_KEY: ReadonlyMap<string, string> = new Map(
  */
 const DEFAULT_F = PK_DEFAULTS.F;
 const DEFAULT_KA_PER_HR = PK_DEFAULTS.kaPerHr;
+
+/**
+ * How many unrelated compounds must share one approximated keo before it is
+ * reported. Five, matching `pk.template-ka`: past coincidence, and low enough that
+ * a group worth a real fit surfaces while it is still small.
+ */
+const TEMPLATE_KEO_MIN_IDENTITIES = 5;
 const DEFAULT_V_L_PER_KG = PK_DEFAULTS.vLPerKg;
 const DEFAULT_V_L_PER_KG_PROTEIN = PK_DEFAULTS.vLPerKgProtein;
 const REFERENCE_WEIGHT_KG = PK_DEFAULTS.referenceWeightKg;
@@ -1077,6 +1084,52 @@ export function lintRegistry(registry: Registry): Finding[] {
         '(catalog)',
         'pk.template-ka',
         `ka ${ka} /h is shared by ${identities.size} unrelated compounds under ${citations.size} different citations — a plausible number reached for repeatedly, not ${rows.length} independent measurements: ${rows.map((r) => `${r.slug}.${r.route}`).join(', ')}`,
+      );
+    }
+  }
+
+  // ── An approximated keo shared by many unrelated compounds ──────────
+  // THE SAME CONCENTRATION SHAPE AS `pk.template-ka`, AND A DIFFERENT DEFECT.
+  // Every row this counts is HONEST on its own terms: `approximated: true` is set,
+  // a note says "Approximation; no published kₑₒ", and nothing wears a citation it
+  // did not earn. So this does not ask for deletions the way the ka rule did.
+  //
+  // What it makes visible is the CONCENTRATION, which no per-compound surface can
+  // show. A reader on one compound page sees "estimated, not fitted" and cannot
+  // see that 45 other compounds carry the identical number, so an author reaching
+  // for a plausible keo cannot tell whether they are adding a reasoned estimate or
+  // the catalog's modal guess. 170 of 196 approximated keos sit on ten values.
+  //
+  // And it matters more than the ka debt does, because of what consumes it: 239 of
+  // the 303 authored occupancy rows — 79% — run their Hill curve against a Ce(t)
+  // built from one of these estimates.
+  //
+  // SCOPED TO `approximated: true` ON EVIDENCE, not for convenience. The 53 fitted
+  // keos were checked: all 53 carry a source_pmid, and only four values are shared
+  // by two compounds each. Three of those four are coincidences at three
+  // significant figures from different papers, and the fourth is isoflurane and
+  // sevoflurane sharing PMID:10443602 — one study measuring both volatile
+  // anaesthetics, which is the right answer rather than a template. A shared
+  // FITTED value would be a worse finding than anything here; there is not one.
+  {
+    const byKeo = new Map<number, string[]>();
+    for (const c of data) {
+      const ec = c.effect_compartment;
+      if (!ec?.approximated || !ec.keo_per_h) continue;
+      byKeo.set(ec.keo_per_h, (byKeo.get(ec.keo_per_h) ?? []).concat(c.slug));
+    }
+    for (const [keo, slugs] of [...byKeo].sort((a, b) => b[1].length - a[1].length)) {
+      const identities = new Set(
+        slugs.map((slug) => {
+          const c = bySlug.get(slug);
+          return canonicalOwner.get(identityKey(c?.name ?? slug)) ?? slug;
+        }),
+      );
+      if (identities.size < TEMPLATE_KEO_MIN_IDENTITIES) continue;
+      warn(
+        '(catalog)',
+        'pd.template-keo',
+        `keo ${keo} /h is the declared approximation on ${identities.size} unrelated compounds — each honestly flagged, but a reader on any one of them cannot see the other ${identities.size - 1}, and occupancy on all of them runs against a Ce(t) built from this one guess: ${slugs.join(', ')}`,
       );
     }
   }

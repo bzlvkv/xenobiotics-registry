@@ -1173,3 +1173,44 @@ describe('receptor.needs-keo is scoped to records a keo could help', () => {
     expect(fired).toContain('pd.needs-solvable-pk');
   });
 });
+
+describe('pd.template-keo', () => {
+  const withKeo = (slug: string, keo: number, approximated: boolean): Compound =>
+    compound({
+      slug,
+      name: slug.toUpperCase(),
+      half_life_hr: { PO: 4 },
+      pk: { PO: { F: 0.9, V_L: 50 } },
+      effect_compartment: approximated
+        ? { keo_per_h: keo, approximated: true, note: 'Approximation.' }
+        : { keo_per_h: keo, source_pmid: 'PMID:1' },
+    } as unknown as Partial<Compound> & { slug: string; name: string });
+
+  const fired = (cs: Compound[]): boolean => rules(lint(cs)).includes('pd.template-keo');
+
+  it('fires once five unrelated compounds share one approximated keo', () => {
+    const five = ['a', 'b', 'c', 'd', 'e'].map((s) => withKeo(s, 0.5, true));
+    expect(fired(five)).toBe(true);
+  });
+
+  it('stays quiet below the threshold', () => {
+    expect(fired(['a', 'b', 'c', 'd'].map((s) => withKeo(s, 0.5, true)))).toBe(false);
+  });
+
+  it('ignores FITTED values, which were checked and are clean', () => {
+    // All 53 fitted keos carry a source_pmid and only four values are shared by
+    // two compounds — three coincidences and one paper measuring isoflurane and
+    // sevoflurane together. A shared fitted value would be a worse finding.
+    expect(fired(['a', 'b', 'c', 'd', 'e', 'f'].map((s) => withKeo(s, 8.66, false)))).toBe(false);
+  });
+
+  it('counts identities, not slugs, so alias records do not inflate a group', () => {
+    const five = ['a', 'b', 'c', 'd', 'e'].map((s) => withKeo(s, 0.5, true));
+    // One more record under the SAME name is the same identity, so a group of
+    // four real compounds plus an alias must not reach the threshold.
+    const four = ['p', 'q', 'r', 's'].map((s) => withKeo(s, 0.25, true));
+    const alias = { ...withKeo('p-alias', 0.25, true), name: 'P' } as Compound;
+    expect(rules(lint([...four, alias])).filter((r) => r === 'pd.template-keo')).toHaveLength(0);
+    expect(fired(five)).toBe(true);
+  });
+});
