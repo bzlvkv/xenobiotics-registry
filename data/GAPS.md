@@ -6608,3 +6608,40 @@ while the exposure is real.
 No route was removed from any `routes[]`; the set is identical in all four and the script refused to
 run otherwise. **Reordering changes which route a reader lands on first, not what the compound is
 used by.**
+
+## 2026-09-27 — Batch 8, the singletons
+
+### `compound.retired-alias-clash` — `r5p` resolved to the wrong molecule
+
+Two lookups disagreed: the retired slug `r5p` forwarded to **`riboflavin-5-phosphate`** while a name
+search for "R5P" hit **`ribose-5-phosphate`**, which lists it as an alias. The rule asked which
+record owns the name, and the chemistry decides it rather than the reference count: **R5P is the
+standard abbreviation for ribose-5-phosphate**, a pentose phosphate pathway intermediate.
+Riboflavin-5'-phosphate is **FMN**, and FMN is its abbreviation — it is already in that record's
+aliases.
+
+So the tombstone was forwarding readers to the wrong molecule. It is removed, and **an `r5p` URL
+that no longer resolves is better than one that silently resolves wrongly**: a 404 tells a reader to
+look again, a wrong compound does not. `ribose-5-phosphate` keeps the alias, which was never in
+doubt.
+
+### `interactions.inert-kinetics` — not work, and the rule metadata now says so
+
+Six kinetics edges name a victim with no solvable PK, so the authored magnitude modulates nothing:
+`bosentan`, `carbamazepine`, `oxcarbazepine`, `phenytoin` and `st-johns-wort` → **hormonal
+contraceptives**, and `posaconazole` → `rapamycin`.
+
+The rule's own message already said "Kept deliberately — each becomes live if the victim gains PK",
+but the rule was not marked `standing`, so it sat in the actionable count claiming a decision it did
+not record. **Five of the six are optimistic in that message anyway**: `hormonal-contraceptives` is a
+drug *class* record, a declared mixture, and it can never gain a solvable curve, so those edges will
+never go live. What survives on each edge is the verbatim fold-change in its note, which is the
+honest quantity — the same shape as the `gemfibrozil` interaction block, where the derived affinities
+were deleted and the quoted exposure ratios kept.
+
+Marked standing in `packages/registry/src/rules.ts`. The edges stay.
+
+### `dose.salt-moiety-unset` on `mitoq` — left alone, as the roadmap said
+
+No source states whether its doses are the mesylate salt or the mitoquinone cation. Still a
+documented standing caveat, not a task.

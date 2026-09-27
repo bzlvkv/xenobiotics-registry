@@ -124,10 +124,13 @@ oral mannitol is unabsorbed and acts luminally.
 - [x] 5-meo-dmt, betamethasone, budesonide, epinephrine, mannitol. `routes[0]` yields no
       elimination rate, so the commonest path through each record renders nothing.
 
-## Batch 8 — singletons
+## Batch 8 — singletons — **DONE 2026-09-27**
 
-- [ ] `compound.retired-alias-clash` — riboflavin-5-phosphate.
-- [ ] `interactions.inert-kinetics` — 1 catalog row.
+- [x] `compound.retired-alias-clash` — the `r5p` tombstone forwarded to FMN while R5P is
+      ribose-5-phosphate. Its one inbound edge was repointed at the canonical slug, then the
+      tombstone removed.
+- [x] `interactions.inert-kinetics` — marked `standing` in `rules.ts`; the message already recorded
+      the decision the metadata did not.
 - [ ] `dose.salt-moiety-unset` on `mitoq` is a **documented standing caveat**, not work: no source
       states whether its doses are salt or cation. Leave it.
 

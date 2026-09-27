@@ -40675,10 +40675,10 @@
     ],
     "interactions": [
       {
-        "slug": "r5p",
+        "slug": "riboflavin-5-phosphate",
         "name": "Riboflavin-5'-Phosphate",
         "level": "synergistic",
-        "note": "Same family — FMN is the activated form. No need to co-supplement; pick one."
+        "note": "The slug here was the counterparty’s retired \"r5p\", and this edge was the only thing keeping that tombstone reachable. Repointed to the canonical slug. Same family — FMN is the activated form. No need to co-supplement; pick one."
       }
     ],
     "mw_g_mol": 376.36,
@@ -40739,10 +40739,7 @@
     "systems": [
       "musculoskeletal"
     ],
-    "retired_slugs": [
-      "r5p"
-    ],
-    "notes": "PK: THE STORED ABSORPTION RATE WAS THE SOLVER DEFAULT WEARING A CITATION. A ka of 1.0/h is exactly what resolvePk substitutes when the field is ABSENT, and no source on this record states one. Removing it is NUMERICALLY A NO-OP — the resolver supplies the identical number — so no curve moves; what changes is that the record stops asserting an absorption rate it never measured. This is the same shape already found on a volume of 35 L, which is likewise the default at the seventy-kilogram reference. THE WIDER DEBT IS LEFT ALONE ON PURPOSE: twelve values account for 152 of the 276 authored absorption rates, but the other eleven are NOT the default, so deleting those would move their curves rather than leave them, which is the error this audit spent a batch documenting."
+    "notes": "RETIRED SLUG \"r5p\" REMOVED. A slug lookup for r5p resolved HERE while a name search for R5P hit ribose-5-phosphate, which lists it as an alias: two lookups, two different molecules. The chemistry decides it rather than the reference count — R5P is the standard abbreviation for RIBOSE-5-PHOSPHATE, a pentose phosphate pathway intermediate, while this compound is FMN and already carries FMN in its own aliases. The tombstone was forwarding readers to the wrong molecule. Its one inbound reference, an interaction edge on riboflavin, was repointed at this canonical slug first, so nothing became unreachable. PK: THE STORED ABSORPTION RATE WAS THE SOLVER DEFAULT WEARING A CITATION. A ka of 1.0/h is exactly what resolvePk substitutes when the field is ABSENT, and no source on this record states one. Removing it is NUMERICALLY A NO-OP — the resolver supplies the identical number — so no curve moves; what changes is that the record stops asserting an absorption rate it never measured. This is the same shape already found on a volume of 35 L, which is likewise the default at the seventy-kilogram reference. THE WIDER DEBT IS LEFT ALONE ON PURPOSE: twelve values account for 152 of the 276 authored absorption rates, but the other eleven are NOT the default, so deleting those would move their curves rather than leave them, which is the error this audit spent a batch documenting."
   },
   {
     "slug": "ribose-5-phosphate",
