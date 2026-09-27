@@ -48,7 +48,7 @@ import {
   efetchUrl,
   quoteFound,
   splitAbstracts,
-  verbatimClaims,
+  verbatimClaimsWithOrphans,
   type QuoteClaim,
   type Registry,
 } from '@xeno/registry';
@@ -160,7 +160,7 @@ async function main(): Promise<void> {
     return;
   }
 
-  const claims = verbatimClaims(registry);
+  const { claims, orphans } = verbatimClaimsWithOrphans(registry);
   const papers = [...new Set(claims.map((c) => c.pmid))];
   const targets = opts.limit === null ? papers : papers.slice(0, opts.limit);
   const wanted = new Set(targets);
@@ -239,6 +239,32 @@ async function main(): Promise<void> {
         `${unfetched.length} unread · ${checking.length} checked of ${claims.length} ` +
         `(${ms} ms) — ${missing.length === 0 ? 'PASS' : 'FAIL'}`,
     );
+    if (orphans.length > 0) {
+      const recoverable = orphans.filter((o) => o.notePmid).length;
+      const worst = [
+        ...orphans.reduce(
+          (m, o) => m.set(o.entity, (m.get(o.entity) ?? 0) + 1),
+          new Map<string, number>(),
+        ),
+      ]
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5)
+        .map(([e, n]) => `${e} (${n})`)
+        .join(', ');
+      console.log(
+        `verify-quotes: ${orphans.length} further span${orphans.length === 1 ? '' : 's'} ` +
+          `claim${orphans.length === 1 ? 's' : ''} verbatim and CANNOT BE CHECKED, across ` +
+          `${new Set(orphans.map((o) => o.entity)).size} records — the quoting clause names no ` +
+          `PMID and the row carries none to fall back on. ${recoverable} sit in a note that DOES ` +
+          `name a paper somewhere, so rewording the clause recovers those with no research. ` +
+          `Worst: ${worst}.`,
+      );
+      console.log(
+        `verify-quotes: an unattributable quote is worse than no quote \u2014 it looks like ` +
+          `provenance and is checked by nothing. This count is coverage, not a failure, so it ` +
+          `does not fail the gate.`,
+      );
+    }
     if (opts.limit !== null && missing.length === 0) {
       console.log(
         `verify-quotes: --limit was set, so this proves nothing about the ` +

@@ -35,6 +35,32 @@ import { describesStoredValue, QUOTED_SPAN } from './lint';
 import { apiKeyParam } from './pubmed';
 import type { Registry } from './types';
 
+/**
+ * A quoted span that CLAIMS to be verbatim and that no gate can check, because its
+ * own clause names no PMID and the object it hangs on carries no `source_pmid` to
+ * fall back on.
+ *
+ * WHY THIS IS COUNTED RATHER THAN DISCARDED. `claimsIn` used to drop these
+ * silently, and a silent drop is the worst outcome this file can produce: the
+ * record looks sourced, a reader sees a sentence in quotation marks beside a
+ * number, and nothing verifies it. The author who wrote the note believes it is
+ * covered. This author wrote exactly that shape on 2026-09-27 — the levothyroxine
+ * rebuild named its PMID in one sentence and quoted the paper in the next, and all
+ * three quotes were invisible until they were looked for deliberately.
+ *
+ * `notePmid` separates the two remedies. True means the note DOES name a paper
+ * somewhere, so rewording the quoting clause to name it recovers the check with no
+ * research at all. False means the paper is not in the note and someone has to find
+ * out which document the sentence came from.
+ */
+export interface OrphanQuote {
+  entity: string;
+  origin: string;
+  quote: string;
+  /** The note names a PMID somewhere — recoverable by rewording alone. */
+  notePmid: boolean;
+}
+
 /** A verbatim-quote claim: this note says this text appears in this paper. */
 export interface QuoteClaim {
   /** The record the note sits on — a compound slug, or a pathway slug. */
@@ -255,10 +281,16 @@ function barePmid(value: unknown): string | null {
  * claim is any object carrying BOTH a note-ish string and a `source_pmid`, so a
  * field added next year is covered by construction.
  */
-function claimsIn(node: unknown, entity: string, path: string, out: QuoteClaim[]): void {
+function claimsIn(
+  node: unknown,
+  entity: string,
+  path: string,
+  out: QuoteClaim[],
+  orphans?: OrphanQuote[],
+): void {
   if (node == null || typeof node !== 'object') return;
   if (Array.isArray(node)) {
-    node.forEach((v, i) => claimsIn(v, entity, `${path}[${i}]`, out));
+    node.forEach((v, i) => claimsIn(v, entity, `${path}[${i}]`, out, orphans));
     return;
   }
   const rec = node as Record<string, unknown>;
@@ -276,19 +308,36 @@ function claimsIn(node: unknown, entity: string, path: string, out: QuoteClaim[]
     for (const { quote, pmid } of quotedClaimsIn(text)) {
       if (pmid) out.push({ entity, origin, pmid, quote });
       else if (rowPmid && !noteExempt) out.push({ entity, origin, pmid: rowPmid, quote });
+      else orphans?.push({ entity, origin, quote, notePmid: /PMID:\s*\d+/.test(text) });
     }
   }
   for (const [k, v] of Object.entries(rec)) {
-    if (typeof v === 'object' && v !== null) claimsIn(v, entity, path ? `${path}.${k}` : k, out);
+    if (typeof v === 'object' && v !== null)
+      claimsIn(v, entity, path ? `${path}.${k}` : k, out, orphans);
   }
 }
 
 /** Every verbatim-quote claim in the registry, with the paper each one names. */
+/**
+ * Every verbatim claim, PLUS every quoted span that claims verbatim and cannot be
+ * attributed. The second list is this gate reporting its own coverage: a run that
+ * says "654 quoted" while 797 spans sit unattributable has checked a minority of
+ * the provenance the catalog appears to carry, and only printing both makes that
+ * visible.
+ */
+export function verbatimClaimsWithOrphans(registry: Registry): {
+  claims: QuoteClaim[];
+  orphans: OrphanQuote[];
+} {
+  const claims: QuoteClaim[] = [];
+  const orphans: OrphanQuote[] = [];
+  for (const c of registry.compounds) claimsIn(c, c.slug, '', claims, orphans);
+  for (const p of registry.pathways) claimsIn(p, `${p.slug} (pathway)`, '', claims, orphans);
+  return { claims, orphans };
+}
+
 export function verbatimClaims(registry: Registry): QuoteClaim[] {
-  const out: QuoteClaim[] = [];
-  for (const c of registry.compounds) claimsIn(c, c.slug, '', out);
-  for (const p of registry.pathways) claimsIn(p, `${p.slug} (pathway)`, '', out);
-  return out;
+  return verbatimClaimsWithOrphans(registry).claims;
 }
 
 /**

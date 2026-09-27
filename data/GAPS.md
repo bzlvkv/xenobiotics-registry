@@ -7286,3 +7286,24 @@ draft of the levothyroxine note put the PMID in one sentence and the quotes in t
 three quotes were silently invisible to the gate**. Naming the PMID inside each quoting clause fixed
 it (651 → 654 claims). A quote that does not register is worse than no quote: it looks like provenance
 and is checked by nothing.
+
+### The quote gate was checking a minority of the catalog's apparent provenance
+
+Chasing my own levothyroxine mistake to its bottom: **797 quoted spans claim verbatim and no gate can
+check any of them** — more than the **654** that are checked. They sit across **329 records**, 712 of
+them in compound-level `notes`. `claimsIn` was **discarding them silently**, so the catalog looked
+better sourced than it is, and every author who wrote one believed it was covered.
+
+`verify:quotes` now prints the count, the worst records, and the split that decides the remedy:
+
+- **238 sit in a note that does name a PMID somewhere.** Rewording the quoting clause to name it
+  recovers the check with **no research at all** — the cheapest provenance work available in this
+  repository.
+- **559 name no paper in the note.** Someone has to establish which document the sentence came from.
+
+It is reported as **coverage, not a failure**, so it does not fail the gate: none of these spans is
+known to be wrong, and failing 797 of them would only teach an author to delete quotes. `verbatimClaims`
+now delegates to `verbatimClaimsWithOrphans` so there is one walker and the two cannot drift.
+
+**The 238 are the next batch, and they are cheap.** Worst records: `abiraterone` (9), `somapacitan` (8),
+`ibrutinib` (7), `ovagen` (7), `daprodustat` (6).

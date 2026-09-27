@@ -21,7 +21,9 @@ import {
   quotedClaimsIn,
   splitAbstracts,
   verbatimClaims,
+  verbatimClaimsWithOrphans,
 } from '../src/index';
+import type { Registry } from '../src/types';
 import { readRegistry } from '../src/read';
 
 describe('quotesIn', () => {
@@ -321,5 +323,48 @@ describe('the NCBI API key travels as a query parameter, or not at all', () => {
     expect(apiKeyParam('')).toBe('');
     expect(apiKeyParam('   ')).toBe('');
     expect(apiKeyParam(undefined)).toBe('');
+  });
+});
+
+describe('verbatimClaimsWithOrphans', () => {
+  const reg = (compound: Record<string, unknown>): Registry =>
+    ({
+      compounds: [compound],
+      pathways: [],
+      receptors: { gpcrs: [], others: [] },
+    }) as unknown as Registry;
+
+  it('counts a quote its clause cannot attribute instead of dropping it', () => {
+    // The levothyroxine shape: the PMID is named in one sentence and the paper is
+    // quoted in the next, so the span belongs to no clause that names a source.
+    const { claims, orphans } = verbatimClaimsWithOrphans(
+      reg({
+        slug: 'x',
+        notes: 'PMID:29212434 is the source. Verbatim: "were estimated to be 0.712 L/h".',
+      }),
+    );
+    expect(claims).toHaveLength(0);
+    expect(orphans).toHaveLength(1);
+    expect(orphans[0]?.notePmid).toBe(true);
+  });
+
+  it('marks an orphan unrecoverable when its note names no paper at all', () => {
+    const { orphans } = verbatimClaimsWithOrphans(
+      reg({ slug: 'x', notes: 'The abstract states "a terminal half-life of eight hours".' }),
+    );
+    expect(orphans[0]?.notePmid).toBe(false);
+  });
+
+  it('is not an orphan once the quoting clause names the paper', () => {
+    const { claims, orphans } = verbatimClaimsWithOrphans(
+      reg({ slug: 'x', notes: 'PMID:29212434 states verbatim "were estimated to be 0.712 L/h".' }),
+    );
+    expect(orphans).toHaveLength(0);
+    expect(claims[0]?.pmid).toBe('29212434');
+  });
+
+  it('keeps verbatimClaims identical, since both walk once', () => {
+    const c = reg({ slug: 'x', notes: 'PMID:1 states verbatim "a half-life of eight hours".' });
+    expect(verbatimClaims(c)).toEqual(verbatimClaimsWithOrphans(c).claims);
   });
 });

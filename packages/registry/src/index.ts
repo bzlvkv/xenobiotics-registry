@@ -110,8 +110,9 @@ export {
   normalizeForMatch,
   quoteFound,
   quotesIn,
+  verbatimClaimsWithOrphans,
   quotedClaimsIn,
   splitAbstracts,
   verbatimClaims,
 } from './quotes';
-export type { QuoteClaim, QuoteVerdict } from './quotes';
+export type { QuoteClaim, QuoteVerdict, OrphanQuote } from './quotes';
