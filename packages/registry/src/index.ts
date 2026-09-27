@@ -98,6 +98,7 @@ export {
   normalizeForMatch,
   quoteFound,
   quotesIn,
+  quotedClaimsIn,
   splitAbstracts,
   verbatimClaims,
 } from './quotes';

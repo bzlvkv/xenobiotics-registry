@@ -91,13 +91,65 @@ const QUOTED_SPAN = /"([^"]{12,})"|“([^”]{12,})”/g;
  * is about, reached here within five minutes of the gate first running.
  */
 export function quotesIn(note: string): string[] {
+  return quotedClaimsIn(note).map((q) => q.quote);
+}
+
+/**
+ * A PMID written INSIDE the prose rather than in a `source_pmid` field.
+ *
+ * Every stub record added on 2026-09-26 cites this way — `PMID:22327401
+ * verbatim: "…"` — because a record with no authored PK has no `pk[route]` block
+ * for a `source_pmid` to sit in, so its provenance lives in `mechanism` and
+ * `notes`. Roughly twenty records were therefore invisible to this gate, and the
+ * defect it exists to catch was found four separate times in one batch on the
+ * records it COULD see. Both facts argue the same way.
+ */
+const INLINE_PMID = /\bPMID:?\s*(\d+)\b/g;
+
+/** A quoted span, and the paper the clause around it names, if it names one. */
+export interface NoteQuote {
+  quote: string;
+  /** Bare digits from an inline `PMID:n` in the same clause, else null. */
+  pmid: string | null;
+}
+
+/**
+ * Every quoted span a note offers as verbatim, each tagged with the PMID its own
+ * clause names.
+ *
+ * WHY THE CLAUSE'S PMID BEATS THE ROW'S. A note routinely cites a second paper
+ * mid-sentence to say where a rejected value came from, or what another group
+ * calls the same thing. topiramate's row cites PMID:10768298 and carried `The
+ * Supuran group calls it "low nanomolar" (PMID:12617904)` — the span belongs to
+ * the paper the clause names, not to the row. Attributing it to the row reported
+ * a true sentence as a defect; attributing it to the clause's own PMID checks
+ * the claim actually being made. Three records carried that shape on 2026-09-27
+ * and a fourth, vadadustat, was shipped by this author the day before.
+ *
+ * Only an UNAMBIGUOUS clause counts: two different PMIDs in one clause leave the
+ * span untagged, and it falls back to the row's `source_pmid` as before, because
+ * guessing which of the two a quote belongs to is exactly the judgement this
+ * file refuses to make.
+ *
+ * Full text is honoured PER CLAUSE here, not per note. A long `notes` field
+ * legitimately says "full text not retrieved" about one value while quoting
+ * abstracts for five others; exempting the whole note on one phrase would hand
+ * back most of what this function is for.
+ */
+export function quotedClaimsIn(note: string): NoteQuote[] {
   if (!CLAIMS_VERBATIM.test(note)) return [];
-  const out: string[] = [];
+  const out: NoteQuote[] = [];
   for (const clause of splitClauses(note)) {
     if (!describesStoredValue(clause)) continue;
-    for (const m of clause.matchAll(QUOTED_SPAN)) out.push((m[1] ?? m[2] ?? '').trim());
+    const ids = [...new Set([...clause.matchAll(INLINE_PMID)].map((m) => m[1]!))];
+    const pmid = ids.length === 1 ? ids[0]! : null;
+    if (pmid !== null && citesFullText(clause)) continue;
+    for (const m of clause.matchAll(QUOTED_SPAN)) {
+      const quote = (m[1] ?? m[2] ?? '').trim();
+      if (quote) out.push({ quote, pmid });
+    }
   }
-  return out.filter(Boolean);
+  return out;
 }
 
 /** True when the note sources its value to full text, so the abstract may be silent. */
@@ -128,14 +180,20 @@ function claimsIn(node: unknown, entity: string, path: string, out: QuoteClaim[]
     return;
   }
   const rec = node as Record<string, unknown>;
-  const pmid = barePmid(rec.source_pmid) ?? barePmid(rec.pmid);
-  if (pmid) {
-    for (const key of ['note', 'notes', 'fu_note', 'dose_moiety_note']) {
-      const text = rec[key];
-      if (typeof text !== 'string' || citesFullText(text)) continue;
-      for (const quote of quotesIn(text)) {
-        out.push({ entity, origin: path ? `${path}.${key}` : key, pmid, quote });
-      }
+  const rowPmid = barePmid(rec.source_pmid) ?? barePmid(rec.pmid);
+  for (const key of ['note', 'notes', 'fu_note', 'dose_moiety_note']) {
+    const text = rec[key];
+    if (typeof text !== 'string') continue;
+    const origin = path ? `${path}.${key}` : key;
+    /*
+     * Note-level full text still exempts a span that falls back to the row's
+     * PMID, which is how this gate has always behaved. A span whose own clause
+     * names a paper is judged on that clause alone — see `quotedClaimsIn`.
+     */
+    const noteExempt = citesFullText(text);
+    for (const { quote, pmid } of quotedClaimsIn(text)) {
+      if (pmid) out.push({ entity, origin, pmid, quote });
+      else if (rowPmid && !noteExempt) out.push({ entity, origin, pmid: rowPmid, quote });
     }
   }
   for (const [k, v] of Object.entries(rec)) {

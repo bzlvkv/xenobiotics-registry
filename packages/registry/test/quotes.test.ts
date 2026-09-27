@@ -13,6 +13,7 @@ import {
   normalizeForMatch,
   quoteFound,
   quotesIn,
+  quotedClaimsIn,
   splitAbstracts,
   verbatimClaims,
 } from '../src/index';
@@ -148,5 +149,49 @@ describe('verbatimClaims over the real registry', () => {
     // suvorexant's orexin rows quote a binding table and say so; the abstract is
     // silent on the number by the paper's own construction.
     expect(claims.filter((c) => c.entity === 'suvorexant')).toEqual([]);
+  });
+});
+
+describe('quotedClaimsIn — a PMID named inside the clause', () => {
+  it('attributes a span to the paper its own clause names, not to the row', () => {
+    const note =
+      'Dodgson 2000 verbatim: "Ki values were approximately 100, 7, 10 microM". ' +
+      'A separate group calls it low nanomolar (PMID:12617904) and states "no quotable figure here".';
+    const out = quotedClaimsIn(note);
+    expect(out.find((q) => q.quote.startsWith('Ki values'))?.pmid).toBeNull();
+    expect(out.find((q) => q.quote.startsWith('no quotable'))?.pmid).toBe('12617904');
+  });
+
+  it('leaves a span untagged when one clause names two different papers', () => {
+    const note = 'Verbatim, PMID:111 against PMID:222: "the disputed sentence here".';
+    expect(quotedClaimsIn(note)[0]?.pmid).toBeNull();
+  });
+
+  it('repeating one PMID in a clause is not ambiguity', () => {
+    const note = 'PMID:333 verbatim, and PMID:333 again: "the quoted sentence here".';
+    expect(quotedClaimsIn(note)[0]?.pmid).toBe('333');
+  });
+
+  it('exempts full text PER CLAUSE, so one such clause does not exempt the note', () => {
+    const note =
+      'FULL TEXT of PMID:111 Table 2: "a table sentence not in the abstract". ' +
+      'PMID:222 abstract states "a sentence that really is in the abstract".';
+    const out = quotedClaimsIn(note);
+    expect(out.map((q) => q.pmid)).toEqual(['222']);
+  });
+
+  it('still refuses a clause describing a value corrected away from', () => {
+    const note =
+      'Verbatim: "the stored sentence goes here". Replaces PMID:999 which said "the old wrong sentence".';
+    expect(quotedClaimsIn(note).map((q) => q.quote)).toEqual(['the stored sentence goes here']);
+  });
+});
+
+describe('verbatimClaims reaches inline-cited prose', () => {
+  const claims = verbatimClaims(readRegistry());
+
+  it('checks compound-level mechanism and notes, which carry no source_pmid', () => {
+    const origins = new Set(claims.map((c) => c.origin));
+    expect(origins.has('notes')).toBe(true);
   });
 });
