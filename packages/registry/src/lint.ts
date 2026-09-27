@@ -358,7 +358,7 @@ function occupancyNoteAsserts(
  * without weakening the rule, because an author confessing a midpoint writes it
  * in their own prose.
  */
-const QUOTED_SPAN = /"[^"]*"|\u201c[^\u201d]*\u201d/g;
+export const QUOTED_SPAN = /"[^"]*"|\u201c[^\u201d]*\u201d/g;
 
 /**
  * Split a note the way every prose rule in this file reads one: into clauses at
@@ -367,8 +367,24 @@ const QUOTED_SPAN = /"[^"]*"|\u201c[^\u201d]*\u201d/g;
  * and a different split would attribute it to the stored one.
  */
 export function splitClauses(note: string): string[] {
-  return note.split(/(?<=[.;])\s+/);
+  return note.split(CLAUSE_BREAK);
 }
+
+/**
+ * A clause boundary: a full stop or semicolon, then optionally the CLOSING
+ * QUOTATION MARK of a quotation that ended on it, then whitespace.
+ *
+ * The closing mark is the whole subtlety. A note that quotes a full sentence
+ * writes `… transcortin and albumin." Two further papers agree (PMID:3834071,
+ * PMID:3593903).` — the `.` is inside the quotation, so the character after it
+ * is `"` rather than a space, and a boundary that demands whitespace
+ * IMMEDIATELY after the terminator does not fire. The two sentences become one
+ * clause, and `quotes.ts` then sees two PMIDs where the author wrote one and
+ * refuses to attribute the quote at all. prednisolone's fu_note lost its check
+ * exactly that way. Allowing the mark costs nothing: a clause can only get
+ * shorter, and a shorter clause is what every rule in this file wants.
+ */
+const CLAUSE_BREAK = /(?<=[.;])["\u201d]?\s+/;
 
 /**
  * True when a clause is talking about the value this record STORES, rather than

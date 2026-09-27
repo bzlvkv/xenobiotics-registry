@@ -264,3 +264,37 @@ describe('quotations pair over the whole note, not per clause', () => {
     ]);
   });
 });
+
+describe('the decision markers are read outside the quotation marks', () => {
+  it('does not exempt a quote because the SOURCE sentence contains "used to"', () => {
+    // prednisolone's fu_note. "was used to characterize" is the paper's own
+    // wording, and `used to` is in the vocabulary meaning "corrected away
+    // from", so this quotation was silently never checked.
+    const note =
+      'PMID:7310640 verbatim: "a two compartment, nonlinear equation was used ' +
+      'to characterize the effective binding of prednisolone".';
+    expect(quotedClaimsIn(note)).toEqual([
+      {
+        quote:
+          'a two compartment, nonlinear equation was used to characterize the effective binding of prednisolone',
+        pmid: '7310640',
+      },
+    ]);
+  });
+
+  it('still exempts one when the AUTHOR writes the marker in their own prose', () => {
+    const note = 'PMID:7310640 verbatim: "the quoted sentence here" — replaces an earlier value.';
+    expect(quotedClaimsIn(note)).toEqual([]);
+  });
+
+  it('breaks a clause after the closing mark of a quotation that ended a sentence', () => {
+    // Without the closing mark in the boundary the two sentences are one clause,
+    // its three PMIDs make the attribution ambiguous, and the quote is dropped.
+    const note =
+      'PMID:7310640 verbatim: "the binding was markedly concentration-dependent." ' +
+      'Two further papers agree (PMID:3834071, PMID:3593903).';
+    expect(quotedClaimsIn(note)).toEqual([
+      { quote: 'the binding was markedly concentration-dependent.', pmid: '7310640' },
+    ]);
+  });
+});

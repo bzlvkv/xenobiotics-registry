@@ -31,7 +31,7 @@
  * script. Nothing here fetches.
  */
 
-import { describesStoredValue } from './lint';
+import { describesStoredValue, QUOTED_SPAN } from './lint';
 import type { Registry } from './types';
 
 /** A verbatim-quote claim: this note says this text appears in this paper. */
@@ -121,7 +121,9 @@ function spansIn(note: string): Span[] {
 /** Clause texts with their end offsets, so a quotation traces to the one it opened in. */
 function clauseRanges(note: string): { end: number; text: string }[] {
   const out: { end: number; text: string }[] = [];
-  const re = /(?<=[.;])\s+/g;
+  // Identical to lint.ts CLAUSE_BREAK, global so it can walk. See its comment:
+  // a closing quotation mark may stand between the terminator and the space.
+  const re = /(?<=[.;])["\u201d]?\s+/g;
   let start = 0;
   for (let m = re.exec(note); m; m = re.exec(note)) {
     out.push({ end: m.index, text: note.slice(start, m.index) });
@@ -168,6 +170,20 @@ export interface NoteQuote {
 }
 
 /**
+ * A clause with every quotation blanked, leaving only the AUTHOR's prose.
+ *
+ * `span.quote` is removed by name before the general pattern runs, because a
+ * clause boundary falls between a full stop and the closing mark that follows
+ * it — so the clause holding a quotation that ended a sentence carries the
+ * OPENING mark and no closing one, and a paired pattern cannot see it.
+ * prednisolone's fu_note is the case: its clause ends `… transcortin and
+ * albumin.` with the `"` already handed to the next boundary.
+ */
+function proseOnly(clause: string, quote: string): string {
+  return clause.split(quote).join(' ').replace(QUOTED_SPAN, ' ');
+}
+
+/**
  * Every quoted span a note offers as verbatim, each tagged with the PMID its own
  * clause names.
  *
@@ -196,7 +212,19 @@ export function quotedClaimsIn(note: string): NoteQuote[] {
   const out: NoteQuote[] = [];
   for (const span of spansIn(note)) {
     const clause = clauses.find((c) => span.start <= c.end)?.text ?? note;
-    if (!describesStoredValue(clause)) continue;
+    /*
+     * THE DECISION MARKERS ARE READ OUTSIDE THE QUOTATION MARKS, the way every
+     * prose rule in `lint.ts` reads one — see `noteClaims`, which blanks the
+     * quotation before it splits. This function was the one caller that did not,
+     * and it silently exempted a true quote for a word inside the SOURCE's own
+     * sentence: prednisolone's fu_note quotes "a two compartment, nonlinear
+     * equation WAS USED TO characterize the effective binding", and `used to`
+     * is in the vocabulary that means "a value this record was corrected away
+     * from". The quotation was therefore never checked against its abstract,
+     * which is the precise hole this gate exists to close. An author confessing
+     * a superseded value writes it in their own prose, never inside a quote.
+     */
+    if (!describesStoredValue(proseOnly(clause, span.quote))) continue;
     const ids = [...new Set([...clause.matchAll(INLINE_PMID)].map((m) => m[1]!))];
     const pmid = ids.length === 1 ? ids[0]! : null;
     if (pmid !== null && citesFullText(clause)) continue;
