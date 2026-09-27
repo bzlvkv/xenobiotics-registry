@@ -42,15 +42,16 @@ commit each.
 Finish: `pnpm verify:quotes` PASS. Do this before Batch 2 — `cbg` and `lsd` appear in both, and
 one concern per diff forbids touching them twice.
 
-## T1 — close the `verify:quotes` blind spot · `packages/`
+## T1 — close the `verify:quotes` blind spot · `packages/` — **DONE 2026-09-27**
 
-- [ ] The gate only inspects a note sitting beside a `source_pmid`. Every stub record added on
+- [x] The gate only inspects a note sitting beside a `source_pmid`. Every stub record added on
       2026-09-26 cites its PMIDs **inline in prose**, so roughly twenty records are unguarded, and
       the `vadadustat` defect fixed in `e8e5d68` proves the guarded path catches real errors.
       Extend `quotesIn` to inline `PMID:n … "quote"` clause pairs and sweep the ~660 records
       carrying notes. Expect a large new finding count; that is the point, not a regression.
 
-Run before Batch 2, so later batches are written against the stricter gate.
+Done in four commits: inline attribution, two normaliser folds, whole-note quotation pairing, and
+22 data repairs. Coverage 232 -> 590 quotes; gate PASSES. Findings in `data/GAPS.md`.
 
 ## Batch 2 — `fraction_unbound` · 19 records
 

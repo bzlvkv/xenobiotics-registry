@@ -6085,3 +6085,52 @@ these now say "full text", the exemption `verify-quotes` documents.
 | --- | --- | --- | --- |
 | **`clarithromycin`** | `interactions[5].kinetics.auc_ratio` | The row cites Terkeltaub 2011 (PMID:21480191), the seven-study DDI programme that produced the data, but its abstract gives only ">125% across all studies" with **no per-drug figure**, and the paper is **not in PMC** — full text NOT RETRIEVED. The stored 3.82 comes from the 277%/282% reported in PMID:23462027, a 2013 review. So the ratio rests on a review while the citation points at the primary. Also: Terkeltaub 2011 carries an **erratum, "Dosage error in article text"** (Arthritis Rheum 2011;63(11):3521), unread. | Publisher full text of PMID:21480191 for the per-inhibitor table, and its erratum. Until then the review is named in `refs[]` and the dependency is on the record. |
 | **`cimetidine`** | the new 6.0 µM | The 1.76/0.96 ratio is a **steady-state Css ratio** at subtherapeutic daily warfarin, not a single-dose AUC ratio. It is AUC-proportional at steady state, which is why it is usable, but it is not the same object as a single-dose AUC fold-change. | A single-dose crossover AUC ratio for cimetidine + warfarin; the note names the Serlin/Toon-era studies as where to look. |
+
+## The widened quote gate — 22 records repaired, 0 values invented (2026-09-27)
+
+Extending `verify:quotes` to inline `PMID:n … "quote"` citations (roadmap T1) took coverage from
+**232 quotes to 590** and reported 22 failures on records nobody had re-read since they were
+written. All 22 are closed and the gate PASSES. **Again not one stored value was wrong.** Two
+batches in a row have now found the same thing: the defects in this catalog's provenance are
+citation-attribution errors, not fabricated numbers.
+
+### Three of the reported failures were the RULE, and fixing them raised coverage twice
+
+HYGIENE R16, three times in one afternoon:
+
+1. **A vulgar fraction.** PubMed prints perampanel's `mean t½, 109 h`; the note writes `t1/2`.
+   U+00BD now folds.
+2. **A Lancet middle-dot decimal.** survodutide's phase 2 abstract reads `0·6, 2·4, 3·6, or 4·8 mg`
+   against the note's `0.6, 2.4`. U+00B7 now folds **between digits only** — it is an ordinary
+   separator elsewhere, and there is a test asserting `A·B` is still not `A.B`.
+3. **Quotation pairing.** A short quoted term shifts a scanning regex's parity: metronidazole's
+   `a lower BOUND (">90%") while the measured figure is "approximately 1"` had thirty characters of
+   *this repository's own prose* reported as a quotation. And a quotation may contain a full stop,
+   so per-clause pairing splits it and gets the parity wrong on both sides — that mistake turned 16
+   findings into 30, eight of them trailing editorial glosses (`— metoclopramide D2 Ki 444 nM.`).
+   Pairing now happens over the whole note and each span is traced to the clause it opened in.
+
+### What the 22 actually were
+
+| Shape | Records | Treatment |
+| --- | --- | --- |
+| **Quote true, abstract has an interpolation the note dropped** | `acyclovir` (`(Clcr)`), `erythromycin` (`(mean +/- s.d.)`), `penicillin-v` (`and that of the potassium salt of PE was 86%`), `propofol` (`(range, 1-2.4 min)`), `vesugen` (the abstract puts quotes round "Pinealon" and "Vesugen") | Quote the sentence as printed, or mark the omission with `…`. |
+| **Segments out of the order the abstract has them** | `metoprolol` — the note put `to beta(1)-AR subtypes…` before `metoprolol`, where the abstract lists the drug first | Reordered to the abstract's own order. |
+| **A gloss inside the quotation marks** | `doxazosin` (`[racemic doxazosin]`) | Gloss moved outside. The three pKi figures are racemic, R- and S- in that order, which is now on the record. |
+| **Wrong ligand named** | `nicotine` — quoted `[3H]nicotine`; Sabey 1999 says `tritiated cytisine and nicotine` | Corrected. |
+| **A unit that is not in the source** | `rimantadine` — quoted `0.6 +/- 0.8%`; the abstract's `%` belongs to the comparator arm | Quoted the whole parenthesis instead. |
+| **Quote belongs to another document** | `afamelanotide` (Ugwu 1997, not Minder 2017), `cimetidine` (the PO row's review, not the IV primary), `macimorelin` ×3 (the LABEL), `mitoq` (a full text, not the review), `gly-low` (the published paper, not the preprint), `cartalax` (a PubChem synonym), `p021` (a second dosing paper) | Attributed to its real owner, or described rather than quoted where an interaction/compound field cannot carry a second source. |
+| **A full-text value that never said so** | `ustekinumab` — KD 106 pM is in Zhou 2021's body (PMC8409790), not its abstract | Marked "full text", like `guselkumab` from the same paper in the previous batch. |
+| **Single quotes inside the source** | `cilostazol` — the abstract prints `suggest 'flip-flop' pharmacokinetics` | Quoted as printed. |
+
+### Carried forward
+
+- **`cimetidine`'s PO review is now named** (PMID:6418428) rather than called "the cited review",
+  so its half-life and F are checkable. The IV row keeps Larsson 1982.
+- **`macimorelin` has label figures an interaction/PK row cannot cite.** `pk[route]` has
+  `source_label` and the PO row uses it, but a *quotation* in that note is attributed to whatever
+  PMID the clause names, so the label's half-life sentence is now **described, not quoted**. A
+  `source_label`-aware quote gate would fix this properly — see roadmap T3.
+- **`p021`'s dose evidence spans three papers in one sentence**, which leaves every quotation in it
+  untagged by design (two or more PMIDs in a clause is ambiguity, not a citation). One of the three
+  is now described instead. Splitting that sentence per paper would make all three checkable.
