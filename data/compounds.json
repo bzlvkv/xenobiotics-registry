@@ -45027,12 +45027,14 @@
       "PO": {
         "V_L": 28,
         "F": 0.991,
-        "source_pmid": "PMID:7695325"
+        "source_pmid": "PMID:7695325",
+        "note": "PROVENANCE ATTACHED, no value changed: all three stored numbers are verbatim in this abstract and none carried a quote. PMID:7695325 states verbatim \"0.5 +/- 0.3 versus 0.4 +/- 0.1 liters/kg for sulfamethoxazole\" (the non-critically-ill arm, 0.4 L/kg x 70 kg = 28 L), verbatim \"15.5 +/- 9.5 versus 14.3 +/- 4.7 h for sulfamethoxazole\" and verbatim \"86.2% +/- 17.9% versus 99.1% +/- 20.5% for sulfamethoxazole\". POPULATION, which the record did not say: PMID:7695325 studied \"critically ill and non-critically ill AIDS patients\", not healthy volunteers, and the stored values are the non-critically-ill arm. The SDs are wide (9.5 h on a 14.3 h half-life). NOTE FOR THE VOLUME PASS: 28 L here is a REAL measurement that coincides with the 0.4 L/kg prior pk.template-volume reports."
       },
       "IV": {
         "V_L": 28,
         "F": 1,
-        "source_pmid": "PMID:7695325"
+        "source_pmid": "PMID:7695325",
+        "note": "See the PO row: the same abstract supplies this route, and the population is AIDS patients rather than healthy volunteers."
       }
     },
     "notes": "PK re-sourced to Chin 1995 (PMID:7695325), adult patients dosed intravenously then orally, sulfamethoxazole reported separately — verbatim \"volume of distribution, ... 0.5 +/- 0.3 versus 0.4 +/- 0.1 liters/kg\", \"half-life, ... 15.5 +/- 9.5 versus 14.3 +/- 4.7 h\" and \"bioavailability was ... 86.2% +/- 17.9% versus 99.1% +/- 20.5% for sulfamethoxazole\"; the non-critically-ill arm is stored. The previous citation described four children with biliary atresia and NO intravenous dosing though the IV row cited it. Two likely origins worth recording: the stored V of 14 L matches that paper sulfamethoxazole CLEARANCE of 13.7 mL/kg/h, and the stored F of 0.95 matches TRIMETHOPRIM fraction absorbed of 0.955 in a different paper."

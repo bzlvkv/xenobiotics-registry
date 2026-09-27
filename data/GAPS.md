@@ -7398,3 +7398,52 @@ it* has now appeared three times in one session — `levothyroxine` (50 h window
 detectable wherever an abstract states its sampling duration, and it is a **stronger signal than a
 missing number**, because it is self-contradictory rather than merely unsupported. Worth a screen of
 its own.
+
+### The observation-window screen: built, measured, and NOT worth a gate
+
+Acting on the pattern named above, all **666 unique PK-cited abstracts** were fetched and screened for
+a stated sampling window shorter than the half-life stored against them. Three versions, and the
+result is mostly a warning about the first two:
+
+| Version | Hits | Precision |
+| --- | --- | --- |
+| Any duration phrase (`over`, `up to`, `for`, `within`, `0–N h`, `AUC(0,N)`) | 62 | **~0** — 5 of 5 checked were false |
+| Plus: require sampling vocabulary nearby, reject when dosing vocabulary is closer | 23 | **still ~0** — 5 of 5 checked were false |
+| Only a sampling noun + `collected`/`obtained` + an explicit bound | **4** | **high** — all 4 correct |
+
+**What defeats the broad screen is that a duration in an abstract is usually not a window.** The
+phrase it catches most is a **Tmax written as "within N hours"** — the exact opposite of a window,
+since it is a value the paper measured — and after that, infusion rates (*"150 µg over 15 min"*) and
+excretion-completeness statements (*"excreted via urine and faeces within 4 days"*). `entecavir`,
+`mirtazapine`, `gabapentin`, `roflumilast` and `testosterone-enanthate` all flagged on one of those
+three, and the gabapentin hit was reading a sentence about **pregabalin** in a shared review.
+
+The narrow version found only `levothyroxine` (already fixed, so it validates the screen rather than
+adding anything) and `sulfamethoxazole`, which is **not** a defect. **Yield is about one defect per 766
+rows, because only 76 of them — 10% — state their window unambiguously at all.** Not worth a gate;
+recorded here with the working pattern so nobody rebuilds the broad version and trusts it.
+
+The narrow pattern, which does work:
+
+```
+\b(?:sampl\w+|blood|plasma|serum|specimens?)\b[^.]{0,80}?\b(?:were\s+)?(?:collected|obtained|drawn|
+taken|available|analy[sz]ed)\b[^.]{0,40}?\b(?:up to|over a period of|over|during|for|through|to)\s+
+(\d+(?:\.\d+)?)\s*(min|minutes?|h|hrs?|hours?|days?|d|weeks?|wk)\b
+```
+
+### sulfamethoxazole: a real 0.4 L/kg, and the reason the 36 were not bulk-stripped
+
+The screen's one new candidate turned out to be a **well-sourced record with no quote**, and it is the
+best argument yet for having left the 36 templated volumes alone. PMID:7695325 states all three stored
+values verbatim — *"0.5 ± 0.3 versus 0.4 ± 0.1 liters/kg for sulfamethoxazole"*, *"15.5 ± 9.5 versus
+14.3 ± 4.7 h"*, *"86.2% ± 17.9% versus 99.1% ± 20.5%"* — so `V` 28 L, `t½` 14.3 h and `F` 0.991 are
+each the non-critically-ill arm, read correctly.
+
+**Its 28 L is a genuine measurement that coincides exactly with the 0.4 L/kg prior**
+`pk.template-volume` reports. A bulk strip keyed on the shared value would have deleted a correctly
+cited number — which is what the per-record rule was protecting against, now demonstrated rather than
+assumed.
+
+Two things were added to the record: the three quotes, and the **population**, which it had never
+stated — PMID:7695325 studied *"critically ill and non-critically ill AIDS patients"*, not healthy
+volunteers, with SDs of 9.5 h on a 14.3 h half-life. 656 → 660 checked quotes.
