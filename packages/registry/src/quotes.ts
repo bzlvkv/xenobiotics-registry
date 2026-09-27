@@ -305,10 +305,35 @@ function claimsIn(
      * names a paper is judged on that clause alone — see `quotedClaimsIn`.
      */
     const noteExempt = citesFullText(text);
+    /*
+     * A NOTE-LEVEL PMID FALLBACK WAS TRIED HERE ON 2026-09-27 AND IS REFUSED.
+     * The reasoning was that `quotedClaimsIn` leaves a span untagged when its
+     * clause names two papers, so a note naming exactly ONE paper should leave
+     * nothing to guess. 107 spans qualified. Attributing them failed 54 of 107
+     * against NCBI, and reading the failures showed the premise was false in the
+     * most damaging way available: A NOTE'S LONE PMID IS OFTEN THE SOURCE THE
+     * RECORD REJECTED.
+     *
+     * adalimumab names PMID:27965661 exactly once, as the paper that "states no
+     * volume of distribution at all", and its quotes come from the Humira FDA
+     * label, which the note identifies by DailyMed setid and not by PMID.
+     * chlorpheniramine names PMID:11332874 once, as stating "NONE of the five
+     * stored numbers", and its quotes belong to "Huang 1982" and to a review.
+     * Both would have been recorded as verified claims against papers their own
+     * authors wrote down as wrong.
+     *
+     * So the clause stays the only scope. An unattributed span is reported as
+     * coverage by `verbatimClaimsWithOrphans` and checked by nothing, which is
+     * honest; a misattributed span is a false pass, which is what this gate
+     * exists to prevent.
+     */
+    // matchAll, not test: INLINE_PMID is a global regex, and `test` on one advances
+    // lastIndex, so consecutive calls alternate between true and false.
+    const noteNamesAnyPmid = [...text.matchAll(INLINE_PMID)].length > 0;
     for (const { quote, pmid } of quotedClaimsIn(text)) {
       if (pmid) out.push({ entity, origin, pmid, quote });
       else if (rowPmid && !noteExempt) out.push({ entity, origin, pmid: rowPmid, quote });
-      else orphans?.push({ entity, origin, quote, notePmid: /PMID:\s*\d+/.test(text) });
+      else orphans?.push({ entity, origin, quote, notePmid: noteNamesAnyPmid });
     }
   }
   for (const [k, v] of Object.entries(rec)) {

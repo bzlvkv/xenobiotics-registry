@@ -7296,14 +7296,39 @@ better sourced than it is, and every author who wrote one believed it was covere
 
 `verify:quotes` now prints the count, the worst records, and the split that decides the remedy:
 
-- **238 sit in a note that does name a PMID somewhere.** Rewording the quoting clause to name it
-  recovers the check with **no research at all** — the cheapest provenance work available in this
-  repository.
+- **238 sit in a note that names a PMID somewhere.** I first called these recoverable by rewording,
+  **and that was wrong** — see the next section.
 - **559 name no paper in the note.** Someone has to establish which document the sentence came from.
 
 It is reported as **coverage, not a failure**, so it does not fail the gate: none of these spans is
 known to be wrong, and failing 797 of them would only teach an author to delete quotes. `verbatimClaims`
 now delegates to `verbatimClaimsWithOrphans` so there is one walker and the two cannot drift.
 
-**The 238 are the next batch, and they are cheap.** Worst records: `abiraterone` (9), `somapacitan` (8),
-`ibrutinib` (7), `ovagen` (7), `daprodustat` (6).
+Worst records: `abiraterone` (9), `somapacitan` (8), `ibrutinib` (7), `ovagen` (7), `daprodustat` (6).
+
+### A note's lone PMID is often the source the record REJECTED, so it cannot be a fallback
+
+I implemented the cheap recovery above and **reverted it**, which is the most useful thing this slice
+produced. The reasoning looked sound: `quotedClaimsIn` refuses to guess between two PMIDs in a clause,
+so a note naming exactly **one** paper appears to leave nothing to guess. **107 spans qualified.**
+
+Attributing them **failed 54 of 107** against NCBI, and the failures showed the premise was false in
+the most damaging way available:
+
+- **`adalimumab`** names PMID:27965661 exactly once — as the paper that *"states no volume of
+  distribution at all"*. Its quotes come from the **Humira FDA label**, which the note identifies by
+  DailyMed setid, not by PMID.
+- **`chlorpheniramine`** names PMID:11332874 once — as stating *"NONE of the five stored numbers"*. Its
+  quotes belong to **"Huang 1982"** (never cited by PMID) and to a review.
+
+Both would have been recorded as **verified claims against papers their own authors had written down as
+wrong**. A thorough note names the source it rejected; that is what makes it thorough, and it is
+exactly what defeats this shortcut — the same lesson as R16, arriving from the other direction.
+
+**The clause stays the only scope.** An unattributed span is checked by nothing, which is honest and now
+reported; a misattributed span is a **false pass**, which is what this gate exists to prevent. The
+refusal is commented at the site and held by two tests, so nobody re-derives it.
+
+**So the 238 are not cheap after all.** Each needs its source established by reading, like the 559 —
+the only difference is that a candidate is already written down, and it is as likely to be the
+rejected paper as the right one.

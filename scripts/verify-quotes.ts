@@ -255,9 +255,9 @@ async function main(): Promise<void> {
         `verify-quotes: ${orphans.length} further span${orphans.length === 1 ? '' : 's'} ` +
           `claim${orphans.length === 1 ? 's' : ''} verbatim and CANNOT BE CHECKED, across ` +
           `${new Set(orphans.map((o) => o.entity)).size} records — the quoting clause names no ` +
-          `PMID and the row carries none to fall back on. ${recoverable} sit in a note that DOES ` +
-          `name a paper somewhere, so rewording the clause recovers those with no research. ` +
-          `Worst: ${worst}.`,
+          `PMID and the row carries none to fall back on. ${recoverable} sit in a note that names ` +
+          `a paper somewhere, but that paper is OFTEN THE ONE THE RECORD REJECTED, so each needs ` +
+          `reading rather than rewording. Worst: ${worst}.`,
       );
       console.log(
         `verify-quotes: an unattributable quote is worse than no quote \u2014 it looks like ` +

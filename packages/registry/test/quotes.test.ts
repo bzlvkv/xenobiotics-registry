@@ -368,3 +368,38 @@ describe('verbatimClaimsWithOrphans', () => {
     expect(verbatimClaims(c)).toEqual(verbatimClaimsWithOrphans(c).claims);
   });
 });
+
+describe('a note-level PMID is refused as a fallback', () => {
+  const reg = (compound: Record<string, unknown>): Registry =>
+    ({
+      compounds: [compound],
+      pathways: [],
+      receptors: { gpcrs: [], others: [] },
+    }) as unknown as Registry;
+
+  it('does not attribute a quote to the single paper its note rejects', () => {
+    // adalimumab's real shape: the one PMID in the note is the paper that states
+    // NOTHING, and the quote comes from a label identified by setid. Attributing
+    // it to that PMID recorded a claim against a source the author called wrong.
+    const { claims, orphans } = verbatimClaimsWithOrphans(
+      reg({
+        slug: 'x',
+        notes:
+          'PMID:27965661 reports AUC and states no volume of distribution at all. The label ' +
+          'does give one, verbatim: "The distribution volume (Vss) ranged from 4.7 to 6.0 L".',
+      }),
+    );
+    expect(claims).toHaveLength(0);
+    expect(orphans).toHaveLength(1);
+    expect(orphans[0]?.notePmid).toBe(true);
+  });
+
+  it('flags notePmid consistently on repeated calls, despite a global regex', () => {
+    const c = reg({
+      slug: 'x',
+      notes: 'PMID:1 states nothing. The label reads verbatim "a half-life of eight hours".',
+    });
+    const runs = [0, 1, 2].map(() => verbatimClaimsWithOrphans(c).orphans[0]?.notePmid);
+    expect(runs).toEqual([true, true, true]);
+  });
+});
