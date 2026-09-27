@@ -246,6 +246,12 @@ function assertsOfThisRecord(sentence: string): boolean {
  */
 const CORRECTED_AWAY_FROM = /\b(?:previous\w*|corrected from|used to|formerly|earlier value)\b/i;
 
+/** A DailyMed SPL set id: the only stable handle on one revision of a US label. */
+const HAS_SET_ID = /\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b/i;
+
+/** An ISO date, which is what pins an EMA SmPC or any label with no set id. */
+const HAS_ISO_DATE = /\b\d{4}-\d{2}-\d{2}\b/;
+
 /**
  * An occupancy note admitting the stored constant was COMPUTED ACROSS a span of
  * published values rather than read off one of them: "pKi range 5.8–6.9 across 5
@@ -1572,6 +1578,30 @@ export function lintRegistry(registry: Registry): Finding[] {
       // because then a reader has no way to re-derive the numbers.
       if (!pk.source_pmid && !pk.source_label) {
         warn(c.slug, 'pk.pmid', `pk.${route} has params but no source_pmid or source_label`);
+      }
+      /*
+       * A LABEL IS REVISED IN PLACE, so "FDA label: Prezista" points at whatever
+       * it says today, not at the sentence the value came from. WORKFLOW asks a
+       * `source_label` to name the product, the SET ID and the effective date
+       * for exactly that reason, and `pnpm verify` cannot help: it resolves
+       * PMIDs, and a label has none.
+       *
+       * So this is the only re-findability check a label citation gets, and it
+       * is offline. A DailyMed set id is a UUID; an EMA SmPC has no set id, so
+       * an ISO date is accepted instead as the thing that pins which revision
+       * was read. Warning, not error: 25 of the 28 label rows predate the rule
+       * and each names a real product, which is most of the way there.
+       */
+      if (
+        pk.source_label &&
+        !HAS_SET_ID.test(pk.source_label) &&
+        !HAS_ISO_DATE.test(pk.source_label)
+      ) {
+        warn(
+          c.slug,
+          'pk.label-revision',
+          `pk.${route} cites a label but names neither a set id nor an effective date, and a label is revised in place — the sentence the value came from cannot be found again`,
+        );
       }
       // A ROUTE CITING BOTH IS NOT A DEFECT, and this rule used to say it was. A
       // route row is a BUNDLE of three or four values, and they can legitimately

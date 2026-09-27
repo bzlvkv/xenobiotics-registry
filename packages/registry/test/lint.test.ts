@@ -1075,3 +1075,22 @@ describe('pathway rules', () => {
     expect(found.filter((r) => r === 'pathway.diagram-ref').length).toBe(3);
   });
 });
+
+describe('pk.label-revision', () => {
+  it('fires on a label citation that names no set id and no date', () => {
+    const findings = lintRegistry(readRegistry());
+    const hit = findings.filter((f) => f.rule === 'pk.label-revision');
+    expect(hit.length).toBeGreaterThan(0);
+    // Every one must name the route whose label citation is unpinned.
+    for (const f of hit) expect(f.message).toMatch(/^pk\.[A-Z]+ cites a label/);
+  });
+
+  it('does not fire on the rows that do name a DailyMed set id', () => {
+    const findings = lintRegistry(readRegistry()).filter((f) => f.rule === 'pk.label-revision');
+    const named = new Set(findings.map((f) => f.entity));
+    // These three carry `set id <uuid>` in their source_label.
+    for (const slug of ['somapacitan', 'macimorelin', 'prucalopride']) {
+      expect(named.has(slug), `${slug} should be pinned`).toBe(false);
+    }
+  });
+});

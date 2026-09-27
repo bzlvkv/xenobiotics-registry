@@ -192,6 +192,11 @@ export const LINT_RULES: Readonly<Record<string, RuleInfo>> = {
     level: 'error',
     summary: 'An intravenous route stores F other than 1.',
   },
+  'pk.label-revision': {
+    level: 'warning',
+    summary:
+      'A label citation names neither a set id nor an effective date, so the revision it quotes cannot be found again.',
+  },
   'pk.pmid': {
     level: 'warning',
     summary: 'A PK block has parameters but neither source_pmid nor source_label.',
