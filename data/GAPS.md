@@ -6711,3 +6711,37 @@ to 61.4 h with within-cohort spreads of 2.6 to 106 h, against 1.4 h in healthy m
 
 `PMC3911487` (no `<body>`) and `PMC5945293` (the MitoQ value is figure-only) — unchanged from the
 earlier assessment.
+
+## 2026-09-27 — T2, the NCBI API key wired into both gates
+
+The key is in this container's environment now, which the earlier assessment said it was not. Both
+URL builders take an optional `apiKey`; the two gate scripts read `NCBI_API_KEY` and drop the
+inter-batch delay from 350 ms to **110 ms (~9 req/s)**, deliberately under the 10 the key buys —
+NCBI throttles on its own clock, and a run that trips the limit loses more to retries than the
+margin saves.
+
+**Measured on the full sweep, not assumed:**
+
+| Gate | Without the key | With it |
+| --- | --- | --- |
+| `pnpm verify` (2,695 ids) | 24.4 s | **19.4 s** |
+| `pnpm verify:quotes` (645 quotes, 502 papers) | 17.4 s | **9.1 s** |
+
+`verify` gains only 1.26× against a 3× rate increase, because it sends 200 ids per request and so is
+dominated by **per-request latency rather than by the rate limit**. `verify:quotes` sends 20 ids per
+request, makes far more of them, and nearly halves. Worth knowing before anyone tries to optimise
+`verify` further: the delay is no longer the bottleneck there.
+
+Three deliberate constraints on how the key is handled:
+
+- **It is read by the scripts, not the library.** `packages/registry` stays pure and a test can build
+  both URL shapes without touching `process.env`.
+- **It travels as a query parameter**, because NCBI accepts it no other way, so a built URL must
+  never be logged. Neither gate logs one, and the code says so where the key is read.
+- **Each run prints which rate it used and never the key** — "NCBI_API_KEY found, ~9 req/s" or "no
+  NCBI_API_KEY, ~3 req/s" — so a slow run can explain itself without anyone reading the source.
+  A blank or whitespace-only variable is treated as absent, so an empty secret cannot send
+  `&api_key=`.
+
+Both gates pass identically with and without the key, which is the point: the key is an
+optimisation, never a dependency.

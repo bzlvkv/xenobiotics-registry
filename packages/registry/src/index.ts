@@ -86,7 +86,14 @@ export { LINT_RULES, STANDING_CAVEAT_RULES } from './rules';
 export type { RuleInfo } from './rules';
 
 // PubMed verdicts, without the fetching.
-export { describePubmed, esummaryUrl, ESUMMARY_BATCH, ESUMMARY_URL, resolved } from './pubmed';
+export {
+  apiKeyParam,
+  describePubmed,
+  esummaryUrl,
+  ESUMMARY_BATCH,
+  ESUMMARY_URL,
+  resolved,
+} from './pubmed';
 export type { EsummaryRecord, EsummaryResponse, PubmedDetail } from './pubmed';
 
 // The one provenance claim a machine can check: a note's quote against its abstract.

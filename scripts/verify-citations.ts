@@ -27,8 +27,9 @@
  * Supabase service key. That database is gone, and with it the whole idea that
  * this script owns state. It reports and it sets an exit code. Nothing else.
  *
- * NETWORK DISCIPLINE. Public NCBI E-utilities, no API key: 200 ids per request
- * (their documented ceiling), ~3 req/s, 5-attempt exponential backoff on 5xx and
+ * NETWORK DISCIPLINE. NCBI E-utilities: 200 ids per request (their documented
+ * ceiling), ~3 req/s bare or ~9 with an `NCBI_API_KEY` in the environment,
+ * 5-attempt exponential backoff on 5xx and
  * transport errors, deduped by pmid so the same id never spends the rate limit
  * twice. The full sweep is ~2,500 unique ids, so it takes a couple of minutes;
  * `--limit` exists for the smoke test you actually want while iterating.
@@ -52,7 +53,18 @@ import {
 } from '@xeno/registry';
 import { DATA_DIR, readRegistry } from '@xeno/registry/read';
 
-const BATCH_DELAY_MS = 350; // ~3 req/s, the ceiling NCBI allows without a key
+/**
+ * NCBI raises the rate ceiling from 3 to 10 requests a second for a registered
+ * API key. It is read from the environment, so the gate works identically with
+ * and without one and nothing about the key lives in the repository.
+ *
+ * 110 ms is ~9 req/s, deliberately under the 10 the key buys: NCBI throttles on
+ * its own clock, not ours, and a run that trips the limit costs more in retries
+ * than the margin saves. NEVER LOG A BUILT URL from here — the key travels as a
+ * query parameter because NCBI accepts it no other way.
+ */
+const API_KEY = process.env.NCBI_API_KEY?.trim() || undefined;
+const BATCH_DELAY_MS = API_KEY ? 110 : 350; // ~9 req/s with a key, ~3 without
 const MAX_RETRIES = 5;
 
 const CAVEAT =
@@ -107,7 +119,7 @@ function sleep(ms: number): Promise<void> {
 }
 
 async function fetchBatch(pmids: readonly string[]): Promise<EsummaryResponse> {
-  const url = esummaryUrl(pmids);
+  const url = esummaryUrl(pmids, API_KEY);
   let lastErr: unknown;
   for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
     try {
@@ -162,6 +174,11 @@ async function main(): Promise<void> {
   log(
     `verify-citations: read ${registry.compounds.length} compounds · ` +
       `${registry.pathways.length} pathways from ${DATA_DIR}`,
+  );
+  // Which rate the run used, never the key itself. A run that is slower than
+  // expected should be able to say why without anyone reading the source.
+  log(
+    `verify-citations: ${API_KEY ? 'NCBI_API_KEY found, ~9 req/s' : 'no NCBI_API_KEY, ~3 req/s'}`,
   );
   log(
     `verify-citations: ${citations.length} citations, ${unique.length} unique PMIDs` +

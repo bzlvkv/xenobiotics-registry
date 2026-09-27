@@ -137,14 +137,16 @@ oral mannitol is unabsorbed and acts luminally.
       tombstone removed.
 - [x] `interactions.inert-kinetics` — marked `standing` in `rules.ts`; the message already recorded
       the decision the metadata did not.
-- [ ] `dose.salt-moiety-unset` on `mitoq` is a **documented standing caveat**, not work: no source
+- [x] `dose.salt-moiety-unset` on `mitoq` is a **documented standing caveat**, not work: no source
       states whether its doses are salt or cation. Leave it.
 
 ## T2 / T3 — tooling, opportunistic · `packages/`, `scripts/`
 
-- [ ] **T2** Wire `NCBI_API_KEY` into `packages/registry/src/pubmed.ts` and
-      `scripts/verify-citations.ts`: 3 → 10 req/s. The key is not in this container's environment,
-      so it needs adding as an environment secret first.
+- [x] **T2 DONE 2026-09-27.** The key IS in the environment now. Both URL builders take an optional
+      `apiKey`, the two gate scripts read `NCBI_API_KEY` and drop the inter-batch delay from 350 ms
+      to 110 ms (~9 req/s, deliberately under the 10 the key buys). Measured on the full sweep:
+      `verify` 24.4 s → 19.4 s. Smaller than 3x because the run is dominated by per-request latency
+      rather than by the rate limit, which is worth knowing before optimising it further.
 - [x] **T3 DONE 2026-09-27.** Became an offline lint rule, `pk.label-revision`, not the network
       verifier planned: only 3 of 28 label rows named the revision they quote. 20 are now pinned with
       a DailyMed set id and effective date; the 3 unpinnable have no US SPL (agomelatine is EMA-only,

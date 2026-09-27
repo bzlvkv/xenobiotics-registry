@@ -32,6 +32,7 @@
  */
 
 import { describesStoredValue, QUOTED_SPAN } from './lint';
+import { apiKeyParam } from './pubmed';
 import type { Registry } from './types';
 
 /** A verbatim-quote claim: this note says this text appears in this paper. */
@@ -436,8 +437,8 @@ export const EFETCH_URL = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.
  */
 export const EFETCH_BATCH = 20;
 
-export function efetchUrl(pmids: readonly string[]): string {
-  return `${EFETCH_URL}?db=pubmed&id=${pmids.join(',')}&rettype=abstract&retmode=text`;
+export function efetchUrl(pmids: readonly string[], apiKey?: string): string {
+  return `${EFETCH_URL}?db=pubmed&id=${pmids.join(',')}&rettype=abstract&retmode=text${apiKeyParam(apiKey)}`;
 }
 
 /**

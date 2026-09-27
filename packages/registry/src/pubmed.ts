@@ -70,8 +70,22 @@ export const ESUMMARY_URL = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esumm
 /** NCBI's documented ceiling for ids in one ESummary request. */
 export const ESUMMARY_BATCH = 200;
 
-export function esummaryUrl(pmids: readonly string[]): string {
-  return `${ESUMMARY_URL}?db=pubmed&id=${pmids.join(',')}&retmode=json`;
+export function esummaryUrl(pmids: readonly string[], apiKey?: string): string {
+  return `${ESUMMARY_URL}?db=pubmed&id=${pmids.join(',')}&retmode=json${apiKeyParam(apiKey)}`;
+}
+
+/**
+ * `&api_key=…` when one was supplied, else nothing.
+ *
+ * NCBI accepts the key ONLY as a query parameter, never as a header, so it ends
+ * up inside the URL. Callers must therefore never log a built URL — the two
+ * gates do not, and neither should anything else. The key is read from the
+ * environment by the SCRIPTS rather than here, so this library stays pure and a
+ * test can build both URL shapes without touching `process.env`.
+ */
+export function apiKeyParam(apiKey?: string): string {
+  const key = apiKey?.trim();
+  return key ? `&api_key=${encodeURIComponent(key)}` : '';
 }
 
 /**

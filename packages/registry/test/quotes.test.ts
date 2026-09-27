@@ -9,7 +9,12 @@
 
 import { describe, expect, it } from 'vitest';
 import {
+  apiKeyParam,
   citesFullText,
+  EFETCH_URL,
+  efetchUrl,
+  ESUMMARY_URL,
+  esummaryUrl,
   normalizeForMatch,
   quoteFound,
   quotesIn,
@@ -296,5 +301,25 @@ describe('the decision markers are read outside the quotation marks', () => {
     expect(quotedClaimsIn(note)).toEqual([
       { quote: 'the binding was markedly concentration-dependent.', pmid: '7310640' },
     ]);
+  });
+});
+
+describe('the NCBI API key travels as a query parameter, or not at all', () => {
+  it('omits api_key when none is given, so the bare URL is unchanged', () => {
+    expect(efetchUrl(['1', '2'])).toBe(
+      `${EFETCH_URL}?db=pubmed&id=1,2&rettype=abstract&retmode=text`,
+    );
+    expect(esummaryUrl(['1'])).toBe(`${ESUMMARY_URL}?db=pubmed&id=1&retmode=json`);
+  });
+
+  it('appends it when given, and encodes it', () => {
+    expect(efetchUrl(['1'], 'abc123')).toContain('&api_key=abc123');
+    expect(esummaryUrl(['1'], 'a b')).toContain('&api_key=a%20b');
+  });
+
+  it('treats blank and whitespace as absent, so an empty env var is not sent', () => {
+    expect(apiKeyParam('')).toBe('');
+    expect(apiKeyParam('   ')).toBe('');
+    expect(apiKeyParam(undefined)).toBe('');
   });
 });
