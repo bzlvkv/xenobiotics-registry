@@ -1292,3 +1292,46 @@ describe('pk.template-volume', () => {
     expect(f?.message).toContain('0.400 L/kg');
   });
 });
+
+describe('dose.salt-moiety-unset is narrowed to records with authored PK', () => {
+  // Must match SALT_DOSE_PROSE: a dose word, then as/of/is/are, then the salt.
+  const saltProse = 'The dose is the mesylate salt while pk describes the cation.';
+  const base = {
+    slug: 'x',
+    name: 'X',
+    routes: ['PO'],
+    doses: { PO: { min: 1, max: 1, typical: 1, unit: 'mg' } },
+    notes: saltProse,
+  };
+  const fired = (extra: Record<string, unknown>): boolean =>
+    rules(lint([compound({ ...base, ...extra } as never)])).includes('dose.salt-moiety-unset');
+
+  it('fires when the record has a curve for the salt mass to be divided in', () => {
+    expect(
+      fired({
+        half_life_hr: { PO: 4 },
+        pk: { PO: { F: 0.9, V_L: 40, source_pmid: 'PMID:1' } },
+      }),
+    ).toBe(true);
+  });
+
+  it('stays quiet with no authored PK — mitoq, whose fraction is unset on purpose', () => {
+    // The harm the rule names needs a volume; a pk_unauthored record has none, so the
+    // arithmetic it warns about cannot happen. R16.
+    expect(
+      fired({
+        half_life_hr: {},
+        pk_unauthored: { reason: 'uncharacterized', note: 'No human PK.' },
+      }),
+    ).toBe(false);
+  });
+
+  it('STILL fires when PK exists but the volume is defaulted', () => {
+    // The resolver divides the salt mass by its 35 L default, so the defect is real.
+    // Gating on a stored V_L instead of on authored PK silenced this, and the rule's
+    // own pre-existing test caught it before it shipped.
+    expect(fired({ half_life_hr: { PO: 4 }, pk: { PO: { F: 0.9, source_pmid: 'PMID:1' } } })).toBe(
+      true,
+    );
+  });
+});

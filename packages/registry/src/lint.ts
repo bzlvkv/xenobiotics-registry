@@ -1801,8 +1801,21 @@ export function lintRegistry(registry: Registry): Finding[] {
     // The inverse: a record whose prose says the dose is a salt while pk[] describes
     // the base, with no fraction set, is silently overstating every concentration by
     // the counter-ion's share.
+    //
+    // NARROWED to records with authored PK. The harm named in this rule's own message
+    // — a salt mass divided by a free-base volume — needs a curve to divide in, and a
+    // `pk_unauthored` record has none, so the warning describes an arithmetic that
+    // cannot happen. Note the condition is ANY authored route, not a stored `V_L`:
+    // where PK exists but the volume is defaulted, the resolver still divides the
+    // salt mass by 35 L, so the defect is real and the rule must still fire. It fired on `mitoq`, whose fraction is unset
+    // DELIBERATELY and at length: no source says whether its 20-160 mg doses are salt
+    // or cation, MitoQ is a supplement with no label to settle it, and applying the
+    // 0.860 cation fraction anyway would invent the missing fact, which is R10. The
+    // record was right and the rule was wrong, which is R16, and this is the same
+    // narrowing `receptor.needs-keo` was given for the same reason.
     if (
       c.dose_moiety_fraction == null &&
+      pkRoutes(c).length > 0 &&
       SALT_DOSE_PROSE.test(`${c.mechanism ?? ''} ${c.notes ?? ''}`)
     ) {
       warn(

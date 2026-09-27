@@ -7494,3 +7494,38 @@ Two lessons, both structural:
 
 `methyldopa.PO` now carries the provenance note it always needed. 108 → 106 warnings, as two
 `pk.template-volume` groups fell below the five-compound threshold.
+
+### dose.salt-moiety-unset narrowed, and the rule's own test caught my first attempt
+
+`mitoq` was the single `dose.salt-moiety-unset` finding, and the record was right: its
+`dose_moiety_fraction` is unset **deliberately and at length** — no source says whether its 20–160 mg
+doses are salt or cation, MitoQ is a supplement with no label to settle it, and applying the 0.860
+cation fraction anyway would invent the missing fact, which is R10. The rule fired on a correct record,
+which is R16, and the harm it names — a salt mass divided by a free-base volume — needs a curve to
+divide in, which a `pk_unauthored` record has none of.
+
+**My first narrowing was wrong and shipped nothing.** I gated on a stored `V_L`, which is not the same
+condition: where PK exists but the volume is *defaulted*, the resolver still divides the salt mass by
+35 L, so the defect is real and the rule must still fire. **The rule's own pre-existing test failed
+immediately** — its fixture has `pk` with no `V_L` and expects the warning — and that is the whole
+argument for tests on lint rules: a rule's test fixture encodes the intent that the rule's prose only
+describes. Gating on *any authored route* is the correct condition, and the test now asserts both
+directions explicitly.
+
+105 warnings. The actionable list is down to `pk.label-revision` (3), `pk.unsolvable-route` (1,
+catalog-level) and `receptor.unknown-target` (1, catalog-level).
+
+### receptor.unknown-target is also a correct record, and needs a catalog change rather than a data one
+
+`alpha_1` (3 rows) and `muscarinic` (1 row) are **deliberate class keys**, documented on the record:
+doxazosin's note reads *"CLASS KEY alpha_1 KEPT: NATIVE HUMAN PROSTATE expresses a mixture of alpha1
+subtypes, so this pKi belongs to no single one."* Assigning `ADRA1A` would invent a selectivity the
+assay did not have.
+
+So the rule is right that the key does not resolve, and the data is right to use it. What is missing is
+a **class-level entry** in `receptors.json`. The schema permits one — `gene` is nullable — but `gtp_id`
+must be a positive integer and the file is **generated** by `scripts/fetch-receptors.ts` from
+IUPHAR/BPS, so a hand-added entry would be overwritten and its id would have to be a real GtoPdb
+**family** anchor rather than a target one. **Deliberately not guessed here.** To unlock: extend
+`fetch-receptors.ts` to pull IUPHAR family ids alongside target ids, then catalogue `alpha_1` and
+`muscarinic` as family entries with `gene: null`.
