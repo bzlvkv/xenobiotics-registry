@@ -1054,7 +1054,6 @@
     "pk": {
       "SC": {
         "F": 0.64,
-        "V_L": 5.6,
         "source_pmid": "PMID:27965661",
         "ka_hr": 0.01833
       }
@@ -1084,7 +1083,7 @@
         "action": "neutralizer"
       }
     ],
-    "notes": "PK: ABSORPTION RATE AUTHORED FROM THE HUMIRA LABEL. This row carried no ka, so the solver substituted 1.0/h and put the peak at 6.1 h. Source, verbatim from the current FDA label (DailyMed setid 4977567e-3525-44ac-9ff5-f1e74b053950): \"The mean time to reach the maximum concentration was 5.5 days (131 ± 56 hours)\" — a point value with its spread, after a single 40 mg subcutaneous dose. The same section corroborates the record independently: \"The average absolute bioavailability of adalimumab ... was 64%\" and a terminal half-life \"ranging from 10 to 20 days\", which contains the stored 13 days. PUBMED HAS THIS NOWHERE — 27 targeted searches across two passes returned four usable peak times for this whole class, because Tmax is a label figure that rarely reaches an abstract. A regulatory label is already a first-class source in this schema. With the stored half-life fixing ke, Tmax solves uniquely for ka by inverting the model own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 0.01833/h, which reproduces 131 h on substitution. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
+    "notes": "V_L 5.6 REMOVED as an R6 stored default — 0.08 L/kg x 70 kg is the consumer default for a protein at MW >= 10 kDa. PMID:27965661 reports AUC0-inf, Cmax and AUC0-last and states no volume of distribution at all. The Humira label does give one, but as a RANGE from an IV arm in RA patients — \"The distribution volume (Vss) ranged from 4.7 to 6.0 L\" — which contains 5.6 without stating it, and pairing an IV Vss with this SC route would be a second defect. Removal is numerically a no-op. PK: ABSORPTION RATE AUTHORED FROM THE HUMIRA LABEL. This row carried no ka, so the solver substituted 1.0/h and put the peak at 6.1 h. Source, verbatim from the current FDA label (DailyMed setid 4977567e-3525-44ac-9ff5-f1e74b053950): \"The mean time to reach the maximum concentration was 5.5 days (131 ± 56 hours)\" — a point value with its spread, after a single 40 mg subcutaneous dose. The same section corroborates the record independently: \"The average absolute bioavailability of adalimumab ... was 64%\" and a terminal half-life \"ranging from 10 to 20 days\", which contains the stored 13 days. PUBMED HAS THIS NOWHERE — 27 targeted searches across two passes returned four usable peak times for this whole class, because Tmax is a label figure that rarely reaches an abstract. A regulatory label is already a first-class source in this schema. With the stored half-life fixing ke, Tmax solves uniquely for ka by inverting the model own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 0.01833/h, which reproduces 131 h on substitution. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
   },
   {
     "slug": "adapalene",
@@ -2947,7 +2946,6 @@
     },
     "pk": {
       "PO": {
-        "F": 0.9,
         "source_pmid": "PMID:22188761"
       }
     },
@@ -2966,7 +2964,8 @@
     "systems": [
       "digestive",
       "immune-hematologic"
-    ]
+    ],
+    "notes": "F 0.9 REMOVED as an R6 stored default. PMID:22188761 is a 4-week supplementation trial measuring plasma phospholipid ARA, prostanoids and clinical chemistry; it states no PK parameter at all. A dietary fatty acid has no IV arm, so no absolute bioavailability is obtainable. Removal is numerically a no-op — 0.9 is the consumer default — and the record now stops claiming the figure was measured."
   },
   {
     "slug": "arginine",
@@ -13143,7 +13142,6 @@
     },
     "pk": {
       "PO": {
-        "F": 0.9,
         "V_L": 210,
         "source_pmid": "PMID:28936175",
         "ka_hr": 1.2
@@ -13157,7 +13155,7 @@
     "systems": [
       "nervous"
     ],
-    "notes": "ABSORPTION-RATE PROVENANCE: this value was derived by inverting the one-compartment peak-time relation in 2026-05-26-wave25-ka-from-tmax.ts, whose header claimed every peak time was verbatim from a primary human study. ALL FORTY-FOUR ENTRIES HAVE NOW BEEN CHECKED AND TWENTY-EIGHT FAIL. This one fails because the number is verbatim but belongs to the RACEMIC amphetamine arm of that study, not to dexamfetamine. It is DISCLOSED RATHER THAN DELETED: a midpoint of a narrow range is usually inside the true spread, and removing it would fall back on the solver default of 1.0 per hour, which is worse for most of these records."
+    "notes": "F 0.9 REMOVED as an R6 stored default. PMID:28936175 compares oral D-amphetamine with oral lisdexamfetamine and states no bioavailability; both arms being oral, no absolute F is derivable from it. Numerically a no-op against the 0.9 default. ABSORPTION-RATE PROVENANCE: this value was derived by inverting the one-compartment peak-time relation in 2026-05-26-wave25-ka-from-tmax.ts, whose header claimed every peak time was verbatim from a primary human study. ALL FORTY-FOUR ENTRIES HAVE NOW BEEN CHECKED AND TWENTY-EIGHT FAIL. This one fails because the number is verbatim but belongs to the RACEMIC amphetamine arm of that study, not to dexamfetamine. It is DISCLOSED RATHER THAN DELETED: a midpoint of a narrow range is usually inside the true spread, and removing it would fall back on the solver default of 1.0 per hour, which is worse for most of these records."
   },
   {
     "slug": "dextromethorphan",
@@ -19623,7 +19621,6 @@
     },
     "pk": {
       "PO": {
-        "F": 0.9,
         "source_pmid": "PMID:9707349",
         "ka_hr": 1.49
       }
@@ -19635,7 +19632,8 @@
       "nervous",
       "immune-hematologic"
     ],
-    "mw_g_mol": 278.43
+    "mw_g_mol": 278.43,
+    "notes": "F 0.9 REMOVED as an R6 stored default. PMID:9707349 reports serum time courses and a morning/evening tmax difference only, with no bioavailability and no volume; the study is oral-only. Numerically a no-op against the 0.9 default."
   },
   {
     "slug": "ganciclovir",
@@ -19782,7 +19780,6 @@
         "F": 0.98,
         "V_L": 14,
         "source_pmid": "PMID:2381138",
-        "ka_hr": 1,
         "lag_hr": 0.75
       }
     },
@@ -19851,7 +19848,7 @@
       "cardiovascular",
       "digestive"
     ],
-    "notes": "PK: THE PHARMACOKINETICS ARE FINE; THE INTERACTION BLOCK IS ALGEBRA ON A MISTYPED CONSTANT. I VERIFIED THE ARITHMETIC MYSELF: five of six stored affinities are EXACTLY 35 divided by one less than that entry own exposure fold-ratio, to two decimals — cerivastatin, montelukast, pioglitazone, rosiglitazone and loperamide. AND THE CONSTANT 35 IS WRONG THREE SEPARATE WAYS. It is called the midpoint of a verbatim \"K(I) ... of 20 to 52 microM\" AND THE MIDPOINT IS 36. That constant BELONGS TO GEMFIBROZIL GLUCURONIDE, NOT GEMFIBROZIL — the parent only number in that paper is a different one against a different enzyme — while the solver applies it against gemfibrozil own plasma concentrations. And it DOES DOUBLE DUTY as both an affinity in one entry and an inhibitor concentration in the five derivations, one source number in two fields, at a value that is not a gemfibrozil plasma concentration on any reading. THE SIXTH BREAKS EVEN THAT SCHEME: it should be 4.93 under the same formula, and \"7.0-fold\" appears verbatim at this record own dose — AN EXPOSURE FOLD-RATIO STORED AS AN AFFINITY IN MICROMOLAR. All seven are deleted; THE VERBATIM FOLD-CHANGES SURVIVE IN THE NOTES AND ARE THE HONEST QUANTITY. Separately, THE SIMVASTATIN MECHANISM IS WRONG: simvastatin is not a substrate of the enzyme named, and a paper not carried here concludes \"the mechanism of the pharmacokinetic interaction is probably inhibition of non-CYP3A4-mediated metabolism of simvastatin acid\". EVERY OTHER VERBATIM QUOTE IN THOSE NOTES VERIFIES, and I WAS WRONG TO SUSPECT the dose-response attribution, which is exactly right. On the absorption: an earlier pass declined to author a rate because the observed peak sits above the ceiling this half-life allows, WHICH WAS CORRECT ARITHMETIC AND THE WRONG CONCLUSION — the margin is under two percent against a spread six times larger, another study peak fits underneath, and the drug has no depot formulation. THAT IS A LAG, NOT AN IMPOSSIBILITY, and leaving the field empty rendered the peak at 1.44 h, wrong in exactly the direction the earlier pass was trying to avoid."
+    "notes": "ka 1.0 REMOVED as an R6 stored default, and the reason is structural rather than a missing citation. PMID:2381138 states a peak TIME, not a rate: \"maximal plasma levels of the parent drug were 46.1 +/- 15.8 micrograms/ml, attained after 2.2 +/- 1.1 h\". A single Tmax gives ONE equation for TWO unknowns when a lag is also authored, and this row pairs ka with lag_hr 0.75: at t1/2 1.5 h and ka 1.0 the inversion returns 1.44 h, plus the 0.75 lag reproduces the verbatim 2.2 h. So the LAG was solved for and ka was left at the default to make the system determinate — an unidentifiable parameter presented as sourced. Removal is numerically a no-op. PK: THE PHARMACOKINETICS ARE FINE; THE INTERACTION BLOCK IS ALGEBRA ON A MISTYPED CONSTANT. I VERIFIED THE ARITHMETIC MYSELF: five of six stored affinities are EXACTLY 35 divided by one less than that entry own exposure fold-ratio, to two decimals — cerivastatin, montelukast, pioglitazone, rosiglitazone and loperamide. AND THE CONSTANT 35 IS WRONG THREE SEPARATE WAYS. It is called the midpoint of a verbatim \"K(I) ... of 20 to 52 microM\" AND THE MIDPOINT IS 36. That constant BELONGS TO GEMFIBROZIL GLUCURONIDE, NOT GEMFIBROZIL — the parent only number in that paper is a different one against a different enzyme — while the solver applies it against gemfibrozil own plasma concentrations. And it DOES DOUBLE DUTY as both an affinity in one entry and an inhibitor concentration in the five derivations, one source number in two fields, at a value that is not a gemfibrozil plasma concentration on any reading. THE SIXTH BREAKS EVEN THAT SCHEME: it should be 4.93 under the same formula, and \"7.0-fold\" appears verbatim at this record own dose — AN EXPOSURE FOLD-RATIO STORED AS AN AFFINITY IN MICROMOLAR. All seven are deleted; THE VERBATIM FOLD-CHANGES SURVIVE IN THE NOTES AND ARE THE HONEST QUANTITY. Separately, THE SIMVASTATIN MECHANISM IS WRONG: simvastatin is not a substrate of the enzyme named, and a paper not carried here concludes \"the mechanism of the pharmacokinetic interaction is probably inhibition of non-CYP3A4-mediated metabolism of simvastatin acid\". EVERY OTHER VERBATIM QUOTE IN THOSE NOTES VERIFIES, and I WAS WRONG TO SUSPECT the dose-response attribution, which is exactly right. On the absorption: an earlier pass declined to author a rate because the observed peak sits above the ceiling this half-life allows, WHICH WAS CORRECT ARITHMETIC AND THE WRONG CONCLUSION — the margin is under two percent against a spread six times larger, another study peak fits underneath, and the drug has no depot formulation. THAT IS A LAG, NOT AN IMPOSSIBILITY, and leaving the field empty rendered the peak at 1.44 h, wrong in exactly the direction the earlier pass was trying to avoid."
   },
   {
     "slug": "genistein",
@@ -20898,7 +20895,6 @@
       "PO": {
         "ka_hr": 1.5,
         "V_L": 25,
-        "F": 0.9,
         "source_pmid": "PMID:8212419"
       }
     },
@@ -20935,7 +20931,8 @@
       "cardiovascular",
       "integumentary"
     ],
-    "recon3d_metabolite_id": "gly"
+    "recon3d_metabolite_id": "gly",
+    "notes": "F 0.9 REMOVED as an R6 stored default, and the cited design forbids the value outright: PMID:8212419 administered glycine by INTRAVENOUS INFUSION, so it cannot state an oral bioavailability. Its headline finding is that glycine kinetics are non-linear — \"The apparent half-life of glycine varied 10-fold (range 26-245 min) and increased in direct proportion to the amount of glycine given\" — which a dose-independent F contradicts rather than rests on. Numerically a no-op against the 0.9 default."
   },
   {
     "slug": "glycolic-acid",
@@ -28804,7 +28801,6 @@
     },
     "pk": {
       "PO": {
-        "F": 0.9,
         "V_L": 21,
         "source_pmid": "PMID:31058159"
       }
@@ -28825,7 +28821,7 @@
       "digestive"
     ],
     "mw_g_mol": 172.27,
-    "notes": "PK: THE STORED ABSORPTION RATE WAS THE SOLVER DEFAULT WEARING A CITATION. A ka of 1.0/h is exactly what resolvePk substitutes when the field is ABSENT, and no source on this record states one. Removing it is NUMERICALLY A NO-OP — the resolver supplies the identical number — so no curve moves; what changes is that the record stops asserting an absorption rate it never measured. This is the same shape already found on a volume of 35 L, which is likewise the default at the seventy-kilogram reference. THE WIDER DEBT IS LEFT ALONE ON PURPOSE: twelve values account for 152 of the 276 authored absorption rates, but the other eleven are NOT the default, so deleting those would move their curves rather than leave them, which is the error this audit spent a batch documenting."
+    "notes": "F 0.9 REMOVED as an R6 stored default. PMID:31058159 reports plasma ketone and fatty-acid responses to 20 mL oil doses and states no bioavailability, volume or half-life. This record already narrates removing a defaulted ka of 1.0 from the same route object; the defaulted F beside it was the identical defect one field over. Numerically a no-op. PK: THE STORED ABSORPTION RATE WAS THE SOLVER DEFAULT WEARING A CITATION. A ka of 1.0/h is exactly what resolvePk substitutes when the field is ABSENT, and no source on this record states one. Removing it is NUMERICALLY A NO-OP — the resolver supplies the identical number — so no curve moves; what changes is that the record stops asserting an absorption rate it never measured. This is the same shape already found on a volume of 35 L, which is likewise the default at the seventy-kilogram reference. THE WIDER DEBT IS LEFT ALONE ON PURPOSE: twelve values account for 152 of the 276 authored absorption rates, but the other eleven are NOT the default, so deleting those would move their curves rather than leave them, which is the error this audit spent a batch documenting."
   },
   {
     "slug": "mct-c6",
@@ -29149,7 +29145,6 @@
       "PO": {
         "ka_hr": 2.64,
         "V_L": 1000,
-        "F": 0.9,
         "source_pmid": "PMID:2943134"
       },
       "IM": {
@@ -29164,7 +29159,8 @@
       "PMID:2943134",
       "PMID:1388093",
       "PMID:2971841"
-    ]
+    ],
+    "notes": "F 0.9 REMOVED as an R6 stored default. PMID:2943134 compares SIX ORAL TABLET FORMULATIONS against each other with no IV arm: it is titled a bioavailability evaluation and is entirely RELATIVE bioavailability, which is a different quantity. No 90% appears in it. Numerically a no-op against the 0.9 default."
   },
   {
     "slug": "melanotan-ii",
@@ -31278,7 +31274,6 @@
     },
     "pk": {
       "PO": {
-        "F": 0.9,
         "V_L": 210,
         "source_pmid": "PMID:34826114",
         "ka_hr": 1.21
@@ -31293,7 +31288,7 @@
       "cardiovascular"
     ],
     "mw_g_mol": 135.21,
-    "notes": "ABSORPTION-RATE PROVENANCE: this value was derived by inverting the one-compartment peak-time relation in 2026-05-26-wave25-ka-from-tmax.ts, whose header claimed every peak time was verbatim from a primary human study. ALL FORTY-FOUR ENTRIES HAVE NOW BEEN CHECKED AND TWENTY-EIGHT FAIL. This one fails because the midpoint of a review range generic to all immediate-release amphetamine, not to this product. It is DISCLOSED RATHER THAN DELETED: a midpoint of a narrow range is usually inside the true spread, and removing it would fall back on the solver default of 1.0 per hour, which is worse for most of these records."
+    "notes": "F 0.9 REMOVED as an R6 stored default. PMID:34826114 lists its parameters explicitly — Cmax, tmax, AUC, t1/2, CL/F, apparent Vss — and states no bioavailability; being oral multiple-dose only it cannot. Separately worth knowing: that study is 24 CHILDREN aged 4-5, so it also does not support this record adult 70 kg-referenced volume. Numerically a no-op. ABSORPTION-RATE PROVENANCE: this value was derived by inverting the one-compartment peak-time relation in 2026-05-26-wave25-ka-from-tmax.ts, whose header claimed every peak time was verbatim from a primary human study. ALL FORTY-FOUR ENTRIES HAVE NOW BEEN CHECKED AND TWENTY-EIGHT FAIL. This one fails because the midpoint of a review range generic to all immediate-release amphetamine, not to this product. It is DISCLOSED RATHER THAN DELETED: a midpoint of a narrow range is usually inside the true spread, and removing it would fall back on the solver default of 1.0 per hour, which is worse for most of these records."
   },
   {
     "slug": "mixed-tocopherols",
@@ -31431,7 +31426,7 @@
       "digestive"
     ],
     "mw_g_mol": 268.74,
-    "notes": "PK: A THREE-STATE RECORD ASSEMBLED FROM ONE PAPER. Its cited review contains no numeral at all, and every stored value traces instead to a study that was never cited: \"clearance, 39.4 (15%) and 29.1 (12%) L/hr; elimination half-life, 1.60 (15%) and 2.00 (18%) hours; and volume of distribution at steady state, 84.3 (11%) and 80.7 (15%) L. The absolute oral bioavailability increased from 0.56 after the first oral dose to 0.86 and 0.90\". THE VOLUME WAS THE DRUG-NAIVE FIRST INFUSION, THE HALF-LIFE WAS AFTER FIFTEEN DAYS OF DOSING, AND THE BIOAVAILABILITY WAS NEITHER. All three now come from the steady state, which is the clinically relevant one for a drug taken daily. MOCLOBEMIDE IS NOT A CARBAMAZEPINE AND MUST NOT BE STRIPPED: its ELIMINATION parameter moves only 1.25-fold on repeated dosing, squarely in the band that kept efavirenz and rifabutin, even though total exposure moves about threefold — \"Mean accumulation factors for moclobemide during the first week were 1.85 for Cmax and 3.0 for AUC ... higher than predicted from single-dose characteristics\". THAT IS REPRESENTABLE HERE BECAUSE THE SOLVER HAS SEPARATE BIOAVAILABILITY AND ELIMINATION SLOTS, where carbamazepine had to put the whole effect on one. The record fails the peak-to-exposure floor by 1.77x and preserves exposure; the previous mix landed the peak within 17% only because a steady-state bioavailability was being applied to a single dose."
+    "notes": "F 0.9 CONFIRMED verbatim but read the population: PMID:3665338 states \"The absolute oral bioavailability increased from 0.56 after the first oral dose to 0.86 and 0.90 after the first and second weeks of administration, respectively\". 0.90 is the SECOND-WEEK STEADY-STATE value; single-dose absolute F is 0.56, a 1.6-fold fork inside one sentence. Anyone rendering a single dose from this row is using a chronic-dosing F. PK: A THREE-STATE RECORD ASSEMBLED FROM ONE PAPER. Its cited review contains no numeral at all, and every stored value traces instead to a study that was never cited: \"clearance, 39.4 (15%) and 29.1 (12%) L/hr; elimination half-life, 1.60 (15%) and 2.00 (18%) hours; and volume of distribution at steady state, 84.3 (11%) and 80.7 (15%) L. The absolute oral bioavailability increased from 0.56 after the first oral dose to 0.86 and 0.90\". THE VOLUME WAS THE DRUG-NAIVE FIRST INFUSION, THE HALF-LIFE WAS AFTER FIFTEEN DAYS OF DOSING, AND THE BIOAVAILABILITY WAS NEITHER. All three now come from the steady state, which is the clinically relevant one for a drug taken daily. MOCLOBEMIDE IS NOT A CARBAMAZEPINE AND MUST NOT BE STRIPPED: its ELIMINATION parameter moves only 1.25-fold on repeated dosing, squarely in the band that kept efavirenz and rifabutin, even though total exposure moves about threefold — \"Mean accumulation factors for moclobemide during the first week were 1.85 for Cmax and 3.0 for AUC ... higher than predicted from single-dose characteristics\". THAT IS REPRESENTABLE HERE BECAUSE THE SOLVER HAS SEPARATE BIOAVAILABILITY AND ELIMINATION SLOTS, where carbamazepine had to put the whole effect on one. The record fails the peak-to-exposure floor by 1.77x and preserves exposure; the previous mix landed the peak within 17% only because a steady-state bioavailability was being applied to a single dose."
   },
   {
     "slug": "mod-grf-1-29",
@@ -34540,7 +34535,7 @@
     "pk": {
       "SC": {
         "F": 0.62,
-        "V_L": 5.6,
+        "V_L": 5.9,
         "source_pmid": "PMID:17096680",
         "ka_hr": 0.01753
       }
@@ -34570,7 +34565,7 @@
         "action": "neutralizer"
       }
     ],
-    "notes": "PK: ABSORPTION RATE AUTHORED FROM THE XOLAIR LABEL. This row carried no ka, so the solver substituted 1.0/h and put the peak at 6.8 h. Source, verbatim from the current FDA label (DailyMed setid 7f6a2191-adfb-48b9-9bfa-0d9920479f0d): \"omalizumab was absorbed slowly, reaching peak serum concentrations after an average of 7–8 days.\" RANGE: the shorter endpoint is taken. PUBMED HAS THIS NOWHERE — 27 targeted searches across two passes returned four usable peak times for this whole class, because Tmax is a label figure that rarely reaches an abstract. A regulatory label is already a first-class source in this schema. With the stored half-life fixing ke, Tmax solves uniquely for ka by inverting the model own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 0.01753/h, which reproduces 168 h on substitution. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
+    "notes": "V_L CORRECTED 5.6 -> 5.9 L. The stored 5.6 was the protein default (0.08 L/kg x 70 kg) wearing a citation that states a different figure: PMID:17096680 verbatim, \"the volume of distribution for omalizumab and IgE 5900 +/- 107 ml, and that for the complex 3630 +/- 223 ml\". Two caveats carried with it: this is a population-model volume for the drug-ligand compartment, and the 3.63 L in the same sentence belongs to the COMPLEX and must not be mistaken for it; and the paper adds \"Clearance and volume of distribution for omalizumab varied with bodyweight\", so a 70 kg-referenced scalar is an approximation the paper does not itself endorse. PK: ABSORPTION RATE AUTHORED FROM THE XOLAIR LABEL. This row carried no ka, so the solver substituted 1.0/h and put the peak at 6.8 h. Source, verbatim from the current FDA label (DailyMed setid 7f6a2191-adfb-48b9-9bfa-0d9920479f0d): \"omalizumab was absorbed slowly, reaching peak serum concentrations after an average of 7–8 days.\" RANGE: the shorter endpoint is taken. PUBMED HAS THIS NOWHERE — 27 targeted searches across two passes returned four usable peak times for this whole class, because Tmax is a label figure that rarely reaches an abstract. A regulatory label is already a first-class source in this schema. With the stored half-life fixing ke, Tmax solves uniquely for ka by inverting the model own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 0.01753/h, which reproduces 168 h on substitution. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
   },
   {
     "slug": "epa-dha",
@@ -46931,7 +46926,6 @@
     },
     "pk": {
       "PO": {
-        "F": 0.9,
         "V_L": 56,
         "source_pmid": "PMID:3979003"
       }
@@ -46952,7 +46946,7 @@
       "nervous",
       "cardiovascular"
     ],
-    "notes": "PK: THE STORED ABSORPTION RATE WAS THE SOLVER DEFAULT WEARING A CITATION. A ka of 1.0/h is exactly what resolvePk substitutes when the field is ABSENT, and no source on this record states one. Removing it is NUMERICALLY A NO-OP — the resolver supplies the identical number — so no curve moves; what changes is that the record stops asserting an absorption rate it never measured. This is the same shape already found on a volume of 35 L, which is likewise the default at the seventy-kilogram reference. THE WIDER DEBT IS LEFT ALONE ON PURPOSE: twelve values account for 152 of the 276 authored absorption rates, but the other eleven are NOT the default, so deleting those would move their curves rather than leave them, which is the error this audit spent a batch documenting."
+    "notes": "F 0.9 REMOVED as an R6 stored default, and the one F-shaped figure in the citation is a DIFFERENT QUANTITY: PMID:3979003 states \"Relative bioavailability of theobromine in chocolate was 80% that of theobromine in solution\" — relative, chocolate-versus-solution, and 80 rather than 90. Read as an absolute F it would not be 0.9 either. Numerically a no-op against the 0.9 default. PK: THE STORED ABSORPTION RATE WAS THE SOLVER DEFAULT WEARING A CITATION. A ka of 1.0/h is exactly what resolvePk substitutes when the field is ABSENT, and no source on this record states one. Removing it is NUMERICALLY A NO-OP — the resolver supplies the identical number — so no curve moves; what changes is that the record stops asserting an absorption rate it never measured. This is the same shape already found on a volume of 35 L, which is likewise the default at the seventy-kilogram reference. THE WIDER DEBT IS LEFT ALONE ON PURPOSE: twelve values account for 152 of the 276 authored absorption rates, but the other eleven are NOT the default, so deleting those would move their curves rather than leave them, which is the error this audit spent a batch documenting."
   },
   {
     "slug": "theophylline",
@@ -52758,7 +52752,7 @@
         "action": "agonist"
       }
     ],
-    "notes": "PK from FDA prescribing information (DailyMed setid af559917-802b-486c-9f7b-b770115acac8): absolute bioavailability >90% (F 0.9), steady-state Vd 567 L, terminal t½ ~1 day (24 h), Tmax 2–3 h, 60–65% excreted unchanged in urine. ka_hr 1.5 derived from Tmax ~2.5 h (ke from t½ 24 h). PK: IT STAYS A LABEL ROW, AND THE SEARCH IS LOGGED RATHER THAN PAPERED OVER. A systematic chase — including the development code name and the sponsor pharmacokinetics authors — found NO PubMed abstract stating an absolute bioavailability, a volume of distribution or a terminal half-life for this drug. The label \">90%\" is an INEQUALITY BOUND stored as a point estimate, which is a confirmed collision shape, and that is now said in the row own provenance text. ka 1.5 is a back-derivation that does not even reproduce its own note claim, implying 2.69 h against the 2.5 h asserted; the one verbatim Tmax available is a median of 2 h. A MATRIX FLAG IS RECORDED: \"a mean blood-to-plasma concentration ratio of 1.9 indicated uptake of prucalopride into blood cells\", so a plasma-referenced volume is not interchangeable with whole-blood quantities.",
+    "notes": "F 0.9 RETAINED but it is not a measurement: the label states \"The absolute oral bioavailability is > 90%\", a lower BOUND whose boundary the stored value sits exactly on. F 1.0 is as consistent with that label as 0.9. Kept because the bound is real and the direction is known, and flagged here so no later pass reads it as measured. PK from FDA prescribing information (DailyMed setid af559917-802b-486c-9f7b-b770115acac8): absolute bioavailability >90% (F 0.9), steady-state Vd 567 L, terminal t½ ~1 day (24 h), Tmax 2–3 h, 60–65% excreted unchanged in urine. ka_hr 1.5 derived from Tmax ~2.5 h (ke from t½ 24 h). PK: IT STAYS A LABEL ROW, AND THE SEARCH IS LOGGED RATHER THAN PAPERED OVER. A systematic chase — including the development code name and the sponsor pharmacokinetics authors — found NO PubMed abstract stating an absolute bioavailability, a volume of distribution or a terminal half-life for this drug. The label \">90%\" is an INEQUALITY BOUND stored as a point estimate, which is a confirmed collision shape, and that is now said in the row own provenance text. ka 1.5 is a back-derivation that does not even reproduce its own note claim, implying 2.69 h against the 2.5 h asserted; the one verbatim Tmax available is a median of 2 h. A MATRIX FLAG IS RECORDED: \"a mean blood-to-plasma concentration ratio of 1.9 indicated uptake of prucalopride into blood cells\", so a plasma-referenced volume is not interchangeable with whole-blood quantities.",
     "refs": [
       "PMID:22943932",
       "PMID:27614912",

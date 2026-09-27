@@ -6177,3 +6177,67 @@ figure the record cites. It was not pinned, and it no longer fires anyway.
 | **`agomelatine`** | `pk.PO.source_label` | Never approved in the US, so DailyMed has nothing. The citation is the **EMA SmPC for Valdoxan**, which has no set id. | The SmPC's own revision date, from the EMA product page. An ISO date satisfies the rule and is the right handle for an EMA document. |
 | **`daclatasvir`** | `pk.PO.source_label` | Daklinza was **withdrawn from the US market**, so no current SPL exists. DailyMed returns nothing for the brand. | An archived SPL version, or the EMA SmPC. |
 | **`tacrine`** | `pk.PO.source_label` | Cognex was **withdrawn in 2013**; DailyMed returns nothing. The record already discloses the withdrawal. | An archived label. Low value — the record exists as a historical reference, and its note already flags that the V 349 L is IV-derived rather than label-derived. |
+
+## 2026-09-27 — stored values equal to a consumer default (R6), 16 route rows
+
+Every one of the sixteen wore a `source_pmid`. Sixteen abstracts and two labels fetched this
+session. **No curve moved anywhere except omalizumab**: a stored figure that equals the default is
+numerically identical to its absence, so the whole batch is a provenance repair, and the
+`pk.defaulted-*` counts rising is the audit working rather than coverage regressing.
+
+### Ten silent citations — value removed
+
+The cited document states nothing about the field at all, and in five of the ten the study design
+forbids it outright.
+
+| Compound | Field | What the citation actually states |
+| --- | --- | --- |
+| `adalimumab` | `pk.SC.V_L` 5.6 | PMID:27965661 reports AUC and Cmax only. The Humira label does give a Vss but as a **range, from an IV arm** — 4.7 to 6.0 L, containing 5.6 without stating it. |
+| `arachidonic-acid` | `pk.PO.F` 0.9 | PMID:22188761 is a supplementation trial measuring plasma phospholipid ARA and prostanoids. **A dietary fatty acid has no IV arm**, so absolute F is unobtainable in principle. |
+| `dextroamphetamine` | `pk.PO.F` 0.9 | PMID:28936175 compares two **oral** arms. No absolute F is derivable from oral-versus-oral. |
+| `gla` | `pk.PO.F` 0.9 | PMID:9707349 reports serum time courses and a morning/evening tmax difference. Oral-only. |
+| `glycine` | `pk.PO.F` 0.9 | PMID:8212419 dosed **by intravenous infusion**, so it cannot state an oral F — and its headline finding is that glycine kinetics are *non-linear*, which a dose-independent F contradicts. |
+| `mct-c10` | `pk.PO.F` 0.9 | PMID:31058159 reports plasma ketone responses to 20 mL oil. This record already narrated removing a defaulted `ka` from the same route object; the defaulted `F` beside it was the same defect one field over. |
+| `medroxyprogesterone` | `pk.PO.F` 0.9 | PMID:2943134 compares **six oral tablet formulations against each other**. Entirely *relative* bioavailability, a different quantity. |
+| `mixed-amphetamine-salts` | `pk.PO.F` 0.9 | PMID:34826114 lists its parameters explicitly (Cmax, tmax, AUC, t½, CL/F, Vss/F) and no F. Separately: **its subjects are 24 children aged 4–5**, so it does not support the record's adult 70 kg volume either. |
+| `theobromine` | `pk.PO.F` 0.9 | PMID:3979003 states *"Relative bioavailability of theobromine in chocolate was 80% that of theobromine in solution"* — relative, and 80 not 90. |
+| `gemfibrozil` | `pk.PO.ka_hr` 1.0 | See below: the defect is structural, not a missing sentence. |
+
+### One wrong value — omalizumab `pk.SC.V_L` 5.6 → **5.9 L**
+
+The only stored number in this batch that was numerically wrong. PMID:17096680 verbatim: *"the
+volume of distribution for omalizumab and IgE 5900 +/- 107 ml, and that for the complex 3630 +/- 223
+ml"*. The 5.6 was the ≥10 kDa protein default (0.08 L/kg × 70 kg) sitting beside a citation that
+states 5.9. Two caveats now ride on the record: the 3.63 L in the same sentence belongs to the
+**complex** and must not be mistaken for the drug, and the paper adds that volume *"varied with
+bodyweight"*, so a 70 kg scalar is an approximation it does not endorse.
+
+### One underdetermined parameter — gemfibrozil `ka` 1.0
+
+The most interesting finding of the batch, and a shape worth naming. PMID:2381138 states a peak
+**time**, not a rate. A single Tmax is **one equation in two unknowns** when a lag is also authored,
+and this row pairs `ka` with `lag_hr` 0.75: at t½ 1.5 h and ka 1.0 the inversion returns 1.44 h,
+and 1.44 + 0.75 reproduces the verbatim 2.2 h. So the **lag was solved for and `ka` was pinned at
+the default to make the system determinate** — an unidentifiable parameter presented as sourced.
+Removal is a no-op and the lag survives, which is the identifiable half.
+
+### Four confirmed — kept, two with a disclosure added
+
+- `bisoprolol`, `clonazepam`, `pregabalin`: F 0.9 is verbatim in the cited document for the named
+  compound. Left exactly as they were. R6 is a *suspicion* rule, not a deletion rule.
+- `moclobemide`: F 0.9 is verbatim, but **read the population**. The cited sentence forks inside
+  itself: *"The absolute oral bioavailability increased from 0.56 after the first oral dose to 0.86
+  and 0.90 after the first and second weeks of administration, respectively"*. 0.90 is the
+  **second-week steady-state** figure; single-dose absolute F is 0.56. Anyone rendering a single
+  dose from this row is using a chronic-dosing F — a 1.6-fold error, now disclosed on the record.
+  R9 in a shape R9 does not name, because the collision is inside one sentence.
+- `prucalopride`: the label states *"The absolute oral bioavailability is > 90%"* — a lower **bound**
+  whose boundary the stored value sits exactly on. F 1.0 is as consistent with that label as 0.9.
+  Kept, because the bound is real and the direction is known, and flagged so no later pass reads it
+  as measured.
+
+### Cross-cutting finding
+
+**Five of the sixteen records carried no `notes` field at all.** A value can be silently defaulted
+and then acquire a citation precisely where there is no prose for a reader to check it against, so
+absence of a note is itself a weak signal for this rule. All five now carry one.
