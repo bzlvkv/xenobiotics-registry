@@ -4807,10 +4807,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 1.4,
+        "ka_hr": 4.388,
         "V_L": 76,
         "F": 0.79,
-        "source_label": "FDA label: Olumiant (baricitinib) prescribing information. DailyMed set id 866e9f35-9035-4581-a4b1-75a621ab55cf, effective 2026-06-30."
+        "source_label": "FDA label: Olumiant (baricitinib) prescribing information. DailyMed set id 866e9f35-9035-4581-a4b1-75a621ab55cf, effective 2026-06-30.",
+        "note": "ABSORPTION RATE DERIVED FROM THE LABEL'S OWN PEAK TIME, replacing 1.4/h — one of this catalog's shared round rates, which nothing stated. Olumiant label (DailyMed set id 866e9f35-9035-4581-a4b1-75a621ab55cf, effective 2026-06-30) verbatim: \"Following oral administration of OLUMIANT, peak plasma concentrations are reached approximately at 1 hour\". With the stored half-life of 12 h fixing ke at 0.0578/h, ln(ka/ke)/(ka-ke) = Tmax inverts to ka 4.388/h — ARITHMETIC, NOT AN ESTIMATE — reproducing 1.00 h on substitution. Hedged with APPROXIMATELY. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "effect_compartment": {
@@ -10574,10 +10575,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 0.7,
+        "ka_hr": 0.3961,
         "V_L": 99.5,
         "F": 1,
-        "source_label": "FDA label: Tybost (cobicistat) 150 mg PO qd exposure figures. DailyMed set id 3784c35c-e87f-410c-900b-8fd6313c6010, effective 2026-02-10."
+        "source_label": "FDA label: Tybost (cobicistat) 150 mg PO qd exposure figures. DailyMed set id 3784c35c-e87f-410c-900b-8fd6313c6010, effective 2026-02-10.",
+        "note": "ABSORPTION RATE DERIVED FROM THE LABEL'S OWN PEAK TIME, replacing 0.7/h — one of this catalog's shared round rates, which nothing stated. Tybost label (DailyMed set id 3784c35c-e87f-410c-900b-8fd6313c6010, effective 2026-02-10) verbatim: \"median cobicistat peak plasma concentrations were observed approximately 3.5 hours postdose\". With the stored half-life of 3.5 h fixing ke at 0.1980/h, ln(ka/ke)/(ka-ke) = Tmax inverts to ka 0.3961/h — ARITHMETIC, NOT AN ESTIMATE — reproducing 3.50 h on substitution. CAVEAT ON THE CONDITIONS: that trial dosed Tybost WITH FOOD and COADMINISTERED WITH DARUNAVIR, so the peak is not a fasted single-agent one. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "half_life_hr": {
@@ -17291,10 +17293,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 1.5,
+        "ka_hr": 2.001,
         "V_L": 581,
         "F": 1,
-        "source_label": "FDA label: Afinitor (everolimus) — 10 mg PO qd: Tmax 1–2 h, t½ 16–19 h, CL/F 23 L/h, V/F 581 L. DailyMed set id 2150f73a-179b-4afc-b8ce-67c85cc72f04, effective 2026-06-01."
+        "source_label": "FDA label: Afinitor (everolimus) — 10 mg PO qd: Tmax 1–2 h, t½ 16–19 h, CL/F 23 L/h, V/F 581 L. DailyMed set id 2150f73a-179b-4afc-b8ce-67c85cc72f04, effective 2026-06-01.",
+        "note": "ABSORPTION RATE DERIVED FROM THE LABEL'S OWN PEAK TIME, replacing 1.5/h — one of this catalog's shared round rates, which nothing stated. Afinitor label (DailyMed set id 2150f73a-179b-4afc-b8ce-67c85cc72f04) verbatim: \"peak everolimus concentrations are reached 1 to 2 hours after administration of oral doses ranging from 5 mg to 70 mg\". With the stored half-life of 17.5 h fixing ke at 0.0396/h, ln(ka/ke)/(ka-ke) = Tmax inverts to ka 2.001/h — ARITHMETIC, NOT AN ESTIMATE — reproducing 2.00 h on substitution. A RANGE; the 2 h endpoint is taken. THE TMAX WAS ALREADY WRITTEN ON THIS ROW’s source_label and still was not used to derive the rate. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "half_life_hr": {
@@ -22842,10 +22845,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 0.8,
+        "ka_hr": 1.23,
         "V_L": 122,
         "F": 0.029,
-        "source_label": "FDA label: Imbruvica (ibrutinib) 560 mg PO qd. DailyMed set id 0dfd0279-ff17-4ea9-89be-9803c71bab44, effective 2025-10-21."
+        "source_label": "FDA label: Imbruvica (ibrutinib) 560 mg PO qd. DailyMed set id 0dfd0279-ff17-4ea9-89be-9803c71bab44, effective 2025-10-21.",
+        "note": "ABSORPTION RATE DERIVED FROM THE LABEL'S OWN PEAK TIME, replacing 0.8/h — one of this catalog's shared round rates, which nothing stated. Imbruvica label (DailyMed set id 0dfd0279-ff17-4ea9-89be-9803c71bab44, effective 2025-10-21) verbatim: \"Ibrutinib is absorbed after oral administration with a median T max of 1 hour to 2 hours\". With the stored half-life of 5 h fixing ke at 0.1386/h, ln(ka/ke)/(ka-ke) = Tmax inverts to ka 1.23/h — ARITHMETIC, NOT AN ESTIMATE — reproducing 2.00 h on substitution. A RANGE on a median; the 2 h endpoint is taken. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "half_life_hr": {
@@ -39692,11 +39696,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 3,
         "V_L": 25,
         "F": 0.52,
         "lag_hr": 2.6,
-        "source_label": "Aciphex (rabeprazole) label — absolute F 52% vs intravenous; t half 1-2 h. The cited relative-bioavailability study of paediatric sprinkle granules supports none of the stored values. DailyMed set id 1eb38279-0237-4967-be7a-c53a826c1138, effective 2026-01-27."
+        "source_label": "Aciphex (rabeprazole) label — absolute F 52% vs intravenous; t half 1-2 h. The cited relative-bioavailability study of paediatric sprinkle granules supports none of the stored values. DailyMed set id 1eb38279-0237-4967-be7a-c53a826c1138, effective 2026-01-27.",
+        "note": "ABSORPTION RATE REMOVED, AND THE LABEL'S PEAK TIME IS UNREACHABLE — which confirms what this row already suspected. The stored 3/h was one of this catalog's shared round rates with no source. Aciphex label (DailyMed set id 1eb38279-0237-4967-be7a-c53a826c1138) verbatim: \"peak plasma concentrations (C max ) of rabeprazole occur over a range of 2 to 5 hours (T max )\". At the stored half-life of 1 h, ke is 0.6931/h and the peak time of a one-compartment model approaches a ceiling of 1/ke = 1.44 h as absorption slows, so even the 2 h endpoint of that range is OUT OF REACH at any rate. A delayed-release proton-pump inhibitor is release-limited and the model has no lag authored, so the inconsistency is structural. The resolver supplies 1.0/h."
       }
     },
     "notes": "PK: THE CLEARANCE IS RIGHT TO 0.3% AND NO ABSORPTION RATE CAN REPRODUCE THE PEAK. Against a verbatim \"the AUC(0-infinity) were 301.12\" at 10 mg this record predicts 300.1 — so the volume, bioavailability and half-life are COLLECTIVELY CORRECT and must not be moved on a failed verbatim check. But the Cmax-over-AUC identity is decisive in the other direction: the observed ratio is 0.656 per hour while the model ceiling at the published peak times is 52, 37 and 26 ng/mL against an observed 197. NO ka EXISTS THAT PRODUCES IT. Solving the identity gives an effective absorption window of five minutes once the enteric coat dissolves, which is exactly what an enteric-coated delayed-release tablet does — so the missing parameter is a LAG, not a rate, and the solver supports one. THE EMPTY EFFECT COMPARTMENT IS CORRECT AND THE ARGUMENT IS THE STRONGEST FORM YET FOUND: acid suppression builds over three to five days of once-daily dosing while the plasma profile is IDENTICAL on day one and day five, and A LINEAR FILTER HAS UNITY STEADY-STATE GAIN — its output tracks exposure per interval, which does not change — SO NO keo OF ANY MAGNITUDE PRODUCES DAY-OVER-DAY ACCUMULATION FROM A NON-ACCUMULATING CURVE. Recovery is set by proton-pump resynthesis, independent of concentration. The stored bioavailability is the label figure and correct; the cited paper is a RELATIVE study of granules in soft food."
@@ -40091,10 +40095,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 1.5,
+        "ka_hr": 2.683,
         "V_L": 87,
         "F": 0.36,
-        "source_label": "FDA label: Azilect (rasagiline) — 1 mg PO qd at steady state: Tmax 1 h, t½ 3 h, F 36%, Vss 87 L. DailyMed set id a40d0e73-3f9f-4b01-979d-402c9cdaeb60, effective 2020-06-30."
+        "source_label": "FDA label: Azilect (rasagiline) — 1 mg PO qd at steady state: Tmax 1 h, t½ 3 h, F 36%, Vss 87 L. DailyMed set id a40d0e73-3f9f-4b01-979d-402c9cdaeb60, effective 2020-06-30.",
+        "note": "ABSORPTION RATE DERIVED FROM THE LABEL'S OWN PEAK TIME, replacing 1.5/h — one of this catalog's shared round rates, which nothing stated. Azilect label (DailyMed set id a40d0e73-3f9f-4b01-979d-402c9cdaeb60) verbatim: \"Rasagiline is rapidly absorbed, reaching peak plasma concentration (Cmax) in approximately 1 hour\". With the stored half-life of 3 h fixing ke at 0.2310/h, ln(ka/ke)/(ka-ke) = Tmax inverts to ka 2.683/h — ARITHMETIC, NOT AN ESTIMATE — reproducing 1.00 h on substitution. THE TMAX WAS ALREADY WRITTEN ON THIS ROW’s source_label and still was not used to derive the rate. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "half_life_hr": {
@@ -45078,10 +45083,11 @@
     ],
     "pk": {
       "PO": {
-        "ka_hr": 0.3,
+        "ka_hr": 0.2754,
         "V_L": 7.5,
         "F": 0.15,
-        "source_label": "Azulfidine (sulfasalazine) label — Vdss 7.5 +/- 1.6 L and plasma half-life 7.6 +/- 3.4 h, both INTRAVENOUS. F 0.15 is the label upper bound (\"less than 15%\") stored as a point value; no primary publishes a point estimate. DailyMed set id b9ef541a-93c8-4428-ba45-398aa0b327d1, effective 2026-05-29."
+        "source_label": "Azulfidine (sulfasalazine) label — Vdss 7.5 +/- 1.6 L and plasma half-life 7.6 +/- 3.4 h, both INTRAVENOUS. F 0.15 is the label upper bound (\"less than 15%\") stored as a point value; no primary publishes a point estimate. DailyMed set id b9ef541a-93c8-4428-ba45-398aa0b327d1, effective 2026-05-29.",
+        "note": "ABSORPTION RATE DERIVED FROM THE LABEL'S OWN PEAK TIME, replacing 0.3/h — one of this catalog's shared round rates, which nothing stated. Azulfidine EN-tabs label (DailyMed set id b9ef541a-93c8-4428-ba45-398aa0b327d1) verbatim: \"the mean peak concentration (6 µg/mL) occurring at 6 hours\". With the stored half-life of 7.6 h fixing ke at 0.0912/h, ln(ka/ke)/(ka-ke) = Tmax inverts to ka 0.2754/h — ARITHMETIC, NOT AN ESTIMATE — reproducing 6.00 h on substitution. The same section gives 3 to 12 h as the spread and ~10 h for the sulfapyridine and 5-ASA metabolites, which are different analytes. This is a DELAYED-RELEASE enteric tablet, so a 6 h peak is release-limited rather than permeability-limited. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       }
     },
     "pk_analyte": "parent",

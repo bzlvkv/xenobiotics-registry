@@ -6403,3 +6403,35 @@ the 0.9 h half-life is very likely the parent's while the peak is a longer-lived
 In all four the ka is removed and the inconsistency written on the record. **The half-life is the
 more likely defect** — a peak at 4.6 h cannot belong to something cleared with a 0.9 h half-life —
 but re-sourcing a half-life is a different concern from this batch and is not done here.
+
+### Part 1b — the seven label-sourced rows of the same eleven groups
+
+Eight of the 121 rows cite a **label** rather than a PMID, so they fell outside the abstract sweep
+above. Labels state a peak time far more reliably than abstracts do, and **seven of the eight do**:
+
+| Compound | ka was | ka is | Label Tmax |
+| --- | --- | --- | --- |
+| `baricitinib` | 1.4 | **4.388** | *"reached approximately at 1 hour"* |
+| `rasagiline` | 1.5 | **2.683** | *"in approximately 1 hour"* |
+| `everolimus` | 1.5 | **2.001** | *"reached 1 to 2 hours"* |
+| `ibrutinib` | 0.8 | **1.23** | *"median T max of 1 hour to 2 hours"* |
+| `cobicistat` | 0.7 | **0.3961** | *"observed approximately 3.5 hours postdose"* |
+| `sulfasalazine` | 0.3 | **0.2754** | *"the mean peak concentration (6 µg/mL) occurring at 6 hours"* |
+
+**Two of these already had the Tmax written on the record and still carried a guessed rate.**
+`everolimus`'s `source_label` reads "Tmax 1–2 h, t½ 16–19 h, CL/F 23 L/h, V/F 581 L" and
+`rasagiline`'s reads "Tmax 1 h, t½ 3 h, F 36%, Vss 87 L" — the derivation was available without a
+single fetch. A number that is present but unused is a worse failure than one that is missing, and
+the lesson generalises: **read `source_label` before searching.**
+
+Caveats on the record: `cobicistat`'s 3.5 h comes from a trial dosed **with food and coadministered
+with darunavir**, not a fasted single agent; `sulfasalazine` is a **delayed-release enteric** tablet,
+so its 6 h peak is release-limited and the label's own 3–12 h spread and ~10 h metabolite peaks are
+different quantities.
+
+`rabeprazole` is the eighth-row exception and joins the unreachable four: its label gives *"a range
+of 2 to 5 hours (T max )"* while a 1 h half-life caps the model's peak at **1.44 h**. Even the
+nearest endpoint is out of reach, which confirms what that record's own prose already suspected
+("NO ka EXISTS THAT PRODUCES IT") and locates the defect: a delayed-release PPI is release-limited
+and this row authors no lag. `metolazone` is the one label with no peak time anywhere; it goes to
+part 2.
