@@ -7140,3 +7140,66 @@ missing is **which one to use for a sweep**.
 
 Also still outside the egress policy, confirmed by `connect_rejected`: `api.unpaywall.org`,
 `api.openalex.org`, `api.core.ac.uk`. NETWORK.md lists all three as needed; none is reachable.
+
+## 2026-09-27 — PK retro-verification: the method, and what the first screen found
+
+### The surface is 232 route blocks, not the 656 first quoted
+
+Of **797 cited route blocks**, **565 already have a quotation** reachable in the route note or the
+compound's `notes`. The unverified surface is **232**: 166 with prose but no quotation, and **66 with
+no prose at all**. An earlier figure of 656 counted only each route's *own* note and ignored the
+compound `notes` where most quotes actually live — a stricter reading than the gates use, and wrong.
+
+### A mechanical pre-screen makes 232 rows tractable
+
+Every one of the **196 unique cited abstracts** was fetched, and each stored value tested for
+verbatim presence, with tolerance for how the same number gets printed: the figure itself, rounded
+and to one or two decimals, **divided by 70 and 75** (a volume printed per kilogram), **×100** (an `F`
+printed as a percent), and **×60** (hours printed as minutes).
+
+| Value | Found in its abstract | Not found |
+| --- | --- | --- |
+| `F` | 173 | 31 |
+| `half_life_hr` | 155 | 73 |
+| `V_L` | 119 | **58** |
+| `ka_hr` | 30 | 22 |
+
+Per row: **96 have every stored value present**, 120 partial, **12 have none at all**, 4 cite a label
+with no abstract to check.
+
+**A hit is evidence, not proof** — the number could belong to another compound or another parameter
+in the same abstract, which is what the existing `receptor.secondary-source` and R2 rules are about.
+A miss is the stronger signal, and that is what this screen is for.
+
+### The 12 rows where nothing matched
+
+`adenosine.IV`, `alpha-gpc.PO`, `arachidonic-acid.PO`, `berberine.PO`, `bromantane.PO`,
+`calcifediol.PO`, `colchicine.PO`, `dpa.PO`, `l-carnitine.PO`, `levothyroxine.PO`+`.IV`,
+`testosterone-enanthate.IM`. Highest suspicion in the catalog and the natural first batch.
+
+### And the screen found a third template class
+
+Crossing "V_L not found in the abstract" with "V_L shared by ≥5 unrelated compounds" gives **36
+rows on both signals** — two independent signals agreeing, which neither gives alone. That led to
+`pk.template-volume` (`326ea78`): **97 of 497 compound-volume pairs** sit on 14 values whose
+per-kilogram equivalents are textbook priors (0.4 L/kg ≈ total body water on 15 compounds, 0.2 ≈
+extracellular on 5, 0.11 ≈ a monoclonal's assumed space on 6).
+
+**Verified, not inferred:** six of the cited abstracts were read in full — `alpha-gpc` PMID:8243501,
+`benfotiamine`/`thiamine` PMID:24399744, `carnosine` PMID:37081019, `mct-c8`/`c10` PMID:31058159,
+`riboflavin` PMID:8604671, `glutamine` PMID:35032556 — and **not one contains volume language of any
+kind**. Not a missed format; the volumes are not in these papers.
+
+### Why the 36 were NOT stripped in this pass
+
+They are not homogeneous, and one row proves it. **`methyldopa`'s own prose attributes its volume to
+PMID:7047042, a review, flagged review-grade** — a different paper from the route's `source_pmid`,
+which is a provenance-attribution question rather than a fabrication, and a bulk strip would have
+destroyed a real citation. Two others (`mct-c10`, `mk4`) already narrate that their citation states
+no volume and keep the value anyway, which is the R6 shape at a value that is *not* the consumer
+default: stripping moves 28 L to the resolver's 35 L rather than being a no-op, so each needs its
+own decision and disclosure.
+
+**The batch is specified and deliberately not run here.** Per-record, as Batch 4's absorption-rate
+sweep was, because that sweep's lesson was that a defensible strip needs the citation read one row at
+a time — and it found two rows in this same shape that turned out to be correct.
