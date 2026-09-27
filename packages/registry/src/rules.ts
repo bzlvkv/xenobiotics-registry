@@ -83,6 +83,7 @@ export const LINT_RULES: Readonly<Record<string, RuleInfo>> = {
   },
   'interactions.inert-kinetics': {
     level: 'warning',
+    standing: true,
     summary: 'The victim has no solvable PK, so the authored magnitude modulates nothing.',
   },
   'interactions.ki-basis-unstated': {

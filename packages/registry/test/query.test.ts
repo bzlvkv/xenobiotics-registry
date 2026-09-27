@@ -199,16 +199,20 @@ describe('interactionsOf', () => {
     expect(edges.every((e) => e.direction === 'in')).toBe(true);
   });
 
-  it('finds the two real edges the catalog authored against retired slugs', () => {
-    // `epa-dha → ala` and `riboflavin → r5p`. Both counterparties were merged away,
-    // and both edges are only reachable through the forwarding index.
-    for (const [canonical, from] of [
-      ['alpha-linolenic-acid', 'epa-dha'],
-      ['riboflavin-5-phosphate', 'riboflavin'],
-    ] as const) {
-      const incoming = interactionsOf(compounds, canonical).filter((e) => e.direction === 'in');
-      expect(incoming.map((e) => e.other?.slug)).toContain(from);
-    }
+  it('finds the real edge the catalog authored against a retired slug', () => {
+    // `epa-dha → ala`: the counterparty was merged away and the edge is reachable
+    // only through the forwarding index.
+    //
+    // `riboflavin → r5p` was the second case and is deliberately gone. That
+    // tombstone forwarded r5p to riboflavin-5'-phosphate (FMN) while R5P is the
+    // standard abbreviation for ribose-5-phosphate, so the forward handed readers
+    // the wrong molecule; the edge was repointed at the canonical slug and the
+    // tombstone removed. The forwarding behaviour is still covered here, by a case
+    // where the forward is correct.
+    const incoming = interactionsOf(compounds, 'alpha-linolenic-acid').filter(
+      (e) => e.direction === 'in',
+    );
+    expect(incoming.map((e) => e.other?.slug)).toContain('epa-dha');
   });
 
   it('works over the real catalog', () => {
