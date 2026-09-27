@@ -4308,13 +4308,13 @@
     },
     "receptor_occupancy": [
       {
-        "receptor": "muscarinic",
+        "receptor": "m1",
         "pathway": "parasympatholysis",
         "emax": 1,
         "hill_n": 1,
         "ec50_mg_l": 0.000463,
         "source_pmid": "PMID:2432979",
-        "note": "M1 cortical IC50; abstract verbatim \"atropine displayed similar affinities for either subtype with IC50s varying only slightly (1.6-4.6 nM)\". MW 289.37",
+        "note": "RETARGETED muscarinic -> m1: the stored 1.6 nM is the CORTICAL M1 figure, from competition against [3H]-pirenzepine in cortical membranes. CAVEAT KEPT IN VIEW: the same abstract says atropine \"displayed similar affinities for either subtype\", so this is where the number was measured, not evidence of M1 selectivity. M1 cortical IC50; abstract verbatim \"atropine displayed similar affinities for either subtype with IC50s varying only slightly (1.6-4.6 nM)\". MW 289.37",
         "action": "antagonist"
       }
     ],
@@ -8043,13 +8043,13 @@
         "action": "antagonist"
       },
       {
-        "receptor": "alpha_1",
+        "receptor": "alpha_1a",
         "pathway": "antagonist",
         "emax": 1,
         "ec50_mg_l": 0.005117,
         "hill_n": 1,
         "source_pmid": "PMID:15306222",
-        "note": "Human alpha-1A, same paper: pKi 7.9 -> 12.59 nM x 406.47 / 1e6. THE PREVIOUS VALUE WAS THIS RECORD OWN BETA-1 NUMBER IN THE ALPHA-1 FIELD: it was byte-identical to the beta-1 row and back-solves to pKi exactly 8.40, which is carvedilol beta-1 affinity, while its alpha-1A is 7.9. One source number entered into two different fields, in the wrong one.",
+        "note": "RETARGETED alpha_1 -> alpha_1a: the stored figure is this row’s own cited HUMAN ALPHA-1A pKi 7.9, so the class key understated what the assay resolved. Human alpha-1A, same paper: pKi 7.9 -> 12.59 nM x 406.47 / 1e6. THE PREVIOUS VALUE WAS THIS RECORD OWN BETA-1 NUMBER IN THE ALPHA-1 FIELD: it was byte-identical to the beta-1 row and back-solves to pKi exactly 8.40, which is carvedilol beta-1 affinity, while its alpha-1A is 7.9. One source number entered into two different fields, in the wrong one.",
         "action": "antagonist"
       },
       {
@@ -10229,7 +10229,7 @@
     },
     "receptor_occupancy": [
       {
-        "receptor": "alpha_1",
+        "receptor": "alpha_1a",
         "pathway": "antagonist",
         "emax": 1,
         "ec50_mg_l": 0.00238972,
@@ -10522,7 +10522,7 @@
         "action": "antagonist"
       },
       {
-        "receptor": "alpha_1",
+        "receptor": "alpha_1a",
         "pathway": "antagonist",
         "emax": 1,
         "ec50_mg_l": 0.001755,
@@ -14482,7 +14482,7 @@
         "ec50_mg_l": 0.001133,
         "hill_n": 1,
         "source_pmid": "PMID:8905340",
-        "note": "Hatano 1996 verbatim: \"mean -log Ki (pKi) values were 8.60-8.63, 8.47-8.55 and 8.61-8.65, respectively\" — the three figures are racemic, R- and S-doxazosin in that order, so 8.60-8.63 is the RACEMATE, which is what this row stores. pKi 8.60 → Ki 2.51 nM (deterministic). ec50 = 2.51 nM × 451.48 / 1e6.",
+        "note": "CLASS KEY alpha_1 KEPT: NATIVE HUMAN PROSTATE expresses a mixture of alpha1 subtypes, so this pKi belongs to no single one. Hatano 1996 verbatim: \"mean -log Ki (pKi) values were 8.60-8.63, 8.47-8.55 and 8.61-8.65, respectively\" — the three figures are racemic, R- and S-doxazosin in that order, so 8.60-8.63 is the RACEMATE, which is what this row stores. pKi 8.60 → Ki 2.51 nM (deterministic). ec50 = 2.51 nM × 451.48 / 1e6.",
         "action": "antagonist"
       }
     ],
@@ -25554,7 +25554,7 @@
         "action": "antagonist"
       },
       {
-        "receptor": "alpha_1",
+        "receptor": "alpha_1a",
         "pathway": "antagonist",
         "emax": 1,
         "ec50_mg_l": 0.01536,
@@ -35259,7 +35259,7 @@
     },
     "receptor_occupancy": [
       {
-        "receptor": "muscarinic",
+        "receptor": "m3",
         "pathway": "parasympatholysis",
         "emax": 1,
         "ec50_mg_l": 0.000567,
@@ -37962,7 +37962,7 @@
         "ec50_mg_l": 0.0000959,
         "hill_n": 1,
         "source_pmid": "PMID:9839591",
-        "note": "Ford 1998 verbatim: \"its affinity for alpha1-adrenoceptors in the human prostate (Ki, 0.25 nmol/L) ... and all of the cloned subtypes (Ki, 0.26-0.44 nmol/L)\". Human prostate α1, [3H]prazosin. ec50 = 0.25 nM × 383.4 / 1e6.",
+        "note": "CLASS KEY alpha_1 IS DELIBERATE: the stored 0.25 nM is the NATIVE HUMAN PROSTATE figure. Its own citation puts the cloned subtypes at 0.26-0.44 nM, i.e. within 1.8x of each other and of this value, so prazosin is non-selective here and no subtype key would be more accurate. The paper’s own subject is the alpha1L phenotype. Ford 1998 verbatim: \"its affinity for alpha1-adrenoceptors in the human prostate (Ki, 0.25 nmol/L) ... and all of the cloned subtypes (Ki, 0.26-0.44 nmol/L)\". Human prostate α1, [3H]prazosin. ec50 = 0.25 nM × 383.4 / 1e6.",
         "action": "antagonist"
       }
     ],
@@ -41329,7 +41329,7 @@
         "ec50_mg_l": 0.001157,
         "hill_n": 1,
         "source_pmid": "PMID:32608144",
-        "note": "Re-attributed. The previous citation studies 5-HT-receptor ligands and NEVER MENTIONS RISPERIDONE; this one names it — \"antipsychotics (eg, chlorpromazine and risperidone) had high alpha1-adrenoceptor affinities\" — from [3H]prazosin whole-cell binding in CHO cells expressing full-length human alpha1 subtypes. The numeric value remains a table figure rather than abstract-verbatim; only the attribution is now correct. Clozapine had already made this exact substitution.",
+        "note": "alpha_1 KEPT: which of alpha1A/1B/1D this figure is was never recorded. Needs PMC7327383 Table 4. Re-attributed. The previous citation studies 5-HT-receptor ligands and NEVER MENTIONS RISPERIDONE; this one names it — \"antipsychotics (eg, chlorpromazine and risperidone) had high alpha1-adrenoceptor affinities\" — from [3H]prazosin whole-cell binding in CHO cells expressing full-length human alpha1 subtypes. The numeric value remains a table figure rather than abstract-verbatim; only the attribution is now correct. Clozapine had already made this exact substitution.",
         "action": "antagonist"
       }
     ],
@@ -46414,13 +46414,13 @@
     },
     "receptor_occupancy": [
       {
-        "receptor": "alpha_1",
+        "receptor": "alpha_1a",
         "pathway": "bph_lower_uts",
         "emax": 1,
         "hill_n": 1,
         "ec50_mg_l": 0.000968,
         "source_pmid": "PMID:7536677",
-        "note": "Recombinant α1 subtypes; abstract verbatim \"Ki value; alpha 1A:2.5 nM\" — α1A used. MW 387.43",
+        "note": "RETARGETED alpha_1 -> alpha_1a: the cited abstract states the subtype outright, \"Ki value; alpha 1A:2.5 nM\", and that is the stored figure. Recombinant α1 subtypes; abstract verbatim \"Ki value; alpha 1A:2.5 nM\" — α1A used. MW 387.43",
         "action": "antagonist"
       }
     ],
@@ -47580,7 +47580,7 @@
     },
     "receptor_occupancy": [
       {
-        "receptor": "muscarinic",
+        "receptor": "m3",
         "pathway": "parasympatholysis",
         "emax": 1,
         "ec50_mg_l": 0.0000188,
@@ -48099,7 +48099,7 @@
         "ec50_mg_l": 0.001074,
         "hill_n": 1,
         "source_pmid": "PMID:9200560",
-        "note": "Nilvebrant 1997 (PMID:9200560) abstract verbatim: tolterodine bound with high affinity to muscarinic receptors in urinary bladder from humans (Ki 3.3 nM). ec50 = 3.3 nM × 325.49 / 1e6. Re-cited from comparator paper PMID:20590605 to this primary tolterodine characterization - 2026-06-28 data-quality audit.",
+        "note": "CLASS KEY muscarinic KEPT: NATIVE HUMAN BLADDER expresses M2 and M3 together, and this paper finds tolterodine NOT M3-selective. Nilvebrant 1997 (PMID:9200560) abstract verbatim: tolterodine bound with high affinity to muscarinic receptors in urinary bladder from humans (Ki 3.3 nM). ec50 = 3.3 nM × 325.49 / 1e6. Re-cited from comparator paper PMID:20590605 to this primary tolterodine characterization - 2026-06-28 data-quality audit.",
         "action": "antagonist"
       }
     ],
@@ -52679,13 +52679,13 @@
     },
     "receptor_occupancy": [
       {
-        "receptor": "muscarinic",
+        "receptor": "m3",
         "pathway": "antagonist",
         "emax": 1,
         "ec50_mg_l": 0.003625,
         "hill_n": 1,
         "source_pmid": "PMID:12122494",
-        "note": "M3. Verbatim: \"In radioligand binding assays, p K(i) values of solifenacin for M(1), M(2), and M(3) receptors were 7.6, 6.9, and 8.0, respectively.\" pKi 8.0 -> 10 nM x 362.5 / 1e6. The previous value was a MIDPOINT of a 7.7-8.0 range whose lower endpoint came from a paper stating no pKi for this drug at all. SPECIES CAVEAT: the abstract does not say the assay used human receptors, so the earlier \"human M3\" claim is withdrawn rather than repeated.",
+        "note": "RETARGETED muscarinic -> m3; pKi 8.0 is the M3 figure quoted below. M3. Verbatim: \"In radioligand binding assays, p K(i) values of solifenacin for M(1), M(2), and M(3) receptors were 7.6, 6.9, and 8.0, respectively.\" pKi 8.0 -> 10 nM x 362.5 / 1e6. The previous value was a MIDPOINT of a 7.7-8.0 range whose lower endpoint came from a paper stating no pKi for this drug at all. SPECIES CAVEAT: the abstract does not say the assay used human receptors, so the earlier \"human M3\" claim is withdrawn rather than repeated.",
         "action": "antagonist"
       }
     ],

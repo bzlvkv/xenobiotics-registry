@@ -82,17 +82,27 @@ R6: every one wears a `source_pmid`. Fetch each abstract, confirm or strip. Stri
 numerically a no-op — what changes is that the record stops claiming a measurement, and the
 `pk.defaulted-*` counts rise, which is the audit working.
 
-## Batch 4 — `pk.template-ka` · 11 groups
+## Batch 4 — `pk.template-ka` · 11 groups — **DONE 2026-09-27**
 
-- [ ] R11. Precedent is unambiguous: all seven `pk.template-quartet` groups audited in 2026-09
+The prediction below was half wrong. All 121 rows were tested against the rule's own discriminator
+("real absorption rates are fitted to a Tmax and land on untidy numbers"): 35 citations do state a
+peak time and now carry a declared derivation, 5 state one no ka can reach, and 78 state none and
+were stripped. `pk.template-ka` fires nowhere; `pk.defaulted-ka-slow` rose 14 -> 24, which is the
+debt becoming visible. Findings in `data/GAPS.md`.
+
+- [x] R11. Precedent is unambiguous: all seven `pk.template-quartet` groups audited in 2026-09
       were real template-fill and not one shared trio was stated by any cited paper. Expect
       strips.
 
-## Batch 5 — the two uncatalogued occupancy keys · 13 rows · `packages/` + data
+## Batch 5 — the two uncatalogued occupancy keys · 13 rows — **DONE 2026-09-27**
 
-- [ ] `alpha_1` (8 rows): carvedilol, clomipramine, clozapine, doxazosin, labetalol, prazosin,
+No literature was needed: nine of the thirteen rows already named the subtype in their own note.
+Nine pinned (5 -> `alpha_1a`, 3 -> `m3`, atropine -> `m1`), four kept on the class key because the
+assay was native tissue or the subtype was never recorded. `m1`/`m3` bridged in `98a9ecb`.
+
+- [x] `alpha_1` (8 rows): carvedilol, clomipramine, clozapine, doxazosin, labetalol, prazosin,
       risperidone, terazosin.
-- [ ] `muscarinic` (5 rows): atropine, oxybutynin, tiotropium, tolterodine, solifenacin.
+- [x] `muscarinic` (5 rows): atropine, oxybutynin, tiotropium, tolterodine, solifenacin.
 
 Pin each row to the subtype **its cited assay measured** (α1A/1B/1D, M1–M5) — never to a subtype
 the paper did not measure. Needs an `OCCUPANCY_TARGET_KEYS` line plus a catalog entry, so the code

@@ -6480,3 +6480,72 @@ encodes flip-flop"*. The last of those, on `pentoxifylline`, **is arithmetically
 half-life its ke is 0.425/h and the stored ka was 0.5/h, so absorption was *faster* than elimination
 and no flip-flop was encoded. A shape argument is checkable, and this one was never checked. Only two
 of the 121 rows had ka < ke at all.
+
+## 2026-09-27 — the two uncatalogued occupancy keys · 13 rows
+
+The roadmap expected 13 literature lookups to find which subtype each cited assay measured. **Not
+one was needed: nine of the thirteen rows already named the subtype in their own note.** The work
+was a retarget, and the finding is that the information was on the record all along while the key
+above it said something weaker.
+
+`receptors.json` already carries CHRM1–5 and ADRA1A/B/D from GtoPdb, and `alpha_1a` was already
+bridged; only `m1` and `m3` were missing from the shorthand-to-gene lookup, added in `98a9ecb`.
+
+### Nine pinned
+
+| Compound | Was | Is | What its own note already said |
+| --- | --- | --- | --- |
+| `carvedilol` | `alpha_1` | `alpha_1a` | "Human alpha-1A … pKi 7.9" |
+| `clomipramine` | `alpha_1` | `alpha_1a` | the α1A column, −8.12, against −6.34 and −6.15 |
+| `clozapine` | `alpha_1` | `alpha_1a` | "Keyed alpha_1 to the highest-affinity subtype (alpha1A)" |
+| `labetalol` | `alpha_1` | `alpha_1a` | the α1A column, −7.33 |
+| `terazosin` | `alpha_1` | `alpha_1a` | *"Ki value; alpha 1A:2.5 nM"* |
+| `oxybutynin` | `muscarinic` | `m3` | "Human muscarinic (M3) affinity" |
+| `tiotropium` | `muscarinic` | `m3` | "human recombinant hM3 (CHO cells)" |
+| `solifenacin` | `muscarinic` | `m3` | *"pK(i) values … for M(1), M(2), and M(3) … 7.6, 6.9, and 8.0"* |
+| `atropine` | `muscarinic` | `m1` | "M1 cortical IC50" |
+
+`atropine` carries a caveat rather than a clean pin: its abstract says atropine *"displayed similar
+affinities for either subtype"*, so `m1` records **where the 1.6 nM was measured** (competition
+against [³H]-pirenzepine in cortical membranes), not evidence of M1 selectivity.
+
+Six of the nine had notes already within a few characters of the 600-character field, so the
+retarget is recorded in this file rather than prefixed onto prose that would have to be deleted to
+make room. **The evidence outranks the annotation.**
+
+### Four kept on the class key, which is the rule working rather than an exception
+
+The code comment on `OCCUPANCY_TARGET_KEYS` has said since it was written that `alpha_1` and
+`muscarinic` stay unmapped because "pinning them to one subtype would state a selectivity no cited
+value measured". These four are exactly that case, and each now says so on its own row:
+
+- **`doxazosin`** and **`prazosin`** — measured in **native human prostate**, which expresses a
+  mixture of α1 subtypes. `prazosin`'s own citation puts the cloned subtypes at 0.26–0.44 nM against
+  its stored native 0.25 nM, i.e. everything within 1.8×, so prazosin is non-selective here and no
+  subtype key would be more accurate.
+- **`tolterodine`** — **native human urinary bladder**, M2 and M3 together. Its abstract states that
+  tolterodine, *unlike* oxybutynin, shows no M3-over-M2 selectivity on cloned human receptors, so a
+  subtype key would assert a selectivity the paper explicitly denies.
+- **`risperidone`** — a genuine skip. The stored value is a table figure from the cloned-subtype
+  study and **the row has never recorded which of α1A/1B/1D it came from**. Unlocked by Table 4 of
+  PMC7327383; guessing α1A because the neighbouring rows are α1A would be pattern-matching.
+
+`receptor.unknown-target` therefore still fires, on 4 rows instead of 13. It should: those four keys
+really are uncatalogued, because the thing they name is a tissue mixture and not a catalogued target.
+
+### Two suspicions raised and refuted — R16 in action
+
+Reading the primary sources to pin subtypes, two rows looked like fabrications and neither was:
+
+- `tolterodine`'s note claims *"abstract verbatim: … urinary bladder from humans (Ki 3.3 nM)"* while
+  the abstract's prominent bladder figures are K(B) 4.0 nM and K(i) 2.7 nM. The 3.3 nM **is** there:
+  the 2.7 nM is **guinea-pig** bladder and the sentence ends "and in urinary bladder from humans
+  (K(i) 3.3 nM)". The stored value and its species are right.
+- `prazosin`'s note attributes its quote to "Ford 1998" while PMID:9839591 is **Fukasawa** 1998. The
+  author name is wrong; the PMID and the quote are exactly right. A wrong author beside a right PMID
+  is a cosmetic defect, not a provenance one.
+
+**But `tolterodine` shows the gate's opt-in blind spot again.** Its note says "abstract verbatim"
+and then gives the sentence **with no quotation marks**, so `verify:quotes` cannot see it — the same
+class of hole fixed in `0b0f1d4`. A note that claims "verbatim" and quotes nothing is unguarded by
+construction, and that is worth a lint rule.
