@@ -7447,3 +7447,50 @@ assumed.
 Two things were added to the record: the three quotes, and the **population**, which it had never
 stated — PMID:7695325 studied *"critically ill and non-critically ill AIDS patients"*, not healthy
 volunteers, with SDs of 9.5 h on a 14.3 h half-life. 656 → 660 checked quotes.
+
+## 2026-09-27 — the volume pass, done per record, and the one row that proves why
+
+32 of the 36 both-signal rows were still live (4 had been resolved by the `pk_unauthored`
+conversions). Split by how far the prior sits from what deleting it would assert:
+
+**23 stripped** — the 0.30–0.71 L/kg nutrient cluster. `adenosine.IV`, `alpha-tocopherol.PO`,
+`benfotiamine.PO`, `beta-carotene.PO`, `carnosine.PO`, `glutamine.PO`+`.IV`, `ketone-ester-deltag.PO`,
+`l-carnitine.PO`+`.IV`, `mct-c8.PO`+`c10.PO`, `menadione.PO`, `riboflavin.PO`,
+`riboflavin-5-phosphate.PO`, `same.IV`, `testosterone-cypionate.IM`, `thiamine.PO`+`.IV`, `tmg.PO`,
+`beta-alanine.PO`, `beta-hydroxybutyrate.PO`+`.IV`. The resolver's 0.5 L/kg default is under twofold
+away from each, and it is a **declared** assumption that `pk.defaulted-volume` warns about, in place of
+an undeclared one wearing a citation. That trade is the whole point of R4.
+
+**8 kept and disclosed** — `curcumin.PO`, `dextroamphetamine.PO`, `goserelin.SC`, `mk4.PO`,
+`methadone.PO`+`.IV`, `cholecalciferol.PO`, `vitamin-k2-mk7.PO`. At 0.20–4.00 L/kg, the default would
+misstate distribution **several-fold in the opposite direction**, and R4 is explicit that deleting a
+value asserts the default rather than silencing the record. Each row now says on its face that its
+citation states no volume and that the number needs a real source. Searched for one first and failed:
+the methadone population-PK papers report `CL/F` and `V/F` only as covariate effects, and the best
+dextroamphetamine-shaped hit, PMID:14586388 with its clean *"steady-state volume of distribution (4.2
+L/kg)"*, turns out to be **methamphetamine** — a different molecule, and exactly the wrong-compound trap
+R2 exists for.
+
+### methyldopa: I stripped a sourced value, caught it, and reverted it
+
+**`methyldopa.PO` was stripped and should not have been.** Its 42 L is 0.60 L/kg from **PMID:7047042**, a
+review that this record's own notes name and flag review-grade, and that its **IV row cites directly**.
+Only the PO row's `source_pmid` (PMID:781212) is silent about it.
+
+This is the failure the previous commit had explicitly warned about, one commit later, by the author who
+wrote the warning. What caught it was checking the one row I had named as the reason for caution — and
+the general check it prompted: **compare every sibling route's citation and read every compound note**,
+not just the row's own `source_pmid`. Of the 24, methyldopa is **the only one** with volume provenance
+elsewhere on the record; the other 23 cite the same silent paper on every route.
+
+Two lessons, both structural:
+
+- **The V_L screen has the same blind spot the quote gate had.** Both tested the row's own PMID and
+  missed a value sourced elsewhere on the same record. A second instance of one shape, and the reason
+  the check above should run before any future strip.
+- **A first pass at that check produced 12 false flags** because it compared bare digits against
+  `"PMID:x"` strings, so every sibling route looked like a different citation. The fix took the count
+  from 12 to 1. A screen that flags half the batch is broken, not thorough.
+
+`methyldopa.PO` now carries the provenance note it always needed. 108 → 106 warnings, as two
+`pk.template-volume` groups fell below the five-compound threshold.

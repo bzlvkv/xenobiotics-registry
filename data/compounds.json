@@ -1136,9 +1136,8 @@
     },
     "pk": {
       "IV": {
-        "V_L": 21,
         "source_pmid": "PMID:2184971",
-        "note": "HALF-LIFE PROVENANCE, recorded because a verbatim-match screen wrongly flagged this row as unsourced: it tested the stored 0.0028 h in hours and minutes but not in SECONDS. PMID:2184971 verbatim: \"The drug has a half-life of 0.6 to 10 seconds\". 10 s is 0.002778 h, the stored value at the SLOW endpoint of that range — the endpoint that renders the longest exposure, disclosed rather than averaged (R3). THE VOLUME IS A DIFFERENT MATTER: 21 L is 0.3 L/kg at the reference weight, a per-kilogram prior this abstract does not state (pk.template-volume)."
+        "note": "V_L 21 REMOVED: an unsourced 0.30 L/kg prior, and PMID:2184971 states no volume. The 0.5 L/kg default now applies and is declared. HALF-LIFE PROVENANCE, recorded because a verbatim-match screen wrongly flagged this row as unsourced: it tested the stored 0.0028 h in hours and minutes but not in SECONDS. PMID:2184971 verbatim: \"The drug has a half-life of 0.6 to 10 seconds\". 10 s is 0.002778 h, the stored value at the SLOW endpoint of that range — the endpoint that renders the longest exposure, disclosed rather than averaged (R3). THE VOLUME IS A DIFFERENT MATTER: 21 L is 0.3 L/kg at the reference weight, a per-kilogram prior this abstract does not state (pk.template-volume)."
       }
     },
     "refs": [
@@ -1892,9 +1891,8 @@
     "pk": {
       "PO": {
         "F": 0.3,
-        "V_L": 28,
         "source_pmid": "PMID:9537614",
-        "note": "ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.3/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:9537614, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
+        "note": "V_L 28 REMOVED: an unsourced 0.40 L/kg prior, and PMID:9537614 states no volume. The 0.5 L/kg default now applies and is declared. ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.3/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:9537614, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
       }
     },
     "refs": [
@@ -5096,9 +5094,8 @@
     "pk": {
       "PO": {
         "F": 0.6,
-        "V_L": 28,
         "source_pmid": "PMID:24399744",
-        "note": "ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.8/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:24399744, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
+        "note": "V_L 28 REMOVED: an unsourced 0.40 L/kg prior, and PMID:24399744 states no volume. The 0.5 L/kg default now applies and is declared. ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.8/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:24399744, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
       }
     },
     "refs": [
@@ -5284,9 +5281,8 @@
     "pk": {
       "PO": {
         "F": 0.1,
-        "V_L": 28,
         "source_pmid": "PMID:11481400",
-        "note": "ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.3/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:11481400, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
+        "note": "V_L 28 REMOVED: an unsourced 0.40 L/kg prior, and PMID:11481400 states no volume. The 0.5 L/kg default now applies and is declared. ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.3/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:11481400, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
       }
     },
     "refs": [
@@ -7959,9 +7955,8 @@
     "pk": {
       "PO": {
         "F": 0.05,
-        "V_L": 21,
         "source_pmid": "PMID:37081019",
-        "note": "ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 2/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:37081019, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. THE FALLBACK MATTERS HERE: the resolver now supplies 1.0/h, which is SLOWER than this record's own elimination rate of 34.66/h, so the curve becomes absorption-limited where it was not. That is disclosed rather than avoided by keeping an invented number. A real rate needs a peak time for this compound, which is what to look for."
+        "note": "V_L 21 REMOVED: unsourced 0.30 L/kg prior, not in PMID:37081019. ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 2/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:37081019, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. THE FALLBACK MATTERS HERE: the resolver now supplies 1.0/h, which is SLOWER than this record's own elimination rate of 34.66/h, so the curve becomes absorption-limited where it was not. That is disclosed rather than avoided by keeping an invented number. A real rate needs a peak time for this compound, which is what to look for."
       }
     },
     "refs": [
@@ -11411,7 +11406,8 @@
         "ka_hr": 0.4,
         "F": 0.02,
         "V_L": 210,
-        "source_pmid": "PMID:9619120"
+        "source_pmid": "PMID:9619120",
+        "note": "V_L 210 IS KEPT AND IS UNSOURCED. PMID:9619120 states no volume, and 3.00 L/kg is one of the shared priors pk.template-volume reports, so this number has no provenance. It is NOT removed because the resolver's 0.5 L/kg default would misstate this compound's distribution by several fold in the opposite direction, and R4 is explicit that deleting a value asserts the default rather than silencing the record. A real source is what this needs."
       }
     },
     "refs": [
@@ -13153,7 +13149,8 @@
       "PO": {
         "V_L": 210,
         "source_pmid": "PMID:28936175",
-        "ka_hr": 1.2
+        "ka_hr": 1.2,
+        "note": "V_L 210 IS KEPT AND IS UNSOURCED. PMID:28936175 states no volume, and 3.00 L/kg is one of the shared priors pk.template-volume reports, so this number has no provenance. It is NOT removed because the resolver's 0.5 L/kg default would misstate this compound's distribution by several fold in the opposite direction, and R4 is explicit that deleting a value asserts the default rather than silencing the record. A real source is what this needs."
       }
     },
     "refs": [
@@ -20729,14 +20726,13 @@
     "pk": {
       "PO": {
         "F": 0.85,
-        "V_L": 21,
         "source_pmid": "PMID:35032556",
-        "note": "ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 2/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:35032556, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
+        "note": "V_L 21 REMOVED: an unsourced 0.30 L/kg prior, and PMID:35032556 states no volume. The 0.5 L/kg default now applies and is declared. ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 2/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:35032556, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
       },
       "IV": {
-        "V_L": 21,
         "F": 1,
-        "source_pmid": "PMID:35032556"
+        "source_pmid": "PMID:35032556",
+        "note": "V_L 21 REMOVED AS AN UNSOURCED PER-KILOGRAM PRIOR. 0.30 L/kg is one of the values shared across unrelated compounds that pk.template-volume reports, and PMID:35032556 states no volume of any kind. The resolver now supplies its 0.5 L/kg default, which is a DECLARED assumption that pk.defaulted-volume warns about, in place of an undeclared one wearing a citation. Exposure changes by the ratio of the two, which is under twofold here."
       }
     },
     "refs": [
@@ -21183,7 +21179,8 @@
         "zo_dur_hr": 672,
         "V_L": 15,
         "F": 1,
-        "source_pmid": "PMID:10926349"
+        "source_pmid": "PMID:10926349",
+        "note": "V_L 15 IS KEPT AND IS UNSOURCED. PMID:10926349 states no volume, and 0.21 L/kg is one of the shared priors pk.template-volume reports, so this number has no provenance. It is NOT removed because the resolver's 0.5 L/kg default would misstate this compound's distribution by several fold in the opposite direction, and R4 is explicit that deleting a value asserts the default rather than silencing the record. A real source is what this needs."
       }
     },
     "mw_g_mol": 1269.4,
@@ -24874,9 +24871,8 @@
     "pk": {
       "PO": {
         "F": 0.95,
-        "V_L": 28,
         "source_pmid": "PMID:22561291",
-        "note": "ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 2.5/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:22561291, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
+        "note": "V_L 28 REMOVED: an unsourced 0.40 L/kg prior, and PMID:22561291 states no volume. The 0.5 L/kg default now applies and is declared. ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 2.5/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:22561291, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
       }
     },
     "refs": [
@@ -25274,14 +25270,13 @@
     "pk": {
       "PO": {
         "F": 0.14,
-        "V_L": 28,
         "source_pmid": "PMID:15591001",
-        "note": "F 0.15 -> 0.14. PMID:15591001 verbatim: \"bioavailability is 14-18% of dose\" — SUPPLEMENTS, where the same abstract puts DIETARY L-carnitine at 54-87%. 0.15 was neither end. ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.5/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:15591001, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
+        "note": "V_L 28 REMOVED: unsourced prior, not in PMID:15591001. F 0.15 -> 0.14. PMID:15591001 verbatim: \"bioavailability is 14-18% of dose\" — SUPPLEMENTS, where the same abstract puts DIETARY L-carnitine at 54-87%. 0.15 was neither end. ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.5/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:15591001, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
       },
       "IV": {
-        "V_L": 28,
         "F": 1,
-        "source_pmid": "PMID:15591001"
+        "source_pmid": "PMID:15591001",
+        "note": "V_L 28 REMOVED AS AN UNSOURCED PER-KILOGRAM PRIOR. 0.40 L/kg is one of the values shared across unrelated compounds that pk.template-volume reports, and PMID:15591001 states no volume of any kind. The resolver now supplies its 0.5 L/kg default, which is a DECLARED assumption that pk.defaulted-volume warns about, in place of an undeclared one wearing a citation. Exposure changes by the ratio of the two, which is under twofold here."
       }
     },
     "refs": [
@@ -28828,8 +28823,8 @@
     },
     "pk": {
       "PO": {
-        "V_L": 21,
-        "source_pmid": "PMID:31058159"
+        "source_pmid": "PMID:31058159",
+        "note": "V_L 21 REMOVED AS AN UNSOURCED PER-KILOGRAM PRIOR. 0.30 L/kg is one of the values shared across unrelated compounds that pk.template-volume reports, and PMID:31058159 states no volume of any kind. The resolver now supplies its 0.5 L/kg default, which is a DECLARED assumption that pk.defaulted-volume warns about, in place of an undeclared one wearing a citation. Exposure changes by the ratio of the two, which is under twofold here."
       }
     },
     "refs": [
@@ -28907,9 +28902,8 @@
     "pk": {
       "PO": {
         "F": 0.95,
-        "V_L": 21,
         "source_pmid": "PMID:31058159",
-        "note": "ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 1.5/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:31058159, has no abstract text to check the rate against. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
+        "note": "V_L 21 REMOVED: an unsourced 0.30 L/kg prior, and PMID:31058159 states no volume. The 0.5 L/kg default now applies and is declared. ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 1.5/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:31058159, has no abstract text to check the rate against. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
       }
     },
     "refs": [
@@ -29461,9 +29455,8 @@
     "pk": {
       "PO": {
         "F": 0.5,
-        "V_L": 21,
         "source_pmid": "PMID:8866040",
-        "note": "ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.8/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:8866040, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. THE FALLBACK MATTERS HERE: the resolver now supplies 1.0/h, which is SLOWER than this record's own elimination rate of 1.54/h, so the curve becomes absorption-limited where it was not. That is disclosed rather than avoided by keeping an invented number. A real rate needs a peak time for this compound, which is what to look for."
+        "note": "V_L 21 REMOVED: unsourced 0.30 L/kg prior, not in PMID:8866040. ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.8/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:8866040, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. THE FALLBACK MATTERS HERE: the resolver now supplies 1.0/h, which is SLOWER than this record's own elimination rate of 1.54/h, so the curve becomes absorption-limited where it was not. That is disclosed rather than avoided by keeping an invented number. A real rate needs a peak time for this compound, which is what to look for."
       }
     },
     "refs": [
@@ -29515,7 +29508,8 @@
       "PO": {
         "F": 0.05,
         "V_L": 14,
-        "source_pmid": "PMID:23140417"
+        "source_pmid": "PMID:23140417",
+        "note": "V_L 14 IS KEPT AND IS UNSOURCED. PMID:23140417 states no volume, and 0.20 L/kg is one of the shared priors pk.template-volume reports, so this number has no provenance. It is NOT removed because the resolver's 0.5 L/kg default would misstate this compound's distribution by several fold in the opposite direction, and R4 is explicit that deleting a value asserts the default rather than silencing the record. A real source is what this needs."
       }
     },
     "refs": [
@@ -29839,12 +29833,14 @@
         "ka_hr": 0.85,
         "V_L": 280,
         "F": 0.8,
-        "source_pmid": "PMID:22621465"
+        "source_pmid": "PMID:22621465",
+        "note": "V_L 280 IS KEPT AND IS UNSOURCED. PMID:22621465 states no volume, and 4.00 L/kg is one of the shared priors pk.template-volume reports, so this number has no provenance. It is NOT removed because the resolver's 0.5 L/kg default would misstate this compound's distribution by several fold in the opposite direction, and R4 is explicit that deleting a value asserts the default rather than silencing the record. A real source is what this needs."
       },
       "IV": {
         "V_L": 280,
         "F": 1,
-        "source_pmid": "PMID:22621465"
+        "source_pmid": "PMID:22621465",
+        "note": "V_L 280 IS KEPT AND IS UNSOURCED. PMID:22621465 states no volume, and 4.00 L/kg is one of the shared priors pk.template-volume reports, so this number has no provenance. It is NOT removed because the resolver's 0.5 L/kg default would misstate this compound's distribution by several fold in the opposite direction, and R4 is explicit that deleting a value asserts the default rather than silencing the record. A real source is what this needs."
       }
     },
     "effect_compartment": {
@@ -30213,7 +30209,8 @@
       "PO": {
         "V_L": 42,
         "F": 0.25,
-        "source_pmid": "PMID:781212"
+        "source_pmid": "PMID:781212",
+        "note": "V_L 42 IS SOURCED, BUT NOT BY THIS ROW'S CITATION. PMID:781212 states no volume; the 42 L is 0.60 L/kg from PMID:7047042, a review, which this record’s notes flag as review-grade and which the IV row cites directly. Recorded because a screen testing only this row's own source_pmid reads the value as unsourced — it is not, and it was stripped in error on 2026-09-27 before this note existed."
       },
       "IV": {
         "V_L": 42,
@@ -40647,9 +40644,8 @@
     "pk": {
       "PO": {
         "F": 0.54,
-        "V_L": 28,
         "source_pmid": "PMID:8604671",
-        "note": "ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 1.2/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:8604671, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
+        "note": "V_L 28 REMOVED: an unsourced 0.40 L/kg prior, and PMID:8604671 states no volume. The 0.5 L/kg default now applies and is declared. ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 1.2/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:8604671, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
       }
     },
     "refs": [
@@ -40702,8 +40698,8 @@
     "pk": {
       "PO": {
         "F": 0.54,
-        "V_L": 28,
-        "source_pmid": "PMID:8604671"
+        "source_pmid": "PMID:8604671",
+        "note": "V_L 28 REMOVED AS AN UNSOURCED PER-KILOGRAM PRIOR. 0.40 L/kg is one of the values shared across unrelated compounds that pk.template-volume reports, and PMID:8604671 states no volume of any kind. The resolver now supplies its 0.5 L/kg default, which is a DECLARED assumption that pk.defaulted-volume warns about, in place of an undeclared one wearing a citation. Exposure changes by the ratio of the two, which is under twofold here."
       }
     },
     "refs": [
@@ -42510,9 +42506,9 @@
         "note": "ABSORPTION RATE DERIVED FROM THE CITED PEAK TIME, replacing 0.8/h — one of this catalog's shared round rates, which no cited abstract stated. PMID:19302903 verbatim: \"T(max), 5.40 (1.14) and 5.20 (1.48) hours\". With the stored half-life of 6.17 h fixing ke at 0.1123/h, Tmax fixes ka uniquely by inverting the model's own definition, ln(ka/ke)/(ka-ke) = Tmax — ARITHMETIC, NOT AN ESTIMATE — giving 0.2843/h, which reproduces 5.40 h on substitution. Two arms, men then women; 5.40 h (men) is taken rather than a midpoint of the two. EXPOSURE IS UNCHANGED: the absorption rate cancels out of AUC, so only the shape moves."
       },
       "IV": {
-        "V_L": 28,
         "F": 1,
-        "source_pmid": "PMID:19302903"
+        "source_pmid": "PMID:19302903",
+        "note": "V_L 28 REMOVED AS AN UNSOURCED PER-KILOGRAM PRIOR. 0.40 L/kg is one of the values shared across unrelated compounds that pk.template-volume reports, and PMID:19302903 states no volume of any kind. The resolver now supplies its 0.5 L/kg default, which is a DECLARED assumption that pk.defaulted-volume warns about, in place of an undeclared one wearing a citation. Exposure changes by the ratio of the two, which is under twofold here."
       }
     },
     "refs": [
@@ -46675,9 +46671,9 @@
         "alpha_hr": 0.05,
         "beta_hr": 0.0036,
         "k21_hr": 0.018,
-        "V_L": 50,
         "F": 1,
-        "source_pmid": "PMID:3595893"
+        "source_pmid": "PMID:3595893",
+        "note": "V_L 50 REMOVED AS AN UNSOURCED PER-KILOGRAM PRIOR. 0.71 L/kg is one of the values shared across unrelated compounds that pk.template-volume reports, and PMID:3595893 states no volume of any kind. The resolver now supplies its 0.5 L/kg default, which is a DECLARED assumption that pk.defaulted-volume warns about, in place of an undeclared one wearing a citation. Exposure changes by the ratio of the two, which is under twofold here."
       }
     },
     "effect_compartment": {
@@ -47101,13 +47097,13 @@
     "pk": {
       "PO": {
         "F": 0.5,
-        "V_L": 21,
-        "source_pmid": "PMID:24399744"
+        "source_pmid": "PMID:24399744",
+        "note": "V_L 21 REMOVED AS AN UNSOURCED PER-KILOGRAM PRIOR. 0.30 L/kg is one of the values shared across unrelated compounds that pk.template-volume reports, and PMID:24399744 states no volume of any kind. The resolver now supplies its 0.5 L/kg default, which is a DECLARED assumption that pk.defaulted-volume warns about, in place of an undeclared one wearing a citation. Exposure changes by the ratio of the two, which is under twofold here."
       },
       "IV": {
-        "V_L": 21,
         "F": 1,
-        "source_pmid": "PMID:24399744"
+        "source_pmid": "PMID:24399744",
+        "note": "V_L 21 REMOVED AS AN UNSOURCED PER-KILOGRAM PRIOR. 0.30 L/kg is one of the values shared across unrelated compounds that pk.template-volume reports, and PMID:24399744 states no volume of any kind. The resolver now supplies its 0.5 L/kg default, which is a DECLARED assumption that pk.defaulted-volume warns about, in place of an undeclared one wearing a citation. Exposure changes by the ratio of the two, which is under twofold here."
       }
     },
     "refs": [
@@ -47742,9 +47738,8 @@
     "pk": {
       "PO": {
         "F": 0.85,
-        "V_L": 28,
         "source_pmid": "PMID:16365055",
-        "note": "ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 1.5/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:16365055, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
+        "note": "V_L 28 REMOVED: an unsourced 0.40 L/kg prior, and PMID:16365055 states no volume. The 0.5 L/kg default now applies and is declared. ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 1.5/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:16365055, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
       }
     },
     "refs": [
@@ -50733,7 +50728,8 @@
         "ka_hr": 0.2,
         "F": 0.8,
         "V_L": 14,
-        "source_pmid": "PMID:12499343"
+        "source_pmid": "PMID:12499343",
+        "note": "V_L 14 IS KEPT AND IS UNSOURCED. PMID:12499343 states no volume, and 0.20 L/kg is one of the shared priors pk.template-volume reports, so this number has no provenance. It is NOT removed because the resolver's 0.5 L/kg default would misstate this compound's distribution by several fold in the opposite direction, and R4 is explicit that deleting a value asserts the default rather than silencing the record. A real source is what this needs."
       }
     },
     "refs": [
@@ -50857,7 +50853,7 @@
         "V_L": 15,
         "F": 0.8,
         "source_pmid": "PMID:23140417",
-        "note": "ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.3/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:23140417, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
+        "note": "V_L 15 KEPT BUT UNSOURCED: PMID:23140417 states no volume and 0.21 L/kg is a shared prior. Not deleted because the 0.5 L/kg default would be worse by several fold. Needs a source. ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.3/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:23140417, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
       }
     },
     "nutrition": {
@@ -52323,8 +52319,8 @@
       "PO": {
         "ka_hr": 1.8,
         "F": 0.7,
-        "V_L": 28,
-        "source_pmid": "PMID:28910200"
+        "source_pmid": "PMID:28910200",
+        "note": "V_L 28 REMOVED AS AN UNSOURCED PER-KILOGRAM PRIOR. 0.40 L/kg is one of the values shared across unrelated compounds that pk.template-volume reports, and PMID:28910200 states no volume of any kind. The resolver now supplies its 0.5 L/kg default, which is a DECLARED assumption that pk.defaulted-volume warns about, in place of an undeclared one wearing a citation. Exposure changes by the ratio of the two, which is under twofold here."
       }
     },
     "refs": [
@@ -52407,14 +52403,13 @@
     "pk": {
       "PO": {
         "F": 0.95,
-        "V_L": 28,
         "source_pmid": "PMID:22561291",
-        "note": "ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 2/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:22561291, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
+        "note": "V_L 28 REMOVED: an unsourced 0.40 L/kg prior, and PMID:22561291 states no volume. The 0.5 L/kg default now applies and is declared. ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 2/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:22561291, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
       },
       "IV": {
-        "V_L": 28,
         "F": 1,
-        "source_pmid": "PMID:22561291"
+        "source_pmid": "PMID:22561291",
+        "note": "V_L 28 REMOVED AS AN UNSOURCED PER-KILOGRAM PRIOR. 0.40 L/kg is one of the values shared across unrelated compounds that pk.template-volume reports, and PMID:22561291 states no volume of any kind. The resolver now supplies its 0.5 L/kg default, which is a DECLARED assumption that pk.defaulted-volume warns about, in place of an undeclared one wearing a citation. Exposure changes by the ratio of the two, which is under twofold here."
       }
     },
     "refs": [
