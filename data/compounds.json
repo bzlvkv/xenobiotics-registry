@@ -1137,7 +1137,8 @@
     "pk": {
       "IV": {
         "V_L": 21,
-        "source_pmid": "PMID:2184971"
+        "source_pmid": "PMID:2184971",
+        "note": "HALF-LIFE PROVENANCE, recorded because a verbatim-match screen wrongly flagged this row as unsourced: it tested the stored 0.0028 h in hours and minutes but not in SECONDS. PMID:2184971 verbatim: \"The drug has a half-life of 0.6 to 10 seconds\". 10 s is 0.002778 h, the stored value at the SLOW endpoint of that range — the endpoint that renders the longest exposure, disclosed rather than averaged (R3). THE VOLUME IS A DIFFERENT MATTER: 21 L is 0.3 L/kg at the reference weight, a per-kilogram prior this abstract does not state (pk.template-volume)."
       }
     },
     "refs": [
@@ -25288,10 +25289,10 @@
     },
     "pk": {
       "PO": {
-        "F": 0.15,
+        "F": 0.14,
         "V_L": 28,
         "source_pmid": "PMID:15591001",
-        "note": "ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.5/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:15591001, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
+        "note": "F 0.15 -> 0.14. PMID:15591001 verbatim: \"bioavailability is 14-18% of dose\" — SUPPLEMENTS, where the same abstract puts DIETARY L-carnitine at 54-87%. 0.15 was neither end. ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.5/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:15591001, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
       },
       "IV": {
         "V_L": 28,
@@ -26523,9 +26524,9 @@
     "pk": {
       "PO": {
         "V_L": 11,
-        "F": 0.69,
+        "F": 0.66,
         "source_pmid": "PMID:6688797",
-        "note": "ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.5/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:6688797, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
+        "note": "F 0.69 -> 0.66. PMID:6688797 verbatim: \"The absolute bioavailabilities of the two tablet preparations were 66% and 72%, respectively\" — 0.69 was their MEAN and is in no source; R3 takes the lower arm, and that spread is formulation. ABSORPTION RATE REMOVED AS UNSOURCED TEMPLATE FILL. 0.5/h was one of eleven round values shared across 121 route rows in this catalog under as many different citations, which cannot be that many independent measurements. Its citation, PMID:6688797, STATES NO PEAK TIME AT ALL, so the rate was not merely unsourced but unfalsifiable against its own source. The resolver now supplies its 1.0/h default, so the peak moves; exposure does not, because the absorption rate cancels out of AUC. A real rate needs a peak time for this compound, which is what to look for."
       },
       "IV": {
         "V_L": 11,

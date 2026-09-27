@@ -7203,3 +7203,29 @@ own decision and disclosure.
 **The batch is specified and deliberately not run here.** Per-record, as Batch 4's absorption-rate
 sweep was, because that sweep's lesson was that a defensible strip needs the citation read one row at
 a time — and it found two rows in this same shape that turned out to be correct.
+
+### First slice of the 12: three rows read, three different verdicts
+
+Reading the twelve none-matched abstracts one at a time, starting with six:
+
+- **`levothyroxine.PO` — a real R3 defect, now fixed.** Stored `F` 0.69 is the **mean of the two
+  figures the paper reports** and appears nowhere in it: PMID:6688797 says *"The absolute
+  bioavailabilities of the two tablet preparations were 66% and 72%, respectively"*. Now **0.66**, the
+  lower arm, which under-states exposure. The two arms are two **tablet preparations**, so that spread
+  is formulation and not measurement error — a record naming one product could justify 0.72.
+- **`l-carnitine.PO` — inside a range but on neither end, now on one.** *"bioavailability is 14-18% of
+  dose"* → **0.14** rather than 0.15. **Scope trap named on the record:** that figure is for
+  **supplements**, while the same abstract puts **dietary** L-carnitine at 54–87% — a fivefold
+  different quantity for one molecule.
+- **`adenosine.IV` — the screen was wrong, not the data.** PMID:2184971 states *"The drug has a
+  half-life of 0.6 to 10 seconds"*, and 10 s **is** the stored 0.0028 h at the slow endpoint. **My
+  screen tested hours and minutes but not seconds**, so it reported a sourced value as unsourced. The
+  quote is now on the record. Its *volume* remains a per-kilogram prior, which is a separate finding.
+
+**The screen has a seconds blind spot**, so some of the 73 "half-life not found" rows are false
+alarms in the same way. A future pass should add ×3600 before trusting that column — and the general
+lesson is the one this batch keeps re-teaching: **the screen orders the work, the abstract decides it.**
+
+`alpha-gpc`, `berberine` and `bromantane` were also read: their abstracts contain **no PK sentence
+with a number at all**, so their stored volumes, F and half-lives are genuinely unsourced and belong
+to the per-record strip pass rather than to a quick fix.
