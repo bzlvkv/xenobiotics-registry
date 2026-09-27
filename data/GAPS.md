@@ -1325,7 +1325,7 @@ contradictions arose. Two drops are worth re-authoring:
 Also note: `alcohol` and `ethanol` had disagreed on the saturable parameters
 themselves (Vmax 136 vs 230 mg/L/h, Km 96 vs 80 mg/L, from PMID:11003200 and
 PMID:3319346 respectively). The merge keeps Holford 1987, the source the Wave 4a
-authoring session chose and the one the ROADMAP records. The other paper's fit
+authoring session chose (a since-deleted roadmap recorded the same choice). The other paper's fit
 remains a legitimate alternative if someone wants to re-verify which better
 matches the registry's dosing range.
 
@@ -6745,3 +6745,36 @@ Three deliberate constraints on how the key is handled:
 
 Both gates pass identically with and without the key, which is the point: the key is an
 optimisation, never a dependency.
+
+## 2026-09-27 — ROADMAP.md deleted, which was the condition it was created under
+
+The file said so itself in its first line, and `authoring/README.md` says there is no roadmap: `pnpm
+report` and this file are the state of the work. The roadmap existed to sequence one known run of
+eight batches plus three tooling items across a session boundary, and every one of them is now
+closed. Keeping it would leave a second source of truth that nothing updates — exactly the failure
+`scripts/report.ts` documents in its own header, where four hand-maintained documents drifted apart
+from each other and from the data.
+
+The one live reference to it in this file has been reworded to stop pointing at a deleted path. The
+two remaining mentions are historical and correct as history: `report.ts` names it among the four
+documents that *used to* hold coverage numbers by hand, and the 2026-09 entry that lists the
+documents deleted for that reason.
+
+**State at the close, all measured:** 1,265 compounds · 230 pathways · 428 targets · `validate` 0
+errors / 82 warnings · `verify` 2,695/2,695 resolved · `verify:quotes` 645 quoted, 0 missing ·
+202 tests.
+
+The nine rules still warning are worth reading as a set, because the shape of what is left changed
+over this run. **Five are standing caveats, and they hold 76 of the 82 findings**:
+`pk.defaulted-volume` (38), `pk.defaulted-ka-slow` (24), `pd.needs-solvable-pk` (12),
+`interactions.inert-kinetics` (1, marked standing this session) and `pk.defaulted-params` (1). The
+four that are not standing hold **six findings between them**: `pk.label-revision` (3, all three
+unpinnable because no US SPL exists), `dose.salt-moiety-unset` (1, `mitoq`),
+`pk.unsolvable-route` (1) and `receptor.unknown-target` (1, the four native-tissue occupancy rows).
+
+`pk.defaulted-ka-slow` **rose from 14 to 24 during this run**, because Batch 4 stripped 78 invented
+absorption rates. That is the intended direction: a rule that counts *silent defaults* should rise
+when a rule that counts *invented values* falls to zero.
+Four rules went to zero over the run — `pd.occupancy-needs-fu`, `pk.template-ka`,
+`pk.unsolvable-default-route` and `compound.retired-alias-clash` — and two new rules were added that
+now also fire nowhere, `pk.label-revision` aside.
