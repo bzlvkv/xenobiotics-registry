@@ -80,8 +80,10 @@ pnpm dev           # the browser client — spot-check the records you touched.
 Everything else you might look for is gone on purpose. There are no dated apply-scripts: the
 JSON files are the source of truth, you edit them directly, and the git diff is the review. There
 is no roadmap; `pnpm report` and [`../data/GAPS.md`](../data/GAPS.md) are the state of the work.
-There is no PK/PD solver; `impliedExposure` in the registry package and the compound page's
-**What the stored values imply** card do the one-compartment arithmetic the hygiene rules need. The
+There is no PK/PD solver; `impliedExposure` and `impliedOccupancy` in the registry package, and the
+compound page's **What the stored values imply** card, do the one-compartment arithmetic the hygiene
+rules need — the PK half and, since 2026-09-27, the PD half that applies R13's free-drug correction
+instead of only warning about it. The
 nutrient-group lint rules left with the food catalog, since no grouping is stored here.
 
 The schema is strict. A field it does not declare, including a misspelled one, fails

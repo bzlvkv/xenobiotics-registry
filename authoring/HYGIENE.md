@@ -393,10 +393,18 @@ roughly `1/fu`, and most affected records are 90-99% protein bound.
 record's `doses.typical` against its own Hill function, the audit found **113 of 213 computable
 pharmacological occupancy rows (53%) at ≥90% occupancy** (sweep) — not a distribution of
 pharmacology. The `fraction_unbound` batches that followed cut it: the same computation today
-reports **50 of 219 (23%)** (live; re-run it with `impliedExposure` from `@xeno/registry`, which
-is what the compound page's implied-values card uses). The 13 biologics all saturating **is
+reports **50 of 219 (23%)** (live). The 13 biologics all saturating **is
 correct** — monoclonals are dosed to saturate by design — and that split is the control showing
 the test discriminates.
+
+**THIS RULE NOW HAS AN IMPLEMENTATION, so do not redo it by hand.** Until 2026-09-27 nothing in the
+repository applied the correction this rule describes — `fraction_unbound` was displayed on a
+compound page and multiplied into nothing — and an author following the sweep above had to remember
+to scale the curve themselves. `impliedOccupancy` in `packages/registry/src/occupancy.ts` does it:
+it resolves a row to a peak occupancy, applies `fu` when and only when the `basis` is an in-vitro
+Ki, and returns `fu: { from: 'default' }` with the bias named in its caveats when the correction is
+missing. `pd.occupancy-flat` **W** reports the rows whose numbers cannot jointly produce a
+dose-response at all.
 
 **Confirmed against humans.** `buspirone`: the model reported 30-39% 5-HT1A occupancy at a
 therapeutic dose where human PET measured "5+/-17%". `duloxetine`: stored SERT ec50 0.000238 mg/L
@@ -556,7 +564,8 @@ Ten checks, cheapest first. Each one has caught a shipped defect.
 | 7 | The abstract quotes a range, and your number is inside it but not an endpoint. | R3. A range interior is not a measurement. |
 | 8 | An apparent volume (`V/F`) sits beside an independently sourced `F`; or a `Vc` from a population fit sits in a one-compartment slot. | R15. Divides the dose by F twice. |
 | 9 | The Cmax or AUC you divided by was measured at steady state, or in patients where your half-life is from healthy volunteers. | R9 and R15. Mixing populations is the defect the audit spends most of its time removing. |
-| 10 | Open the record's **What the stored values imply** card. Does Tmax and Cmax match the paper? Is any input you meant to store marked `default`? Then set Cmax against each occupancy row's `ec50_mg_l`: Cmax at 10× EC50 is about 91% occupancy and at 100× is about 99%, so a ratio like that at an ordinary dose needs explaining. | R13 and R15. Before the fu correction 53% of pharmacological rows sat ≥90%; it is 23% now, so a saturated row is no longer the norm. |
+| 10 | Open the record's **What the stored values imply** card. Does Tmax and Cmax match the paper? Is any input you meant to store marked `default`? | R15. |
+| 10b | For occupancy, call `impliedOccupancy` rather than comparing Cmax to `ec50_mg_l` by eye — **the by-eye version omits `fu` and so commits R13 while checking for it.** A peak outside 1–99% means the dose, exposure, keo, unbound fraction and affinity cannot jointly produce a dose-response; `pd.occupancy-flat` **W** lists them. Both readings are real: `cbd` at 0.004% for CB1 is correct pharmacology, `montelukast` at 99.9% with no `fu` is not. | R13. Before the fu correction 53% of pharmacological rows sat ≥90%; it is 23% now. |
 
 Then, before `pnpm validate`:
 

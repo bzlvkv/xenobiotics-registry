@@ -13,6 +13,17 @@ Rate-limit keys, where a host offers one, go in a local `.env` (gitignored).
 
 The plain list, one host per line for pasting into an allowlist, is at the end of this file.
 
+**A host being on this list means an authoring pass wants it, not that it works.** Four entries were
+tested on 2026-09-27 and behave differently from what the table implies; the findings are in
+`data/GAPS.md` and the short version is here, because the cost of rediscovering them is hours.
+
+| Host | Verified 2026-09-27 |
+| --- | --- |
+| `api.elsevier.com` | Reachable, and the key is **not entitled**: 403 `AUTHENTICATION_ERROR` on every view of every article including `META`, on the `entitlement` endpoint, and on an **open-access control**. Bound to an institutional IP or an InstToken, so **no allowlist entry fixes it**. Not a full-text route from here. |
+| `www.guidetopharmacology.org` | The **CSV works** (`/DATA/targets_and_families.csv`, 1.9 MB, GtoPdb 2026.3) and is what `pnpm receptors:fetch` uses. The **Web Services** (`/services/…`) now return **401 without an API key**. Use the CSV. |
+| `pmc.ncbi.nlm.nih.gov` | Fine one at a time; **reCAPTCHA on a sweep** — 29 of 42 articles blocked at a 0.4 s interval. For bulk full text use Europe PMC's `…/rest/PMC{id}/fullTextXML`, which has no such gate and returned 31 of the same 42 cleanly. |
+| `api.unpaywall.org`, `api.openalex.org`, `api.core.ac.uk` | **Outside this environment's egress policy** (`connect_rejected`). Listed below as wanted; not currently reachable. |
+
 ## Tier 1 — called by the repository's own scripts, or named in WORKFLOW.md
 
 | Host | Used for |
@@ -23,7 +34,7 @@ The plain list, one host per line for pasting into an allowlist, is at the end o
 | `www.ncbi.nlm.nih.gov` | Redirects, MeSH, Gene, and older PMC paths. |
 | `pubchem.ncbi.nlm.nih.gov` | `mw_g_mol`, re-queried during the batch. |
 | `dailymed.nlm.nih.gov` | SPL labels for `source_label` provenance. |
-| `www.guidetopharmacology.org` | `pnpm receptors:fetch`; `gtp_id` lookups for new `nonGpcrTargets`. |
+| `www.guidetopharmacology.org` | `pnpm receptors:fetch`; `gtp_id` lookups for new `nonGpcrTargets`. **Use the CSV, not the Web Services** — see the table above. |
 | `registry.npmjs.org` | `pnpm install`. |
 
 ## Tier 2 — finding open-access full text
@@ -37,9 +48,9 @@ Where a GAPS row says "full text not retrieved". The value must still be read in
 | `ftp.ncbi.nlm.nih.gov` | PMC open-access bulk packages. |
 | `doi.org`, `dx.doi.org` | Resolving DOIs recorded in older GAPS rows. |
 | `api.crossref.org` | DOI metadata and licence; whether a paper has gone open access since the row was written. |
-| `api.unpaywall.org`, `api.openalex.org` | Open-access location for a DOI. |
+| `api.unpaywall.org`, `api.openalex.org` | Open-access location for a DOI. **Not reachable here — see the table above.** |
 | `api.semanticscholar.org` | Citation graph and full-text links. |
-| `api.core.ac.uk`, `core.ac.uk` | Open-access aggregator. |
+| `api.core.ac.uk`, `core.ac.uk` | Open-access aggregator. **Not reachable here — see the table above.** |
 | `scholar.archive.org`, `web.archive.org`, `archive.org` | Archived copies; a label revised in place can be read at its cited effective date. |
 
 ## Tier 3 — regulatory labels and assessment reports

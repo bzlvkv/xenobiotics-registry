@@ -116,6 +116,23 @@ re-chased.
 **Abstracts can be truncated.** Older records end with `(ABSTRACT TRUNCATED AT 400 WORDS)`. The
 value may be in the missing part, so that is "not retrieved" too.
 
+**When `efetch db=pmc` returns front matter, two other routes often work**, and which one you use
+matters as soon as you need more than one paper:
+
+```sh
+# one article, renders tables that efetch omits — but rate-limited by reCAPTCHA
+curl -s -H 'User-Agent: Mozilla/5.0' "https://pmc.ncbi.nlm.nih.gov/articles/PMC3281520/"
+# a SWEEP: an API, no reCAPTCHA, open-access subset only
+curl -s "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3281520/fullTextXML"
+```
+
+The article route is how three values were read this month that `efetch` could not reach. **It is
+not for bulk work:** fetching 42 articles at a 0.4 s interval got **29 of them answered with
+reCAPTCHA**, which looks like a content miss and is not one. Europe PMC's `fullTextXML` has no such
+gate and returned 31 of the same 42 cleanly, so **use the API for a sweep and the article route for
+the one paper it cannot serve.** Resolve a PMC id to its PMID through the converter rather than from
+memory: `https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles/?ids=PMC3281520&format=json`.
+
 **A full-text value may be stored**, and it is often the only place a volume or an `fu` is printed.
 Cite the same `source_pmid` and say **"full text"** in the note beside the quote, so a later reader
 does not check the abstract, fail to find the number, and file it as a miscitation. The rule an

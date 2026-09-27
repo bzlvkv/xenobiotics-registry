@@ -53,7 +53,8 @@ pnpm check      # format + lint + typecheck + test + validate
 ## Code
 
 The only library is `packages/registry` (types, zod schema, loader, queries,
-lint rules). `packages/web` is a read-only browsing client. `scripts/` holds the
+lint rules, and the `impliedExposure` / `impliedOccupancy` spot-checks that resolve a record's
+stored numbers into an implied curve and occupancy). `packages/web` is a read-only browsing client. `scripts/` holds the
 gates. There is no database, no app and no build pipeline for the data: the
 JSON files are the source of truth and changes are reviewed as git diffs.
 

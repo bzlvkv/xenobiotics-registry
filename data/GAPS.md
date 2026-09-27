@@ -6670,9 +6670,10 @@ from fabricating a third value to support a second one is the gate working exact
 
 Two things were prepared and then reverted with it, and are recorded here as the unlock: an `eprs`
 entry in `nonGpcrTargets` (gene EPRS1, class enzyme, **`gtp_id: 0`** — the file's standing convention
-for a target GtoPdb does not carry, already used by six entries), and an `fu_note`. **GtoPdb's Web
-Services now return 401 without an API key**, so no real `gtp_id` can be looked up from this
-environment even if one exists. The sequence to author this row is: PK for halofuginone → keo →
+for a target GtoPdb does not carry, already used by six entries), and an `fu_note`. **Corrected
+later the same day:** the reason first given here was that GtoPdb's Web Services return 401 without
+an API key. They do, but that was not the binding reason and the conclusion did not depend on it —
+see the closing section of this file for what the CSV the repo actually uses shows. The sequence to author this row is: PK for halofuginone → keo →
 catalog entry → the Ki above.
 
 Also a distinction worth keeping: this is a **derived** Ki, taken from the slope of IC50 against
@@ -6836,8 +6837,8 @@ the gate.
 ### What is stored
 
 `eprs` added to `nonGpcrTargets` (gene EPRS1, class enzyme, **`gtp_id: 0`** — this file's convention
-for a target GtoPdb does not carry, already used by six entries; GtoPdb's Web Services return 401
-without an API key, so no id could be looked up). The row: Ki **18.3 nM → ec50 0.00758901 mg/L**,
+for a target GtoPdb does not carry, already used by six entries; see the closing section for why,
+which is not the 401 first recorded here). The row: Ki **18.3 nM → ec50 0.00758901 mg/L**,
 `basis: in_vitro_ki`, inhibitor.
 
 Two corrections made while checking the source rather than trusting the first read:
@@ -7094,3 +7095,48 @@ band by arithmetic — it "confirmed" `amiodarone` at 14,000 mg and `zaleplon` a
 **The model cannot identify this defect. Only the labels can.**
 
 `pd.occupancy-flat` 46 → 43 rows.
+
+## 2026-09-27 — cleanup: three verified facts about this environment's sources
+
+A tidying pass over what the session learned about its own sources, because
+`authoring/NETWORK.md` is read *before* a session and three of its entries promised
+more than they deliver.
+
+### `gtp_id: 0` on `eprs` was right, and my reason for it was wrong
+
+I recorded that GtoPdb's Web Services return **401 without an API key** — true, `/services/targets`
+does — and concluded that "no id could be looked up even if one exists". **That was not the binding
+reason.** This repository does not use the Web Services at all: `scripts/fetch-receptors.ts` pulls
+`guidetopharmacology.org/DATA/targets_and_families.csv`, which **still downloads fine** (HTTP 200,
+1.9 MB, GtoPdb **2026.3**, published 2026-09-16). I had the lookup available and did not use it.
+
+Checking it properly gives a better answer and a trap. GtoPdb **does** have an *"Aminoacyl-tRNA
+synthetases"* family — and every member is ***Plasmodium falciparum***, including **"Plasmodium
+falciparum prolyl-tRNA synthetase" (target id 3056)**. There is **no human EPRS1 in GtoPdb**, so
+`gtp_id: 0` stands.
+
+**Why that family is Plasmodium-only is the pharmacology of this very compound:** halofuginone
+derives from febrifugine, the antimalarial principle of Changshan, so the prolyl-tRNA synthetase
+GtoPdb catalogues is the parasite's. **The trap is obvious once stated** — target id 3056 looks like
+exactly the anchor an author wants for `eprs`, and attaching it would hang a *Plasmodium* enzyme id on
+a human record. R8 in a place R8 does not usually reach: the species mismatch is in the *catalog*,
+not in the measurement.
+
+### `api.elsevier.com` is reachable and the key is not entitled
+
+Worth separating, because only one half is fixable by an allowlist. The host now answers (the proxy
+stopped rejecting CONNECT once it was allowlisted), and Elsevier returns **403
+`AUTHENTICATION_ERROR` on every view of every article** — including `META`, the `entitlement`
+endpoint, and **an open-access control article**, while ScienceDirect search returns 401. The key's
+account is not entitled from this network, which is bound to a registered institutional IP or an
+InstToken. **No allowlist entry fixes that**, so NETWORK.md should not list it as a full-text route.
+
+### Bulk PMC fetching needs the API, not the article route
+
+Fetching 42 PMC articles through `pmc.ncbi.nlm.nih.gov/articles/PMCn/` tripped **reCAPTCHA on 29 of
+them** — the rate, not the content. `www.ebi.ac.uk/europepmc/webservices/rest/PMC{id}/fullTextXML`
+has no such gate and returned 31 of the 42 cleanly. Both hosts are already in NETWORK.md; what was
+missing is **which one to use for a sweep**.
+
+Also still outside the egress policy, confirmed by `connect_rejected`: `api.unpaywall.org`,
+`api.openalex.org`, `api.core.ac.uk`. NETWORK.md lists all three as needed; none is reachable.
