@@ -220,3 +220,47 @@ describe('normalizeForMatch — renderings that are the same sentence', () => {
     expect(normalizeForMatch('A·B')).not.toBe(normalizeForMatch('A.B'));
   });
 });
+
+describe('quoted spans pair by parity, not by scanning', () => {
+  it('does not read the prose between two quotations as a quotation', () => {
+    // metronidazole: `>90%` is under the floor, so a scanning regex skipped it
+    // and matched the thirty characters of prose that followed.
+    const note =
+      'Verbatim: the stored value was a lower BOUND (">90%") while the measured figure is "approximately 1" here.';
+    expect(quotedClaimsIn(note).map((q) => q.quote)).toEqual(['approximately 1']);
+  });
+
+  it('still takes two genuine quotations in one clause', () => {
+    const note = 'Verbatim: "the first quoted sentence" and "the second quoted sentence".';
+    expect(quotedClaimsIn(note).map((q) => q.quote)).toEqual([
+      'the first quoted sentence',
+      'the second quoted sentence',
+    ]);
+  });
+});
+
+describe('quotations pair over the whole note, not per clause', () => {
+  it('does not read the prose between two quotations as a quotation', () => {
+    // metronidazole: `>90%` is under the floor, so a scanner skipped it and
+    // matched the thirty characters of prose that followed.
+    const note =
+      'Verbatim: the stored value was a lower BOUND (">90%") while the measured figure is "approximately 1" here.';
+    expect(quotedClaimsIn(note).map((q) => q.quote)).toEqual(['approximately 1']);
+  });
+
+  it('keeps a quotation that contains a full stop, which straddles a clause', () => {
+    const note =
+      'PMID:123 verbatim: "the first sentence ends. and the second one follows" after it.';
+    expect(quotedClaimsIn(note)).toEqual([
+      { quote: 'the first sentence ends. and the second one follows', pmid: '123' },
+    ]);
+  });
+
+  it('does not report the trailing prose after such a quotation', () => {
+    const note =
+      'PMID:9 verbatim: "a quoted sentence here. and more of it" — editorial gloss follows.';
+    expect(quotedClaimsIn(note).map((q) => q.quote)).toEqual([
+      'a quoted sentence here. and more of it',
+    ]);
+  });
+});

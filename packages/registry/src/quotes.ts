@@ -31,7 +31,7 @@
  * script. Nothing here fetches.
  */
 
-import { describesStoredValue, splitClauses } from './lint';
+import { describesStoredValue } from './lint';
 import type { Registry } from './types';
 
 /** A verbatim-quote claim: this note says this text appears in this paper. */
@@ -75,7 +75,61 @@ const CITES_FULL_TEXT = /\bfull[-\s]text\b/i;
  * sentence ("human M3", "Ki"), and matching one proves nothing while failing one
  * is almost always the abstract wording a label differently.
  */
-const QUOTED_SPAN = /"([^"]{12,})"|“([^”]{12,})”/g;
+const MIN_QUOTE = 12;
+
+/** A quotation and the offset in the note where it opened. */
+interface Span {
+  quote: string;
+  start: number;
+}
+
+/**
+ * Every quotation in a note, paired by PARITY over the WHOLE note.
+ *
+ * Two things defeat a regex that scans for the next `"…"` long enough to count,
+ * and the gate hit both the first time it could see a compound's `notes`.
+ *
+ * A SHORT QUOTED TERM SHIFTS THE PARITY. metronidazole's note reads `a lower
+ * BOUND (">90%") while the measured figure is "approximately 1"`. `>90%` is
+ * under the floor, so a scanner skips it and then matches `") while the
+ * measured figure is "` — thirty characters of this catalog's own prose,
+ * reported as a quotation the abstract does not contain.
+ *
+ * A QUOTATION MAY CONTAIN A FULL STOP, so it straddles a clause boundary and
+ * per-clause parity is wrong on BOTH sides of the split. That is why pairing
+ * happens over the note and the clause is only asked for afterwards, from the
+ * offset where the quotation opened.
+ *
+ * Curly pairs are taken first and blanked to spaces, which preserves every
+ * offset, so a curly apostrophe cannot disturb the straight-quote parity.
+ */
+function spansIn(note: string): Span[] {
+  const out: Span[] = [];
+  for (const m of note.matchAll(/“([^”]{12,})”/g)) {
+    out.push({ quote: m[1]!.trim(), start: m.index });
+  }
+  const flat = note.replace(/“[^”]*”/g, (m) => ' '.repeat(m.length));
+  const marks: number[] = [];
+  for (let i = 0; i < flat.length; i++) if (flat[i] === '"') marks.push(i);
+  for (let i = 0; i + 1 < marks.length; i += 2) {
+    const quote = flat.slice(marks[i]! + 1, marks[i + 1]!).trim();
+    if (quote.length >= MIN_QUOTE) out.push({ quote, start: marks[i]! });
+  }
+  return out;
+}
+
+/** Clause texts with their end offsets, so a quotation traces to the one it opened in. */
+function clauseRanges(note: string): { end: number; text: string }[] {
+  const out: { end: number; text: string }[] = [];
+  const re = /(?<=[.;])\s+/g;
+  let start = 0;
+  for (let m = re.exec(note); m; m = re.exec(note)) {
+    out.push({ end: m.index, text: note.slice(start, m.index) });
+    start = m.index + m[0].length;
+  }
+  out.push({ end: note.length, text: note.slice(start) });
+  return out;
+}
 
 /**
  * Every quoted span in a note that claims to be quoting its cited abstract.
@@ -138,16 +192,15 @@ export interface NoteQuote {
  */
 export function quotedClaimsIn(note: string): NoteQuote[] {
   if (!CLAIMS_VERBATIM.test(note)) return [];
+  const clauses = clauseRanges(note);
   const out: NoteQuote[] = [];
-  for (const clause of splitClauses(note)) {
+  for (const span of spansIn(note)) {
+    const clause = clauses.find((c) => span.start <= c.end)?.text ?? note;
     if (!describesStoredValue(clause)) continue;
     const ids = [...new Set([...clause.matchAll(INLINE_PMID)].map((m) => m[1]!))];
     const pmid = ids.length === 1 ? ids[0]! : null;
     if (pmid !== null && citesFullText(clause)) continue;
-    for (const m of clause.matchAll(QUOTED_SPAN)) {
-      const quote = (m[1] ?? m[2] ?? '').trim();
-      if (quote) out.push({ quote, pmid });
-    }
+    out.push({ quote: span.quote, pmid });
   }
   return out;
 }
