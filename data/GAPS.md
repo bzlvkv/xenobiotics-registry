@@ -7671,3 +7671,32 @@ full-text tables, which Rule 1 forbids citing without fetching — and R2's own 
 needs a full-text source (PMC open-access, a label, or IUPHAR/BPS with a citable per-value PMID), not
 more abstract searches. The 51-candidate list is in `scratchpad`/regenerable from `gpcr.ts`; the
 constraint is the source tier, not the candidate supply.
+
+## 2026-09-28 — the full-text path, built so the next session can use it
+
+The PD-coverage bottleneck is the source tier: affinities live in full-text tables, not abstracts. This
+session added the fetch that reaches them, so a future pass is not limited to the ~1-in-8 abstract hit
+rate recorded above.
+
+`pnpm fetch:fulltext <pmid> [--mentions <term>]` (`scripts/fetch-fulltext.ts`, pure helpers in
+`packages/registry/src/pmc.ts`): resolves the PMID to the article's own PMCID (first
+`<ArticleId IdType="pmc">`; later ones are reference-list entries), pulls the **BioC** full text — body
+**and table cells** as plain-text passages — and prints it, filterable to passages naming a compound.
+
+**Verified 2026-09-28.** BioC (`www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_json/PMC{id}/unicode`)
+returns full text with no reCAPTCHA and no key at a 1 s pace, unlike `pmc.ncbi.nlm.nih.gov` which gates
+sweeps. Its host was already Tier 1. Three explicit outcomes: passages; `not in PMC` (no full text
+exists); `not in the OA subset` (publisher-blocked, e.g. Baker 2005 / PMC1576008 — the β-blocker
+affinity table that would have unlocked betaxolol, and which is exactly the non-fetchable case, so
+betaxolol stays blocked honestly).
+
+**It widens what can be sourced, not how.** A table value still needs a verbatim quote, still says
+"full text" for the `verify:quotes` exemption (checked by a human, not the gate), and is still bound by
+R2 — the compound must be the table row's subject, not a comparator. WORKFLOW §3 now carries the
+authoring procedure; NETWORK.md carries the verified endpoint.
+
+**For the next PD session:** the 51-candidate GPCR list regenerates from the `gpcr.ts` approach in
+scratchpad; for each, find a characterization paper, `pnpm fetch:fulltext` it, and read the affinity
+table. That converts the pool at full-text yield rather than abstract yield. `fraction_unbound` (protein
+binding, also a full-text/label number) is reachable the same way and closes the `pd.occupancy-needs-fu`
+warnings that in-vitro-Ki rows carry.

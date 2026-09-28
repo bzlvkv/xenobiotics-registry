@@ -116,3 +116,7 @@ export {
   verbatimClaims,
 } from './quotes';
 export type { QuoteClaim, QuoteVerdict, OrphanQuote } from './quotes';
+
+// The full-text path, for the affinities and bindings abstracts do not carry.
+export { firstPmcId, biocUrl, passagesFromBioC, passagesMentioning } from './pmc';
+export type { PmcId, Passage } from './pmc';

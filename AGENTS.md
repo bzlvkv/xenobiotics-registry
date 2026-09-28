@@ -44,6 +44,7 @@ pnpm validate --since /tmp/before.json  # only what your edit changed
 pnpm verify     # every cited PMID against NCBI. Network, about 25 s.
 pnpm verify:quotes # every verbatim quote against the abstract it cites. Network, ~6 s.
 pnpm report     # what is authored and what is open, derived from the data
+pnpm fetch:fulltext <pmid> # open-access full text (body + tables) for a value an abstract omits. Network.
 pnpm test       # registry package tests, including the no-field-loss check
 ./live.sh       # validate, then serve the browsing client for a spot-check
 pnpm dev        # the client alone, without the install check or the gate

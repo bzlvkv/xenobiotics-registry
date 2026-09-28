@@ -13,6 +13,7 @@
     "verify": "tsx scripts/verify-citations.ts",
     "verify:quotes": "tsx scripts/verify-quotes.ts",
     "report": "tsx scripts/report.ts",
+    "fetch:fulltext": "tsx scripts/fetch-fulltext.ts",
     "receptors:fetch": "tsx scripts/fetch-receptors.ts",
     "test": "pnpm -r test",
     "typecheck": "tsc --noEmit -p tsconfig.json && pnpm -r typecheck",

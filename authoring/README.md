@@ -28,6 +28,7 @@ pnpm validate      # schema + loaders + lint rules. Seconds. Must be clean befor
 pnpm verify        # every cited PMID against NCBI ESummary. Minutes, network.
 pnpm verify:quotes # every verbatim quote against the abstract it names. Seconds, network.
 pnpm report        # the coverage report: what is authored, what is open, which keys are unknown.
+pnpm fetch:fulltext <pmid> # open-access full text (body + tables), for affinities and bindings abstracts omit. Network.
 pnpm dev           # the browser client — spot-check the records you touched.
 ```
 

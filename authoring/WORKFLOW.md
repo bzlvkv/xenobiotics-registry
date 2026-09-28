@@ -164,6 +164,33 @@ Ask for the quantity by the name the literature uses, not by the name the schema
 | `interactions[].kinetics.ki_uM` | an in-vitro Ki, **or** a clinical AUC ratio to calibrate from | declare `ki_basis`; store `auc_ratio` and `assumed_perp_uM` so the arithmetic reconstructs |
 | `mw_g_mol` | PubChem, re-queried during the batch | not carried over from a previous search report; not stored at all for a polydisperse polymer |
 
+### When the number is in a table, not the abstract — `pnpm fetch:fulltext`
+
+`receptor_occupancy[].ec50_mg_l`, `fraction_unbound`, and often `V_L` are the fields that abstracts do
+not print — the value is in a table in the full text. The 2026-09-28 PD-coverage screen made this
+concrete: ~25 abstract searches for occupancy affinities yielded **one** citable Ki. Rule 1 forbids
+citing a table you have not fetched, so fetch it:
+
+```
+pnpm fetch:fulltext <pmid>                    # the whole open-access body, section-labelled
+pnpm fetch:fulltext <pmid> --mentions aprepitant   # only the passages naming your compound
+```
+
+It resolves the PMID to the article's own PMCID, pulls the BioC full text (body **and** table cells),
+and prints it. Three outcomes, each explicit: passages printed; `not in PMC` (no full text exists — the
+abstract is all there is); or `not in the PMC open-access subset` (the paper is in PMC but
+publisher-blocked, e.g. Baker 2005 / PMC1576008 — do **not** cite it, the table is not fetched).
+
+**Full text widens what you can source; it does not loosen how.** A value read from a fetched table:
+1. still needs a **verbatim quote** of the sentence or cell in the note;
+2. is exempt from `verify:quotes` only because it is not the abstract — so **write "full text" in the
+   note** (that is the detectable exemption `citesFullText` reads) and know that **you**, not the gate,
+   are the check;
+3. is still subject to **R2**: the compound must be the row's subject, not a comparator or reference
+   standard in the same table. A table lists many drugs; only one of them is yours.
+
+Convert an affinity as `ec50_mg_l = Ki_nM × mw_g_mol / 1e6`, and write the arithmetic on the record.
+
 ### Recording a verified value
 
 Three things go in together, or it is not authored:

@@ -21,6 +21,7 @@ tested on 2026-09-27 and behave differently from what the table implies; the fin
 | --- | --- |
 | `api.elsevier.com` | Reachable, and the key is **not entitled**: 403 `AUTHENTICATION_ERROR` on every view of every article including `META`, on the `entitlement` endpoint, and on an **open-access control**. Bound to an institutional IP or an InstToken, so **no allowlist entry fixes it**. Not a full-text route from here. |
 | `www.guidetopharmacology.org` | The **CSV works** (`/DATA/targets_and_families.csv`, 1.9 MB, GtoPdb 2026.3) and is what `pnpm receptors:fetch` uses. The **Web Services** (`/services/…`) now return **401 without an API key**. Use the CSV. |
+| `www.ncbi.nlm.nih.gov/research/bionlp/…` (BioC) | **Verified 2026-09-28.** The BioC full-text API (`/RESTful/pmcoa.cgi/BioC_json/PMC{id}/unicode`) returns body **and tables** as plain-text passages, **no reCAPTCHA and no key**, at a 1 s pace. This is what `pnpm fetch:fulltext` uses. Host is already Tier 1 (`www.ncbi.nlm.nih.gov`). Only the OA subset resolves; a non-OA id returns an HTML page the script reports as such. |
 | `pmc.ncbi.nlm.nih.gov` | Fine one at a time; **reCAPTCHA on a sweep** — 29 of 42 articles blocked at a 0.4 s interval. For bulk full text use Europe PMC's `…/rest/PMC{id}/fullTextXML`, which has no such gate and returned 31 of the same 42 cleanly. |
 | `api.unpaywall.org`, `api.openalex.org`, `api.core.ac.uk` | **Outside this environment's egress policy** (`connect_rejected`). Listed below as wanted; not currently reachable. |
 
