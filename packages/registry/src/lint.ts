@@ -1798,6 +1798,34 @@ export function lintRegistry(registry: Registry): Finding[] {
         `dose_moiety_fraction ${c.dose_moiety_fraction} is set but no dose_moiety_note records the salt, the analyte and the arithmetic — a bare stoichiometric constant is unreviewable`,
       );
     }
+    if (c.mg_per_iu != null && !c.iu_note) {
+      warn(
+        c.slug,
+        'dose.iu-note',
+        `mg_per_iu ${c.mg_per_iu} is set but no iu_note records the substance, the pharmacopoeial equivalence and the arithmetic — an unexplained potency-to-mass factor is unreviewable, and a wrong one scales every concentration on the record`,
+      );
+    }
+    // An IU-dosed route with authored PK that renders NOTHING, which is the state
+    // four records were in: a cited half-life, a cited pk block, and no curve,
+    // because `impliedExposure` refuses an IU dose it cannot convert. Scoped to
+    // routes that actually have PK, since an IU dose on a route with no pk block is
+    // not withholding anything.
+    for (const [route, pk] of pkRoutes(c)) {
+      // pkRoutes widens the route to `string`, so index the dose map the same way.
+      const d = (c.doses as Record<string, { unit?: string } | undefined>)[route];
+      if (d?.unit !== 'IU' || c.mg_per_iu != null) continue;
+      warn(
+        c.slug,
+        'dose.iu-unconverted',
+        `doses.${route} is in IU and no mg_per_iu is stored, so this route yields no curve at all despite carrying authored PK (${Object.keys(
+          pk,
+        )
+          .filter((k) => k !== 'note' && k !== 'source_pmid' && k !== 'source_label')
+          .join(
+            ', ',
+          )}) — the conversion is a pharmacopoeial definition and needs a source, not a guess`,
+      );
+    }
     // The inverse: a record whose prose says the dose is a salt while pk[] describes
     // the base, with no fraction set, is silently overstating every concentration by
     // the counter-ion's share.

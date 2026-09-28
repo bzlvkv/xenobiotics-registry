@@ -116,8 +116,17 @@ export function impliedExposure(
   else {
     const d = c.doses[route];
     if (!d) return { ok: false, route, reason: 'no dose is stored for this route' };
-    if (d.unit === 'IU') return { ok: false, route, reason: 'the dose is in IU, not a mass' };
-    dose = d.typical * MG_PER_UNIT[d.unit];
+    if (d.unit === 'IU') {
+      // An IU carries no mass until the record says what its mass is. The equivalence
+      // is a pharmacopoeial definition per substance, so it is stored, never guessed.
+      if (c.mg_per_iu == null) {
+        return { ok: false, route, reason: 'the dose is in IU and no mg_per_iu is stored' };
+      }
+      dose = d.typical * c.mg_per_iu;
+      caveats.push(`dose converted from ${d.typical} IU at mg_per_iu ${c.mg_per_iu}`);
+    } else {
+      dose = d.typical * MG_PER_UNIT[d.unit];
+    }
   }
   if (c.dose_moiety_fraction != null) {
     dose *= c.dose_moiety_fraction;

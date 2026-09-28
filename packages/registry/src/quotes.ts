@@ -295,7 +295,16 @@ function claimsIn(
   }
   const rec = node as Record<string, unknown>;
   const rowPmid = barePmid(rec.source_pmid) ?? barePmid(rec.pmid);
-  for (const key of ['note', 'notes', 'fu_note', 'dose_moiety_note']) {
+  // ANY key whose name ends in `note` or `notes`, rather than a list of the four
+  // that existed when this was written. The enumerated version was a standing bug
+  // waiting for the next field: `iu_note` was added on 2026-09-28 with two verbatim
+  // conversion quotes, and the gate silently checked NEITHER, because the name was
+  // not on the list. That is the same failure this file's own header records — twenty
+  // pathway-diagram citations went unchecked for as long as the enumerating version
+  // of `allCitations` existed — reproduced by the author who had just read it.
+  // A suffix test covers every note-ish field the schema has now and every one it
+  // gains later, which is the property `claimsIn` was already trying to have.
+  for (const key of Object.keys(rec).filter((k) => /note$|notes$/.test(k))) {
     const text = rec[key];
     if (typeof text !== 'string') continue;
     const origin = path ? `${path}.${key}` : key;

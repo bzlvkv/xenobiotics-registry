@@ -48,6 +48,15 @@ export const LINT_RULES: Readonly<Record<string, RuleInfo>> = {
     level: 'error',
     summary: 'Neither authored PK nor a pk_unauthored reason: nobody has looked at this record.',
   },
+  'dose.iu-note': {
+    level: 'warning',
+    summary: 'mg_per_iu is set with no iu_note, so an unreviewable factor scales every dose.',
+  },
+  'dose.iu-unconverted': {
+    level: 'warning',
+    summary:
+      'An IU-dosed route carries authored PK but no mg_per_iu, so it renders no curve at all.',
+  },
   'dose.moiety-note': {
     level: 'warning',
     summary: 'dose_moiety_fraction is set with no note recording the salt and the arithmetic.',

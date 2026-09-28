@@ -230,6 +230,19 @@ export const compoundSchema = z.strictObject({
   // requires the note alongside it.
   dose_moiety_fraction: z.number().gt(0).max(1).optional(),
   dose_moiety_note: z.string().max(600).optional(),
+  // Milligrams per international unit, for a record whose doses[] are in IU.
+  // An IU is a BIOLOGICAL potency unit and its mass equivalence is fixed by a
+  // pharmacopoeial definition, per substance — 1 IU is 0.025 mcg of vitamin D3 and
+  // 1 mg of dl-alpha-tocopheryl acetate, which are not the same kind of number at
+  // all. So it cannot be a constant in the resolver and it cannot be inferred from
+  // the molecular weight; it has to be stored per record, with the source that
+  // states it, exactly as `dose_moiety_fraction` is.
+  //
+  // Without it an IU-dosed route renders nothing: `impliedExposure` refuses the dose
+  // rather than guessing, which was right and is why 4 records with authored PK and
+  // a cited half-life produced no curve at all.
+  mg_per_iu: z.number().positive().optional(),
+  iu_note: z.string().max(600).optional(),
   // Fraction unbound in plasma, (0, 1]. Absent means 1.0 (no correction), so a
   // record without it keeps its pre-correction occupancy curve.
   fraction_unbound: z.number().gt(0).max(1).optional(),

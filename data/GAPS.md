@@ -7529,3 +7529,58 @@ IUPHAR/BPS, so a hand-added entry would be overwritten and its id would have to 
 **family** anchor rather than a target one. **Deliberately not guessed here.** To unlock: extend
 `fetch-receptors.ts` to pull IUPHAR family ids alongside target ids, then catalogue `alpha_1` and
 `muscarinic` as family entries with `gene: null`.
+
+## 2026-09-28 — making IU-dosed records simulatable: `mg_per_iu`
+
+**Why four records with authored PK and a cited half-life rendered nothing.** `impliedExposure`
+refused their dose outright: *"the dose is in IU, not a mass"*. That refusal was correct — an IU is a
+unit of **biological potency**, and its mass equivalence is fixed per substance by a pharmacopoeial
+definition. 1 IU is **0.025 mcg** of cholecalciferol and **1 mg** of dl-α-tocopheryl acetate, a factor
+of **40,000** apart, so the resolver cannot hold a constant and cannot derive one from molecular weight.
+
+`mg_per_iu` + `iu_note` now store it per record, exactly as `dose_moiety_fraction` +
+`dose_moiety_note` store the salt-to-base correction, with two lint rules on the same pattern:
+`dose.iu-note` (a bare factor is unreviewable) and `dose.iu-unconverted` (an IU route carrying PK that
+therefore renders nothing). The second rule named all four blocked records immediately.
+
+**11 IU-dosed routes exist**; 4 carry PK: `cholecalciferol.PO`, `tocopheryl-acetate.PO`,
+`calcitonin.SC`, `oxytocin.IV`.
+
+### Only cholecalciferol could be sourced
+
+`mg_per_iu` **2.5e-5**, from two independent abstracts that agree exactly:
+
+- PMID:38477739 — *"a weekly dose of 10 000 international units (250 micrograms) of vitamin D3"* →
+  250/10000 = 0.025 mcg/IU
+- PMID:28187226 — *"Sixty micrograms (2400 IU)/d of D3"* → 60/2400 = 0.025 mcg/IU
+
+Two trials printing the same factor is what a pharmacopoeial definition looks like, as distinct from a
+measurement. The stored 2333 IU now resolves to **0.0583 mg**. PK-simulatable: **614 → 615**.
+
+### The other three: searched and not found
+
+`tocopheryl-acetate` (1 IU = 1 mg dl-α-tocopheryl acetate), `calcitonin` (salmon calcitonin IU/mg
+potency) and `oxytocin` (1 IU ≈ 1.68 mcg) are all **pharmacopoeial definitions that no indexed abstract
+states in a form this session could fetch**. Queries tried: `vitamin+E+IU+conversion+milligram+tocopherol`,
+`alpha-tocopheryl+acetate+international+unit+milligram+equivalence`, `salmon+calcitonin+4500+IU`,
+`salmon+calcitonin+international+units+per+milligram+potency`, `oxytocin+international+unit+microgram+equivalent`,
+`oxytocin+1.68+microgram` — the last returns papers using "5 iu oxytocin" without any mass equivalence.
+
+**To unlock:** a USP or Ph. Eur. monograph, which is a `source_label` rather than a PMID. Rule 1 forbids
+citing one not fetched, and these are paywalled, so the three keep their `dose.iu-unconverted` warning
+until someone has the monograph in hand. That is the honest state: the conversion is not unknown to
+pharmacy, it is unavailable to this gate.
+
+### And a third instance of the gate-not-looking-where-the-data-is shape
+
+`iu_note` was authored with two verbatim quotes and `verify:quotes` checked **neither**, because
+`claimsIn` enumerated four note field names and the new one was not among them. **`quotes.ts`'s own
+header records this exact failure** — twenty pathway-diagram citations went unchecked for as long as
+the enumerating version of `allCitations` existed — and I reproduced it in the same file, having read
+that comment earlier in the session.
+
+Fixed generically: the walker now takes **any key ending in `note` or `notes`**, so every note-ish
+field the schema has and every one it gains later is covered by construction. 660 → 662 checked quotes.
+This is the third time in two days that a gate has been looking at the row while the provenance sat
+somewhere else (the first two are R20). **A new note-bearing field should be assumed invisible to the
+quote gate until the count goes up.**

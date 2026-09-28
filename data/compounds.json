@@ -50813,7 +50813,9 @@
       "ul": 4000,
       "unit": "IU",
       "note": "Vitamin D3. FDA Daily Value 20 mcg = 800 IU (21 CFR 101.9). NIH ODS UL 100 mcg = 4000 IU/d. 1 mcg = 40 IU."
-    }
+    },
+    "mg_per_iu": 0.000025,
+    "iu_note": "1 IU of cholecalciferol is 0.025 mcg, so mg_per_iu is 2.5e-5. TWO INDEPENDENT ABSTRACTS STATE IT AND AGREE EXACTLY. PMID:38477739 verbatim: \"a weekly dose of 10 000 international units (250 micrograms) of vitamin D3\", giving 250/10000 = 0.025 mcg/IU. PMID:28187226 verbatim: \"Sixty micrograms (2400 IU)/d of D3\", giving 60/2400 = 0.025. A pharmacopoeial potency definition, not a measurement, which is why two trials print the same factor. The stored 2333 IU resolves to 0.0583 mg; this route rendered no curve until the factor existed."
   },
   {
     "slug": "vitamin-k2-mk7",

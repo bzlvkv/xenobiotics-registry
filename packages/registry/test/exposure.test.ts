@@ -108,3 +108,29 @@ describe('impliedExposure', () => {
     expect(resolved).toBeGreaterThan(600);
   });
 });
+
+describe('an IU dose resolves only when the record says what an IU weighs', () => {
+  const iu = (mg_per_iu?: number): Compound =>
+    ({
+      slug: 'cholecalciferol-like',
+      name: 'D3',
+      routes: ['PO'],
+      doses: { PO: { min: 1000, max: 5000, typical: 2333, unit: 'IU' } },
+      half_life_hr: { PO: 360 },
+      pk: { PO: { F: 0.8, V_L: 14, ka_hr: 0.2, source_pmid: 'PMID:1' } },
+      ...(mg_per_iu != null ? { mg_per_iu } : {}),
+    }) as unknown as Compound;
+
+  it('refuses rather than guessing a mass', () => {
+    const r = impliedExposure(iu(), 'PO');
+    expect(r.ok).toBe(false);
+    if (!r.ok) expect(r.reason).toContain('no mg_per_iu is stored');
+  });
+
+  it('converts at the stored factor and says so in the caveats', () => {
+    const r = impliedExposure(iu(0.000025), 'PO');
+    expect(r.ok).toBe(true);
+    // 2333 IU x 2.5e-5 = 0.058325 mg, not 2333 mg — a 40,000-fold difference.
+    if (r.ok) expect(r.caveats.join(' ')).toContain('converted from 2333 IU');
+  });
+});

@@ -1335,3 +1335,44 @@ describe('dose.salt-moiety-unset is narrowed to records with authored PK', () =>
     );
   });
 });
+
+describe('the IU conversion pair', () => {
+  const iuRecord = (extra: Record<string, unknown>): Compound =>
+    compound({
+      slug: 'x',
+      name: 'X',
+      routes: ['PO'],
+      doses: { PO: { min: 1000, max: 5000, typical: 2333, unit: 'IU' } },
+      half_life_hr: { PO: 360 },
+      pk: { PO: { F: 0.8, V_L: 14, source_pmid: 'PMID:1' } },
+      ...extra,
+    } as never);
+
+  it('dose.iu-unconverted fires on an IU route with PK and no factor', () => {
+    expect(rules(lint([iuRecord({})]))).toContain('dose.iu-unconverted');
+  });
+
+  it('goes quiet once the factor is stored', () => {
+    const f = rules(
+      lint([iuRecord({ mg_per_iu: 0.000025, iu_note: 'PMID:1 states 0.025 mcg/IU.' })]),
+    );
+    expect(f).not.toContain('dose.iu-unconverted');
+    expect(f).not.toContain('dose.iu-note');
+  });
+
+  it('dose.iu-note fires when the factor is set with no note', () => {
+    expect(rules(lint([iuRecord({ mg_per_iu: 0.000025 })]))).toContain('dose.iu-note');
+  });
+
+  it('does not fire on an IU route with no pk block, which withholds nothing', () => {
+    const noPk = compound({
+      slug: 'y',
+      name: 'Y',
+      routes: ['PO'],
+      doses: { PO: { min: 1, max: 1, typical: 1, unit: 'IU' } },
+      half_life_hr: {},
+      pk_unauthored: { reason: 'uncharacterized', note: 'No human PK.' },
+    } as never);
+    expect(rules(lint([noPk]))).not.toContain('dose.iu-unconverted');
+  });
+});

@@ -590,6 +590,25 @@ export interface Compound {
    *  set without one, because a bare stoichiometric constant is unreviewable. */
   dose_moiety_note?: string;
   /**
+   * MILLIGRAMS PER INTERNATIONAL UNIT, for a record whose `doses[]` are in IU.
+   *
+   * An IU is a unit of BIOLOGICAL POTENCY, and its mass equivalence is fixed
+   * separately for each substance by a pharmacopoeial definition: 1 IU is 0.025 mcg
+   * of cholecalciferol and 1 mg of dl-alpha-tocopheryl acetate — a factor of 40,000
+   * apart. It therefore cannot be a constant in the resolver, and it cannot be
+   * derived from the molecular weight, because potency is not mass. It is stored per
+   * record with the source that states the equivalence, exactly as
+   * `dose_moiety_fraction` is.
+   *
+   * Until it is set, an IU-dosed route yields no curve at all: `impliedExposure`
+   * refuses the dose rather than guessing a mass. That refusal is correct, and it is
+   * why four records carrying authored PK and a cited half-life rendered nothing.
+   */
+  mg_per_iu?: number;
+  /** Provenance for `mg_per_iu`: the substance, the pharmacopoeial equivalence and
+   *  the arithmetic. `dose.iu-note` warns when the factor is set without one. */
+  iu_note?: string;
+  /**
    * FRACTION UNBOUND IN PLASMA (fu), in (0, 1] — the share of the plasma
    * concentration not bound to albumin or AAG and therefore available to reach a
    * receptor.
