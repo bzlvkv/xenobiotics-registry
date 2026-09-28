@@ -7648,3 +7648,26 @@ The 415-candidate pool is real, but converting it is affinity-abstract-limited, 
 that would make each occupancy accurate is largely full-text. A realistic batch is a handful of
 compounds whose affinity is a headline abstract number (antagonists whose Ki IS the finding), not a
 sweep of hundreds.
+
+## 2026-09-28 — the "headline Ki in an abstract" screen: measured, low yield
+
+Following the aprepitant success, screened a batch of the 51 GPCR-ligand PD candidates for an affinity
+stated verbatim in a fetchable abstract. Searched: betaxolol (β1), brompheniramine (H1), butorphanol
+(κ), agomelatine (MT1/MT2), cinacalcet (CaSR), loratadine/chlorpheniramine/fexofenadine (H1),
+famotidine (H2), mirabegron (β3), naltrexone (µ) — roughly 25 queries.
+
+**Exactly one new authorable value across the batch, and it was aprepitant last turn.** Every other hit
+was one of three non-citable shapes:
+- a NEW compound's Ki with the candidate named only as a qualitative comparator ("naltrexone-like
+  potency"; PMID:36557961),
+- a RELATIVE potency, not an absolute constant ("2 times more potent than famotidine"; PMID:7774860),
+- a FUNCTIONAL tissue IC50, not a receptor affinity (mirabegron 2.0 µM in a relaxation assay;
+  PMID:42679515).
+
+**Conclusion, so the next session does not re-run this:** the yield of authorable occupancy rows from
+abstracts alone is roughly **1 in 8–10 candidates**. Affinity constants overwhelmingly live in
+full-text tables, which Rule 1 forbids citing without fetching — and R2's own defect history
+(secondary-citation, abstract-silent) is exactly why that rule is strict. Growing PD coverage at scale
+needs a full-text source (PMC open-access, a label, or IUPHAR/BPS with a citable per-value PMID), not
+more abstract searches. The 51-candidate list is in `scratchpad`/regenerable from `gpcr.ts`; the
+constraint is the source tier, not the candidate supply.
