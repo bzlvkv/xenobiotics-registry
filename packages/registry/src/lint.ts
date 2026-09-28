@@ -1101,6 +1101,40 @@ export function lintRegistry(registry: Registry): Finding[] {
     }
   }
 
+  // ── Doses with no citation, counted rather than listed ──────────────
+  // A DOSE IS THE INPUT TO EVERY RENDERED CURVE and Cmax scales with it linearly, so
+  // an unsourced dose is as load-bearing as an unsourced volume. Until 2026-09-28
+  // `doseRange` had no citation field at all, so this is a coverage figure on a gap
+  // that was structural rather than an authoring backlog — which is why it is ONE
+  // catalog-level finding and not 1,347 of them. Listing them would drown the gate
+  // and teach an author to ignore it; a single moving number does not.
+  //
+  // Counted on routes that RENDER, because those are the doses a reader actually
+  // sees resolved into a concentration. A dose on a route with no PK states a
+  // clinical fact and is worth sourcing, but it is not feeding a curve.
+  {
+    let cited = 0;
+    const uncited: string[] = [];
+    for (const c of data) {
+      for (const [route] of pkRoutes(c)) {
+        const d = (
+          c.doses as Record<string, { source_pmid?: string; source_label?: string } | undefined>
+        )[route];
+        if (!d) continue;
+        if (d.source_pmid ?? d.source_label) cited++;
+        else uncited.push(`${c.slug}.${route}`);
+      }
+    }
+    if (uncited.length > 0) {
+      const total = cited + uncited.length;
+      warn(
+        '(catalog)',
+        'dose.uncited',
+        `${uncited.length} of ${total} doses on a route that renders carry no citation (${((cited / total) * 100).toFixed(1)}% cited) — a dose is the input to every curve and Cmax scales with it linearly, so these are as load-bearing as an unsourced volume. The field is new, so this is a coverage figure, not a defect list: e.g. ${uncited.slice(0, 6).join(', ')}`,
+      );
+    }
+  }
+
   // ── A volume shared by many unrelated compounds ─────────────────────
   // THE THIRD INSTANCE OF ONE SHAPE, and the most consequential field it has
   // appeared in. `pk.template-ka` found it in absorption rates and

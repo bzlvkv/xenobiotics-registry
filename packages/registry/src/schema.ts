@@ -45,6 +45,19 @@ const doseRange = z.strictObject({
   // every row where a different unit would have been plausible) — but a silent
   // default on a dose is a hundred- or thousandfold error waiting to happen.
   unit: z.enum(['mg', 'g', 'mcg', 'IU']),
+  // PROVENANCE FOR THE DOSE, added 2026-09-28. A dose is the INPUT to every rendered
+  // curve — Cmax scales with it linearly — and until now it was the largest block of
+  // stored numbers in the catalog with nowhere to put a citation: 1,347 ranges, none
+  // citable. Where a dose was sourced at all, the paper was named in the compound's
+  // prose, which is precisely where no gate can check it.
+  //
+  // All three are optional, so this is additive: existing rows stay valid and gain a
+  // citation as each is verified. Nothing else was needed to make them checked —
+  // `citationsIn` walks any object for `source_pmid`, and `claimsIn` now reads any
+  // key ending in `note`, so both network gates pick these up by construction.
+  source_pmid: pmid,
+  source_label: z.string().max(300).optional(),
+  note: z.string().max(800).optional(),
 });
 
 // Species a value was measured in; omitted means human. Animal-derived PK is

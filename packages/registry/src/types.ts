@@ -151,6 +151,12 @@ export interface DoseRange {
    *  on a dose is a hundred- or thousandfold error waiting to happen, so the
    *  registry states it on every row. */
   unit: DoseUnit;
+  /** Provenance for the dose range. A dose is the input to every rendered curve and
+   *  Cmax scales with it linearly, so an unsourced one is as load-bearing as an
+   *  unsourced volume. Optional: 1,347 ranges predate the field. */
+  source_pmid?: string;
+  source_label?: string;
+  note?: string;
 }
 
 /**
