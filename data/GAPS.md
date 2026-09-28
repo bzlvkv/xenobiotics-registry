@@ -7584,3 +7584,36 @@ field the schema has and every one it gains later is covered by construction. 66
 This is the third time in two days that a gate has been looking at the row while the provenance sat
 somewhere else (the first two are R20). **A new note-bearing field should be assumed invisible to the
 quote gate until the count goes up.**
+
+## 2026-09-28 — doses authored for records whose PK route rendered nothing
+
+`dose.iu-unconverted` and the missing-dose blockers left a set of records with a working half-life and
+pk block but no curve, because the dose was absent. Each dose below is the one stated in the very paper
+the route's pk block already cites, so the curve is now driven end to end by one source.
+
+**Authored (PK-simulatable 615 → 618):**
+
+- `betamethasone.PO` = 0.6 mg, `.IM` = 6–12 mg (typical 8). Both verbatim in PMID:8148226 and
+  PMID:6487477, both stated as betamethasone-equivalent so no moiety correction.
+- `salicylic-acid-topical.TD` = 500 mg applied (PMID:10026401 verbatim), composing with the row's
+  F 0.15 to the absorbed amount.
+- `ergocalciferol.PO` = 0.103 mg, a declared derivation: PMID:9771862 states "260 nmol (approximately
+  4000 IU) vitamin D2", and 260 nmol × 396.65 g/mol = 0.1031 mg.
+
+**Deliberately left dose-less, each with a concrete obstacle:**
+
+- `betamethasone.IV` — PMID:6662164 gives "10.6 mg betamethasone phosphate", the phosphate ESTER mass,
+  while the analyte is betamethasone base. Storing 10.6 mg would inflate Cmax by the phosphate share.
+  Unlocking needs the salt identity and a `dose_moiety_fraction`; PO and IM already make the compound
+  simulatable, so IV waits rather than guess.
+- `kisspeptin.IV` — PMID:16174713 gives "4 pmol/kg × min", an infusion RATE, not a bolus the
+  one-compartment resolver can take. Needs a bolus study or an infusion-aware resolver.
+- `vasopressin.IV` — PMID:1262458 is a 125I-AVP tracer disposition study; it reports clearance and
+  half-life but no therapeutic dose to render.
+- `beta-hydroxybutyrate.PO`/`.IV` — PMID:22561291 doses the ketone monoESTER at 140–714 mg/kg, an
+  ester-and-per-kg quantity against a BHB analyte. Two conversions (ester→BHB, per-kg→absolute) and
+  neither is stated, so it stays dose-less.
+- `mct-c10.PO` — PMID:31058159 gives "a first 20 ml dose" of an oil mixture; volume-of-a-mixture, not
+  a mass of C10, and the record already notes the paper states no PK parameter.
+- `tretinoin.TD`, `tazarotene.TD` — topical retinoids whose cited abstracts state an applied
+  concentration, not an absolute applied mass; needs the treated area to become a dose.

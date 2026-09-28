@@ -5379,6 +5379,22 @@
         "max": 0.5,
         "typical": 0.1,
         "unit": "mg"
+      },
+      "PO": {
+        "min": 0.6,
+        "max": 0.6,
+        "typical": 0.6,
+        "unit": "mg",
+        "source_pmid": "PMID:8148226",
+        "note": "Dose from the PK study this route cites. PMID:8148226 verbatim: \"after oral administration of 0.6 mg betamethasone\". A single fixed dose, so min = max = typical."
+      },
+      "IM": {
+        "min": 6,
+        "max": 12,
+        "typical": 8,
+        "unit": "mg",
+        "source_pmid": "PMID:6487477",
+        "note": "Dose from the PK study this route cites. PMID:6487477 verbatim: \"betamethasone phosphate equivalent to 8 mg betamethasone was administered intramuscularly\" (typical), with a \"6 or 12 mg betamethasone\" range in the same abstract. Stated as betamethasone-equivalent, so no moiety correction is needed."
       }
     },
     "half_life_hr": {
@@ -42369,7 +42385,16 @@
     "routes": [
       "TD"
     ],
-    "doses": {},
+    "doses": {
+      "TD": {
+        "min": 500,
+        "max": 500,
+        "typical": 500,
+        "unit": "mg",
+        "source_pmid": "PMID:10026401",
+        "note": "Applied dose from the PK study this route cites. PMID:10026401 verbatim: \"500 mg salicylic acid in case of formulation\". Topical: this is the amount applied, and F 0.15 on the row is the absorbed fraction, so the two compose to the systemic amount."
+      }
+    },
     "half_life_hr": {
       "TD": 3
     },
@@ -50654,7 +50679,16 @@
     "routes": [
       "PO"
     ],
-    "doses": {},
+    "doses": {
+      "PO": {
+        "min": 0.103,
+        "max": 0.103,
+        "typical": 0.103,
+        "unit": "mg",
+        "source_pmid": "PMID:9771862",
+        "note": "DECLARED DERIVATION from the stated molar dose. PMID:9771862 verbatim: \"260 nmol (approximately 4000 IU) vitamin D2\". Ergocalciferol is vitamin D2, so 260 nmol x 396.65 g/mol = 0.1031 mg. The nmol is verbatim; the mg is arithmetic on it and the molecular weight, not a second source."
+      }
+    },
     "half_life_hr": {
       "PO": 240
     },
