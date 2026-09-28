@@ -7617,3 +7617,34 @@ the route's pk block already cites, so the curve is now driven end to end by one
   a mass of C10, and the record already notes the paper states no PK parameter.
 - `tretinoin.TD`, `tazarotene.TD` — topical retinoids whose cited abstracts state an applied
   concentration, not an absolute applied mass; needs the treated area to become a dose.
+
+## 2026-09-28 — option 1 worked end to end: aprepitant becomes PD-simulatable
+
+The first of the 415 "PK-simulatable, no occupancy row" candidates, carried the whole way to show the
+path and its true cost.
+
+`aprepitant` had a solvable PO curve and no occupancy row. Added:
+- occupancy `nk1` (antagonist), `ec50_mg_l` 6.95e-4 from PMID:18187929 verbatim *"K(i) for aprepitant,
+  a brain-penetrating NK(1) antagonist, was 1.3 nM"* in human IM9 cells; 1.3 nM × 534.43 / 1e6.
+- a new `nk1 → TACR1` entry in `OCCUPANCY_TARGET_KEYS` — NK1 had never been an occupancy target, and
+  the gene key was catalogued but unmapped, so the row would otherwise trip `receptor.unknown-target`.
+- `effect_compartment` keo 1/h, `approximated: true`, declared per R17 exactly as acetazolamide and
+  alogliptin do — the affinity is a real cited human Ki; only the equilibration rate is soft.
+
+PD-simulatable **203 → 204**. verify:quotes 667 → 669.
+
+`fraction_unbound` left unset: aprepitant is highly protein-bound but no fetchable abstract states the
+figure (it is a label fact), so `pd.occupancy-needs-fu` stands rather than a guessed fu. At the 125 mg
+dose the NK1 occupancy is near-saturating even before any fu correction — correct pharmacology for an
+effective antagonist, the cbd/adalimumab case, not a defect.
+
+### The honest per-compound cost
+
+This is NOT one abstract per compound. aprepitant took: an affinity abstract (most affinities are in
+full-text tables, not abstracts — betaxolol, tried first, failed on exactly this), a quote
+verification, a catalog-mapping check plus a map addition, an approximated-keo decision, and a
+protein-binding search that came up empty. Call it 4–6 fetches and one code change for one compound.
+The 415-candidate pool is real, but converting it is affinity-abstract-limited, and the binding data
+that would make each occupancy accurate is largely full-text. A realistic batch is a handful of
+compounds whose affinity is a headline abstract number (antagonists whose Ki IS the finding), not a
+sweep of hundreds.

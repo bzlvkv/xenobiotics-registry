@@ -176,6 +176,7 @@ export const OCCUPANCY_TARGET_KEYS: Readonly<Record<string, string>> = {
   alpha_2c: 'ADRA2C',
   at1: 'AGTR1',
   beta_1: 'ADRB1',
+  nk1: 'TACR1',
   beta_2: 'ADRB2',
   cb1: 'CNR1',
   cb2: 'CNR2',

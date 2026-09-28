@@ -2912,7 +2912,24 @@
         "source_pmid": "PMID:14973304"
       }
     ],
-    "notes": "PK: THE RIGHT PAPER WAS ALREADY IN THIS RECORD refs[] AND CITED BY NOTHING. Its stored source states no volume, no rate and no half-life; the population fit does, verbatim: \"Typical population estimates of CL/F, apparent distribution volume (V(d)/F), absorption constant (K(a)) and absorption lag time were 1.54 L/h, 72.1 L, 0.893/h and 0.295 h\". So ka 0.893 IS MEASURED — my class-9 suspicion of its precision was the precision of a FIT. The abstract names its own volume apparent, so F is pinned to 1; the measured bioavailability is 0.59 at 125 mg and 0.67 at 80 mg, and the stored 0.65 was the UPPER CONFIDENCE BOUND of the first, neither value nor their mean. The half-life of 12 h was unsourced AND self-contradictory: the same fit implies 32.4 h, while 12 h beside V 72 implies a clearance 2.7x the published one. THE INTRAVENOUS ROUTE IS REMOVED — its only intravenous exposure was a 2 mg stable-isotope TRACER MICRODOSE, sixty-fold below therapeutic in a dose-nonlinear drug, and the marketed intravenous product is FOSAPREPITANT, a different molecule. INTERACTIONS: BOTH AFFINITIES ARE CALIBRATIONS, AND ONE NOTE ALREADY SAID SO OUT LOUD — it writes \"Ki ≈ 1.5/0.47 = 3.19\" in plain sight. The assumed concentration of 1.5 µM sits about four times below this record own modelled mean plasma level, so unlike itraconazole the calibration is anchored to an exposure the model does not actually produce; the ratio it reproduces is therefore softer than the published one. Declared rather than silently corrected, because the published fold-change is the quantity worth keeping."
+    "notes": "PK: THE RIGHT PAPER WAS ALREADY IN THIS RECORD refs[] AND CITED BY NOTHING. Its stored source states no volume, no rate and no half-life; the population fit does, verbatim: \"Typical population estimates of CL/F, apparent distribution volume (V(d)/F), absorption constant (K(a)) and absorption lag time were 1.54 L/h, 72.1 L, 0.893/h and 0.295 h\". So ka 0.893 IS MEASURED — my class-9 suspicion of its precision was the precision of a FIT. The abstract names its own volume apparent, so F is pinned to 1; the measured bioavailability is 0.59 at 125 mg and 0.67 at 80 mg, and the stored 0.65 was the UPPER CONFIDENCE BOUND of the first, neither value nor their mean. The half-life of 12 h was unsourced AND self-contradictory: the same fit implies 32.4 h, while 12 h beside V 72 implies a clearance 2.7x the published one. THE INTRAVENOUS ROUTE IS REMOVED — its only intravenous exposure was a 2 mg stable-isotope TRACER MICRODOSE, sixty-fold below therapeutic in a dose-nonlinear drug, and the marketed intravenous product is FOSAPREPITANT, a different molecule. INTERACTIONS: BOTH AFFINITIES ARE CALIBRATIONS, AND ONE NOTE ALREADY SAID SO OUT LOUD — it writes \"Ki ≈ 1.5/0.47 = 3.19\" in plain sight. The assumed concentration of 1.5 µM sits about four times below this record own modelled mean plasma level, so unlike itraconazole the calibration is anchored to an exposure the model does not actually produce; the ratio it reproduces is therefore softer than the published one. Declared rather than silently corrected, because the published fold-change is the quantity worth keeping.",
+    "receptor_occupancy": [
+      {
+        "receptor": "nk1",
+        "pathway": "antagonist",
+        "action": "antagonist",
+        "emax": 1,
+        "hill_n": 1,
+        "ec50_mg_l": 0.000694759,
+        "source_pmid": "PMID:18187929",
+        "note": "Human NK1. PMID:18187929 measured binding in \"human lymphoblastic IM9 cells\" and states verbatim: \"K(i) for aprepitant, a brain-penetrating NK(1) antagonist, was 1.3 nM\". ec50_mg_l = 1.3 nM x 534.43 g/mol / 1e6 = 6.95e-4. Competitive antagonist, so emax/hill are the model defaults."
+      }
+    ],
+    "effect_compartment": {
+      "keo_per_h": 1,
+      "approximated": true,
+      "note": "Approximation; no published keo. Aprepitant is a reversible competitive NK1 antagonist with no measured effect-site equilibration constant, so keo defaults to 1/h, declared per R17. The occupancy row is real (cited human Ki); only the time-course rate is soft."
+    }
   },
   {
     "slug": "arachidonic-acid",
